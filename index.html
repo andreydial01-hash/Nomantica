@@ -262,7 +262,7 @@ footer p{font-size:.78rem;color:var(--muted)}
   <ul class="nav-links">
     <li><a href="#proceso">Proceso</a></li>
     <li><a href="#email">Email</a></li>
-    <li><a href="#portafolio">Portafolio</a></li>
+    <li><a href="#portafolio">Proyectos</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#contacto" class="nav-cta">Empezar →</a></li>
   </ul>
@@ -395,7 +395,7 @@ footer p{font-size:.78rem;color:var(--muted)}
 <section class="portfolio-section" id="portafolio">
   <div class="portfolio-inner">
     <div class="portfolio-header reveal">
-      <span class="stag">Portafolio</span>
+      <span class="stag">Proyectos</span>
       <h2 class="stitle">Trabajos que hablan<br>por sí solos</h2>
     </div>
     <div class="portfolio-grid">
@@ -764,11 +764,12 @@ footer p{font-size:.78rem;color:var(--muted)}
       <p class="ssub" style="margin:1.2rem auto 0;text-align:center;max-width:440px">Únete a las marcas que ya están generando más ventas con email marketing inteligente. Sin spam, sin trucos.</p>
     </div>
     <div class="reveal" data-delay="2">
-      <form class="email-form" onsubmit="handleSubmit(event)">
-        <input type="email" placeholder="tu@email.com" required>
-        <button type="submit">Quiero crecer →</button>
-      </form>
-      <p class="form-note">Sin spam. Solo estrategia. Cancela cuando quieras. 🔒</p>
+      <div class="email-form" id="ctaForm">
+        <input type="email" id="ctaEmail" placeholder="tu@email.com" style="display:flex;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem" />
+        <input type="text" id="ctaName" placeholder="tu nombre" style="display:none;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem" />
+        <button id="ctaBtn" onclick="handleStep()">Quiero crecer →</button>
+      </div>
+      <p class="form-note" id="ctaNote">Sin spam. Solo estrategia. Cancela cuando quieras. 🔒</p>
     </div>
   </div>
 </section>
@@ -813,19 +814,106 @@ footer p{font-size:.78rem;color:var(--muted)}
   }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
   document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => obs.observe(el));
 
-  // Form submit
-  function handleSubmit(e){
-    e.preventDefault();
-    const btn = e.target.querySelector('button');
-    btn.textContent = '¡Registrado! ✓';
-    btn.style.background = 'var(--accent3)';
-    btn.style.color = '#000';
-    setTimeout(() => {
-      btn.textContent = 'Quiero crecer →';
-      btn.style.background = '';
-      btn.style.color = '';
-      e.target.reset();
-    }, 3000);
+  // Multi-step form
+  const SUPABASE_URL = 'https://acjxlouiphdxitdmoasy.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFjanhsb3VpcGhkeGl0ZG1vYXN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMjE5MTYsImV4cCI6MjA4Nzc5NzkxNn0.KD22fbboTxJF6Zv3Px2aM0hQiMEYAjwyHUYDvkE8rGU';
+
+  let formStep = 1;
+  let userEmail = '';
+
+  async function handleStep() {
+    const emailInput = document.getElementById('ctaEmail');
+    const nameInput  = document.getElementById('ctaName');
+    const btn        = document.getElementById('ctaBtn');
+    const note       = document.getElementById('ctaNote');
+    const form       = document.getElementById('ctaForm');
+
+    // ── PASO 1: validar email ──
+    if (formStep === 1) {
+      const email = emailInput.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailInput.style.outline = '1px solid #e53e3e';
+        setTimeout(() => emailInput.style.outline = '', 1500);
+        return;
+      }
+      userEmail = email;
+
+      // animación de transición
+      emailInput.style.transition = 'opacity .35s, transform .35s';
+      emailInput.style.opacity = '0';
+      emailInput.style.transform = 'translateX(-10px)';
+
+      setTimeout(() => {
+        emailInput.style.display = 'none';
+        nameInput.style.display = 'flex';
+        nameInput.style.flex = '1';
+        nameInput.style.opacity = '0';
+        nameInput.style.transform = 'translateX(10px)';
+        nameInput.style.transition = 'opacity .35s, transform .35s';
+        nameInput.focus();
+        setTimeout(() => {
+          nameInput.style.opacity = '1';
+          nameInput.style.transform = 'translateX(0)';
+        }, 20);
+      }, 350);
+
+      btn.textContent = 'Confirmar →';
+      note.textContent = '¡Casi listo! Solo dinos cómo te llamas 👋';
+      formStep = 2;
+      return;
+    }
+
+    // ── PASO 2: guardar en Supabase ──
+    if (formStep === 2) {
+      const name = nameInput.value.trim();
+      if (!name) {
+        nameInput.style.outline = '1px solid #e53e3e';
+        setTimeout(() => nameInput.style.outline = '', 1500);
+        return;
+      }
+
+      btn.textContent = 'Enviando...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/suscriptores`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({ email: userEmail, nombre: name })
+        });
+
+        if (!res.ok) throw new Error();
+
+        // éxito
+        nameInput.style.transition = 'opacity .3s';
+        nameInput.style.opacity = '0';
+        setTimeout(() => {
+          nameInput.style.display = 'none';
+          form.style.justifyContent = 'center';
+          btn.textContent = '¡Listo, ' + name.split(' ')[0] + '! Te contactamos pronto 🎉';
+          btn.style.background = 'var(--accent3)';
+          btn.style.color = '#000';
+          btn.style.borderRadius = '100px';
+          btn.style.padding = '.72rem 1.8rem';
+          btn.disabled = false;
+          note.textContent = 'Revisa tu bandeja, pronto tendrás noticias nuestras ✉️';
+        }, 300);
+
+      } catch {
+        btn.textContent = 'Algo falló, intenta de nuevo';
+        btn.style.background = '#e53e3e';
+        btn.disabled = false;
+        setTimeout(() => {
+          btn.textContent = 'Confirmar →';
+          btn.style.background = '';
+        }, 3000);
+      }
+    }
   }
 
   // Hero parallax
