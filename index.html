@@ -400,17 +400,199 @@ footer p{font-size:.78rem;color:var(--muted)}
     </div>
     <div class="portfolio-grid">
       <div class="pcard reveal-scale" data-delay="1">
-        <div class="pthumb"><div class="tbg" style="background:linear-gradient(135deg,rgba(74,63,212,.28),rgba(107,94,240,.14))"></div><span class="ticon">✉️</span><span class="tlabel">Próximamente</span></div>
+        <div class="pthumb">
+          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <defs>
+              <radialGradient id="g1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4a3fd4" stop-opacity=".18"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
+              <filter id="glow1"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="380" height="180" fill="#0a0a1a"/>
+            <ellipse cx="190" cy="90" rx="120" ry="70" fill="url(#g1)"/>
+            <!-- orbit arcs -->
+            <ellipse cx="190" cy="90" rx="100" ry="38" fill="none" stroke="#4a3fd4" stroke-width=".7" stroke-opacity=".3" stroke-dasharray="4 6"/>
+            <ellipse cx="190" cy="90" rx="65" ry="24" fill="none" stroke="#6b5ef0" stroke-width=".7" stroke-opacity=".25" stroke-dasharray="3 5"/>
+            <!-- burst lines from center -->
+            <g filter="url(#glow1)" stroke="#6b5ef0" stroke-width=".9" stroke-opacity=".55" stroke-linecap="round">
+              <line x1="190" y1="90" x2="190" y2="38"><animate attributeName="y2" values="38;34;38" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="190" y1="90" x2="236" y2="62"><animate attributeName="x2" values="236;240;236" dur="3.2s" repeatCount="indefinite"/></line>
+              <line x1="190" y1="90" x2="144" y2="62"><animate attributeName="x2" values="144;140;144" dur="2.8s" repeatCount="indefinite"/></line>
+              <line x1="190" y1="90" x2="248" y2="90"><animate attributeName="x2" values="248;253;248" dur="3.5s" repeatCount="indefinite"/></line>
+              <line x1="190" y1="90" x2="132" y2="90"><animate attributeName="x2" values="132;127;132" dur="3s" repeatCount="indefinite"/></line>
+              <line x1="190" y1="90" x2="224" y2="118"><animate attributeName="y2" values="118;122;118" dur="2.6s" repeatCount="indefinite"/></line>
+              <line x1="190" y1="90" x2="156" y2="118"><animate attributeName="y2" values="118;122;118" dur="3.1s" repeatCount="indefinite"/></line>
+            </g>
+            <!-- rocket body -->
+            <g transform="translate(190,90)" filter="url(#glow1)">
+              <polygon points="0,-22 8,-2 -8,-2" fill="#4a3fd4" opacity=".9"/>
+              <rect x="-8" y="-2" width="16" height="14" rx="2" fill="#6b5ef0" opacity=".85"/>
+              <polygon points="-8,12 -14,20 -8,18" fill="#4a3fd4" opacity=".7"/>
+              <polygon points="8,12 14,20 8,18" fill="#4a3fd4" opacity=".7"/>
+              <!-- window -->
+              <circle cx="0" cy="4" r="4" fill="none" stroke="#60d4f7" stroke-width="1.2" opacity=".8"/>
+              <!-- flame -->
+              <ellipse cx="0" cy="22" rx="5" ry="8" fill="#60d4f7" opacity=".4"><animate attributeName="ry" values="8;12;7;10;8" dur="1.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".4;.7;.35;.6;.4" dur="1.4s" repeatCount="indefinite"/></ellipse>
+              <ellipse cx="0" cy="22" rx="2.5" ry="5" fill="#9b7ff8" opacity=".7"><animate attributeName="ry" values="5;8;4;7;5" dur="1.1s" repeatCount="indefinite"/></ellipse>
+              <!-- ascending anim -->
+              <animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="4s" repeatCount="indefinite" additive="sum"/>
+            </g>
+            <!-- dots on orbit -->
+            <circle cx="290" cy="90" r="3" fill="#9b7ff8" opacity=".7"><animateMotion dur="7s" repeatCount="indefinite" path="M0,0 A100,38 0 1,1 -1,0 Z"/></circle>
+            <circle cx="190" cy="66" r="2" fill="#60d4f7" opacity=".6"><animateMotion dur="4.5s" repeatCount="indefinite" path="M0,0 A65,24 0 1,0 1,0 Z"/></circle>
+            <!-- stars bg -->
+            <circle cx="60" cy="30" r="1" fill="#fff" opacity=".2"/>
+            <circle cx="320" cy="50" r="1.2" fill="#fff" opacity=".15"/>
+            <circle cx="340" cy="140" r=".8" fill="#fff" opacity=".2"/>
+            <circle cx="40" cy="150" r="1" fill="#fff" opacity=".15"/>
+            <circle cx="270" cy="20" r=".8" fill="#fff" opacity=".18"/>
+          </svg>
+        </div>
         <div class="pbody"><div class="pcat">Email Marketing</div><div class="ptitle">Campaña de lanzamiento</div><div class="pdescr">Estrategia de emails para el lanzamiento de un producto digital. Resultados por publicar.</div></div>
         <div class="pfooter"><span class="ptag">E-commerce</span><span class="parrow">→</span></div>
       </div>
       <div class="pcard reveal-scale" data-delay="2">
-        <div class="pthumb"><div class="tbg" style="background:linear-gradient(135deg,rgba(96,212,247,.18),rgba(74,63,212,.18))"></div><span class="ticon">🎯</span><span class="tlabel">Próximamente</span></div>
+        <div class="pthumb">
+          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <defs>
+              <radialGradient id="g2" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#60d4f7" stop-opacity=".1"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
+              <filter id="glow2"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <marker id="arr" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><polygon points="0,0 5,2.5 0,5" fill="#6b5ef0" opacity=".6"/></marker>
+            </defs>
+            <rect width="380" height="180" fill="#0a0a1a"/>
+            <ellipse cx="190" cy="80" rx="130" ry="75" fill="url(#g2)"/>
+
+            <!-- Node row 1: 1 node -->
+            <g filter="url(#glow2)">
+              <rect x="168" y="14" width="44" height="24" rx="6" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1.2"/>
+              <rect x="172" y="18" width="16" height="4" rx="2" fill="#4a3fd4" opacity=".6"/>
+              <rect x="172" y="26" width="10" height="3" rx="1.5" fill="#4a3fd4" opacity=".3"/>
+              <!-- pulse ring -->
+              <rect x="168" y="14" width="44" height="24" rx="6" fill="none" stroke="#6b5ef0" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.5;0" dur="2.8s" repeatCount="indefinite"/><animate attributeName="x" values="168;164;168" dur="2.8s" repeatCount="indefinite"/><animate attributeName="y" values="14;10;14" dur="2.8s" repeatCount="indefinite"/><animate attributeName="width" values="44;52;44" dur="2.8s" repeatCount="indefinite"/><animate attributeName="height" values="24;32;24" dur="2.8s" repeatCount="indefinite"/></rect>
+            </g>
+
+            <!-- connectors level 1→2 -->
+            <line x1="190" y1="38" x2="120" y2="66" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".4" marker-end="url(#arr)"/>
+            <line x1="190" y1="38" x2="260" y2="66" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".4" marker-end="url(#arr)"/>
+
+            <!-- Node row 2: 2 nodes -->
+            <g filter="url(#glow2)">
+              <rect x="96" y="68" width="44" height="24" rx="6" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.2"/>
+              <rect x="100" y="72" width="14" height="4" rx="2" fill="#6b5ef0" opacity=".55"/>
+              <rect x="100" y="80" width="9" height="3" rx="1.5" fill="#6b5ef0" opacity=".3"/>
+
+              <rect x="238" y="68" width="44" height="24" rx="6" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.2"/>
+              <rect x="242" y="72" width="14" height="4" rx="2" fill="#6b5ef0" opacity=".55"/>
+              <rect x="242" y="80" width="9" height="3" rx="1.5" fill="#6b5ef0" opacity=".3"/>
+            </g>
+
+            <!-- connectors level 2→3 -->
+            <line x1="118" y1="92" x2="90" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr)"/>
+            <line x1="118" y1="92" x2="162" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr)"/>
+            <line x1="260" y1="92" x2="218" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr)"/>
+            <line x1="260" y1="92" x2="290" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr)"/>
+
+            <!-- Node row 3: 4 nodes -->
+            <g filter="url(#glow2)">
+              <!-- node A -->
+              <rect x="64" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
+              <rect x="68" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
+              <rect x="68" y="130" width="6" height="2.5" rx="1.2" fill="#9b7ff8" opacity=".25"/>
+              <!-- node B -->
+              <rect x="138" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
+              <rect x="142" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
+              <rect x="142" y="130" width="6" height="2.5" rx="1.2" fill="#9b7ff8" opacity=".25"/>
+              <!-- node C -->
+              <rect x="194" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
+              <rect x="198" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
+              <rect x="198" y="130" width="6" height="2.5" rx="1.2" fill="#9b7ff8" opacity=".25"/>
+              <!-- node D -->
+              <rect x="268" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
+              <rect x="272" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
+              <rect x="272" y="130" width="6" height="2.5" rx="1.2" fill="#9b7ff8" opacity=".25"/>
+            </g>
+
+            <!-- animated pulse dots travelling down the lines -->
+            <circle r="2.5" fill="#60d4f7" opacity=".8">
+              <animateMotion dur="2.2s" repeatCount="indefinite" begin="0s" path="M190,26 L120,68"/>
+            </circle>
+            <circle r="2.5" fill="#60d4f7" opacity=".8">
+              <animateMotion dur="2.2s" repeatCount="indefinite" begin="1.1s" path="M190,26 L260,68"/>
+            </circle>
+            <circle r="2" fill="#9b7ff8" opacity=".75">
+              <animateMotion dur="2s" repeatCount="indefinite" begin=".5s" path="M118,90 L90,120"/>
+            </circle>
+            <circle r="2" fill="#9b7ff8" opacity=".75">
+              <animateMotion dur="2s" repeatCount="indefinite" begin="1.5s" path="M260,90 L290,120"/>
+            </circle>
+          </svg>
+        </div>
         <div class="pbody"><div class="pcat">Growth Strategy</div><div class="ptitle">Automatización de nurturing</div><div class="pdescr">Secuencias automatizadas de 8 pasos para convertir leads fríos en clientes activos.</div></div>
         <div class="pfooter"><span class="ptag">SaaS</span><span class="parrow">→</span></div>
       </div>
       <div class="pcard reveal-scale" data-delay="3">
-        <div class="pthumb"><div class="tbg" style="background:linear-gradient(135deg,rgba(155,127,248,.22),rgba(96,212,247,.1))"></div><span class="ticon">📈</span><span class="tlabel">Próximamente</span></div>
+        <div class="pthumb">
+          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <defs>
+              <radialGradient id="g3" cx="50%" cy="55%" r="55%"><stop offset="0%" stop-color="#9b7ff8" stop-opacity=".14"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
+              <filter id="glow3"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <clipPath id="bodyClip"><ellipse cx="190" cy="106" rx="14" ry="20"/></clipPath>
+            </defs>
+            <rect width="380" height="180" fill="#0a0a1a"/>
+            <ellipse cx="190" cy="100" rx="130" ry="75" fill="url(#g3)"/>
+
+            <!-- broadcast waves -->
+            <g filter="url(#glow3)" fill="none" stroke-linecap="round">
+              <!-- wave 1 -->
+              <path d="M138,88 Q124,75 138,62" stroke="#4a3fd4" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.55;0" dur="3s" begin="0s" repeatCount="indefinite"/><animate attributeName="d" values="M138,88 Q124,75 138,62;M133,91 Q117,75 133,59;M138,88 Q124,75 138,62" dur="3s" begin="0s" repeatCount="indefinite"/></path>
+              <path d="M242,88 Q256,75 242,62" stroke="#4a3fd4" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.55;0" dur="3s" begin="0s" repeatCount="indefinite"/><animate attributeName="d" values="M242,88 Q256,75 242,62;M247,91 Q263,75 247,59;M242,88 Q256,75 242,62" dur="3s" begin="0s" repeatCount="indefinite"/></path>
+              <!-- wave 2 -->
+              <path d="M122,100 Q104,75 122,50" stroke="#6b5ef0" stroke-width="1.3" opacity=".0"><animate attributeName="opacity" values="0;.45;0" dur="3s" begin=".7s" repeatCount="indefinite"/><animate attributeName="d" values="M122,100 Q104,75 122,50;M116,104 Q96,75 116,46;M122,100 Q104,75 122,50" dur="3s" begin=".7s" repeatCount="indefinite"/></path>
+              <path d="M258,100 Q276,75 258,50" stroke="#6b5ef0" stroke-width="1.3" opacity=".0"><animate attributeName="opacity" values="0;.45;0" dur="3s" begin=".7s" repeatCount="indefinite"/><animate attributeName="d" values="M258,100 Q276,75 258,50;M264,104 Q284,75 264,46;M258,100 Q276,75 258,50" dur="3s" begin=".7s" repeatCount="indefinite"/></path>
+              <!-- wave 3 -->
+              <path d="M106,112 Q82,75 106,38" stroke="#9b7ff8" stroke-width="1.1" opacity=".0"><animate attributeName="opacity" values="0;.35;0" dur="3s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="d" values="M106,112 Q82,75 106,38;M99,117 Q72,75 99,33;M106,112 Q82,75 106,38" dur="3s" begin="1.4s" repeatCount="indefinite"/></path>
+              <path d="M274,112 Q298,75 274,38" stroke="#9b7ff8" stroke-width="1.1" opacity=".0"><animate attributeName="opacity" values="0;.35;0" dur="3s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="d" values="M274,112 Q298,75 274,38;M281,117 Q308,75 281,33;M274,112 Q298,75 274,38" dur="3s" begin="1.4s" repeatCount="indefinite"/></path>
+            </g>
+
+            <!-- figure: head -->
+            <circle cx="190" cy="70" r="14" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.4" filter="url(#glow3)" opacity=".95"/>
+            <!-- inner head detail -->
+            <circle cx="190" cy="70" r="8" fill="none" stroke="#9b7ff8" stroke-width=".7" opacity=".4"/>
+            <circle cx="190" cy="70" r="3.5" fill="#6b5ef0" opacity=".5"/>
+
+            <!-- figure: body -->
+            <ellipse cx="190" cy="106" rx="14" ry="20" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.2" filter="url(#glow3)" opacity=".9"/>
+            <!-- shirt lines -->
+            <line x1="184" y1="96" x2="196" y2="96" stroke="#6b5ef0" stroke-width=".7" stroke-opacity=".35"/>
+            <line x1="183" y1="102" x2="197" y2="102" stroke="#6b5ef0" stroke-width=".7" stroke-opacity=".25"/>
+
+            <!-- neck connector -->
+            <rect x="187" y="83" width="6" height="7" rx="2" fill="#0f0f22" stroke="#6b5ef0" stroke-width=".8" opacity=".7"/>
+
+            <!-- floating envelope icons around -->
+            <g filter="url(#glow3)" opacity=".0">
+              <rect x="308" y="58" width="28" height="20" rx="4" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1"/>
+              <polyline points="308,58 322,70 336,58" fill="none" stroke="#4a3fd4" stroke-width=".9"/>
+              <animate attributeName="opacity" values="0;.65;0" dur="4s" begin=".5s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0,0;0,-5;0,0" dur="4s" begin=".5s" repeatCount="indefinite"/>
+            </g>
+            <g filter="url(#glow3)" opacity=".0">
+              <rect x="44" y="68" width="24" height="17" rx="3.5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
+              <polyline points="44,68 56,77 68,68" fill="none" stroke="#9b7ff8" stroke-width=".8"/>
+              <animate attributeName="opacity" values="0;.55;0" dur="4s" begin="2s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="4s" begin="2s" repeatCount="indefinite"/>
+            </g>
+            <g filter="url(#glow3)" opacity=".0">
+              <rect x="306" y="108" width="22" height="16" rx="3" fill="#0f0f22" stroke="#60d4f7" stroke-width=".9"/>
+              <polyline points="306,108 317,116 328,108" fill="none" stroke="#60d4f7" stroke-width=".8"/>
+              <animate attributeName="opacity" values="0;.5;0" dur="4s" begin="3.1s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="4s" begin="3.1s" repeatCount="indefinite"/>
+            </g>
+
+            <!-- baseline ground -->
+            <line x1="150" y1="148" x2="230" y2="148" stroke="#4a3fd4" stroke-width=".6" stroke-opacity=".25"/>
+            <line x1="164" y1="126" x2="164" y2="148" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".3"/>
+            <line x1="216" y1="126" x2="216" y2="148" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".3"/>
+          </svg>
+        </div>
         <div class="pbody"><div class="pcat">Email + Contenido</div><div class="ptitle">Newsletter de marca personal</div><div class="pdescr">Estrategia de contenido semanal con copywriting editorial que fidelizó a más de 5k suscriptores.</div></div>
         <div class="pfooter"><span class="ptag">Marca Personal</span><span class="parrow">→</span></div>
       </div>
