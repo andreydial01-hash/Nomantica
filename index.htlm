@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nomántica — Marketing que se mueve</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#05050e;
+  --surface:#0a0a1a;
+  --surface2:#0f0f22;
+  --accent:#4a3fd4;
+  --accent-bright:#6b5ef0;
+  --accent2:#9b7ff8;
+  --accent3:#60d4f7;
+  --text:#eeedf8;
+  --muted:#6b6a8f;
+  --border:rgba(74,63,212,0.15);
+  --border2:rgba(255,255,255,0.06);
+  --fd:'Bricolage Grotesque',sans-serif;
+  --fh:'Caveat',cursive;
+  --fb:'Lato',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-weight:300;overflow-x:hidden;cursor:none}
+
+/* ── Cursor ── */
+.cursor{width:10px;height:10px;background:var(--accent-bright);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:screen}
+.cursor-ring{width:34px;height:34px;border:1px solid rgba(74,63,212,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:width .3s,height .3s}
+
+/* ── Nav ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 4rem;backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .4s,background .4s}
+nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
+.nav-logo{font-family:var(--fd);font-weight:800;font-size:1.45rem;letter-spacing:-.03em;color:var(--text);text-decoration:none}
+.nav-logo .la{background:linear-gradient(180deg,#c8c8c8 0%,#ffffff 20%,#e0e0e0 35%,#888888 52%,#c0c0c0 65%,#ffffff 78%,#b0b0b0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.flogo .la{background:linear-gradient(180deg,#c8c8c8 0%,#ffffff 20%,#e0e0e0 35%,#888888 52%,#c0c0c0 65%,#ffffff 78%,#b0b0b0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--accent)!important;color:#fff!important;padding:.55rem 1.3rem;border-radius:100px;font-weight:600!important;text-transform:none!important;letter-spacing:.01em!important;box-shadow:0 0 22px rgba(74,63,212,.4);transition:background .3s,box-shadow .3s!important}
+.nav-cta:hover{background:var(--accent-bright)!important;box-shadow:0 0 38px rgba(107,94,240,.55)!important}
+
+/* ── Scroll reveal ── */
+.reveal{opacity:0;transform:translateY(48px);transition:opacity .8s cubic-bezier(.25,.46,.45,.94),transform .8s cubic-bezier(.25,.46,.45,.94)}
+.reveal.visible{opacity:1;transform:none}
+.reveal-left{opacity:0;transform:translateX(-55px);transition:opacity .85s ease,transform .85s ease}
+.reveal-left.visible{opacity:1;transform:none}
+.reveal-right{opacity:0;transform:translateX(55px);transition:opacity .85s ease,transform .85s ease}
+.reveal-right.visible{opacity:1;transform:none}
+.reveal-scale{opacity:0;transform:scale(.88);transition:opacity .7s ease,transform .7s ease}
+.reveal-scale.visible{opacity:1;transform:none}
+[data-delay="1"]{transition-delay:.1s}
+[data-delay="2"]{transition-delay:.22s}
+[data-delay="3"]{transition-delay:.36s}
+[data-delay="4"]{transition-delay:.5s}
+
+/* ── Hero ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9rem 2rem 6rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 65% at 50% -5%,rgba(74,63,212,.22),transparent 68%),radial-gradient(ellipse 55% 40% at 85% 75%,rgba(107,94,240,.1),transparent 60%),radial-gradient(ellipse 45% 45% at 10% 70%,rgba(96,212,247,.06),transparent 60%);animation:bgPulse 9s ease-in-out infinite alternate}
+@keyframes bgPulse{0%{opacity:.75}100%{opacity:1}}
+.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px;opacity:.6;pointer-events:none}
+.floater{position:absolute;border-radius:50%;pointer-events:none;animation:float 7s ease-in-out infinite}
+.f1{width:350px;height:350px;background:radial-gradient(circle,rgba(74,63,212,.07),transparent 70%);top:10%;left:-8%}
+.f2{width:220px;height:220px;background:radial-gradient(circle,rgba(107,94,240,.07),transparent 70%);top:45%;right:-4%;animation-delay:2.5s}
+.f3{width:160px;height:160px;background:radial-gradient(circle,rgba(96,212,247,.06),transparent 70%);bottom:18%;left:12%;animation-delay:5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(74,63,212,.1);border:1px solid rgba(74,63,212,.28);color:var(--accent-bright);font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;margin-bottom:2rem;animation:fadeInDown 1s ease .2s both}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--accent-bright);border-radius:50%;animation:blink 1.5s ease infinite}
+@keyframes blink{50%{opacity:0}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}
+
+.hero h1{font-family:var(--fd);font-size:clamp(3.5rem,8.5vw,8.5rem);font-weight:800;line-height:1.15;letter-spacing:-.04em;max-width:920px;margin-bottom:1.6rem;animation:fadeInUp 1s ease .4s both}
+.hero h1 .hand{font-family:var(--fh);font-weight:700;font-size:1.08em;color:var(--accent-bright);display:inline;text-shadow:0 0 40px rgba(107,94,240,.5)}
+.hero p{font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:500px;line-height:1.75;margin-bottom:3rem;animation:fadeInUp 1s ease .6s both}
+.hero-actions{display:flex;gap:1rem;align-items:center;animation:fadeInUp 1s ease .8s both}
+.btn-primary{background:var(--accent);color:#fff;padding:.9rem 2.2rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:1rem;transition:transform .3s,box-shadow .3s,background .3s;box-shadow:0 0 40px rgba(74,63,212,.4)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 65px rgba(107,94,240,.6);background:var(--accent-bright)}
+.btn-ghost{color:var(--muted);text-decoration:none;font-size:.95rem;display:flex;align-items:center;gap:.5rem;transition:color .3s}
+.btn-ghost:hover{color:var(--text)}
+.btn-ghost svg{transition:transform .3s}
+.btn-ghost:hover svg{transform:translateX(4px)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;animation:fadeInUp 1s ease 1.2s both}
+.scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollLine 2s ease infinite;transform-origin:top}
+@keyframes scrollLine{0%,100%{transform:scaleY(0);opacity:1}50%{transform:scaleY(1);opacity:1}99%{opacity:0}}
+
+/* ── Marquee ── */
+.marquee-wrap{overflow:hidden;padding:1.8rem 0;border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);background:var(--surface)}
+.marquee-track{display:flex;gap:3.5rem;animation:marquee 28s linear infinite;width:max-content}
+.marquee-item{display:flex;align-items:center;gap:.9rem;font-family:var(--fd);font-size:.9rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.mdot{width:5px;height:5px;border-radius:50%;background:var(--accent-bright)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── Stats ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat-item{background:var(--bg);padding:3rem 2rem;text-align:center}
+.stat-num{font-family:var(--fd);font-size:3.2rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--text),var(--muted));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+.stat-num .hi{-webkit-text-fill-color:var(--accent-bright)}
+.stat-label{font-size:.85rem;color:var(--muted);letter-spacing:.04em}
+
+/* ── Section base ── */
+.section{padding:8rem 4rem;max-width:1200px;margin:0 auto}
+.stag{display:inline-block;font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:.9rem;font-weight:600}
+.stitle{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.4rem}
+.stitle .hand{font-family:var(--fh);font-weight:700;font-size:1.1em;color:var(--accent-bright);display:inline;text-shadow:0 0 30px rgba(107,94,240,.4)}
+.ssub{font-size:1.05rem;color:var(--muted);max-width:490px;line-height:1.75}
+
+/* ── Proceso ── */
+.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.steps-list{display:flex;flex-direction:column;gap:1.8rem;margin-top:3rem}
+.step-item{display:flex;gap:1.4rem;align-items:flex-start;padding:1.4rem 1.5rem;border-radius:16px;border:1px solid transparent;transition:border-color .3s,background .3s;cursor:default}
+.step-item:hover{border-color:var(--border);background:var(--surface)}
+.step-num{font-family:var(--fd);font-size:2.2rem;font-weight:800;color:rgba(74,63,212,.18);line-height:1;min-width:2ch;transition:color .3s}
+.step-item:hover .step-num{color:rgba(74,63,212,.5)}
+.step-content h3{font-family:var(--fd);font-size:1.05rem;font-weight:700;margin-bottom:.35rem}
+.step-content p{color:var(--muted);font-size:.875rem;line-height:1.65}
+.steps-visual{height:480px;border-radius:24px;overflow:hidden;background:var(--surface);border:1px solid var(--border);position:relative}
+.visual-inner{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(74,63,212,.1),transparent 70%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;padding:2.5rem}
+.mini-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.4rem;width:100%;display:flex;align-items:center;gap:1rem;animation:slideCard 5s ease-in-out infinite}
+.mini-card:nth-child(2){animation-delay:1.5s}
+.mini-card:nth-child(3){animation-delay:3s}
+@keyframes slideCard{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
+.mini-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.mini-card-text{flex:1}
+.mini-card-title{font-size:.83rem;font-weight:600;margin-bottom:.18rem}
+.mini-card-sub{font-size:.73rem;color:var(--muted)}
+.mini-badge{font-size:.68rem;padding:.2rem .6rem;border-radius:100px;font-weight:600;white-space:nowrap}
+
+/* ── Email section ── */
+.email-section{padding:6rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.email-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-top:2rem}
+.feat-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.9rem;color:var(--text)}
+.feat-list li span{color:var(--accent3);flex-shrink:0;margin-top:.1rem}
+.email-visual{background:var(--surface2);border:1px solid var(--border);border-radius:24px;padding:2rem;position:relative;overflow:hidden}
+.email-visual::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 50% 50%,rgba(74,63,212,.06),transparent 60%);animation:rotate 22s linear infinite}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.email-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.4rem;position:relative}
+.email-stat{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:1rem;text-align:center}
+.email-stat-num{font-family:var(--fd);font-size:1.45rem;font-weight:800;color:var(--accent-bright)}
+.email-stat-label{font-size:.7rem;color:var(--muted);margin-top:.18rem}
+.email-rows{display:flex;flex-direction:column;gap:1rem;position:relative}
+.email-row{display:flex;align-items:center;gap:.75rem;background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:1rem 1.25rem}
+.email-row-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.email-row-title{font-size:.82rem;font-weight:600;margin-bottom:.15rem}
+.email-row-sub{font-size:.72rem;color:var(--muted)}
+.email-row-badge{margin-left:auto;font-size:.7rem;padding:.2rem .65rem;border-radius:100px;font-weight:600;white-space:nowrap}
+
+/* ── Portfolio ── */
+.portfolio-section{padding:8rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.portfolio-inner{max-width:1200px;margin:0 auto}
+.portfolio-header{text-align:center;margin-bottom:4rem}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.pcard{background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;transition:transform .4s,border-color .4s,box-shadow .4s;cursor:default}
+.pcard:hover{transform:translateY(-6px);border-color:var(--border);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.pthumb{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.tbg{position:absolute;inset:0}
+.ticon{position:absolute;font-size:2.5rem;opacity:.15}
+.tlabel{position:relative;z-index:1;font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.12);padding:.4rem 1rem;border-radius:100px;backdrop-filter:blur(4px)}
+.pbody{padding:1.5rem}
+.pcat{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-bright);font-weight:700;margin-bottom:.4rem}
+.ptitle{font-family:var(--fd);font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
+.pdescr{font-size:.82rem;color:var(--muted);line-height:1.6}
+.pfooter{display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem 1.5rem}
+.ptag{font-size:.7rem;background:rgba(74,63,212,.1);color:var(--muted);border:1px solid var(--border2);padding:.25rem .7rem;border-radius:100px}
+.parrow{width:32px;height:32px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;transition:background .3s,color .3s,border-color .3s}
+.pcard:hover .parrow{background:var(--accent);color:#fff;border-color:var(--accent)}
+.port-cta{text-align:center;margin-top:3rem}
+.btn-outline{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--border2);color:var(--muted);padding:.8rem 2rem;border-radius:100px;text-decoration:none;font-size:.9rem;font-weight:500;transition:border-color .3s,color .3s}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent-bright)}
+
+/* ── Reviews ── */
+.reviews-section{padding:8rem 4rem;max-width:1200px;margin:0 auto}
+.reviews-header{text-align:center;margin-bottom:5rem}
+.rev-summary{display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:1.5rem}
+.rev-score{font-family:var(--fd);font-size:4rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--accent-bright),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.rev-stars-wrap{display:flex;flex-direction:column;gap:.4rem}
+.stars-row{display:flex;gap:3px}
+.star{color:var(--accent2);font-size:1.2rem}
+.rev-count{font-size:.82rem;color:var(--muted)}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.rev-card{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:2rem;transition:transform .4s,border-color .4s,box-shadow .4s;position:relative;overflow:hidden}
+.rev-card::before{content:'\201C';position:absolute;top:.5rem;right:1.5rem;font-family:var(--fh);font-size:6rem;line-height:1;color:rgba(74,63,212,.1);pointer-events:none}
+.rev-card:hover{transform:translateY(-5px);border-color:var(--border);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.rev-stars{display:flex;gap:3px;margin-bottom:1rem}
+.rev-star{color:var(--accent2);font-size:.95rem}
+.rev-text{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:1.5rem;font-weight:300}
+.rev-author{display:flex;align-items:center;gap:.9rem}
+.rev-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.9rem;font-weight:700;color:#fff;flex-shrink:0}
+.rev-name{font-weight:600;font-size:.9rem;margin-bottom:.1rem}
+.rev-role{font-size:.75rem;color:var(--muted)}
+.rev-verified{display:flex;align-items:center;gap:.3rem;font-size:.7rem;color:var(--accent3);margin-top:.15rem}
+
+/* ── Paquetes ── */
+.paquetes-section{padding:8rem 4rem;max-width:1200px;margin:0 auto}
+.paquetes-header{text-align:center;margin-bottom:4rem}
+.paquetes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;align-items:start}
+.pkg-card{background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:2.5rem;position:relative;overflow:hidden;transition:transform .4s,box-shadow .4s}
+.pkg-card:hover{transform:translateY(-8px);box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.pkg-card.featured{background:var(--surface2);border-color:rgba(74,63,212,.38);box-shadow:0 0 80px rgba(74,63,212,.12)}
+.pkg-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.pkg-badge{display:inline-flex;background:rgba(74,63,212,.13);color:var(--accent-bright);border:1px solid rgba(74,63,212,.28);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:.28rem .75rem;border-radius:100px;margin-bottom:1.5rem}
+.pkg-name{font-family:var(--fd);font-size:1.5rem;font-weight:800;margin-bottom:.45rem}
+.pkg-desc{color:var(--muted);font-size:.875rem;line-height:1.65;margin-bottom:2rem;min-height:3rem}
+.pkg-divider{height:1px;background:var(--border2);margin-bottom:2rem}
+.pkg-features{list-style:none;display:flex;flex-direction:column;gap:.8rem;margin-bottom:2.5rem}
+.pkg-features li{display:flex;align-items:flex-start;gap:.7rem;font-size:.865rem;color:var(--muted)}
+.pkg-features li.on{color:var(--text)}
+.chk{color:var(--accent3);flex-shrink:0;margin-top:.08rem}
+.xck{color:rgba(255,255,255,.14);flex-shrink:0;margin-top:.08rem}
+.pkg-btn{display:block;text-align:center;padding:.88rem 1.5rem;border-radius:12px;font-size:.92rem;font-weight:600;text-decoration:none;border:1px solid var(--border2);color:var(--text);transition:transform .3s,box-shadow .3s,background .3s}
+.pkg-btn:hover{transform:translateY(-2px)}
+.pkg-btn.feat{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 30px rgba(74,63,212,.4)}
+.pkg-btn.feat:hover{box-shadow:0 0 55px rgba(107,94,240,.55);background:var(--accent-bright)}
+
+/* ── CTA ── */
+.cta-section{padding:8rem 4rem;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(74,63,212,.15),transparent 70%)}
+.cta-inner{position:relative;z-index:1}
+.cta-title{font-family:var(--fd);font-size:clamp(2.5rem,5.5vw,5.5rem);font-weight:800;line-height:1.15;letter-spacing:-.04em;margin-bottom:1.5rem}
+.cta-title .hand{font-family:var(--fh);font-weight:700;font-size:1.1em;color:var(--accent-bright);display:inline;text-shadow:0 0 40px rgba(107,94,240,.5)}
+.email-form{display:flex;max-width:460px;margin:2.5rem auto 0;background:var(--surface);border:1px solid var(--border);border-radius:100px;padding:.35rem .35rem .35rem 1.5rem;transition:border-color .3s,box-shadow .3s}
+.email-form:focus-within{border-color:rgba(74,63,212,.5);box-shadow:0 0 40px rgba(74,63,212,.14)}
+.email-form input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem}
+.email-form input::placeholder{color:var(--muted)}
+.email-form button{background:var(--accent);color:#fff;border:none;padding:.72rem 1.5rem;border-radius:100px;font-family:var(--fb);font-size:.88rem;font-weight:600;cursor:none;transition:background .3s}
+.email-form button:hover{background:var(--accent-bright)}
+.form-note{font-size:.76rem;color:var(--muted);margin-top:1rem}
+
+/* ── Footer ── */
+footer{padding:2.5rem 4rem;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between}
+.flogo{font-family:var(--fd);font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+footer p{font-size:.78rem;color:var(--muted)}
+.flinks{display:flex;gap:1.5rem;list-style:none}
+.flinks a{color:var(--muted);text-decoration:none;font-size:.78rem;transition:color .3s}
+.flinks a:hover{color:var(--text)}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .section,.email-section,.portfolio-section,.reviews-section,.paquetes-section,.cta-section{padding:5rem 1.5rem}
+  .steps-grid,.email-inner{grid-template-columns:1fr}
+  .portfolio-grid,.reviews-grid,.paquetes-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:1.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Nom<span class="la">á</span>ntica</a>
+  <ul class="nav-links">
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#email">Email</a></li>
+    <li><a href="#portafolio">Portafolio</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contacto" class="nav-cta">Empezar →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-noise"></div>
+  <div class="floater f1"></div>
+  <div class="floater f2"></div>
+  <div class="floater f3"></div>
+  <div class="hero-tag">Estrategia · Email · Crecimiento</div>
+  <h1>Marketing que<br><span class="hand">mueve</span> tu negocio</h1>
+  <p>Estrategias personalizadas de email marketing y growth para marcas que quieren crecer sin perderse en el camino.</p>
+  <div class="hero-actions">
+    <a href="#contacto" class="btn-primary">Contáctanos →</a>
+    <a href="#proceso" class="btn-ghost">Cómo funciona <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="mdot"></span>Email Marketing</span>
+    <span class="marquee-item"><span class="mdot"></span>Automatización</span>
+    <span class="marquee-item"><span class="mdot"></span>Lead Generation</span>
+    <span class="marquee-item"><span class="mdot"></span>Conversión</span>
+    <span class="marquee-item"><span class="mdot"></span>Estrategia Digital</span>
+    <span class="marquee-item"><span class="mdot"></span>Growth Hacking</span>
+    <span class="marquee-item"><span class="mdot"></span>Copywriting</span>
+    <span class="marquee-item"><span class="mdot"></span>Segmentación</span>
+    <span class="marquee-item"><span class="mdot"></span>Email Marketing</span>
+    <span class="marquee-item"><span class="mdot"></span>Automatización</span>
+    <span class="marquee-item"><span class="mdot"></span>Lead Generation</span>
+    <span class="marquee-item"><span class="mdot"></span>Conversión</span>
+    <span class="marquee-item"><span class="mdot"></span>Estrategia Digital</span>
+    <span class="marquee-item"><span class="mdot"></span>Growth Hacking</span>
+    <span class="marquee-item"><span class="mdot"></span>Copywriting</span>
+    <span class="marquee-item"><span class="mdot"></span>Segmentación</span>
+  </div>
+</div>
+
+<!-- PROCESO -->
+<section class="section" id="proceso">
+  <div class="steps-grid">
+    <div>
+      <div class="reveal">
+        <span class="stag">Nuestro proceso</span>
+        <h2 class="stitle">Estrategia sin rodeos</h2>
+        <p class="ssub">Analizamos tu negocio, construimos la estrategia y ejecutamos. Sin complicaciones, con resultados claros.</p>
+      </div>
+      <div class="steps-list">
+        <div class="step-item reveal" data-delay="1">
+          <div class="step-num">01</div>
+          <div class="step-content"><h3>Diagnóstico inicial</h3><p>Auditamos tu situación: base de datos, canales activos, métricas y oportunidades.</p></div>
+        </div>
+        <div class="step-item reveal" data-delay="2">
+          <div class="step-num">02</div>
+          <div class="step-content"><h3>Diseño de estrategia</h3><p>Plan personalizado con flujos de email, segmentación y calendario de envíos.</p></div>
+        </div>
+        <div class="step-item reveal" data-delay="3">
+          <div class="step-num">03</div>
+          <div class="step-content"><h3>Ejecución y automatización</h3><p>Implementamos todo para que funcione mientras tú te enfocas en crecer.</p></div>
+        </div>
+        <div class="step-item reveal" data-delay="4">
+          <div class="step-num">04</div>
+          <div class="step-content"><h3>Análisis y optimización</h3><p>Medimos, aprendemos y mejoramos. Reportes claros con lo que importa.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="steps-visual reveal-right">
+      <div class="visual-inner">
+        <div class="mini-card">
+          <div class="mini-icon" style="background:rgba(74,63,212,.15)">📊</div>
+          <div class="mini-card-text"><div class="mini-card-title">Medimos el éxito</div><div class="mini-card-sub">2,450 aperturas · 18.3% CTR</div></div>
+          <div class="mini-badge" style="background:rgba(96,212,247,.1);color:var(--accent3)">+340%</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-icon" style="background:rgba(107,94,240,.12)">✉️</div>
+          <div class="mini-card-text"><div class="mini-card-title">Sistema automatizado de mensajes</div><div class="mini-card-sub">Tasa apertura: 64.2%</div></div>
+          <div class="mini-badge" style="background:rgba(74,63,212,.1);color:var(--accent-bright)">Live</div>
+        </div>
+        <div class="mini-card">
+          <div class="mini-icon" style="background:rgba(96,212,247,.1)">🎯</div>
+          <div class="mini-card-text"><div class="mini-card-title">Hacemos publicidad que convierte</div><div class="mini-card-sub">1,200 contactos · Lista caliente</div></div>
+          <div class="mini-badge" style="background:rgba(155,127,248,.12);color:var(--accent2)">Nuevo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL MARKETING -->
+<section class="email-section" id="email">
+  <div class="email-inner">
+    <div class="reveal-left">
+      <span class="stag">Email Marketing</span>
+      <h2 class="stitle">Emails que la gente <span class="hand">quiere</span> abrir</h2>
+      <p class="ssub">Flujos automatizados y campañas diseñadas para convertir. Tu lista de contactos es el activo más poderoso de tu negocio — nosotros lo activamos.</p>
+      <ul class="feat-list">
+        <li><span>✓</span>Secuencias de bienvenida y nurturing</li>
+        <li><span>✓</span>Campañas estacionales y promocionales</li>
+        <li><span>✓</span>Segmentación inteligente de audiencias</li>
+        <li><span>✓</span>A/B testing de asuntos y contenido</li>
+        <li><span>✓</span>Copywriting persuasivo en cada envío</li>
+        <li><span>✓</span>Reportes de performance mensuales</li>
+      </ul>
+    </div>
+    <div class="reveal-right">
+      <div class="email-visual">
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;min-height:260px;flex-direction:column;gap:1.5rem;position:relative">
+          <div style="font-family:var(--fd);font-size:4.5rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--accent-bright),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center">4.1×</div>
+          <div style="font-size:.95rem;color:var(--muted);text-align:center;max-width:200px;line-height:1.6">Retorno de inversión promedio de nuestros clientes</div>
+          <div style="display:flex;gap:1.5rem;margin-top:.5rem">
+            <div style="text-align:center"><div style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent-bright)">58%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Apertura</div></div>
+            <div style="width:1px;background:var(--border2)"></div>
+            <div style="text-align:center"><div style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent2)">22%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">CTR</div></div>
+            <div style="width:1px;background:var(--border2)"></div>
+            <div style="text-align:center"><div style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent3)">0.2%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Rebote</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section class="portfolio-section" id="portafolio">
+  <div class="portfolio-inner">
+    <div class="portfolio-header reveal">
+      <span class="stag">Portafolio</span>
+      <h2 class="stitle">Trabajos que hablan<br>por sí solos</h2>
+    </div>
+    <div class="portfolio-grid">
+      <div class="pcard reveal-scale" data-delay="1">
+        <div class="pthumb"><div class="tbg" style="background:linear-gradient(135deg,rgba(74,63,212,.28),rgba(107,94,240,.14))"></div><span class="ticon">✉️</span><span class="tlabel">Próximamente</span></div>
+        <div class="pbody"><div class="pcat">Email Marketing</div><div class="ptitle">Campaña de lanzamiento</div><div class="pdescr">Estrategia de emails para el lanzamiento de un producto digital. Resultados por publicar.</div></div>
+        <div class="pfooter"><span class="ptag">E-commerce</span><span class="parrow">→</span></div>
+      </div>
+      <div class="pcard reveal-scale" data-delay="2">
+        <div class="pthumb"><div class="tbg" style="background:linear-gradient(135deg,rgba(96,212,247,.18),rgba(74,63,212,.18))"></div><span class="ticon">🎯</span><span class="tlabel">Próximamente</span></div>
+        <div class="pbody"><div class="pcat">Growth Strategy</div><div class="ptitle">Automatización de nurturing</div><div class="pdescr">Secuencias automatizadas de 8 pasos para convertir leads fríos en clientes activos.</div></div>
+        <div class="pfooter"><span class="ptag">SaaS</span><span class="parrow">→</span></div>
+      </div>
+      <div class="pcard reveal-scale" data-delay="3">
+        <div class="pthumb"><div class="tbg" style="background:linear-gradient(135deg,rgba(155,127,248,.22),rgba(96,212,247,.1))"></div><span class="ticon">📈</span><span class="tlabel">Próximamente</span></div>
+        <div class="pbody"><div class="pcat">Email + Contenido</div><div class="ptitle">Newsletter de marca personal</div><div class="pdescr">Estrategia de contenido semanal con copywriting editorial que fidelizó a más de 5k suscriptores.</div></div>
+        <div class="pfooter"><span class="ptag">Marca Personal</span><span class="parrow">→</span></div>
+      </div>
+    </div>
+    <div class="port-cta reveal"><a href="#contacto" class="btn-outline">¿Quieres ser parte de nuestro portafolio? →</a></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section style="padding:8rem 0;overflow:hidden" id="reviews">
+
+  <div class="carousel-outer">
+    <div class="carousel-track" id="carouselTrack">
+
+      <div class="tcard">
+        <div class="tcard-glow"></div>
+        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
+        <p class="tcard-text">Trabajar con Nomántica fue un acierto total. Entendieron mi negocio desde el minuto uno y los resultados se notaron rápido. Muy recomendables.</p>
+        <div class="tcard-author">
+          <div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#9b7ff8)">CR</div>
+          <div><div class="rev-name">Carlos Reyes</div><div class="rev-verified">✓ Verificado</div></div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-glow"></div>
+        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
+        <p class="tcard-text">Estoy súper contenta con Nomántica. Captaron la esencia de mi marca y le dieron justo el impulso que quería.</p>
+        <div class="tcard-author">
+          <div class="rev-avatar" style="background:linear-gradient(135deg,#6b5ef0,#60d4f7)">SO</div>
+          <div><div class="rev-name">Sofía Ortega</div><div class="rev-verified">✓ Verificado</div></div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-glow"></div>
+        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
+        <p class="tcard-text">Conseguimos ordenar nuestra estrategia digital y mejorar resultados.</p>
+        <div class="tcard-author">
+          <div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#60d4f7)">AM</div>
+          <div><div class="rev-name">Andrés Molina</div><div class="rev-verified">✓ Verificado</div></div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-glow"></div>
+        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
+        <p class="tcard-text">Le pusimos orden a todo el tema digital y empezamos a ver resultados de verdad. Son prácticos, van al grano y se implican mucho.</p>
+        <div class="tcard-author">
+          <div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#60d4f7)">LV</div>
+          <div><div class="rev-name">Laura Villanueva</div><div class="rev-verified">✓ Verificado</div></div>
+        </div>
+      </div>
+
+      <div class="tcard">
+        <div class="tcard-glow"></div>
+        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
+        <p class="tcard-text">Muy buena experiencia con Nomántica. Nos ayudaron a enfocar mejor la estrategia y a optimizar lo que ya estábamos haciendo.</p>
+        <div class="tcard-author">
+          <div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#4a3fd4)">DP</div>
+          <div><div class="rev-name">Diego Paredes</div><div class="rev-verified">✓ Verificado</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- dots -->
+    <div class="carousel-dots" id="carouselDots">
+      <button class="cdot active" onclick="goTo(0)"></button>
+      <button class="cdot" onclick="goTo(1)"></button>
+      <button class="cdot" onclick="goTo(2)"></button>
+      <button class="cdot" onclick="goTo(3)"></button>
+      <button class="cdot" onclick="goTo(4)"></button>
+    </div>
+  </div>
+</section>
+
+<style>
+.carousel-outer{position:relative;margin-top:4rem;padding-bottom:3rem}
+.carousel-track{
+  display:flex;
+  gap:1.5rem;
+  padding:2rem 4rem 1rem;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  scroll-behavior:smooth;
+}
+.carousel-track::-webkit-scrollbar{display:none}
+.tcard{
+  flex:0 0 380px;
+  scroll-snap-align:start;
+  background:var(--surface);
+  border:1px solid var(--border2);
+  border-radius:24px;
+  padding:2.2rem;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .4s, box-shadow .4s, transform .4s;
+}
+.tcard:hover{
+  border-color:rgba(74,63,212,.4);
+  box-shadow:0 0 60px rgba(74,63,212,.15), 0 20px 50px rgba(0,0,0,.3);
+  transform:translateY(-4px);
+}
+.tcard-glow{
+  position:absolute;
+  top:-60px; left:50%; transform:translateX(-50%);
+  width:200px; height:200px;
+  background:radial-gradient(circle, rgba(74,63,212,.18), transparent 70%);
+  pointer-events:none;
+  transition:opacity .4s;
+  opacity:0;
+}
+.tcard:hover .tcard-glow{opacity:1}
+.tcard-text{font-size:.92rem;color:var(--text);line-height:1.75;margin:1rem 0 1.8rem;font-weight:300}
+.tcard-author{display:flex;align-items:center;gap:.9rem}
+.carousel-dots{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:1.5rem}
+.cdot{width:8px;height:8px;border-radius:100px;border:none;background:var(--border2);cursor:none;transition:background .3s, width .3s}
+.cdot.active{background:var(--accent-bright);width:24px}
+
+/* auto-scroll highlight */
+@keyframes cardPulse{
+  0%,100%{box-shadow:0 0 0 rgba(74,63,212,0)}
+  50%{box-shadow:0 0 50px rgba(74,63,212,.2), 0 0 0 1px rgba(74,63,212,.3)}
+}
+.tcard.active-card{animation:cardPulse 2s ease}
+</style>
+
+<script>
+(function(){
+  const track = document.getElementById('carouselTrack');
+  const dots = document.querySelectorAll('.cdot');
+  const cards = document.querySelectorAll('.tcard');
+  let current = 0;
+  let timer;
+
+  function goTo(i){
+    current = i;
+    const card = cards[i];
+    track.scrollTo({ left: card.offsetLeft - 64, behavior: 'smooth' });
+    dots.forEach((d,idx) => d.classList.toggle('active', idx === i));
+    cards.forEach((c,idx) => {
+      c.classList.remove('active-card');
+      if(idx === i){ void c.offsetWidth; c.classList.add('active-card'); }
+    });
+    clearInterval(timer);
+    timer = setInterval(next, 3800);
+  }
+
+  function next(){ goTo((current + 1) % cards.length); }
+
+  window.goTo = goTo;
+  timer = setInterval(next, 10000);
+
+  // pause on hover
+  track.addEventListener('mouseenter', () => clearInterval(timer));
+  track.addEventListener('mouseleave', () => { timer = setInterval(next, 10000); });
+})();
+</script>
+
+<!-- CTA -->
+<section class="cta-section" id="contacto">
+  <div class="cta-inner">
+    <div class="reveal">
+      <span class="stag">Empieza hoy</span>
+      <h2 class="cta-title">¿Listo para<br><span class="hand">crecer?</span></h2>
+      <p class="ssub" style="margin:1.2rem auto 0;text-align:center;max-width:440px">Únete a las marcas que ya están generando más ventas con email marketing inteligente. Sin spam, sin trucos.</p>
+    </div>
+    <div class="reveal" data-delay="2">
+      <form class="email-form" onsubmit="handleSubmit(event)">
+        <input type="email" placeholder="tu@email.com" required>
+        <button type="submit">Quiero crecer →</button>
+      </form>
+      <p class="form-note">Sin spam. Solo estrategia. Cancela cuando quieras. 🔒</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">Nom<span class="la">á</span>ntica</div>
+  <p>© 2025 Nomántica. Todos los derechos reservados.</p>
+  <ul class="flinks">
+    <li><a href="#">Privacidad</a></li>
+    <li><a href="#">Términos</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx-5}px,${my-5}px)`;
+  });
+  (function anim(){
+    rx += (mx-rx-17)*.11;
+    ry += (my-ry-17)*.11;
+    ring.style.transform = `translate(${rx}px,${ry}px)`;
+    requestAnimationFrame(anim);
+  })();
+  document.querySelectorAll('a,button,input,.pcard,.rev-card,.step-item,.pkg-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px';});
+    el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px';});
+  });
+
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
+
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => obs.observe(el));
+
+  // Form submit
+  function handleSubmit(e){
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = '¡Registrado! ✓';
+    btn.style.background = 'var(--accent3)';
+    btn.style.color = '#000';
+    setTimeout(() => {
+      btn.textContent = 'Quiero crecer →';
+      btn.style.background = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 3000);
+  }
+
+  // Hero parallax
+  document.addEventListener('mousemove', e => {
+    const x = (e.clientX/innerWidth - .5) * 16;
+    const y = (e.clientY/innerHeight - .5) * 8;
+    const bg = document.getElementById('heroBg');
+    if(bg) bg.style.transform = `translate(${x*.45}px,${y*.45}px)`;
+  });
+</script>
+</body>
+</html>
