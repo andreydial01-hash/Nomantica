@@ -256,6 +256,50 @@ footer p{font-size:.78rem;color:var(--muted)}
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursor-ring"></div>
 
+<!-- WhatsApp Button -->
+<a href="https://wa.me/527121837694" target="_blank" rel="noopener" id="waBtn" title="Escríbenos por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="#fff">
+    <path d="M16 1C7.716 1 1 7.716 1 16c0 2.628.678 5.1 1.865 7.254L1 31l7.98-1.833A14.94 14.94 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.2a12.14 12.14 0 01-6.19-1.694l-.443-.263-4.736 1.088 1.118-4.617-.29-.473A12.16 12.16 0 013.8 16C3.8 9.26 9.26 3.8 16 3.8S28.2 9.26 28.2 16 22.74 28.2 16 28.2zm6.67-9.115c-.366-.183-2.163-1.067-2.498-1.19-.335-.12-.578-.183-.822.184-.244.366-.944 1.19-1.157 1.434-.213.244-.427.274-.793.091-.366-.183-1.545-.57-2.943-1.816-1.088-.97-1.822-2.168-2.035-2.534-.213-.366-.023-.564.16-.746.164-.163.366-.427.549-.64.183-.213.244-.366.366-.61.122-.244.061-.457-.03-.64-.092-.183-.822-1.982-1.127-2.713-.297-.713-.598-.616-.822-.628l-.7-.012c-.244 0-.64.091-.975.457s-1.28 1.25-1.28 3.047 1.311 3.534 1.494 3.778c.183.244 2.58 3.94 6.253 5.524.874.377 1.556.602 2.087.77.877.279 1.676.24 2.308.145.704-.104 2.163-.884 2.468-1.737.305-.854.305-1.585.213-1.737-.09-.152-.334-.244-.7-.427z"/>
+  </svg>
+</a>
+
+<style>
+#waBtn{
+  position:fixed;
+  bottom:2rem;
+  right:2rem;
+  z-index:999;
+  width:56px;height:56px;
+  background:#25d366;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 24px rgba(37,211,102,.45);
+  transition:transform .3s, box-shadow .3s;
+  animation:waPop .6s cubic-bezier(.34,1.56,.64,1) 1.5s both;
+}
+#waBtn:hover{
+  transform:scale(1.12);
+  box-shadow:0 6px 36px rgba(37,211,102,.65);
+}
+@keyframes waPop{
+  from{opacity:0;transform:scale(0)}
+  to{opacity:1;transform:scale(1)}
+}
+/* pulse ring */
+#waBtn::before{
+  content:'';
+  position:absolute;
+  inset:-4px;
+  border-radius:50%;
+  border:2px solid rgba(37,211,102,.5);
+  animation:waPulse 2.2s ease-out infinite;
+}
+@keyframes waPulse{
+  0%{transform:scale(1);opacity:.7}
+  100%{transform:scale(1.5);opacity:0}
+}
+</style>
+
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">Nom<span class="la">á</span>ntica</a>
