@@ -263,7 +263,47 @@ footer p{font-size:.78rem;color:var(--muted)}
   </svg>
 </a>
 
+<!-- WhatsApp bubble -->
+<div id="waBubble">Contáctanos ahora 👋</div>
+
 <style>
+#waBubble{
+  position:fixed;
+  bottom:5.4rem;
+  right:1.5rem;
+  z-index:999;
+  background:#fff;
+  color:#111;
+  font-family:var(--fb);
+  font-size:.82rem;
+  font-weight:600;
+  padding:.55rem 1rem;
+  border-radius:100px;
+  box-shadow:0 4px 20px rgba(0,0,0,.18);
+  white-space:nowrap;
+  pointer-events:none;
+  animation:bubbleIn .5s cubic-bezier(.34,1.56,.64,1) 2s both, bubbleOut .4s ease 9s forwards;
+}
+/* tail */
+#waBubble::after{
+  content:'';
+  position:absolute;
+  bottom:-7px;
+  right:22px;
+  width:0;height:0;
+  border-left:7px solid transparent;
+  border-right:7px solid transparent;
+  border-top:8px solid #fff;
+}
+@keyframes bubbleIn{
+  from{opacity:0;transform:translateY(10px) scale(.85)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes bubbleOut{
+  from{opacity:1;transform:scale(1)}
+  to{opacity:0;transform:scale(.85);pointer-events:none}
+}
+
 #waBtn{
   position:fixed;
   bottom:2rem;
@@ -811,6 +851,8 @@ footer p{font-size:.78rem;color:var(--muted)}
       <div class="email-form" id="ctaForm">
         <input type="email" id="ctaEmail" placeholder="tu@email.com" style="display:flex;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem" />
         <input type="text" id="ctaName" placeholder="tu nombre" style="display:none;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem" />
+        <!-- honeypot: oculto para humanos, visible para bots -->
+        <input type="text" id="ctaHoney" style="display:none;position:absolute;left:-9999px" tabindex="-1" autocomplete="off"/>
         <button id="ctaBtn" onclick="handleStep()">Quiero crecer →</button>
       </div>
       <p class="form-note" id="ctaNote">Sin spam. Solo estrategia. Cancela cuando quieras. 🔒</p>
@@ -864,25 +906,35 @@ footer p{font-size:.78rem;color:var(--muted)}
 
   let formStep = 1;
   let userEmail = '';
+  let submitted = false; // bloquea doble envío por sesión
+
+  // sanitiza texto: elimina HTML y limita longitud
+  function sanitize(str, max) {
+    return str.replace(/<[^>]*>/g, '').replace(/[<>"'`;]/g, '').trim().slice(0, max);
+  }
 
   async function handleStep() {
+    if (submitted) return;
+
     const emailInput = document.getElementById('ctaEmail');
     const nameInput  = document.getElementById('ctaName');
+    const honey      = document.getElementById('ctaHoney');
     const btn        = document.getElementById('ctaBtn');
     const note       = document.getElementById('ctaNote');
     const form       = document.getElementById('ctaForm');
 
     // ── PASO 1: validar email ──
     if (formStep === 1) {
-      const email = emailInput.value.trim();
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      const raw = emailInput.value.trim();
+      // bloquea bots que rellenan el honeypot
+      if (honey.value) return;
+      if (!raw || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw) || raw.length > 254) {
         emailInput.style.outline = '1px solid #e53e3e';
         setTimeout(() => emailInput.style.outline = '', 1500);
         return;
       }
-      userEmail = email;
+      userEmail = sanitize(raw, 254);
 
-      // animación de transición
       emailInput.style.transition = 'opacity .35s, transform .35s';
       emailInput.style.opacity = '0';
       emailInput.style.transform = 'translateX(-10px)';
@@ -909,13 +961,15 @@ footer p{font-size:.78rem;color:var(--muted)}
 
     // ── PASO 2: guardar en Supabase ──
     if (formStep === 2) {
-      const name = nameInput.value.trim();
-      if (!name) {
+      const rawName = nameInput.value.trim();
+      if (!rawName || rawName.length < 2) {
         nameInput.style.outline = '1px solid #e53e3e';
         setTimeout(() => nameInput.style.outline = '', 1500);
         return;
       }
+      const nombre = sanitize(rawName, 80);
 
+      submitted = true; // bloquea reenvíos
       btn.textContent = 'Enviando...';
       btn.disabled = true;
 
@@ -928,18 +982,17 @@ footer p{font-size:.78rem;color:var(--muted)}
             'Authorization': `Bearer ${SUPABASE_KEY}`,
             'Prefer': 'return=minimal'
           },
-          body: JSON.stringify({ email: userEmail, nombre: name })
+          body: JSON.stringify({ email: userEmail, nombre })
         });
 
         if (!res.ok) throw new Error();
 
-        // éxito
         nameInput.style.transition = 'opacity .3s';
         nameInput.style.opacity = '0';
         setTimeout(() => {
           nameInput.style.display = 'none';
           form.style.justifyContent = 'center';
-          btn.textContent = '¡Listo, ' + name.split(' ')[0] + '! Te contactamos pronto 🎉';
+          btn.textContent = '¡Listo, ' + nombre.split(' ')[0] + '! Te contactamos pronto 🎉';
           btn.style.background = 'var(--accent3)';
           btn.style.color = '#000';
           btn.style.borderRadius = '100px';
@@ -949,6 +1002,7 @@ footer p{font-size:.78rem;color:var(--muted)}
         }, 300);
 
       } catch {
+        submitted = false; // permite reintentar si hay error de red
         btn.textContent = 'Algo falló, intenta de nuevo';
         btn.style.background = '#e53e3e';
         btn.disabled = false;
