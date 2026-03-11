@@ -3,41 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nomántica — Marketing que se mueve</title>
+<title>Nomántica — Más clientes para tu negocio</title>
+<!-- Open Graph / Meta Ads -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://nomantica.com"/>
+<meta property="og:title" content="¿Tu negocio necesita más clientes? — Nomántica"/>
+<meta property="og:description" content="Ayudamos a negocios mexicanos a vender más con marketing digital que realmente funciona. Email, redes, publicidad y páginas web. Resultados reales."/>
+<meta property="og:image" content="https://nomantica.com/og-image.jpg"/>
+<meta property="og:locale" content="es_MX"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="¿Tu negocio necesita más clientes? — Nomántica"/>
+<meta name="twitter:description" content="Marketing digital para pymes mexicanas. Email, redes, publicidad y más. Resultados reales."/>
+<meta name="twitter:image" content="https://nomantica.com/og-image.jpg"/>
+<meta name="description" content="Ayudamos a negocios mexicanos a vender más con marketing digital que realmente funciona. Email, redes, publicidad y páginas web."/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#05050e;
-  --surface:#0a0a1a;
-  --surface2:#0f0f22;
-  --accent:#4a3fd4;
-  --accent-bright:#6b5ef0;
-  --accent2:#9b7ff8;
-  --accent3:#60d4f7;
-  --text:#eeedf8;
-  --muted:#6b6a8f;
-  --border:rgba(74,63,212,0.15);
-  --border2:rgba(255,255,255,0.06);
-  --fd:'Bricolage Grotesque',sans-serif;
-  --fh:'Caveat',cursive;
-  --fb:'Lato',sans-serif;
+  --bg:#05050e;--surface:#0a0a1a;--surface2:#0f0f22;
+  --accent:#4a3fd4;--accent-bright:#6b5ef0;--accent2:#9b7ff8;--accent3:#60d4f7;
+  --text:#eeedf8;--muted:#6b6a8f;--border:rgba(74,63,212,.15);--border2:rgba(255,255,255,.06);
+  --fd:'Bricolage Grotesque',sans-serif;--fh:'Caveat',cursive;--fb:'Lato',sans-serif;
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--fb);font-weight:300;overflow-x:hidden;cursor:none}
-
-/* ── Cursor ── */
-.cursor{width:10px;height:10px;background:var(--accent-bright);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;mix-blend-mode:screen}
-.cursor-ring{width:34px;height:34px;border:1px solid rgba(74,63,212,.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transition:width .3s,height .3s}
+body{background:var(--bg);color:var(--text);font-family:var(--fb);font-weight:300;overflow-x:hidden}
 
 /* ── Nav ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 4rem;backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .4s,background .4s}
 nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .nav-logo{font-family:var(--fd);font-weight:800;font-size:1.45rem;letter-spacing:-.03em;color:var(--text);text-decoration:none}
-.nav-logo .la{background:linear-gradient(180deg,#c8c8c8 0%,#ffffff 20%,#e0e0e0 35%,#888888 52%,#c0c0c0 65%,#ffffff 78%,#b0b0b0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.flogo .la{background:linear-gradient(180deg,#c8c8c8 0%,#ffffff 20%,#e0e0e0 35%,#888888 52%,#c0c0c0 65%,#ffffff 78%,#b0b0b0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-logo .la{background:linear-gradient(180deg,#c8c8c8 0%,#fff 20%,#e0e0e0 35%,#888 52%,#c0c0c0 65%,#fff 78%,#b0b0b0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.flogo .la{background:linear-gradient(180deg,#c8c8c8 0%,#fff 20%,#e0e0e0 35%,#888 52%,#c0c0c0 65%,#fff 78%,#b0b0b0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{color:var(--muted);text-decoration:none;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;transition:color .3s}
 .nav-links a:hover{color:var(--text)}
@@ -53,10 +51,8 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .reveal-right.visible{opacity:1;transform:none}
 .reveal-scale{opacity:0;transform:scale(.88);transition:opacity .7s ease,transform .7s ease}
 .reveal-scale.visible{opacity:1;transform:none}
-[data-delay="1"]{transition-delay:.1s}
-[data-delay="2"]{transition-delay:.22s}
-[data-delay="3"]{transition-delay:.36s}
-[data-delay="4"]{transition-delay:.5s}
+[data-delay="1"]{transition-delay:.1s}[data-delay="2"]{transition-delay:.22s}
+[data-delay="3"]{transition-delay:.36s}[data-delay="4"]{transition-delay:.5s}
 
 /* ── Hero ── */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9rem 2rem 6rem;position:relative;overflow:hidden}
@@ -68,13 +64,11 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .f2{width:220px;height:220px;background:radial-gradient(circle,rgba(107,94,240,.07),transparent 70%);top:45%;right:-4%;animation-delay:2.5s}
 .f3{width:160px;height:160px;background:radial-gradient(circle,rgba(96,212,247,.06),transparent 70%);bottom:18%;left:12%;animation-delay:5s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
-
 .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(74,63,212,.1);border:1px solid rgba(74,63,212,.28);color:var(--accent-bright);font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;margin-bottom:2rem;animation:fadeInDown 1s ease .2s both}
 .hero-tag::before{content:'';width:6px;height:6px;background:var(--accent-bright);border-radius:50%;animation:blink 1.5s ease infinite}
 @keyframes blink{50%{opacity:0}}
 @keyframes fadeInDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
 @keyframes fadeInUp{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}
-
 .hero h1{font-family:var(--fd);font-size:clamp(3.5rem,8.5vw,8.5rem);font-weight:800;line-height:1.15;letter-spacing:-.04em;max-width:920px;margin-bottom:1.6rem;animation:fadeInUp 1s ease .4s both}
 .hero h1 .hand{font-family:var(--fh);font-weight:700;font-size:1.08em;color:var(--accent-bright);display:inline;text-shadow:0 0 40px rgba(107,94,240,.5)}
 .hero p{font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:500px;line-height:1.75;margin-bottom:3rem;animation:fadeInUp 1s ease .6s both}
@@ -85,7 +79,6 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .btn-ghost:hover{color:var(--text)}
 .btn-ghost svg{transition:transform .3s}
 .btn-ghost:hover svg{transform:translateX(4px)}
-.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;animation:fadeInUp 1s ease 1.2s both}
 .scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollLine 2s ease infinite;transform-origin:top}
 @keyframes scrollLine{0%,100%{transform:scaleY(0);opacity:1}50%{transform:scaleY(1);opacity:1}99%{opacity:0}}
 
@@ -122,13 +115,10 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .steps-visual{height:480px;border-radius:24px;overflow:hidden;background:var(--surface);border:1px solid var(--border);position:relative}
 .visual-inner{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(74,63,212,.1),transparent 70%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.2rem;padding:2.5rem}
 .mini-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.4rem;width:100%;display:flex;align-items:center;gap:1rem;animation:slideCard 5s ease-in-out infinite}
-.mini-card:nth-child(2){animation-delay:1.5s}
-.mini-card:nth-child(3){animation-delay:3s}
+.mini-card:nth-child(2){animation-delay:1.5s}.mini-card:nth-child(3){animation-delay:3s}
 @keyframes slideCard{0%,100%{transform:translateX(0)}50%{transform:translateX(8px)}}
 .mini-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.mini-card-text{flex:1}
-.mini-card-title{font-size:.83rem;font-weight:600;margin-bottom:.18rem}
-.mini-card-sub{font-size:.73rem;color:var(--muted)}
+.mini-card-text{flex:1}.mini-card-title{font-size:.83rem;font-weight:600;margin-bottom:.18rem}.mini-card-sub{font-size:.73rem;color:var(--muted)}
 .mini-badge{font-size:.68rem;padding:.2rem .6rem;border-radius:100px;font-weight:600;white-space:nowrap}
 
 /* ── Email section ── */
@@ -140,16 +130,6 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .email-visual{background:var(--surface2);border:1px solid var(--border);border-radius:24px;padding:2rem;position:relative;overflow:hidden}
 .email-visual::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 50% 50%,rgba(74,63,212,.06),transparent 60%);animation:rotate 22s linear infinite}
 @keyframes rotate{to{transform:rotate(360deg)}}
-.email-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.4rem;position:relative}
-.email-stat{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:1rem;text-align:center}
-.email-stat-num{font-family:var(--fd);font-size:1.45rem;font-weight:800;color:var(--accent-bright)}
-.email-stat-label{font-size:.7rem;color:var(--muted);margin-top:.18rem}
-.email-rows{display:flex;flex-direction:column;gap:1rem;position:relative}
-.email-row{display:flex;align-items:center;gap:.75rem;background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:1rem 1.25rem}
-.email-row-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.email-row-title{font-size:.82rem;font-weight:600;margin-bottom:.15rem}
-.email-row-sub{font-size:.72rem;color:var(--muted)}
-.email-row-badge{margin-left:auto;font-size:.7rem;padding:.2rem .65rem;border-radius:100px;font-weight:600;white-space:nowrap}
 
 /* ── Portfolio ── */
 .portfolio-section{padding:8rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
@@ -159,9 +139,6 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .pcard{background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;transition:transform .4s,border-color .4s,box-shadow .4s;cursor:default}
 .pcard:hover{transform:translateY(-6px);border-color:var(--border);box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .pthumb{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.tbg{position:absolute;inset:0}
-.ticon{position:absolute;font-size:2.5rem;opacity:.15}
-.tlabel{position:relative;z-index:1;font-family:var(--fd);font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.12);padding:.4rem 1rem;border-radius:100px;backdrop-filter:blur(4px)}
 .pbody{padding:1.5rem}
 .pcat{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-bright);font-weight:700;margin-bottom:.4rem}
 .ptitle{font-family:var(--fd);font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
@@ -174,49 +151,26 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .btn-outline{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--border2);color:var(--muted);padding:.8rem 2rem;border-radius:100px;text-decoration:none;font-size:.9rem;font-weight:500;transition:border-color .3s,color .3s}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent-bright)}
 
-/* ── Reviews ── */
-.reviews-section{padding:8rem 4rem;max-width:1200px;margin:0 auto}
-.reviews-header{text-align:center;margin-bottom:5rem}
-.rev-summary{display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:1.5rem}
-.rev-score{font-family:var(--fd);font-size:4rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--accent-bright),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.rev-stars-wrap{display:flex;flex-direction:column;gap:.4rem}
-.stars-row{display:flex;gap:3px}
-.star{color:var(--accent2);font-size:1.2rem}
-.rev-count{font-size:.82rem;color:var(--muted)}
-.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.rev-card{background:var(--surface);border:1px solid var(--border2);border-radius:20px;padding:2rem;transition:transform .4s,border-color .4s,box-shadow .4s;position:relative;overflow:hidden}
-.rev-card::before{content:'\201C';position:absolute;top:.5rem;right:1.5rem;font-family:var(--fh);font-size:6rem;line-height:1;color:rgba(74,63,212,.1);pointer-events:none}
-.rev-card:hover{transform:translateY(-5px);border-color:var(--border);box-shadow:0 20px 50px rgba(0,0,0,.3)}
+/* ── Reviews carousel ── */
+.carousel-outer{position:relative;margin-top:4rem;padding-bottom:3rem}
+.carousel-track{display:flex;gap:1.5rem;padding:2rem 4rem 1rem;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth}
+.carousel-track::-webkit-scrollbar{display:none}
+.tcard{flex:0 0 380px;scroll-snap-align:start;background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:2.2rem;position:relative;overflow:hidden;transition:border-color .4s,box-shadow .4s,transform .4s}
+.tcard:hover{border-color:rgba(74,63,212,.4);box-shadow:0 0 60px rgba(74,63,212,.15),0 20px 50px rgba(0,0,0,.3);transform:translateY(-4px)}
+.tcard-glow{position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:200px;height:200px;background:radial-gradient(circle,rgba(74,63,212,.18),transparent 70%);pointer-events:none;transition:opacity .4s;opacity:0}
+.tcard:hover .tcard-glow{opacity:1}
+.tcard-text{font-size:.92rem;color:var(--text);line-height:1.75;margin:1rem 0 1.8rem;font-weight:300}
+.tcard-author{display:flex;align-items:center;gap:.9rem}
+.carousel-dots{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:1.5rem}
+.cdot{width:8px;height:8px;border-radius:100px;border:none;background:var(--border2);cursor:pointer;transition:background .3s,width .3s}
+.cdot.active{background:var(--accent-bright);width:24px}
 .rev-stars{display:flex;gap:3px;margin-bottom:1rem}
 .rev-star{color:var(--accent2);font-size:.95rem}
-.rev-text{font-size:.9rem;color:var(--text);line-height:1.7;margin-bottom:1.5rem;font-weight:300}
-.rev-author{display:flex;align-items:center;gap:.9rem}
 .rev-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:.9rem;font-weight:700;color:#fff;flex-shrink:0}
 .rev-name{font-weight:600;font-size:.9rem;margin-bottom:.1rem}
-.rev-role{font-size:.75rem;color:var(--muted)}
 .rev-verified{display:flex;align-items:center;gap:.3rem;font-size:.7rem;color:var(--accent3);margin-top:.15rem}
-
-/* ── Paquetes ── */
-.paquetes-section{padding:8rem 4rem;max-width:1200px;margin:0 auto}
-.paquetes-header{text-align:center;margin-bottom:4rem}
-.paquetes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;align-items:start}
-.pkg-card{background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:2.5rem;position:relative;overflow:hidden;transition:transform .4s,box-shadow .4s}
-.pkg-card:hover{transform:translateY(-8px);box-shadow:0 24px 70px rgba(0,0,0,.35)}
-.pkg-card.featured{background:var(--surface2);border-color:rgba(74,63,212,.38);box-shadow:0 0 80px rgba(74,63,212,.12)}
-.pkg-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-.pkg-badge{display:inline-flex;background:rgba(74,63,212,.13);color:var(--accent-bright);border:1px solid rgba(74,63,212,.28);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:.28rem .75rem;border-radius:100px;margin-bottom:1.5rem}
-.pkg-name{font-family:var(--fd);font-size:1.5rem;font-weight:800;margin-bottom:.45rem}
-.pkg-desc{color:var(--muted);font-size:.875rem;line-height:1.65;margin-bottom:2rem;min-height:3rem}
-.pkg-divider{height:1px;background:var(--border2);margin-bottom:2rem}
-.pkg-features{list-style:none;display:flex;flex-direction:column;gap:.8rem;margin-bottom:2.5rem}
-.pkg-features li{display:flex;align-items:flex-start;gap:.7rem;font-size:.865rem;color:var(--muted)}
-.pkg-features li.on{color:var(--text)}
-.chk{color:var(--accent3);flex-shrink:0;margin-top:.08rem}
-.xck{color:rgba(255,255,255,.14);flex-shrink:0;margin-top:.08rem}
-.pkg-btn{display:block;text-align:center;padding:.88rem 1.5rem;border-radius:12px;font-size:.92rem;font-weight:600;text-decoration:none;border:1px solid var(--border2);color:var(--text);transition:transform .3s,box-shadow .3s,background .3s}
-.pkg-btn:hover{transform:translateY(-2px)}
-.pkg-btn.feat{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 30px rgba(74,63,212,.4)}
-.pkg-btn.feat:hover{box-shadow:0 0 55px rgba(107,94,240,.55);background:var(--accent-bright)}
+@keyframes cardPulse{0%,100%{box-shadow:0 0 0 rgba(74,63,212,0)}50%{box-shadow:0 0 50px rgba(74,63,212,.2),0 0 0 1px rgba(74,63,212,.3)}}
+.tcard.active-card{animation:cardPulse 2s ease}
 
 /* ── CTA ── */
 .cta-section{padding:8rem 4rem;text-align:center;position:relative;overflow:hidden}
@@ -228,7 +182,7 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .email-form:focus-within{border-color:rgba(74,63,212,.5);box-shadow:0 0 40px rgba(74,63,212,.14)}
 .email-form input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem}
 .email-form input::placeholder{color:var(--muted)}
-.email-form button{background:var(--accent);color:#fff;border:none;padding:.72rem 1.5rem;border-radius:100px;font-family:var(--fb);font-size:.88rem;font-weight:600;cursor:none;transition:background .3s}
+.email-form button{background:var(--accent);color:#fff;border:none;padding:.72rem 1.5rem;border-radius:100px;font-family:var(--fb);font-size:.88rem;font-weight:600;cursor:pointer;transition:background .3s}
 .email-form button:hover{background:var(--accent-bright)}
 .form-note{font-size:.76rem;color:var(--muted);margin-top:1rem}
 
@@ -240,105 +194,34 @@ footer p{font-size:.78rem;color:var(--muted)}
 .flinks a{color:var(--muted);text-decoration:none;font-size:.78rem;transition:color .3s}
 .flinks a:hover{color:var(--text)}
 
+/* ── WhatsApp ── */
+#waBubble{position:fixed;bottom:5.4rem;right:1.5rem;z-index:999;background:#fff;color:#111;font-family:var(--fb);font-size:.82rem;font-weight:600;padding:.55rem 1rem;border-radius:100px;box-shadow:0 4px 20px rgba(0,0,0,.18);white-space:nowrap;pointer-events:none;animation:bubbleIn .5s cubic-bezier(.34,1.56,.64,1) 2s both,bubbleOut .4s ease 9s forwards}
+#waBubble::after{content:'';position:absolute;bottom:-7px;right:22px;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:8px solid #fff}
+@keyframes bubbleIn{from{opacity:0;transform:translateY(10px) scale(.85)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes bubbleOut{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(.85)}}
+#waBtn{position:fixed;bottom:2rem;right:2rem;z-index:999;width:56px;height:56px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(37,211,102,.45);transition:transform .3s,box-shadow .3s;animation:waPop .6s cubic-bezier(.34,1.56,.64,1) 1.5s both}
+#waBtn:hover{transform:scale(1.12);box-shadow:0 6px 36px rgba(37,211,102,.65)}
+@keyframes waPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+#waBtn::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(37,211,102,.5);animation:waPulse 2.2s ease-out infinite}
+@keyframes waPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+
 @media(max-width:900px){
-  nav{padding:1rem 1.5rem}
-  .nav-links{display:none}
+  nav{padding:1rem 1.5rem}.nav-links{display:none}
   .stats{grid-template-columns:1fr 1fr}
-  .section,.email-section,.portfolio-section,.reviews-section,.paquetes-section,.cta-section{padding:5rem 1.5rem}
+  .section,.email-section,.portfolio-section,.cta-section{padding:5rem 1.5rem}
   .steps-grid,.email-inner{grid-template-columns:1fr}
-  .portfolio-grid,.reviews-grid,.paquetes-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:1fr}
   footer{flex-direction:column;gap:1.5rem;text-align:center}
 }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
-
-<!-- WhatsApp Button -->
-<a href="https://wa.me/527121837694" target="_blank" rel="noopener" id="waBtn" title="Escríbenos por WhatsApp">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="#fff">
-    <path d="M16 1C7.716 1 1 7.716 1 16c0 2.628.678 5.1 1.865 7.254L1 31l7.98-1.833A14.94 14.94 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.2a12.14 12.14 0 01-6.19-1.694l-.443-.263-4.736 1.088 1.118-4.617-.29-.473A12.16 12.16 0 013.8 16C3.8 9.26 9.26 3.8 16 3.8S28.2 9.26 28.2 16 22.74 28.2 16 28.2zm6.67-9.115c-.366-.183-2.163-1.067-2.498-1.19-.335-.12-.578-.183-.822.184-.244.366-.944 1.19-1.157 1.434-.213.244-.427.274-.793.091-.366-.183-1.545-.57-2.943-1.816-1.088-.97-1.822-2.168-2.035-2.534-.213-.366-.023-.564.16-.746.164-.163.366-.427.549-.64.183-.213.244-.366.366-.61.122-.244.061-.457-.03-.64-.092-.183-.822-1.982-1.127-2.713-.297-.713-.598-.616-.822-.628l-.7-.012c-.244 0-.64.091-.975.457s-1.28 1.25-1.28 3.047 1.311 3.534 1.494 3.778c.183.244 2.58 3.94 6.253 5.524.874.377 1.556.602 2.087.77.877.279 1.676.24 2.308.145.704-.104 2.163-.884 2.468-1.737.305-.854.305-1.585.213-1.737-.09-.152-.334-.244-.7-.427z"/>
-  </svg>
-</a>
-
-<!-- WhatsApp bubble -->
+<!-- WhatsApp -->
 <div id="waBubble">Contáctanos ahora 👋</div>
-
-<style>
-#waBubble{
-  position:fixed;
-  bottom:5.4rem;
-  right:1.5rem;
-  z-index:999;
-  background:#fff;
-  color:#111;
-  font-family:var(--fb);
-  font-size:.82rem;
-  font-weight:600;
-  padding:.55rem 1rem;
-  border-radius:100px;
-  box-shadow:0 4px 20px rgba(0,0,0,.18);
-  white-space:nowrap;
-  pointer-events:none;
-  animation:bubbleIn .5s cubic-bezier(.34,1.56,.64,1) 2s both, bubbleOut .4s ease 9s forwards;
-}
-/* tail */
-#waBubble::after{
-  content:'';
-  position:absolute;
-  bottom:-7px;
-  right:22px;
-  width:0;height:0;
-  border-left:7px solid transparent;
-  border-right:7px solid transparent;
-  border-top:8px solid #fff;
-}
-@keyframes bubbleIn{
-  from{opacity:0;transform:translateY(10px) scale(.85)}
-  to{opacity:1;transform:translateY(0) scale(1)}
-}
-@keyframes bubbleOut{
-  from{opacity:1;transform:scale(1)}
-  to{opacity:0;transform:scale(.85);pointer-events:none}
-}
-
-#waBtn{
-  position:fixed;
-  bottom:2rem;
-  right:2rem;
-  z-index:999;
-  width:56px;height:56px;
-  background:#25d366;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 24px rgba(37,211,102,.45);
-  transition:transform .3s, box-shadow .3s;
-  animation:waPop .6s cubic-bezier(.34,1.56,.64,1) 1.5s both;
-}
-#waBtn:hover{
-  transform:scale(1.12);
-  box-shadow:0 6px 36px rgba(37,211,102,.65);
-}
-@keyframes waPop{
-  from{opacity:0;transform:scale(0)}
-  to{opacity:1;transform:scale(1)}
-}
-/* pulse ring */
-#waBtn::before{
-  content:'';
-  position:absolute;
-  inset:-4px;
-  border-radius:50%;
-  border:2px solid rgba(37,211,102,.5);
-  animation:waPulse 2.2s ease-out infinite;
-}
-@keyframes waPulse{
-  0%{transform:scale(1);opacity:.7}
-  100%{transform:scale(1.5);opacity:0}
-}
-</style>
+<a href="https://wa.me/527121837694" target="_blank" rel="noopener" id="waBtn" title="Escríbenos por WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="#fff"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.628.678 5.1 1.865 7.254L1 31l7.98-1.833A14.94 14.94 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.2a12.14 12.14 0 01-6.19-1.694l-.443-.263-4.736 1.088 1.118-4.617-.29-.473A12.16 12.16 0 013.8 16C3.8 9.26 9.26 3.8 16 3.8S28.2 9.26 28.2 16 22.74 28.2 16 28.2zm6.67-9.115c-.366-.183-2.163-1.067-2.498-1.19-.335-.12-.578-.183-.822.184-.244.366-.944 1.19-1.157 1.434-.213.244-.427.274-.793.091-.366-.183-1.545-.57-2.943-1.816-1.088-.97-1.822-2.168-2.035-2.534-.213-.366-.023-.564.16-.746.164-.163.366-.427.549-.64.183-.213.244-.366.366-.61.122-.244.061-.457-.03-.64-.092-.183-.822-1.982-1.127-2.713-.297-.713-.598-.616-.822-.628l-.7-.012c-.244 0-.64.091-.975.457s-1.28 1.25-1.28 3.047 1.311 3.534 1.494 3.778c.183.244 2.58 3.94 6.253 5.524.874.377 1.556.602 2.087.77.877.279 1.676.24 2.308.145.704-.104 2.163-.884 2.468-1.737.305-.854.305-1.585.213-1.737-.09-.152-.334-.244-.7-.427z"/></svg>
+</a>
 
 <!-- NAV -->
 <nav id="nav">
@@ -356,38 +239,34 @@ footer p{font-size:.78rem;color:var(--muted)}
 <section class="hero">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-noise"></div>
-  <div class="floater f1"></div>
-  <div class="floater f2"></div>
-  <div class="floater f3"></div>
-  <div class="hero-tag">Estrategia · Email · Crecimiento</div>
-  <h1>Marketing que<br><span class="hand">mueve</span> tu negocio</h1>
-  <p>Estrategias personalizadas de email marketing y growth para marcas que quieren crecer sin perderse en el camino.</p>
+  <div class="floater f1"></div><div class="floater f2"></div><div class="floater f3"></div>
+  <h1>¿Tu negocio necesita<br>más <span class="hand">clientes?</span></h1>
+  <p>Ayudamos a negocios mexicanos a vender más con marketing digital que realmente funciona. Tú enfócate en tu negocio — nosotros traemos los clientes.</p>
   <div class="hero-actions">
     <a href="#contacto" class="btn-primary">Contáctanos →</a>
     <a href="#proceso" class="btn-ghost">Cómo funciona <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
   </div>
-
 </section>
 
 <!-- MARQUEE -->
 <div class="marquee-wrap">
   <div class="marquee-track">
+    <span class="marquee-item"><span class="mdot"></span>Más Ventas</span>
+    <span class="marquee-item"><span class="mdot"></span>Más Clientes</span>
     <span class="marquee-item"><span class="mdot"></span>Email Marketing</span>
-    <span class="marquee-item"><span class="mdot"></span>Automatización</span>
-    <span class="marquee-item"><span class="mdot"></span>Lead Generation</span>
-    <span class="marquee-item"><span class="mdot"></span>Conversión</span>
-    <span class="marquee-item"><span class="mdot"></span>Estrategia Digital</span>
-    <span class="marquee-item"><span class="mdot"></span>Growth Hacking</span>
-    <span class="marquee-item"><span class="mdot"></span>Copywriting</span>
-    <span class="marquee-item"><span class="mdot"></span>Segmentación</span>
+    <span class="marquee-item"><span class="mdot"></span>Publicidad Digital</span>
+    <span class="marquee-item"><span class="mdot"></span>Redes Sociales</span>
+    <span class="marquee-item"><span class="mdot"></span>Páginas Web</span>
+    <span class="marquee-item"><span class="mdot"></span>E-commerce</span>
+    <span class="marquee-item"><span class="mdot"></span>Resultados Reales</span>
+    <span class="marquee-item"><span class="mdot"></span>Más Ventas</span>
+    <span class="marquee-item"><span class="mdot"></span>Más Clientes</span>
     <span class="marquee-item"><span class="mdot"></span>Email Marketing</span>
-    <span class="marquee-item"><span class="mdot"></span>Automatización</span>
-    <span class="marquee-item"><span class="mdot"></span>Lead Generation</span>
-    <span class="marquee-item"><span class="mdot"></span>Conversión</span>
-    <span class="marquee-item"><span class="mdot"></span>Estrategia Digital</span>
-    <span class="marquee-item"><span class="mdot"></span>Growth Hacking</span>
-    <span class="marquee-item"><span class="mdot"></span>Copywriting</span>
-    <span class="marquee-item"><span class="mdot"></span>Segmentación</span>
+    <span class="marquee-item"><span class="mdot"></span>Publicidad Digital</span>
+    <span class="marquee-item"><span class="mdot"></span>Redes Sociales</span>
+    <span class="marquee-item"><span class="mdot"></span>Páginas Web</span>
+    <span class="marquee-item"><span class="mdot"></span>E-commerce</span>
+    <span class="marquee-item"><span class="mdot"></span>Resultados Reales</span>
   </div>
 </div>
 
@@ -401,41 +280,17 @@ footer p{font-size:.78rem;color:var(--muted)}
         <p class="ssub">Analizamos tu negocio, construimos la estrategia y ejecutamos. Sin complicaciones, con resultados claros.</p>
       </div>
       <div class="steps-list">
-        <div class="step-item reveal" data-delay="1">
-          <div class="step-num">01</div>
-          <div class="step-content"><h3>Diagnóstico inicial</h3><p>Auditamos tu situación: base de datos, canales activos, métricas y oportunidades.</p></div>
-        </div>
-        <div class="step-item reveal" data-delay="2">
-          <div class="step-num">02</div>
-          <div class="step-content"><h3>Diseño de estrategia</h3><p>Plan personalizado con flujos de email, segmentación y calendario de envíos.</p></div>
-        </div>
-        <div class="step-item reveal" data-delay="3">
-          <div class="step-num">03</div>
-          <div class="step-content"><h3>Ejecución y automatización</h3><p>Implementamos todo para que funcione mientras tú te enfocas en crecer.</p></div>
-        </div>
-        <div class="step-item reveal" data-delay="4">
-          <div class="step-num">04</div>
-          <div class="step-content"><h3>Análisis y optimización</h3><p>Medimos, aprendemos y mejoramos. Reportes claros con lo que importa.</p></div>
-        </div>
+        <div class="step-item reveal" data-delay="1"><div class="step-num">01</div><div class="step-content"><h3>Diagnóstico inicial</h3><p>Auditamos tu situación: base de datos, canales activos, métricas y oportunidades.</p></div></div>
+        <div class="step-item reveal" data-delay="2"><div class="step-num">02</div><div class="step-content"><h3>Diseño de estrategia</h3><p>Plan personalizado con flujos de email, segmentación y calendario de envíos.</p></div></div>
+        <div class="step-item reveal" data-delay="3"><div class="step-num">03</div><div class="step-content"><h3>Ejecución y automatización</h3><p>Implementamos todo para que funcione mientras tú te enfocas en crecer.</p></div></div>
+        <div class="step-item reveal" data-delay="4"><div class="step-num">04</div><div class="step-content"><h3>Análisis y optimización</h3><p>Medimos, aprendemos y mejoramos. Reportes claros con lo que importa.</p></div></div>
       </div>
     </div>
     <div class="steps-visual reveal-right">
       <div class="visual-inner">
-        <div class="mini-card">
-          <div class="mini-icon" style="background:rgba(74,63,212,.15)">📊</div>
-          <div class="mini-card-text"><div class="mini-card-title">Medimos el éxito</div><div class="mini-card-sub">2,450 aperturas · 18.3% CTR</div></div>
-          <div class="mini-badge" style="background:rgba(96,212,247,.1);color:var(--accent3)">+340%</div>
-        </div>
-        <div class="mini-card">
-          <div class="mini-icon" style="background:rgba(107,94,240,.12)">✉️</div>
-          <div class="mini-card-text"><div class="mini-card-title">Sistema automatizado de mensajes</div><div class="mini-card-sub">Tasa apertura: 64.2%</div></div>
-          <div class="mini-badge" style="background:rgba(74,63,212,.1);color:var(--accent-bright)">Live</div>
-        </div>
-        <div class="mini-card">
-          <div class="mini-icon" style="background:rgba(96,212,247,.1)">🎯</div>
-          <div class="mini-card-text"><div class="mini-card-title">Hacemos publicidad que convierte</div><div class="mini-card-sub">1,200 contactos · Lista caliente</div></div>
-          <div class="mini-badge" style="background:rgba(155,127,248,.12);color:var(--accent2)">Nuevo</div>
-        </div>
+        <div class="mini-card"><div class="mini-icon" style="background:rgba(74,63,212,.15)">📊</div><div class="mini-card-text"><div class="mini-card-title">Medimos el éxito</div><div class="mini-card-sub">2,450 aperturas · 18.3% CTR</div></div><div class="mini-badge" style="background:rgba(96,212,247,.1);color:var(--accent3)">+340%</div></div>
+        <div class="mini-card"><div class="mini-icon" style="background:rgba(107,94,240,.12)">✉️</div><div class="mini-card-text"><div class="mini-card-title">Sistema automatizado</div><div class="mini-card-sub">Tasa apertura: 64.2%</div></div><div class="mini-badge" style="background:rgba(74,63,212,.1);color:var(--accent-bright)">Live</div></div>
+        <div class="mini-card"><div class="mini-icon" style="background:rgba(96,212,247,.1)">🎯</div><div class="mini-card-text"><div class="mini-card-title">Publicidad que convierte</div><div class="mini-card-sub">1,200 contactos · Lista caliente</div></div><div class="mini-badge" style="background:rgba(155,127,248,.12);color:var(--accent2)">Nuevo</div></div>
       </div>
     </div>
   </div>
@@ -475,7 +330,7 @@ footer p{font-size:.78rem;color:var(--muted)}
   </div>
 </section>
 
-<!-- PORTAFOLIO -->
+<!-- PROYECTOS -->
 <section class="portfolio-section" id="portafolio">
   <div class="portfolio-inner">
     <div class="portfolio-header reveal">
@@ -483,6 +338,8 @@ footer p{font-size:.78rem;color:var(--muted)}
       <h2 class="stitle">Trabajos que hablan<br>por sí solos</h2>
     </div>
     <div class="portfolio-grid">
+
+      <!-- 1. Campaña de lanzamiento -->
       <div class="pcard reveal-scale" data-delay="1">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
@@ -492,258 +349,440 @@ footer p{font-size:.78rem;color:var(--muted)}
             </defs>
             <rect width="380" height="180" fill="#0a0a1a"/>
             <ellipse cx="190" cy="90" rx="120" ry="70" fill="url(#g1)"/>
-            <!-- orbit arcs -->
             <ellipse cx="190" cy="90" rx="100" ry="38" fill="none" stroke="#4a3fd4" stroke-width=".7" stroke-opacity=".3" stroke-dasharray="4 6"/>
             <ellipse cx="190" cy="90" rx="65" ry="24" fill="none" stroke="#6b5ef0" stroke-width=".7" stroke-opacity=".25" stroke-dasharray="3 5"/>
-            <!-- burst lines from center -->
             <g filter="url(#glow1)" stroke="#6b5ef0" stroke-width=".9" stroke-opacity=".55" stroke-linecap="round">
               <line x1="190" y1="90" x2="190" y2="38"><animate attributeName="y2" values="38;34;38" dur="3s" repeatCount="indefinite"/></line>
               <line x1="190" y1="90" x2="236" y2="62"><animate attributeName="x2" values="236;240;236" dur="3.2s" repeatCount="indefinite"/></line>
               <line x1="190" y1="90" x2="144" y2="62"><animate attributeName="x2" values="144;140;144" dur="2.8s" repeatCount="indefinite"/></line>
               <line x1="190" y1="90" x2="248" y2="90"><animate attributeName="x2" values="248;253;248" dur="3.5s" repeatCount="indefinite"/></line>
               <line x1="190" y1="90" x2="132" y2="90"><animate attributeName="x2" values="132;127;132" dur="3s" repeatCount="indefinite"/></line>
-              <line x1="190" y1="90" x2="224" y2="118"><animate attributeName="y2" values="118;122;118" dur="2.6s" repeatCount="indefinite"/></line>
-              <line x1="190" y1="90" x2="156" y2="118"><animate attributeName="y2" values="118;122;118" dur="3.1s" repeatCount="indefinite"/></line>
             </g>
-            <!-- rocket body -->
             <g transform="translate(190,90)" filter="url(#glow1)">
               <polygon points="0,-22 8,-2 -8,-2" fill="#4a3fd4" opacity=".9"/>
               <rect x="-8" y="-2" width="16" height="14" rx="2" fill="#6b5ef0" opacity=".85"/>
               <polygon points="-8,12 -14,20 -8,18" fill="#4a3fd4" opacity=".7"/>
               <polygon points="8,12 14,20 8,18" fill="#4a3fd4" opacity=".7"/>
-              <!-- window -->
               <circle cx="0" cy="4" r="4" fill="none" stroke="#60d4f7" stroke-width="1.2" opacity=".8"/>
-              <!-- flame -->
               <ellipse cx="0" cy="22" rx="5" ry="8" fill="#60d4f7" opacity=".4"><animate attributeName="ry" values="8;12;7;10;8" dur="1.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".4;.7;.35;.6;.4" dur="1.4s" repeatCount="indefinite"/></ellipse>
               <ellipse cx="0" cy="22" rx="2.5" ry="5" fill="#9b7ff8" opacity=".7"><animate attributeName="ry" values="5;8;4;7;5" dur="1.1s" repeatCount="indefinite"/></ellipse>
-              <!-- ascending anim -->
               <animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="4s" repeatCount="indefinite" additive="sum"/>
             </g>
-            <!-- dots on orbit -->
-            <circle cx="290" cy="90" r="3" fill="#9b7ff8" opacity=".7"><animateMotion dur="7s" repeatCount="indefinite" path="M0,0 A100,38 0 1,1 -1,0 Z"/></circle>
-            <circle cx="190" cy="66" r="2" fill="#60d4f7" opacity=".6"><animateMotion dur="4.5s" repeatCount="indefinite" path="M0,0 A65,24 0 1,0 1,0 Z"/></circle>
-            <!-- stars bg -->
-            <circle cx="60" cy="30" r="1" fill="#fff" opacity=".2"/>
-            <circle cx="320" cy="50" r="1.2" fill="#fff" opacity=".15"/>
-            <circle cx="340" cy="140" r=".8" fill="#fff" opacity=".2"/>
-            <circle cx="40" cy="150" r="1" fill="#fff" opacity=".15"/>
-            <circle cx="270" cy="20" r=".8" fill="#fff" opacity=".18"/>
+            <circle r="3" fill="#9b7ff8" opacity=".7"><animateMotion dur="7s" repeatCount="indefinite" path="M190,90 A100,38 0 1,1 189,90 Z"/></circle>
+            <circle r="2" fill="#60d4f7" opacity=".6"><animateMotion dur="4.5s" repeatCount="indefinite" path="M190,90 A65,24 0 1,0 191,90 Z"/></circle>
+            <circle cx="60" cy="30" r="1" fill="#fff" opacity=".2"/><circle cx="320" cy="50" r="1.2" fill="#fff" opacity=".15"/><circle cx="340" cy="140" r=".8" fill="#fff" opacity=".2"/>
           </svg>
         </div>
         <div class="pbody"><div class="pcat">Email Marketing</div><div class="ptitle">Campaña de lanzamiento</div><div class="pdescr">Estrategia de emails para el lanzamiento de un producto digital. Resultados por publicar.</div></div>
         <div class="pfooter"><span class="ptag">E-commerce</span><span class="parrow">→</span></div>
       </div>
+
+      <!-- 2. Automatización de nurturing -->
       <div class="pcard reveal-scale" data-delay="2">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
               <radialGradient id="g2" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#60d4f7" stop-opacity=".1"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
               <filter id="glow2"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <marker id="arr" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><polygon points="0,0 5,2.5 0,5" fill="#6b5ef0" opacity=".6"/></marker>
+              <marker id="arr2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><polygon points="0,0 5,2.5 0,5" fill="#6b5ef0" opacity=".6"/></marker>
             </defs>
             <rect width="380" height="180" fill="#0a0a1a"/>
             <ellipse cx="190" cy="80" rx="130" ry="75" fill="url(#g2)"/>
-
-            <!-- Node row 1: 1 node -->
             <g filter="url(#glow2)">
               <rect x="168" y="14" width="44" height="24" rx="6" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1.2"/>
               <rect x="172" y="18" width="16" height="4" rx="2" fill="#4a3fd4" opacity=".6"/>
               <rect x="172" y="26" width="10" height="3" rx="1.5" fill="#4a3fd4" opacity=".3"/>
-              <!-- pulse ring -->
-              <rect x="168" y="14" width="44" height="24" rx="6" fill="none" stroke="#6b5ef0" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.5;0" dur="2.8s" repeatCount="indefinite"/><animate attributeName="x" values="168;164;168" dur="2.8s" repeatCount="indefinite"/><animate attributeName="y" values="14;10;14" dur="2.8s" repeatCount="indefinite"/><animate attributeName="width" values="44;52;44" dur="2.8s" repeatCount="indefinite"/><animate attributeName="height" values="24;32;24" dur="2.8s" repeatCount="indefinite"/></rect>
             </g>
-
-            <!-- connectors level 1→2 -->
-            <line x1="190" y1="38" x2="120" y2="66" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".4" marker-end="url(#arr)"/>
-            <line x1="190" y1="38" x2="260" y2="66" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".4" marker-end="url(#arr)"/>
-
-            <!-- Node row 2: 2 nodes -->
+            <line x1="190" y1="38" x2="120" y2="66" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".4" marker-end="url(#arr2)"/>
+            <line x1="190" y1="38" x2="260" y2="66" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".4" marker-end="url(#arr2)"/>
             <g filter="url(#glow2)">
               <rect x="96" y="68" width="44" height="24" rx="6" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.2"/>
               <rect x="100" y="72" width="14" height="4" rx="2" fill="#6b5ef0" opacity=".55"/>
               <rect x="100" y="80" width="9" height="3" rx="1.5" fill="#6b5ef0" opacity=".3"/>
-
               <rect x="238" y="68" width="44" height="24" rx="6" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.2"/>
               <rect x="242" y="72" width="14" height="4" rx="2" fill="#6b5ef0" opacity=".55"/>
               <rect x="242" y="80" width="9" height="3" rx="1.5" fill="#6b5ef0" opacity=".3"/>
             </g>
-
-            <!-- connectors level 2→3 -->
-            <line x1="118" y1="92" x2="90" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr)"/>
-            <line x1="118" y1="92" x2="162" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr)"/>
-            <line x1="260" y1="92" x2="218" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr)"/>
-            <line x1="260" y1="92" x2="290" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr)"/>
-
-            <!-- Node row 3: 4 nodes -->
+            <line x1="118" y1="92" x2="90" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr2)"/>
+            <line x1="118" y1="92" x2="162" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr2)"/>
+            <line x1="260" y1="92" x2="218" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr2)"/>
+            <line x1="260" y1="92" x2="290" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr2)"/>
             <g filter="url(#glow2)">
-              <!-- node A -->
               <rect x="64" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
               <rect x="68" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
-              <rect x="68" y="130" width="6" height="2.5" rx="1.2" fill="#9b7ff8" opacity=".25"/>
-              <!-- node B -->
               <rect x="138" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
               <rect x="142" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
-              <rect x="142" y="130" width="6" height="2.5" rx="1.2" fill="#9b7ff8" opacity=".25"/>
-              <!-- node C -->
               <rect x="194" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
               <rect x="198" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
-              <rect x="198" y="130" width="6" height="2.5" rx="1.2" fill="#9b7ff8" opacity=".25"/>
-              <!-- node D -->
               <rect x="268" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
               <rect x="272" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
-              <rect x="272" y="130" width="6" height="2.5" rx="1.2" fill="#9b7ff8" opacity=".25"/>
             </g>
-
-            <!-- animated pulse dots travelling down the lines -->
-            <circle r="2.5" fill="#60d4f7" opacity=".8">
-              <animateMotion dur="2.2s" repeatCount="indefinite" begin="0s" path="M190,26 L120,68"/>
-            </circle>
-            <circle r="2.5" fill="#60d4f7" opacity=".8">
-              <animateMotion dur="2.2s" repeatCount="indefinite" begin="1.1s" path="M190,26 L260,68"/>
-            </circle>
-            <circle r="2" fill="#9b7ff8" opacity=".75">
-              <animateMotion dur="2s" repeatCount="indefinite" begin=".5s" path="M118,90 L90,120"/>
-            </circle>
-            <circle r="2" fill="#9b7ff8" opacity=".75">
-              <animateMotion dur="2s" repeatCount="indefinite" begin="1.5s" path="M260,90 L290,120"/>
-            </circle>
+            <circle r="2.5" fill="#60d4f7" opacity=".8"><animateMotion dur="2.2s" repeatCount="indefinite" begin="0s" path="M190,26 L120,68"/></circle>
+            <circle r="2.5" fill="#60d4f7" opacity=".8"><animateMotion dur="2.2s" repeatCount="indefinite" begin="1.1s" path="M190,26 L260,68"/></circle>
+            <circle r="2" fill="#9b7ff8" opacity=".75"><animateMotion dur="2s" repeatCount="indefinite" begin=".5s" path="M118,90 L90,120"/></circle>
+            <circle r="2" fill="#9b7ff8" opacity=".75"><animateMotion dur="2s" repeatCount="indefinite" begin="1.5s" path="M260,90 L290,120"/></circle>
           </svg>
         </div>
         <div class="pbody"><div class="pcat">Growth Strategy</div><div class="ptitle">Automatización de nurturing</div><div class="pdescr">Secuencias automatizadas de 8 pasos para convertir leads fríos en clientes activos.</div></div>
         <div class="pfooter"><span class="ptag">SaaS</span><span class="parrow">→</span></div>
       </div>
+
+      <!-- 3. Newsletter de marca personal -->
       <div class="pcard reveal-scale" data-delay="3">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
               <radialGradient id="g3" cx="50%" cy="55%" r="55%"><stop offset="0%" stop-color="#9b7ff8" stop-opacity=".14"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
               <filter id="glow3"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <clipPath id="bodyClip"><ellipse cx="190" cy="106" rx="14" ry="20"/></clipPath>
             </defs>
             <rect width="380" height="180" fill="#0a0a1a"/>
             <ellipse cx="190" cy="100" rx="130" ry="75" fill="url(#g3)"/>
-
-            <!-- broadcast waves -->
             <g filter="url(#glow3)" fill="none" stroke-linecap="round">
-              <!-- wave 1 -->
-              <path d="M138,88 Q124,75 138,62" stroke="#4a3fd4" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.55;0" dur="3s" begin="0s" repeatCount="indefinite"/><animate attributeName="d" values="M138,88 Q124,75 138,62;M133,91 Q117,75 133,59;M138,88 Q124,75 138,62" dur="3s" begin="0s" repeatCount="indefinite"/></path>
-              <path d="M242,88 Q256,75 242,62" stroke="#4a3fd4" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.55;0" dur="3s" begin="0s" repeatCount="indefinite"/><animate attributeName="d" values="M242,88 Q256,75 242,62;M247,91 Q263,75 247,59;M242,88 Q256,75 242,62" dur="3s" begin="0s" repeatCount="indefinite"/></path>
-              <!-- wave 2 -->
-              <path d="M122,100 Q104,75 122,50" stroke="#6b5ef0" stroke-width="1.3" opacity=".0"><animate attributeName="opacity" values="0;.45;0" dur="3s" begin=".7s" repeatCount="indefinite"/><animate attributeName="d" values="M122,100 Q104,75 122,50;M116,104 Q96,75 116,46;M122,100 Q104,75 122,50" dur="3s" begin=".7s" repeatCount="indefinite"/></path>
-              <path d="M258,100 Q276,75 258,50" stroke="#6b5ef0" stroke-width="1.3" opacity=".0"><animate attributeName="opacity" values="0;.45;0" dur="3s" begin=".7s" repeatCount="indefinite"/><animate attributeName="d" values="M258,100 Q276,75 258,50;M264,104 Q284,75 264,46;M258,100 Q276,75 258,50" dur="3s" begin=".7s" repeatCount="indefinite"/></path>
-              <!-- wave 3 -->
-              <path d="M106,112 Q82,75 106,38" stroke="#9b7ff8" stroke-width="1.1" opacity=".0"><animate attributeName="opacity" values="0;.35;0" dur="3s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="d" values="M106,112 Q82,75 106,38;M99,117 Q72,75 99,33;M106,112 Q82,75 106,38" dur="3s" begin="1.4s" repeatCount="indefinite"/></path>
-              <path d="M274,112 Q298,75 274,38" stroke="#9b7ff8" stroke-width="1.1" opacity=".0"><animate attributeName="opacity" values="0;.35;0" dur="3s" begin="1.4s" repeatCount="indefinite"/><animate attributeName="d" values="M274,112 Q298,75 274,38;M281,117 Q308,75 281,33;M274,112 Q298,75 274,38" dur="3s" begin="1.4s" repeatCount="indefinite"/></path>
+              <path d="M138,88 Q124,75 138,62" stroke="#4a3fd4" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.55;0" dur="3s" begin="0s" repeatCount="indefinite"/></path>
+              <path d="M242,88 Q256,75 242,62" stroke="#4a3fd4" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.55;0" dur="3s" begin="0s" repeatCount="indefinite"/></path>
+              <path d="M122,100 Q104,75 122,50" stroke="#6b5ef0" stroke-width="1.3" opacity=".0"><animate attributeName="opacity" values="0;.45;0" dur="3s" begin=".7s" repeatCount="indefinite"/></path>
+              <path d="M258,100 Q276,75 258,50" stroke="#6b5ef0" stroke-width="1.3" opacity=".0"><animate attributeName="opacity" values="0;.45;0" dur="3s" begin=".7s" repeatCount="indefinite"/></path>
+              <path d="M106,112 Q82,75 106,38" stroke="#9b7ff8" stroke-width="1.1" opacity=".0"><animate attributeName="opacity" values="0;.35;0" dur="3s" begin="1.4s" repeatCount="indefinite"/></path>
+              <path d="M274,112 Q298,75 274,38" stroke="#9b7ff8" stroke-width="1.1" opacity=".0"><animate attributeName="opacity" values="0;.35;0" dur="3s" begin="1.4s" repeatCount="indefinite"/></path>
             </g>
-
-            <!-- figure: head -->
             <circle cx="190" cy="70" r="14" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.4" filter="url(#glow3)" opacity=".95"/>
-            <!-- inner head detail -->
             <circle cx="190" cy="70" r="8" fill="none" stroke="#9b7ff8" stroke-width=".7" opacity=".4"/>
             <circle cx="190" cy="70" r="3.5" fill="#6b5ef0" opacity=".5"/>
-
-            <!-- figure: body -->
             <ellipse cx="190" cy="106" rx="14" ry="20" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.2" filter="url(#glow3)" opacity=".9"/>
-            <!-- shirt lines -->
-            <line x1="184" y1="96" x2="196" y2="96" stroke="#6b5ef0" stroke-width=".7" stroke-opacity=".35"/>
-            <line x1="183" y1="102" x2="197" y2="102" stroke="#6b5ef0" stroke-width=".7" stroke-opacity=".25"/>
-
-            <!-- neck connector -->
             <rect x="187" y="83" width="6" height="7" rx="2" fill="#0f0f22" stroke="#6b5ef0" stroke-width=".8" opacity=".7"/>
-
-            <!-- floating envelope icons around -->
             <g filter="url(#glow3)" opacity=".0">
               <rect x="308" y="58" width="28" height="20" rx="4" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1"/>
               <polyline points="308,58 322,70 336,58" fill="none" stroke="#4a3fd4" stroke-width=".9"/>
               <animate attributeName="opacity" values="0;.65;0" dur="4s" begin=".5s" repeatCount="indefinite"/>
-              <animateTransform attributeName="transform" type="translate" values="0,0;0,-5;0,0" dur="4s" begin=".5s" repeatCount="indefinite"/>
             </g>
             <g filter="url(#glow3)" opacity=".0">
               <rect x="44" y="68" width="24" height="17" rx="3.5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
               <polyline points="44,68 56,77 68,68" fill="none" stroke="#9b7ff8" stroke-width=".8"/>
               <animate attributeName="opacity" values="0;.55;0" dur="4s" begin="2s" repeatCount="indefinite"/>
-              <animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="4s" begin="2s" repeatCount="indefinite"/>
             </g>
-            <g filter="url(#glow3)" opacity=".0">
-              <rect x="306" y="108" width="22" height="16" rx="3" fill="#0f0f22" stroke="#60d4f7" stroke-width=".9"/>
-              <polyline points="306,108 317,116 328,108" fill="none" stroke="#60d4f7" stroke-width=".8"/>
-              <animate attributeName="opacity" values="0;.5;0" dur="4s" begin="3.1s" repeatCount="indefinite"/>
-              <animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="4s" begin="3.1s" repeatCount="indefinite"/>
-            </g>
-
-            <!-- baseline ground -->
-            <line x1="150" y1="148" x2="230" y2="148" stroke="#4a3fd4" stroke-width=".6" stroke-opacity=".25"/>
-            <line x1="164" y1="126" x2="164" y2="148" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".3"/>
-            <line x1="216" y1="126" x2="216" y2="148" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".3"/>
           </svg>
         </div>
-        <div class="pbody"><div class="pcat">Email + Contenido</div><div class="ptitle">Newsletter de marca personal</div><div class="pdescr">Estrategia de contenido semanal con copywriting editorial que fidelizó a más de 5k suscriptores.</div></div>
+        <div class="pbody"><div class="pcat">Email + Contenido</div><div class="ptitle">Newsletter de marca personal</div><div class="pdescr">Estrategia de contenido semanal con copywriting editorial que fidelizó más de 5k suscriptores.</div></div>
         <div class="pfooter"><span class="ptag">Marca Personal</span><span class="parrow">→</span></div>
       </div>
-    </div>
+
+      <!-- 4. Contenido orgánico -->
+      <div class="pcard reveal-scale" data-delay="1">
+        <div class="pthumb">
+          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <defs>
+              <radialGradient id="g4" cx="50%" cy="60%" r="50%"><stop offset="0%" stop-color="#60d4f7" stop-opacity=".12"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
+              <filter id="glow4"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="380" height="180" fill="#0a0a1a"/>
+            <ellipse cx="190" cy="110" rx="110" ry="65" fill="url(#g4)"/>
+            <!-- stem -->
+            <line x1="190" y1="155" x2="190" y2="75" stroke="#4a3fd4" stroke-width="1.5" stroke-opacity=".5" stroke-linecap="round"/>
+            <!-- branches -->
+            <path d="M190,115 Q165,100 148,108" stroke="#6b5ef0" stroke-width="1.2" fill="none" stroke-opacity=".6" stroke-linecap="round"/>
+            <path d="M190,100 Q215,85 232,93" stroke="#6b5ef0" stroke-width="1.2" fill="none" stroke-opacity=".6" stroke-linecap="round"/>
+            <path d="M190,130 Q218,122 228,130" stroke="#9b7ff8" stroke-width="1" fill="none" stroke-opacity=".5" stroke-linecap="round"/>
+            <!-- leaves -->
+            <ellipse cx="140" cy="106" rx="12" ry="7" fill="#4a3fd4" opacity=".35" transform="rotate(-20,140,106)" filter="url(#glow4)"/>
+            <ellipse cx="236" cy="91" rx="12" ry="7" fill="#6b5ef0" opacity=".35" transform="rotate(15,236,91)" filter="url(#glow4)"/>
+            <ellipse cx="230" cy="129" rx="9" ry="5.5" fill="#9b7ff8" opacity=".3" transform="rotate(10,230,129)" filter="url(#glow4)"/>
+            <!-- tip bud -->
+            <ellipse cx="190" cy="72" rx="7" ry="9" fill="#60d4f7" opacity=".25" filter="url(#glow4)"/>
+            <ellipse cx="190" cy="72" rx="3.5" ry="5" fill="#60d4f7" opacity=".5" filter="url(#glow4)"><animate attributeName="ry" values="5;7;5" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".5;.8;.5" dur="3s" repeatCount="indefinite"/></ellipse>
+            <!-- floating content cards -->
+            <g opacity=".0"><rect x="80" y="45" width="38" height="24" rx="5" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1"/><rect x="85" y="50" width="14" height="3" rx="1.5" fill="#4a3fd4" opacity=".5"/><rect x="85" y="57" width="9" height="2.5" rx="1.2" fill="#4a3fd4" opacity=".3"/><animate attributeName="opacity" values="0;.75;0" dur="4s" begin="0s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0,0;0,-6;0,0" dur="4s" begin="0s" repeatCount="indefinite"/></g>
+            <g opacity=".0"><rect x="262" y="38" width="38" height="24" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/><rect x="267" y="43" width="14" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/><rect x="267" y="50" width="9" height="2.5" rx="1.2" fill="#9b7ff8" opacity=".3"/><animate attributeName="opacity" values="0;.65;0" dur="4s" begin="2s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0,0;0,-5;0,0" dur="4s" begin="2s" repeatCount="indefinite"/></g>
+            <g opacity=".0"><rect x="56" y="118" width="34" height="22" rx="5" fill="#0f0f22" stroke="#60d4f7" stroke-width="1"/><rect x="61" y="123" width="12" height="3" rx="1.5" fill="#60d4f7" opacity=".45"/><animate attributeName="opacity" values="0;.6;0" dur="4s" begin="1.2s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0,0;0,-5;0,0" dur="4s" begin="1.2s" repeatCount="indefinite"/></g>
+            <!-- soil -->
+            <ellipse cx="190" cy="157" rx="30" ry="5" fill="#4a3fd4" opacity=".12"/>
+          </svg>
+        </div>
+        <div class="pbody"><div class="pcat">Contenido</div><div class="ptitle">Creación de contenido orgánico</div><div class="pdescr">Estrategia de contenido que crece de forma natural, conectando con la audiencia correcta en el momento correcto.</div></div>
+        <div class="pfooter"><span class="ptag">Orgánico</span><span class="parrow">→</span></div>
+      </div>
+
+      <!-- 5. Campañas publicitarias -->
+      <div class="pcard reveal-scale" data-delay="2">
+        <div class="pthumb">
+          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <defs>
+              <radialGradient id="g5" cx="42%" cy="50%" r="50%"><stop offset="0%" stop-color="#4a3fd4" stop-opacity=".2"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
+              <filter id="glow5"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="380" height="180" fill="#0a0a1a"/>
+            <ellipse cx="160" cy="90" rx="110" ry="80" fill="url(#g5)"/>
+            <!-- target rings -->
+            <circle cx="155" cy="90" r="68" fill="none" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".2"/>
+            <circle cx="155" cy="90" r="50" fill="none" stroke="#4a3fd4" stroke-width=".9" stroke-opacity=".3"><animate attributeName="r" values="50;52;50" dur="3s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values=".3;.5;.3" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="155" cy="90" r="33" fill="none" stroke="#6b5ef0" stroke-width="1" stroke-opacity=".4"><animate attributeName="r" values="33;35;33" dur="3s" repeatCount="indefinite"/></circle>
+            <circle cx="155" cy="90" r="17" fill="none" stroke="#9b7ff8" stroke-width="1.2" stroke-opacity=".5"/>
+            <circle cx="155" cy="90" r="6" fill="#9b7ff8" opacity=".35" filter="url(#glow5)"/>
+            <circle cx="155" cy="90" r="3" fill="#60d4f7" opacity=".8" filter="url(#glow5)"><animate attributeName="opacity" values=".8;1;.8" dur="1.5s" repeatCount="indefinite"/></circle>
+            <!-- dart/arrow -->
+            <line x1="260" y1="40" x2="162" y2="88" stroke="#60d4f7" stroke-width="1.4" stroke-opacity=".7" stroke-linecap="round" filter="url(#glow5)"/>
+            <polygon points="158,90 168,83 170,94" fill="#60d4f7" opacity=".8" filter="url(#glow5)"/>
+            <!-- tail feathers -->
+            <line x1="260" y1="40" x2="268" y2="33" stroke="#60d4f7" stroke-width="1" stroke-opacity=".4"/>
+            <line x1="260" y1="40" x2="255" y2="30" stroke="#60d4f7" stroke-width="1" stroke-opacity=".4"/>
+            <!-- metric bars (right side) -->
+            <g filter="url(#glow5)">
+              <rect x="296" y="130" width="10" height="35" rx="3" fill="#4a3fd4" opacity=".5"><animate attributeName="height" values="35;42;35" dur="3s" repeatCount="indefinite"/><animate attributeName="y" values="130;123;130" dur="3s" repeatCount="indefinite"/></rect>
+              <rect x="312" y="115" width="10" height="50" rx="3" fill="#6b5ef0" opacity=".5"><animate attributeName="height" values="50;58;50" dur="3.5s" repeatCount="indefinite"/><animate attributeName="y" values="115;107;115" dur="3.5s" repeatCount="indefinite"/></rect>
+              <rect x="328" y="100" width="10" height="65" rx="3" fill="#9b7ff8" opacity=".5"><animate attributeName="height" values="65;72;65" dur="2.8s" repeatCount="indefinite"/><animate attributeName="y" values="100;93;100" dur="2.8s" repeatCount="indefinite"/></rect>
+              <rect x="344" y="82" width="10" height="83" rx="3" fill="#60d4f7" opacity=".45"><animate attributeName="height" values="83;90;83" dur="3.2s" repeatCount="indefinite"/><animate attributeName="y" values="82;75;82" dur="3.2s" repeatCount="indefinite"/></rect>
+              <line x1="292" y1="165" x2="358" y2="165" stroke="#4a3fd4" stroke-width=".6" stroke-opacity=".3"/>
+            </g>
+            <!-- expanding pulse rings -->
+            <circle cx="155" cy="90" r="33" fill="none" stroke="#6b5ef0" stroke-width="1.5" opacity="0"><animate attributeName="r" values="17;75;17" dur="3s" repeatCount="indefinite"/><animate attributeName="opacity" values=".6;0;.6" dur="3s" repeatCount="indefinite"/></circle>
+          </svg>
+        </div>
+        <div class="pbody"><div class="pcat">Publicidad</div><div class="ptitle">Campañas publicitarias</div><div class="pdescr">Campañas de pago orientadas a resultados medibles. Cada peso invertido, rastreado y optimizado.</div></div>
+        <div class="pfooter"><span class="ptag">Ads</span><span class="parrow">→</span></div>
+      </div>
+
+      <!-- 6. Creación de plataformas -->
+      <div class="pcard reveal-scale" data-delay="3">
+        <div class="pthumb">
+          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <defs>
+              <radialGradient id="g6" cx="50%" cy="55%" r="52%"><stop offset="0%" stop-color="#9b7ff8" stop-opacity=".16"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
+              <filter id="glow6"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="380" height="180" fill="#0a0a1a"/>
+            <ellipse cx="190" cy="100" rx="120" ry="70" fill="url(#g6)"/>
+            <!-- isometric layers stack -->
+            <!-- layer 3 (bottom) -->
+            <g filter="url(#glow6)">
+              <polygon points="190,135 260,118 260,128 190,145 120,128 120,118" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1" stroke-opacity=".5"/>
+              <polygon points="120,118 190,135 190,145 120,128" fill="#4a3fd4" opacity=".08"/>
+              <polygon points="260,118 190,135 190,145 260,128" fill="#4a3fd4" opacity=".12"/>
+              <polygon points="120,118 190,101 260,118 190,135" fill="#4a3fd4" opacity=".15"/>
+            </g>
+            <!-- layer 2 -->
+            <g filter="url(#glow6)">
+              <polygon points="190,108 255,93 255,103 190,118 125,103 125,93" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.1" stroke-opacity=".55"/>
+              <polygon points="125,93 190,108 190,118 125,103" fill="#6b5ef0" opacity=".08"/>
+              <polygon points="255,93 190,108 190,118 255,103" fill="#6b5ef0" opacity=".12"/>
+              <polygon points="125,93 190,76 255,93 190,108" fill="#6b5ef0" opacity=".18"/>
+            </g>
+            <!-- layer 1 (top) -->
+            <g filter="url(#glow6)">
+              <polygon points="190,81 250,67 250,77 190,91 130,77 130,67" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1.2" stroke-opacity=".65"/>
+              <polygon points="130,67 190,81 190,91 130,77" fill="#9b7ff8" opacity=".1"/>
+              <polygon points="250,67 190,81 190,91 250,77" fill="#9b7ff8" opacity=".15"/>
+              <polygon points="130,67 190,50 250,67 190,81" fill="#9b7ff8" opacity=".22"/>
+            </g>
+            <!-- top glowing dot -->
+            <circle cx="190" cy="50" r="4" fill="#60d4f7" opacity=".7" filter="url(#glow6)"><animate attributeName="opacity" values=".7;1;.7" dur="2s" repeatCount="indefinite"/><animate attributeName="r" values="4;5.5;4" dur="2s" repeatCount="indefinite"/></circle>
+            <!-- vertical connector lines -->
+            <line x1="190" y1="91" x2="190" y2="108" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".4"/>
+            <line x1="190" y1="118" x2="190" y2="135" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".35"/>
+            <!-- animated pulse on layers -->
+            <polygon points="130,67 190,50 250,67 190,81" fill="none" stroke="#9b7ff8" stroke-width="1" opacity="0"><animate attributeName="opacity" values="0;.5;0" dur="2.5s" repeatCount="indefinite"/></polygon>
+            <polygon points="125,93 190,76 255,93 190,108" fill="none" stroke="#6b5ef0" stroke-width="1" opacity="0"><animate attributeName="opacity" values="0;.4;0" dur="2.5s" begin=".8s" repeatCount="indefinite"/></polygon>
+          </svg>
+        </div>
+        <div class="pbody"><div class="pcat">Plataformas</div><div class="ptitle">Creación de plataformas</div><div class="pdescr">Arquitecturas digitales sólidas y escalables, construidas para crecer contigo desde el primer día.</div></div>
+        <div class="pfooter"><span class="ptag">Tech</span><span class="parrow">→</span></div>
+      </div>
+
+      <!-- 7. Desarrollo web -->
+      <div class="pcard reveal-scale" data-delay="1">
+        <div class="pthumb">
+          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <defs>
+              <radialGradient id="g7" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4a3fd4" stop-opacity=".15"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
+              <filter id="glow7"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="380" height="180" fill="#0a0a1a"/>
+            <ellipse cx="190" cy="95" rx="120" ry="70" fill="url(#g7)"/>
+            <!-- browser window -->
+            <rect x="80" y="28" width="220" height="130" rx="10" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1.2" stroke-opacity=".5" filter="url(#glow7)"/>
+            <!-- browser top bar -->
+            <rect x="80" y="28" width="220" height="26" rx="10" fill="#4a3fd4" opacity=".12"/>
+            <rect x="82" y="40" width="216" height="1" fill="#4a3fd4" opacity=".2"/>
+            <!-- traffic lights -->
+            <circle cx="100" cy="41" r="4" fill="#4a3fd4" opacity=".5"/>
+            <circle cx="114" cy="41" r="4" fill="#6b5ef0" opacity=".5"/>
+            <circle cx="128" cy="41" r="4" fill="#9b7ff8" opacity=".5"/>
+            <!-- url bar -->
+            <rect x="145" y="35" width="120" height="12" rx="6" fill="#0a0a1a" stroke="#4a3fd4" stroke-width=".7" stroke-opacity=".3"/>
+            <rect x="150" y="39" width="40" height="4" rx="2" fill="#4a3fd4" opacity=".2"/>
+            <!-- code lines -->
+            <g filter="url(#glow7)">
+              <rect x="96" y="68" width="18" height="4" rx="2" fill="#9b7ff8" opacity=".55"/>
+              <rect x="120" y="68" width="55" height="4" rx="2" fill="#60d4f7" opacity=".35"/>
+              <rect x="96" y="80" width="12" height="4" rx="2" fill="#6b5ef0" opacity=".5"/>
+              <rect x="114" y="80" width="70" height="4" rx="2" fill="#4a3fd4" opacity=".3"/>
+              <rect x="190" y="80" width="30" height="4" rx="2" fill="#9b7ff8" opacity=".3"/>
+              <rect x="106" y="92" width="80" height="4" rx="2" fill="#60d4f7" opacity=".28"/>
+              <rect x="96" y="104" width="14" height="4" rx="2" fill="#9b7ff8" opacity=".5"/>
+              <rect x="116" y="104" width="45" height="4" rx="2" fill="#6b5ef0" opacity=".28"/>
+              <rect x="167" y="104" width="20" height="4" rx="2" fill="#60d4f7" opacity=".35"/>
+              <rect x="96" y="116" width="100" height="4" rx="2" fill="#4a3fd4" opacity=".25"/>
+              <rect x="96" y="128" width="60" height="4" rx="2" fill="#9b7ff8" opacity=".3"/>
+              <rect x="162" y="128" width="25" height="4" rx="2" fill="#60d4f7" opacity=".25"/>
+              <!-- indent lines -->
+              <rect x="106" y="80" width="2" height="28" rx="1" fill="#4a3fd4" opacity=".2"/>
+            </g>
+            <!-- blinking cursor -->
+            <rect x="156" y="68" width="2" height="12" rx="1" fill="#60d4f7" opacity=".9"><animate attributeName="opacity" values=".9;0;.9" dur="1s" repeatCount="indefinite"/></rect>
+          </svg>
+        </div>
+        <div class="pbody"><div class="pcat">Web</div><div class="ptitle">Desarrollo web</div><div class="pdescr">Sitios web rápidos, modernos y optimizados para convertir visitas en clientes desde el primer scroll.</div></div>
+        <div class="pfooter"><span class="ptag">Frontend</span><span class="parrow">→</span></div>
+      </div>
+
+      <!-- 8. E-commerce -->
+      <div class="pcard reveal-scale" data-delay="2">
+        <div class="pthumb">
+          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <defs>
+              <radialGradient id="g8" cx="50%" cy="50%" r="55%"><stop offset="0%" stop-color="#60d4f7" stop-opacity=".12"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
+              <filter id="glow8"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="380" height="180" fill="#0a0a1a"/>
+            <ellipse cx="190" cy="95" rx="120" ry="70" fill="url(#g8)"/>
+            <!-- shopping bag -->
+            <g filter="url(#glow8)">
+              <path d="M155,75 L155,140 L225,140 L225,75 Z" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.3" stroke-opacity=".6"/>
+              <!-- bag handle -->
+              <path d="M170,75 Q170,55 190,55 Q210,55 210,75" fill="none" stroke="#6b5ef0" stroke-width="1.3" stroke-opacity=".6"/>
+              <!-- product grid inside bag -->
+              <rect x="163" y="88" width="22" height="18" rx="3" fill="#4a3fd4" opacity=".3"/>
+              <rect x="189" y="88" width="22" height="18" rx="3" fill="#9b7ff8" opacity=".3"/>
+              <rect x="163" y="110" width="22" height="18" rx="3" fill="#60d4f7" opacity=".25"/>
+              <rect x="189" y="110" width="22" height="18" rx="3" fill="#6b5ef0" opacity=".3"/>
+              <!-- bag shine -->
+              <line x1="163" y1="82" x2="217" y2="82" stroke="#6b5ef0" stroke-width=".7" stroke-opacity=".25"/>
+            </g>
+            <!-- trend arrow (right side) -->
+            <g filter="url(#glow8)">
+              <polyline points="250,148 265,130 278,138 295,108 308,115 326,85" fill="none" stroke="#60d4f7" stroke-width="1.4" stroke-opacity=".6" stroke-linecap="round" stroke-linejoin="round"/>
+              <polygon points="326,85 318,90 322,98" fill="#60d4f7" opacity=".7"/>
+              <!-- area fill under line -->
+              <polyline points="250,148 265,130 278,138 295,108 308,115 326,85 326,150 250,150" fill="#60d4f7" fill-opacity=".04"/>
+              <!-- dot highlights -->
+              <circle cx="265" cy="130" r="2.5" fill="#60d4f7" opacity=".6"/>
+              <circle cx="295" cy="108" r="2.5" fill="#60d4f7" opacity=".6"/>
+              <circle cx="326" cy="85" r="3.5" fill="#60d4f7" opacity=".8" filter="url(#glow8)"><animate attributeName="r" values="3.5;5;3.5" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values=".8;1;.8" dur="2s" repeatCount="indefinite"/></circle>
+            </g>
+            <!-- floating price tags -->
+            <g opacity=".0">
+              <rect x="72" y="65" width="38" height="22" rx="5" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1"/>
+              <rect x="77" y="71" width="16" height="3" rx="1.5" fill="#4a3fd4" opacity=".5"/>
+              <rect x="77" y="78" width="10" height="2.5" rx="1.2" fill="#4a3fd4" opacity=".3"/>
+              <animate attributeName="opacity" values="0;.7;0" dur="4s" begin="1s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0,0;0,-5;0,0" dur="4s" begin="1s" repeatCount="indefinite"/>
+            </g>
+            <g opacity=".0">
+              <rect x="72" y="105" width="38" height="22" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
+              <rect x="77" y="111" width="16" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
+              <animate attributeName="opacity" values="0;.6;0" dur="4s" begin="2.5s" repeatCount="indefinite"/>
+              <animateTransform attributeName="transform" type="translate" values="0,0;0,-5;0,0" dur="4s" begin="2.5s" repeatCount="indefinite"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pbody"><div class="pcat">E-commerce</div><div class="ptitle">E-commerce</div><div class="pdescr">Tiendas en línea diseñadas para vender. Experiencia de compra fluida, rápida y que genera confianza.</div></div>
+        <div class="pfooter"><span class="ptag">Tienda Online</span><span class="parrow">→</span></div>
+      </div>
+
+      <!-- 9. Redes sociales -->
+      <div class="pcard reveal-scale" data-delay="3">
+        <div class="pthumb">
+          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
+            <defs>
+              <radialGradient id="g9" cx="50%" cy="50%" r="55%"><stop offset="0%" stop-color="#9b7ff8" stop-opacity=".15"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
+              <filter id="glow9"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <rect width="380" height="180" fill="#0a0a1a"/>
+            <ellipse cx="190" cy="90" rx="125" ry="75" fill="url(#g9)"/>
+            <!-- 3x2 post grid -->
+            <!-- row 1 -->
+            <g filter="url(#glow9)">
+              <!-- post 1 (reel - play button) -->
+              <rect x="95" y="28" width="55" height="55" rx="8" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.1" stroke-opacity=".5"/>
+              <rect x="95" y="28" width="55" height="55" rx="8" fill="#4a3fd4" fill-opacity=".08"/>
+              <polygon points="118,48 118,64 132,56" fill="#9b7ff8" opacity=".6"/>
+              <!-- play indicator corner -->
+              <rect x="137" y="32" width="9" height="5" rx="2" fill="#9b7ff8" opacity=".4"/>
+
+              <!-- post 2 (carrusel) -->
+              <rect x="162" y="28" width="55" height="55" rx="8" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1.1" stroke-opacity=".5"/>
+              <rect x="168" y="35" width="42" height="28" rx="4" fill="#4a3fd4" opacity=".12"/>
+              <rect x="172" y="38" width="18" height="3" rx="1.5" fill="#6b5ef0" opacity=".45"/>
+              <rect x="172" y="45" width="28" height="3" rx="1.5" fill="#6b5ef0" opacity=".3"/>
+              <rect x="172" y="52" width="22" height="3" rx="1.5" fill="#6b5ef0" opacity=".2"/>
+              <!-- carousel dots -->
+              <circle cx="181" cy="74" r="2.5" fill="#6b5ef0" opacity=".7"/>
+              <circle cx="190" cy="74" r="2" fill="#4a3fd4" opacity=".4"/>
+              <circle cx="198" cy="74" r="2" fill="#4a3fd4" opacity=".4"/>
+
+              <!-- post 3 -->
+              <rect x="229" y="28" width="55" height="55" rx="8" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1.1" stroke-opacity=".5"/>
+              <rect x="235" y="35" width="42" height="28" rx="4" fill="#9b7ff8" opacity=".08"/>
+              <rect x="239" y="39" width="14" height="3" rx="1.5" fill="#9b7ff8" opacity=".4"/>
+              <rect x="239" y="46" width="30" height="3" rx="1.5" fill="#9b7ff8" opacity=".25"/>
+              <rect x="239" y="53" width="20" height="3" rx="1.5" fill="#9b7ff8" opacity=".2"/>
+            </g>
+            <!-- row 2 -->
+            <g filter="url(#glow9)">
+              <!-- post 4 -->
+              <rect x="95" y="95" width="55" height="55" rx="8" fill="#0f0f22" stroke="#60d4f7" stroke-width="1.1" stroke-opacity=".45"/>
+              <rect x="101" y="102" width="42" height="28" rx="4" fill="#60d4f7" opacity=".06"/>
+              <rect x="105" y="106" width="20" height="3" rx="1.5" fill="#60d4f7" opacity=".35"/>
+              <rect x="105" y="113" width="32" height="3" rx="1.5" fill="#60d4f7" opacity=".22"/>
+              <!-- like button -->
+              <path d="M112,135 Q112,130 117,130 Q122,130 122,135 Q122,130 127,130 Q132,130 132,135 Q132,140 122,146 Q112,140 112,135 Z" fill="#60d4f7" opacity=".0"><animate attributeName="opacity" values="0;.5;0" dur="3s" repeatCount="indefinite"/><animate attributeName="transform" values="scale(1);scale(1.2);scale(1)" dur="3s" repeatCount="indefinite"/></path>
+              <path d="M112,135 Q112,130 117,130 Q122,130 122,135 Q122,130 127,130 Q132,130 132,135 Q132,140 122,146 Q112,140 112,135 Z" fill="none" stroke="#60d4f7" stroke-width=".8" opacity=".4"/>
+
+              <!-- post 5 (reel) -->
+              <rect x="162" y="95" width="55" height="55" rx="8" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.1" stroke-opacity=".5"/>
+              <rect x="162" y="95" width="55" height="55" rx="8" fill="#6b5ef0" fill-opacity=".07"/>
+              <polygon points="185,115 185,131 199,123" fill="#6b5ef0" opacity=".55"/>
+              <rect x="204" y="99" width="9" height="5" rx="2" fill="#6b5ef0" opacity=".4"/>
+
+              <!-- post 6 (carrusel) -->
+              <rect x="229" y="95" width="55" height="55" rx="8" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1.1" stroke-opacity=".5"/>
+              <rect x="235" y="102" width="42" height="28" rx="4" fill="#4a3fd4" opacity=".1"/>
+              <rect x="239" y="106" width="24" height="3" rx="1.5" fill="#9b7ff8" opacity=".4"/>
+              <rect x="239" y="113" width="16" height="3" rx="1.5" fill="#9b7ff8" opacity=".28"/>
+              <circle cx="249" cy="137" r="2.5" fill="#9b7ff8" opacity=".7"/>
+              <circle cx="258" cy="137" r="2" fill="#4a3fd4" opacity=".4"/>
+              <circle cx="266" cy="137" r="2" fill="#4a3fd4" opacity=".4"/>
+            </g>
+            <!-- growth bars (bottom strip) -->
+            <g filter="url(#glow9)">
+              <rect x="95" y="160" width="8" height="14" rx="2" fill="#4a3fd4" opacity=".45"/>
+              <rect x="107" y="155" width="8" height="19" rx="2" fill="#6b5ef0" opacity=".45"/>
+              <rect x="119" y="150" width="8" height="24" rx="2" fill="#9b7ff8" opacity=".5"/>
+              <rect x="131" y="145" width="8" height="29" rx="2" fill="#60d4f7" opacity=".45"><animate attributeName="height" values="29;34;29" dur="2s" repeatCount="indefinite"/><animate attributeName="y" values="145;140;145" dur="2s" repeatCount="indefinite"/></rect>
+            </g>
+          </svg>
+        </div>
+        <div class="pbody"><div class="pcat">Social Media</div><div class="ptitle">Gestión de redes sociales</div><div class="pdescr">Publicaciones, reels y carruseles programados para crecer tu comunidad con contenido que engancha.</div></div>
+        <div class="pfooter"><span class="ptag">Redes Sociales</span><span class="parrow">→</span></div>
+      </div>
+
+    </div><!-- /portfolio-grid -->
     <div class="port-cta reveal"><a href="#contacto" class="btn-outline">¿Quieres ser parte de nuestro portafolio? →</a></div>
   </div>
 </section>
 
 <!-- REVIEWS -->
 <section style="padding:8rem 0;overflow:hidden" id="reviews">
-
+  <div style="text-align:center;padding:0 2rem" class="reveal">
+    <span class="stag">Reviews</span>
+    <h2 class="stitle">Lo que dicen<br>nuestros clientes</h2>
+  </div>
   <div class="carousel-outer">
     <div class="carousel-track" id="carouselTrack">
-
-      <div class="tcard">
-        <div class="tcard-glow"></div>
-        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
-        <p class="tcard-text">Trabajar con Nomántica fue un acierto total. Entendieron mi negocio desde el minuto uno y los resultados se notaron rápido. Muy recomendables.</p>
-        <div class="tcard-author">
-          <div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#9b7ff8)">CR</div>
-          <div><div class="rev-name">Carlos Reyes</div><div class="rev-verified">✓ Verificado</div></div>
-        </div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-glow"></div>
-        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
-        <p class="tcard-text">Estoy súper contenta con Nomántica. Captaron la esencia de mi marca y le dieron justo el impulso que quería.</p>
-        <div class="tcard-author">
-          <div class="rev-avatar" style="background:linear-gradient(135deg,#6b5ef0,#60d4f7)">SO</div>
-          <div><div class="rev-name">Sofía Ortega</div><div class="rev-verified">✓ Verificado</div></div>
-        </div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-glow"></div>
-        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
-        <p class="tcard-text">Conseguimos ordenar nuestra estrategia digital y mejorar resultados.</p>
-        <div class="tcard-author">
-          <div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#60d4f7)">AM</div>
-          <div><div class="rev-name">Andrés Molina</div><div class="rev-verified">✓ Verificado</div></div>
-        </div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-glow"></div>
-        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
-        <p class="tcard-text">Le pusimos orden a todo el tema digital y empezamos a ver resultados de verdad. Son prácticos, van al grano y se implican mucho.</p>
-        <div class="tcard-author">
-          <div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#60d4f7)">LV</div>
-          <div><div class="rev-name">Laura Villanueva</div><div class="rev-verified">✓ Verificado</div></div>
-        </div>
-      </div>
-
-      <div class="tcard">
-        <div class="tcard-glow"></div>
-        <div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div>
-        <p class="tcard-text">Muy buena experiencia con Nomántica. Nos ayudaron a enfocar mejor la estrategia y a optimizar lo que ya estábamos haciendo.</p>
-        <div class="tcard-author">
-          <div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#4a3fd4)">DP</div>
-          <div><div class="rev-name">Diego Paredes</div><div class="rev-verified">✓ Verificado</div></div>
-        </div>
-      </div>
-
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Trabajar con Nomántica fue un acierto total. Entendieron mi negocio desde el minuto uno y los resultados se notaron rápido. Muy recomendables.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#9b7ff8)">CR</div><div><div class="rev-name">Carlos Reyes</div><div class="rev-verified">✓ Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Estoy súper contenta con Nomántica. Captaron la esencia de mi marca y le dieron justo el impulso que quería.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#6b5ef0,#60d4f7)">SO</div><div><div class="rev-name">Sofía Ortega</div><div class="rev-verified">✓ Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Conseguimos ordenar nuestra estrategia digital y mejorar resultados de forma consistente.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#60d4f7)">AM</div><div><div class="rev-name">Andrés Molina</div><div class="rev-verified">✓ Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Le pusimos orden a todo el tema digital y empezamos a ver resultados de verdad. Son prácticos, van al grano y se implican mucho.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#60d4f7)">LV</div><div><div class="rev-name">Laura Villanueva</div><div class="rev-verified">✓ Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Muy buena experiencia con Nomántica. Nos ayudaron a enfocar mejor la estrategia y a optimizar lo que ya estábamos haciendo.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#4a3fd4)">DP</div><div><div class="rev-name">Diego Paredes</div><div class="rev-verified">✓ Verificado</div></div></div></div>
     </div>
-
-    <!-- dots -->
     <div class="carousel-dots" id="carouselDots">
       <button class="cdot active" onclick="goTo(0)"></button>
       <button class="cdot" onclick="goTo(1)"></button>
@@ -754,104 +793,18 @@ footer p{font-size:.78rem;color:var(--muted)}
   </div>
 </section>
 
-<style>
-.carousel-outer{position:relative;margin-top:4rem;padding-bottom:3rem}
-.carousel-track{
-  display:flex;
-  gap:1.5rem;
-  padding:2rem 4rem 1rem;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-  scroll-behavior:smooth;
-}
-.carousel-track::-webkit-scrollbar{display:none}
-.tcard{
-  flex:0 0 380px;
-  scroll-snap-align:start;
-  background:var(--surface);
-  border:1px solid var(--border2);
-  border-radius:24px;
-  padding:2.2rem;
-  position:relative;
-  overflow:hidden;
-  transition:border-color .4s, box-shadow .4s, transform .4s;
-}
-.tcard:hover{
-  border-color:rgba(74,63,212,.4);
-  box-shadow:0 0 60px rgba(74,63,212,.15), 0 20px 50px rgba(0,0,0,.3);
-  transform:translateY(-4px);
-}
-.tcard-glow{
-  position:absolute;
-  top:-60px; left:50%; transform:translateX(-50%);
-  width:200px; height:200px;
-  background:radial-gradient(circle, rgba(74,63,212,.18), transparent 70%);
-  pointer-events:none;
-  transition:opacity .4s;
-  opacity:0;
-}
-.tcard:hover .tcard-glow{opacity:1}
-.tcard-text{font-size:.92rem;color:var(--text);line-height:1.75;margin:1rem 0 1.8rem;font-weight:300}
-.tcard-author{display:flex;align-items:center;gap:.9rem}
-.carousel-dots{display:flex;align-items:center;justify-content:center;gap:.6rem;margin-top:1.5rem}
-.cdot{width:8px;height:8px;border-radius:100px;border:none;background:var(--border2);cursor:none;transition:background .3s, width .3s}
-.cdot.active{background:var(--accent-bright);width:24px}
-
-/* auto-scroll highlight */
-@keyframes cardPulse{
-  0%,100%{box-shadow:0 0 0 rgba(74,63,212,0)}
-  50%{box-shadow:0 0 50px rgba(74,63,212,.2), 0 0 0 1px rgba(74,63,212,.3)}
-}
-.tcard.active-card{animation:cardPulse 2s ease}
-</style>
-
-<script>
-(function(){
-  const track = document.getElementById('carouselTrack');
-  const dots = document.querySelectorAll('.cdot');
-  const cards = document.querySelectorAll('.tcard');
-  let current = 0;
-  let timer;
-
-  function goTo(i){
-    current = i;
-    const card = cards[i];
-    track.scrollTo({ left: card.offsetLeft - 64, behavior: 'smooth' });
-    dots.forEach((d,idx) => d.classList.toggle('active', idx === i));
-    cards.forEach((c,idx) => {
-      c.classList.remove('active-card');
-      if(idx === i){ void c.offsetWidth; c.classList.add('active-card'); }
-    });
-    clearInterval(timer);
-    timer = setInterval(next, 3800);
-  }
-
-  function next(){ goTo((current + 1) % cards.length); }
-
-  window.goTo = goTo;
-  timer = setInterval(next, 10000);
-
-  // pause on hover
-  track.addEventListener('mouseenter', () => clearInterval(timer));
-  track.addEventListener('mouseleave', () => { timer = setInterval(next, 10000); });
-})();
-</script>
-
 <!-- CTA -->
 <section class="cta-section" id="contacto">
   <div class="cta-inner">
     <div class="reveal">
       <span class="stag">Empieza hoy</span>
-      <h2 class="cta-title">¿Listo para<br><span class="hand">crecer?</span></h2>
-      <p class="ssub" style="margin:1.2rem auto 0;text-align:center;max-width:440px">Únete a las marcas que ya están generando más ventas con email marketing inteligente. Sin spam, sin trucos.</p>
+      <h2 class="cta-title">Deja de perder<br>clientes <span class="hand">hoy.</span></h2>
+      <p class="ssub" style="margin:1.2rem auto 0;text-align:center;max-width:460px">Déjanos tus datos y en menos de 24 horas te mostramos exactamente cómo podemos hacer crecer tu negocio. Sin compromiso.</p>
     </div>
     <div class="reveal" data-delay="2">
       <div class="email-form" id="ctaForm">
-        <input type="email" id="ctaEmail" placeholder="tu@email.com" style="display:flex;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem" />
-        <input type="text" id="ctaName" placeholder="tu nombre" style="display:none;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem" />
-        <!-- honeypot: oculto para humanos, visible para bots -->
+        <input type="email" id="ctaEmail" placeholder="tu@email.com" style="display:flex;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
+        <input type="text" id="ctaName" placeholder="tu nombre" style="display:none;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
         <input type="text" id="ctaHoney" style="display:none;position:absolute;left:-9999px" tabindex="-1" autocomplete="off"/>
         <button id="ctaBtn" onclick="handleStep()">Quiero crecer →</button>
       </div>
@@ -871,25 +824,6 @@ footer p{font-size:.78rem;color:var(--muted)}
 </footer>
 
 <script>
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let mx=0,my=0,rx=0,ry=0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.transform = `translate(${mx-5}px,${my-5}px)`;
-  });
-  (function anim(){
-    rx += (mx-rx-17)*.11;
-    ry += (my-ry-17)*.11;
-    ring.style.transform = `translate(${rx}px,${ry}px)`;
-    requestAnimationFrame(anim);
-  })();
-  document.querySelectorAll('a,button,input,.pcard,.rev-card,.step-item,.pkg-card').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{ring.style.width='48px';ring.style.height='48px';});
-    el.addEventListener('mouseleave',()=>{ring.style.width='34px';ring.style.height='34px';});
-  });
-
   // Nav scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
@@ -900,22 +834,42 @@ footer p{font-size:.78rem;color:var(--muted)}
   }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
   document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => obs.observe(el));
 
+  // Hero parallax
+  document.addEventListener('mousemove', e => {
+    const x = (e.clientX/innerWidth-.5)*16;
+    const y = (e.clientY/innerHeight-.5)*8;
+    const bg = document.getElementById('heroBg');
+    if(bg) bg.style.transform = `translate(${x*.45}px,${y*.45}px)`;
+  });
+
+  // Carousel
+  const track = document.getElementById('carouselTrack');
+  const dots = document.querySelectorAll('.cdot');
+  const cards = document.querySelectorAll('.tcard');
+  let current = 0, timer;
+  function goTo(i){
+    current = i;
+    track.scrollTo({ left: cards[i].offsetLeft - 64, behavior:'smooth' });
+    dots.forEach((d,idx) => d.classList.toggle('active', idx===i));
+    cards.forEach((c,idx) => { c.classList.remove('active-card'); if(idx===i){ void c.offsetWidth; c.classList.add('active-card'); }});
+    clearInterval(timer); timer = setInterval(next, 3800);
+  }
+  function next(){ goTo((current+1)%cards.length); }
+  window.goTo = goTo;
+  timer = setInterval(next, 10000);
+  track.addEventListener('mouseenter', () => clearInterval(timer));
+  track.addEventListener('mouseleave', () => { timer = setInterval(next, 10000); });
+
   // Multi-step form
   const SUPABASE_URL = 'https://acjxlouiphdxitdmoasy.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFjanhsb3VpcGhkeGl0ZG1vYXN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMjE5MTYsImV4cCI6MjA4Nzc5NzkxNn0.KD22fbboTxJF6Zv3Px2aM0hQiMEYAjwyHUYDvkE8rGU';
 
-  let formStep = 1;
-  let userEmail = '';
-  let submitted = false; // bloquea doble envío por sesión
+  let formStep = 1, userEmail = '', submitted = false;
 
-  // sanitiza texto: elimina HTML y limita longitud
-  function sanitize(str, max) {
-    return str.replace(/<[^>]*>/g, '').replace(/[<>"'`;]/g, '').trim().slice(0, max);
-  }
+  function sanitize(str, max){ return str.replace(/<[^>]*>/g,'').replace(/[<>"'`;]/g,'').trim().slice(0,max); }
 
-  async function handleStep() {
-    if (submitted) return;
-
+  async function handleStep(){
+    if(submitted) return;
     const emailInput = document.getElementById('ctaEmail');
     const nameInput  = document.getElementById('ctaName');
     const honey      = document.getElementById('ctaHoney');
@@ -923,104 +877,62 @@ footer p{font-size:.78rem;color:var(--muted)}
     const note       = document.getElementById('ctaNote');
     const form       = document.getElementById('ctaForm');
 
-    // ── PASO 1: validar email ──
-    if (formStep === 1) {
+    if(formStep === 1){
       const raw = emailInput.value.trim();
-      // bloquea bots que rellenan el honeypot
-      if (honey.value) return;
-      if (!raw || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw) || raw.length > 254) {
+      if(honey.value) return;
+      if(!raw || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw) || raw.length > 254){
         emailInput.style.outline = '1px solid #e53e3e';
-        setTimeout(() => emailInput.style.outline = '', 1500);
-        return;
+        setTimeout(() => emailInput.style.outline = '', 1500); return;
       }
       userEmail = sanitize(raw, 254);
-
-      emailInput.style.transition = 'opacity .35s, transform .35s';
-      emailInput.style.opacity = '0';
-      emailInput.style.transform = 'translateX(-10px)';
-
+      emailInput.style.transition = 'opacity .35s,transform .35s';
+      emailInput.style.opacity = '0'; emailInput.style.transform = 'translateX(-10px)';
       setTimeout(() => {
         emailInput.style.display = 'none';
-        nameInput.style.display = 'flex';
-        nameInput.style.flex = '1';
-        nameInput.style.opacity = '0';
-        nameInput.style.transform = 'translateX(10px)';
-        nameInput.style.transition = 'opacity .35s, transform .35s';
+        nameInput.style.display = 'flex'; nameInput.style.flex = '1';
+        nameInput.style.opacity = '0'; nameInput.style.transform = 'translateX(10px)';
+        nameInput.style.transition = 'opacity .35s,transform .35s';
         nameInput.focus();
-        setTimeout(() => {
-          nameInput.style.opacity = '1';
-          nameInput.style.transform = 'translateX(0)';
-        }, 20);
+        setTimeout(() => { nameInput.style.opacity = '1'; nameInput.style.transform = 'translateX(0)'; }, 20);
       }, 350);
-
       btn.textContent = 'Confirmar →';
       note.textContent = '¡Casi listo! Solo dinos cómo te llamas 👋';
-      formStep = 2;
-      return;
+      formStep = 2; return;
     }
 
-    // ── PASO 2: guardar en Supabase ──
-    if (formStep === 2) {
+    if(formStep === 2){
       const rawName = nameInput.value.trim();
-      if (!rawName || rawName.length < 2) {
+      if(!rawName || rawName.length < 2){
         nameInput.style.outline = '1px solid #e53e3e';
-        setTimeout(() => nameInput.style.outline = '', 1500);
-        return;
+        setTimeout(() => nameInput.style.outline = '', 1500); return;
       }
       const nombre = sanitize(rawName, 80);
-
-      submitted = true; // bloquea reenvíos
-      btn.textContent = 'Enviando...';
-      btn.disabled = true;
-
+      submitted = true; btn.textContent = 'Enviando...'; btn.disabled = true;
       try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/suscriptores`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Prefer': 'return=minimal'
-          },
+          method:'POST',
+          headers:{ 'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=minimal' },
           body: JSON.stringify({ email: userEmail, nombre })
         });
-
-        if (!res.ok) throw new Error();
-
-        nameInput.style.transition = 'opacity .3s';
-        nameInput.style.opacity = '0';
+        if(!res.ok) throw new Error();
+        nameInput.style.transition = 'opacity .3s'; nameInput.style.opacity = '0';
         setTimeout(() => {
-          nameInput.style.display = 'none';
-          form.style.justifyContent = 'center';
-          btn.textContent = '¡Listo, ' + nombre.split(' ')[0] + '! Te contactamos pronto 🎉';
-          btn.style.background = 'var(--accent3)';
-          btn.style.color = '#000';
-          btn.style.borderRadius = '100px';
-          btn.style.padding = '.72rem 1.8rem';
-          btn.disabled = false;
-          note.textContent = 'Revisa tu bandeja, pronto tendrás noticias nuestras ✉️';
+          nameInput.style.display = 'none'; form.style.justifyContent = 'center';
+          btn.textContent = '¡Listo, ' + nombre.split(' ')[0] + '! Abriendo WhatsApp… 🎉';
+          btn.style.background = 'var(--accent3)'; btn.style.color = '#000';
+          btn.style.borderRadius = '100px'; btn.style.padding = '.72rem 1.8rem'; btn.disabled = false;
+          note.textContent = 'Te estamos redirigiendo a WhatsApp para darte la bienvenida 👋';
+          // Redirigir a WhatsApp con mensaje pre-escrito
+          const msg = encodeURIComponent('Hola, acabo de registrarme en Nomántica y me interesa saber más sobre sus servicios');
+          setTimeout(() => { window.open('https://wa.me/527121837694?text=' + msg, '_blank'); }, 1500);
         }, 300);
-
       } catch {
-        submitted = false; // permite reintentar si hay error de red
-        btn.textContent = 'Algo falló, intenta de nuevo';
-        btn.style.background = '#e53e3e';
-        btn.disabled = false;
-        setTimeout(() => {
-          btn.textContent = 'Confirmar →';
-          btn.style.background = '';
-        }, 3000);
+        submitted = false;
+        btn.textContent = 'Algo falló, intenta de nuevo'; btn.style.background = '#e53e3e'; btn.disabled = false;
+        setTimeout(() => { btn.textContent = 'Confirmar →'; btn.style.background = ''; }, 3000);
       }
     }
   }
-
-  // Hero parallax
-  document.addEventListener('mousemove', e => {
-    const x = (e.clientX/innerWidth - .5) * 16;
-    const y = (e.clientY/innerHeight - .5) * 8;
-    const bg = document.getElementById('heroBg');
-    if(bg) bg.style.transform = `translate(${x*.45}px,${y*.45}px)`;
-  });
 </script>
 </body>
 </html>
