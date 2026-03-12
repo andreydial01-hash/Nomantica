@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden;background:#05050e}
+body{display:flex;align-items:center;justify-content:center}
+canvas{display:block}
+</style>
+</head>
+<body>
+<canvas id="c" width="1200" height="630"></canvas>
+<script>
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const W = 1200, H = 630;
+
+function draw(){
+  // ── Background ──
+  const bg = ctx.createRadialGradient(W/2, H*0.4, 0, W/2, H*0.4, 620);
+  bg.addColorStop(0,   '#1a1830');
+  bg.addColorStop(0.5, '#0a0a14');
+  bg.addColorStop(1,   '#05050e');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // ── Grid ──
+  ctx.strokeStyle = 'rgba(74,63,212,0.06)';
+  ctx.lineWidth = 1;
+  for(let x=0;x<W;x+=60){ ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke(); }
+  for(let y=0;y<H;y+=60){ ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke(); }
+
+  // ── Glow ──
+  const glow = ctx.createRadialGradient(W/2, H/2, 0, W/2, H/2, 320);
+  glow.addColorStop(0, 'rgba(74,63,212,0.20)');
+  glow.addColorStop(1, 'rgba(74,63,212,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0,0,W,H);
+
+  // ── Corner brackets ──
+  ctx.strokeStyle = 'rgba(74,63,212,0.28)';
+  ctx.lineWidth = 1.5;
+  const cs = 70, cm = 32;
+  // TL
+  ctx.beginPath();ctx.moveTo(cm+cs,cm);ctx.lineTo(cm,cm);ctx.lineTo(cm,cm+cs);ctx.stroke();
+  // TR
+  ctx.beginPath();ctx.moveTo(W-cm-cs,cm);ctx.lineTo(W-cm,cm);ctx.lineTo(W-cm,cm+cs);ctx.stroke();
+  // BL
+  ctx.beginPath();ctx.moveTo(cm+cs,H-cm);ctx.lineTo(cm,H-cm);ctx.lineTo(cm,H-cm-cs);ctx.stroke();
+  // BR
+  ctx.beginPath();ctx.moveTo(W-cm-cs,H-cm);ctx.lineTo(W-cm,H-cm);ctx.lineTo(W-cm,H-cm-cs);ctx.stroke();
+
+  // ── Logo — measure parts ──
+  const fontSize = 118;
+  ctx.font = `800 ${fontSize}px 'Bricolage Grotesque', Arial Black, sans-serif`;
+
+  const before  = 'Nom';
+  const accent  = 'á';
+  const after   = 'ntica';
+  const wBefore = ctx.measureText(before).width;
+  const wAccent = ctx.measureText(accent).width;
+  const wAfter  = ctx.measureText(after).width;
+  const wTotal  = wBefore + wAccent + wAfter;
+  const logoX   = (W - wTotal) / 2;
+  const logoY   = H/2 - 58;
+
+  // "Nom" — white
+  ctx.fillStyle = '#eeedf8';
+  ctx.fillText(before, logoX, logoY);
+
+  // "á" — metallic gradient
+  const gMetal = ctx.createLinearGradient(0, logoY - fontSize, 0, logoY + 8);
+  gMetal.addColorStop(0.00, '#a0a0a0');
+  gMetal.addColorStop(0.10, '#d8d8d8');
+  gMetal.addColorStop(0.22, '#ffffff');
+  gMetal.addColorStop(0.36, '#d4d4d4');
+  gMetal.addColorStop(0.50, '#686868');
+  gMetal.addColorStop(0.62, '#b4b4b4');
+  gMetal.addColorStop(0.76, '#f0f0f0');
+  gMetal.addColorStop(0.88, '#bebebe');
+  gMetal.addColorStop(1.00, '#888888');
+
+  // subtle shadow under á
+  ctx.shadowColor = 'rgba(0,0,0,0.55)';
+  ctx.shadowBlur  = 6;
+  ctx.shadowOffsetY = 2;
+  ctx.fillStyle = gMetal;
+  ctx.fillText(accent, logoX + wBefore, logoY);
+  ctx.shadowColor = 'transparent';
+  ctx.shadowBlur  = 0;
+  ctx.shadowOffsetY = 0;
+
+  // "ntica" — white
+  ctx.fillStyle = '#eeedf8';
+  ctx.fillText(after, logoX + wBefore + wAccent, logoY);
+
+  // ── Tagline ──
+  ctx.font = '300 24px "Bricolage Grotesque", Arial, sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.42)';
+  ctx.letterSpacing = '0.14em';
+  const tagline = 'MARKETING DIGITAL';
+  const wTag = ctx.measureText(tagline).width;
+  ctx.fillText(tagline, (W - wTag) / 2, logoY + 54);
+
+  // ── Pill ──
+  const pillText = '¿Tu negocio necesita más clientes?';
+  ctx.font = '600 22px "Bricolage Grotesque", Arial, sans-serif';
+  const wPill = ctx.measureText(pillText).width;
+  const pillPadX = 36, pillPadY = 14;
+  const pillW = wPill + pillPadX * 2;
+  const pillH = 52;
+  const pillX = (W - pillW) / 2;
+  const pillY = logoY + 90;
+
+  // pill background
+  ctx.beginPath();
+  ctx.roundRect(pillX, pillY, pillW, pillH, pillH/2);
+  ctx.fillStyle = 'rgba(74,63,212,0.15)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(107,94,240,0.5)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // pill text
+  ctx.fillStyle = '#9b7ff8';
+  ctx.fillText(pillText, pillX + pillPadX, pillY + pillH/2 + 8);
+
+  // ── Domain ──
+  ctx.font = '300 16px "Bricolage Grotesque", Arial, sans-serif';
+  ctx.fillStyle = 'rgba(255,255,255,0.16)';
+  ctx.fillText('nomantica.com', W - 190, H - 36);
+}
+
+// Wait for font to load
+document.fonts.ready.then(draw);
+</script>
+</body>
+</html>
