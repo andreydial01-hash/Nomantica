@@ -8,14 +8,17 @@
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://nomantica.com"/>
 <meta property="og:title" content="¿Tu negocio necesita más clientes? — Nomántica"/>
-<meta property="og:description" content="Ayudamos a negocios mexicanos a vender más con marketing digital que realmente funciona. Email, redes, publicidad y páginas web. Resultados reales."/>
+<meta property="og:description" content="Ayudamos a negocios a vender más con marketing digital que realmente funciona. Email, redes, publicidad y páginas web. Resultados reales."/>
 <meta property="og:image" content="https://nomantica.com/og-image.jpg"/>
 <meta property="og:locale" content="es_MX"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="¿Tu negocio necesita más clientes? — Nomántica"/>
 <meta name="twitter:description" content="Marketing digital para pymes mexicanas. Email, redes, publicidad y más. Resultados reales."/>
 <meta name="twitter:image" content="https://nomantica.com/og-image.jpg"/>
-<meta name="description" content="Ayudamos a negocios mexicanos a vender más con marketing digital que realmente funciona. Email, redes, publicidad y páginas web."/>
+<meta name="description" content="Ayudamos a negocios a vender más con marketing digital que realmente funciona. Email, redes, publicidad y páginas web."/>
+<meta name="robots" content="index, follow"/>
+<!-- Content Security Policy -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://acjxlouiphdxitdmoasy.supabase.co https://wa.me; frame-src 'none'; object-src 'none';"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Lato:wght@300;400&display=swap" rel="stylesheet">
@@ -241,7 +244,7 @@ footer p{font-size:.78rem;color:var(--muted)}
   <div class="hero-noise"></div>
   <div class="floater f1"></div><div class="floater f2"></div><div class="floater f3"></div>
   <h1>¿Tu negocio necesita<br>más <span class="hand">clientes?</span></h1>
-  <p>Ayudamos a negocios mexicanos a vender más con marketing digital que realmente funciona. Tú enfócate en tu negocio — nosotros traemos los clientes.</p>
+  <p>Ayudamos a negocios a vender más con marketing digital que realmente funciona. Tú enfócate en tu negocio — nosotros traemos los clientes.</p>
   <div class="hero-actions">
     <a href="#contacto" class="btn-primary">Contáctanos →</a>
     <a href="#proceso" class="btn-ghost">Cómo funciona <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -802,14 +805,61 @@ footer p{font-size:.78rem;color:var(--muted)}
       <p class="ssub" style="margin:1.2rem auto 0;text-align:center;max-width:460px">Déjanos tus datos y en menos de 24 horas te mostramos exactamente cómo podemos hacer crecer tu negocio. Sin compromiso.</p>
     </div>
     <div class="reveal" data-delay="2">
-      <div class="email-form" id="ctaForm">
-        <input type="email" id="ctaEmail" placeholder="tu@email.com" style="display:flex;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
-        <input type="text" id="ctaName" placeholder="tu nombre" style="display:none;flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
-        <input type="text" id="ctaHoney" style="display:none;position:absolute;left:-9999px" tabindex="-1" autocomplete="off"/>
-        <button id="ctaBtn" onclick="handleStep()">Quiero crecer →</button>
+      <!-- progress dots -->
+      <div id="ctaProgress" style="display:flex;justify-content:center;gap:.5rem;margin-bottom:1.2rem">
+        <div class="cpd active" id="cpd1"></div>
+        <div class="cpd" id="cpd2"></div>
+        <div class="cpd" id="cpd3"></div>
       </div>
-      <p class="form-note" id="ctaNote">Sin spam. Solo estrategia. Cancela cuando quieras. 🔒</p>
+
+      <!-- step 1: email -->
+      <div class="email-form" id="ctaStep1">
+        <input type="email" id="ctaEmail" placeholder="tu@email.com" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
+        <input type="text" id="ctaHoney" style="display:none;position:absolute;left:-9999px" tabindex="-1" autocomplete="off"/>
+        <button onclick="handleStep()">Siguiente →</button>
+      </div>
+
+      <!-- step 2: nombre + teléfono -->
+      <div id="ctaStep2" style="display:none;flex-direction:column;gap:.75rem;max-width:460px;margin:0 auto">
+        <div class="email-form" style="margin:0">
+          <input type="text" id="ctaName" placeholder="Tu nombre completo" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
+        </div>
+        <div class="email-form" style="margin:0">
+          <input type="tel" id="ctaPhone" placeholder="Tu número de WhatsApp" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
+        </div>
+        <button class="step-btn" onclick="handleStep()">Siguiente →</button>
+      </div>
+
+      <!-- step 3: servicio + comentarios -->
+      <div id="ctaStep3" style="display:none;flex-direction:column;gap:.75rem;max-width:460px;margin:0 auto">
+        <div class="email-form" style="margin:0;padding:.35rem .35rem .35rem 1.2rem;border-radius:16px">
+          <select id="ctaService" style="flex:1;background:transparent;border:none;outline:none;color:var(--muted);font-family:var(--fb);font-size:.88rem;cursor:pointer">
+            <option value="" disabled selected style="background:#0a0a1a">¿Qué servicio te interesa?</option>
+            <option value="Email Marketing" style="background:#0a0a1a">Email Marketing</option>
+            <option value="Redes Sociales" style="background:#0a0a1a">Gestión de Redes Sociales</option>
+            <option value="Campañas Publicitarias" style="background:#0a0a1a">Campañas Publicitarias</option>
+            <option value="Desarrollo Web" style="background:#0a0a1a">Desarrollo Web</option>
+            <option value="E-commerce" style="background:#0a0a1a">E-commerce</option>
+            <option value="Contenido Orgánico" style="background:#0a0a1a">Creación de Contenido</option>
+            <option value="Plataformas" style="background:#0a0a1a">Creación de Plataformas</option>
+            <option value="Todo" style="background:#0a0a1a">Necesito todo 🚀</option>
+          </select>
+        </div>
+        <div class="email-form" style="margin:0;padding:.8rem 1.2rem;border-radius:16px;align-items:flex-start">
+          <textarea id="ctaComment" placeholder="Cuéntanos brevemente sobre tu negocio y lo que necesitas..." style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.88rem;resize:none;min-height:80px;line-height:1.6" maxlength="400"></textarea>
+        </div>
+        <button class="step-btn" id="ctaBtn" onclick="handleStep()">Enviar y hablar por WhatsApp →</button>
+      </div>
+
+      <p class="form-note" id="ctaNote">Sin spam. Te contactamos en menos de 24 hrs. 🔒</p>
     </div>
+
+    <style>
+    .cpd{width:8px;height:8px;border-radius:100px;background:var(--border2);transition:background .3s,width .3s}
+    .cpd.active{background:var(--accent-bright);width:24px}
+    .step-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:.85rem 1.5rem;border-radius:100px;font-family:var(--fb);font-size:.92rem;font-weight:600;cursor:pointer;transition:background .3s}
+    .step-btn:hover{background:var(--accent-bright)}
+    </style>
   </div>
 </section>
 
@@ -817,8 +867,8 @@ footer p{font-size:.78rem;color:var(--muted)}
   <div class="flogo">Nom<span class="la">á</span>ntica</div>
   <p>© 2025 Nomántica. Todos los derechos reservados.</p>
   <ul class="flinks">
-    <li><a href="#">Privacidad</a></li>
-    <li><a href="#">Términos</a></li>
+    <li><a href="privacidad.html">Privacidad</a></li>
+    <li><a href="terminos.html">Términos</a></li>
     <li><a href="#">Contacto</a></li>
   </ul>
 </footer>
@@ -864,72 +914,135 @@ footer p{font-size:.78rem;color:var(--muted)}
   const SUPABASE_URL = 'https://acjxlouiphdxitdmoasy.supabase.co';
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFjanhsb3VpcGhkeGl0ZG1vYXN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIyMjE5MTYsImV4cCI6MjA4Nzc5NzkxNn0.KD22fbboTxJF6Zv3Px2aM0hQiMEYAjwyHUYDvkE8rGU';
 
+  // Rate limiting: máx 3 intentos por sesión
+  let attempts = 0;
+  const MAX_ATTEMPTS = 3;
+
   let formStep = 1, userEmail = '', submitted = false;
 
   function sanitize(str, max){ return str.replace(/<[^>]*>/g,'').replace(/[<>"'`;]/g,'').trim().slice(0,max); }
+  function sanitizePhone(str){ return str.replace(/[^\d\s\+\-\(\)]/g,'').trim().slice(0,20); }
+
+  function setProgress(step){
+    document.querySelectorAll('.cpd').forEach((d,i) => d.classList.toggle('active', i < step));
+  }
+
+  function showStep(n){
+    document.getElementById('ctaStep1').style.display = n===1 ? 'flex' : 'none';
+    document.getElementById('ctaStep2').style.display = n===2 ? 'flex' : 'none';
+    document.getElementById('ctaStep3').style.display = n===3 ? 'flex' : 'none';
+    setProgress(n);
+  }
+
+  function animIn(el){
+    el.style.opacity='0'; el.style.transform='translateX(18px)';
+    el.style.transition='opacity .35s,transform .35s';
+    setTimeout(()=>{ el.style.opacity='1'; el.style.transform='none'; },20);
+  }
 
   async function handleStep(){
     if(submitted) return;
-    const emailInput = document.getElementById('ctaEmail');
-    const nameInput  = document.getElementById('ctaName');
-    const honey      = document.getElementById('ctaHoney');
-    const btn        = document.getElementById('ctaBtn');
-    const note       = document.getElementById('ctaNote');
-    const form       = document.getElementById('ctaForm');
 
+    // bloqueo por intentos fallidos
+    if(attempts >= MAX_ATTEMPTS){
+      document.getElementById('ctaNote').textContent = 'Demasiados intentos. Contáctanos directo por WhatsApp 👇';
+      return;
+    }
+    const note = document.getElementById('ctaNote');
+
+    // ── PASO 1: email ──
     if(formStep === 1){
+      const honey = document.getElementById('ctaHoney');
+      const emailInput = document.getElementById('ctaEmail');
       const raw = emailInput.value.trim();
       if(honey.value) return;
       if(!raw || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw) || raw.length > 254){
-        emailInput.style.outline = '1px solid #e53e3e';
-        setTimeout(() => emailInput.style.outline = '', 1500); return;
+        emailInput.style.outline='1px solid #e53e3e';
+        setTimeout(()=> emailInput.style.outline='',1500); return;
       }
       userEmail = sanitize(raw, 254);
-      emailInput.style.transition = 'opacity .35s,transform .35s';
-      emailInput.style.opacity = '0'; emailInput.style.transform = 'translateX(-10px)';
-      setTimeout(() => {
-        emailInput.style.display = 'none';
-        nameInput.style.display = 'flex'; nameInput.style.flex = '1';
-        nameInput.style.opacity = '0'; nameInput.style.transform = 'translateX(10px)';
-        nameInput.style.transition = 'opacity .35s,transform .35s';
-        nameInput.focus();
-        setTimeout(() => { nameInput.style.opacity = '1'; nameInput.style.transform = 'translateX(0)'; }, 20);
-      }, 350);
-      btn.textContent = 'Confirmar →';
-      note.textContent = '¡Casi listo! Solo dinos cómo te llamas 👋';
-      formStep = 2; return;
+      formStep = 2;
+      showStep(2);
+      animIn(document.getElementById('ctaStep2'));
+      note.textContent = 'Paso 2 de 3 — ¿Cómo te llamas y a qué número te escribimos?';
+      document.getElementById('ctaName').focus();
+      return;
     }
 
+    // ── PASO 2: nombre + teléfono ──
     if(formStep === 2){
-      const rawName = nameInput.value.trim();
-      if(!rawName || rawName.length < 2){
-        nameInput.style.outline = '1px solid #e53e3e';
-        setTimeout(() => nameInput.style.outline = '', 1500); return;
+      const nameInput  = document.getElementById('ctaName');
+      const phoneInput = document.getElementById('ctaPhone');
+      const name  = nameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      if(!name || name.length < 2){
+        attempts++;
+        nameInput.style.outline='1px solid #e53e3e';
+        setTimeout(()=> nameInput.style.outline='',1500); return;
       }
-      const nombre = sanitize(rawName, 80);
+      if(!phone || !/^[\d\s\+\-\(\)]{7,15}$/.test(phone)){
+        attempts++;
+        phoneInput.style.outline='1px solid #e53e3e';
+        setTimeout(()=> phoneInput.style.outline='',1500); return;
+      }
+      formStep = 3;
+      showStep(3);
+      animIn(document.getElementById('ctaStep3'));
+      note.textContent = 'Último paso — cuéntanos qué necesitas 👇';
+      document.getElementById('ctaService').focus();
+      return;
+    }
+
+    // ── PASO 3: servicio + comentarios → guardar ──
+    if(formStep === 3){
+      const service = document.getElementById('ctaService').value;
+      const comment = document.getElementById('ctaComment').value.trim();
+      const btn     = document.getElementById('ctaBtn');
+
+      if(!service){
+        document.getElementById('ctaService').style.outline='1px solid #e53e3e';
+        setTimeout(()=> document.getElementById('ctaService').style.outline='',1500); return;
+      }
+
+      const nombre      = sanitize(document.getElementById('ctaName').value.trim(), 80);
+      const telefono    = sanitizePhone(document.getElementById('ctaPhone').value.trim());
+      const servicio    = sanitize(service, 60);
+      const comentarios = sanitize(comment, 400);
+
       submitted = true; btn.textContent = 'Enviando...'; btn.disabled = true;
+
       try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/suscriptores`, {
           method:'POST',
-          headers:{ 'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=minimal' },
-          body: JSON.stringify({ email: userEmail, nombre })
+          headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=minimal'},
+          body: JSON.stringify({ email: userEmail, nombre, telefono, servicio, comentarios })
         });
         if(!res.ok) throw new Error();
-        nameInput.style.transition = 'opacity .3s'; nameInput.style.opacity = '0';
-        setTimeout(() => {
-          nameInput.style.display = 'none'; form.style.justifyContent = 'center';
-          btn.textContent = '¡Listo, ' + nombre.split(' ')[0] + '! Abriendo WhatsApp… 🎉';
-          btn.style.background = 'var(--accent3)'; btn.style.color = '#000';
-          btn.style.borderRadius = '100px'; btn.style.padding = '.72rem 1.8rem'; btn.disabled = false;
-          note.textContent = 'Te estamos redirigiendo a WhatsApp para darte la bienvenida 👋';
-          // Redirigir a WhatsApp con mensaje pre-escrito
-          const msg = encodeURIComponent('Hola, acabo de registrarme en Nomántica y me interesa saber más sobre sus servicios');
-          setTimeout(() => { window.open('https://wa.me/527121837694?text=' + msg, '_blank'); }, 1500);
-        }, 300);
+
+        document.getElementById('ctaStep3').style.opacity='0';
+        document.getElementById('ctaStep3').style.transition='opacity .3s';
+        setTimeout(()=>{
+          document.getElementById('ctaStep3').innerHTML = `
+            <div style="text-align:center;padding:1rem 0">
+              <div style="font-size:2.5rem;margin-bottom:.8rem">🎉</div>
+              <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;margin-bottom:.5rem">¡Listo, ${nombre.split(' ')[0]}!</div>
+              <div style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1.4rem">Recibimos tu información. Te contactamos en menos de 24 hrs.</div>
+              <a href="https://wa.me/527121837694?text=${encodeURIComponent('Hola, acabo de registrarme en Nomántica y me interesa saber más sobre sus servicios')}" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;background:#25d366;color:#fff;padding:.8rem 1.8rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.92rem;box-shadow:0 4px 20px rgba(37,211,102,.35)">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18" fill="#fff"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.628.678 5.1 1.865 7.254L1 31l7.98-1.833A14.94 14.94 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.2a12.14 12.14 0 01-6.19-1.694l-.443-.263-4.736 1.088 1.118-4.617-.29-.473A12.16 12.16 0 013.8 16C3.8 9.26 9.26 3.8 16 3.8S28.2 9.26 28.2 16 22.74 28.2 16 28.2zm6.67-9.115c-.366-.183-2.163-1.067-2.498-1.19-.335-.12-.578-.183-.822.184-.244.366-.944 1.19-1.157 1.434-.213.244-.427.274-.793.091-.366-.183-1.545-.57-2.943-1.816-1.088-.97-1.822-2.168-2.035-2.534-.213-.366-.023-.564.16-.746.164-.163.366-.427.549-.64.183-.213.244-.366.366-.61.122-.244.061-.457-.03-.64-.092-.183-.822-1.982-1.127-2.713-.297-.713-.598-.616-.822-.628l-.7-.012c-.244 0-.64.091-.975.457s-1.28 1.25-1.28 3.047 1.311 3.534 1.494 3.778c.183.244 2.58 3.94 6.253 5.524.874.377 1.556.602 2.087.77.877.279 1.676.24 2.308.145.704-.104 2.163-.884 2.468-1.737.305-.854.305-1.585.213-1.737-.09-.152-.334-.244-.7-.427z"/></svg>
+                Escríbenos por WhatsApp
+              </a>
+            </div>`;
+          document.getElementById('ctaStep3').style.opacity='1';
+          document.getElementById('ctaProgress').style.display='none';
+          note.textContent='';
+          setProgress(3);
+        },300);
+
       } catch {
         submitted = false;
-        btn.textContent = 'Algo falló, intenta de nuevo'; btn.style.background = '#e53e3e'; btn.disabled = false;
-        setTimeout(() => { btn.textContent = 'Confirmar →'; btn.style.background = ''; }, 3000);
+        attempts++;
+        btn.textContent='Algo falló, intenta de nuevo'; btn.style.background='#e53e3e'; btn.disabled=false;
+        setTimeout(()=>{ btn.textContent='Enviar y hablar por WhatsApp →'; btn.style.background=''; },3000);
       }
     }
   }
