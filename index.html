@@ -57,6 +57,11 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 [data-delay="1"]{transition-delay:.1s}[data-delay="2"]{transition-delay:.22s}
 [data-delay="3"]{transition-delay:.36s}[data-delay="4"]{transition-delay:.5s}
 
+/* Letter-by-letter reveal (títulos) */
+.split .word{display:inline-block;white-space:nowrap}
+.split .ltr{display:inline-block;opacity:0;transform:translateY(.55em) rotate(4deg);filter:blur(6px);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.75,.25,1),filter .5s ease}
+.split.visible .ltr{opacity:1;transform:none;filter:none}
+
 /* ── Hero ── */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9rem 2rem 6rem;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 65% at 50% -5%,rgba(74,63,212,.22),transparent 68%),radial-gradient(ellipse 55% 40% at 85% 75%,rgba(107,94,240,.1),transparent 60%),radial-gradient(ellipse 45% 45% at 10% 70%,rgba(96,212,247,.06),transparent 60%);animation:bgPulse 9s ease-in-out infinite alternate}
@@ -66,7 +71,49 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .f1{width:350px;height:350px;background:radial-gradient(circle,rgba(74,63,212,.07),transparent 70%);top:10%;left:-8%}
 .f2{width:220px;height:220px;background:radial-gradient(circle,rgba(107,94,240,.07),transparent 70%);top:45%;right:-4%;animation-delay:2.5s}
 .f3{width:160px;height:160px;background:radial-gradient(circle,rgba(96,212,247,.06),transparent 70%);bottom:18%;left:12%;animation-delay:5s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-22px)}}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -22px}}
+
+/* ── Scroll glow (fondo reactivo por sección) ── */
+.section-glow{position:absolute;inset:0;pointer-events:none;opacity:0;will-change:opacity,transform;z-index:0}
+.section-glow.g-purple{background:radial-gradient(ellipse 60% 50% at 50% 42%,rgba(74,63,212,.18),transparent 70%)}
+.section-glow.g-blue{background:radial-gradient(ellipse 55% 48% at 50% 55%,rgba(96,212,247,.12),transparent 70%)}
+.section-glow.g-violet{background:radial-gradient(ellipse 65% 50% at 50% 45%,rgba(155,127,248,.15),transparent 70%)}
+
+/* ── Scroll progress bar ── */
+#scrollProgress{position:fixed;top:0;left:0;height:2px;width:0;z-index:200;background:linear-gradient(90deg,var(--accent),var(--accent-bright),var(--accent3));box-shadow:0 0 10px rgba(107,94,240,.5);transition:width .1s linear}
+
+/* ── Success check-burst ── */
+@keyframes okDraw{to{stroke-dashoffset:0}}
+@keyframes okRays{0%{opacity:0;transform:scale(.4)}60%{opacity:1}100%{opacity:.9;transform:scale(1)}}
+
+/* ── SVG icon draw-in ── */
+.mi-svg{display:block}
+.mi-svg .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .85s cubic-bezier(.65,0,.35,1)}
+.reveal-right.visible .mi-svg .draw{stroke-dashoffset:0}
+.reveal-right.visible .mini-card:nth-child(2) .mi-svg .draw{transition-delay:.14s}
+.reveal-right.visible .mini-card:nth-child(3) .mi-svg .draw{transition-delay:.28s}
+
+/* ── Feature-list checks ── */
+.feat-list li .chk{width:18px;height:18px;flex-shrink:0;color:var(--accent3);display:inline-flex;align-items:center;justify-content:center;margin-top:.05rem}
+.feat-list li .chk .draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .55s ease}
+.reveal-left.visible .feat-list li .chk .draw{stroke-dashoffset:0}
+.reveal-left.visible .feat-list li:nth-child(1) .chk .draw{transition-delay:.15s}
+.reveal-left.visible .feat-list li:nth-child(2) .chk .draw{transition-delay:.24s}
+.reveal-left.visible .feat-list li:nth-child(3) .chk .draw{transition-delay:.33s}
+.reveal-left.visible .feat-list li:nth-child(4) .chk .draw{transition-delay:.42s}
+.reveal-left.visible .feat-list li:nth-child(5) .chk .draw{transition-delay:.51s}
+.reveal-left.visible .feat-list li:nth-child(6) .chk .draw{transition-delay:.6s}
+
+/* ── Review stars & verified ── */
+.rev-star{color:var(--accent2);display:inline-flex;line-height:0}
+.rev-star svg{width:14px;height:14px}
+.rev-verified .vchk{width:13px;height:13px;display:inline-flex;flex-shrink:0}
+.rev-verified .vchk svg{width:100%;height:100%}
+@media(prefers-reduced-motion:reduce){
+  .mi-svg .draw,.feat-list li .chk .draw{transition:none!important;stroke-dashoffset:0!important}
+  #scrollProgress{transition:none}
+  .split .ltr{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+}
 .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(74,63,212,.1);border:1px solid rgba(74,63,212,.28);color:var(--accent-bright);font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;margin-bottom:2rem;animation:fadeInDown 1s ease .2s both}
 .hero-tag::before{content:'';width:6px;height:6px;background:var(--accent-bright);border-radius:50%;animation:blink 1.5s ease infinite}
 @keyframes blink{50%{opacity:0}}
@@ -85,13 +132,6 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollLine 2s ease infinite;transform-origin:top}
 @keyframes scrollLine{0%,100%{transform:scaleY(0);opacity:1}50%{transform:scaleY(1);opacity:1}99%{opacity:0}}
 
-/* ── Marquee ── */
-.marquee-wrap{overflow:hidden;padding:1.8rem 0;border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);background:var(--surface)}
-.marquee-track{display:flex;gap:3.5rem;animation:marquee 28s linear infinite;width:max-content}
-.marquee-item{display:flex;align-items:center;gap:.9rem;font-family:var(--fd);font-size:.9rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
-.mdot{width:5px;height:5px;border-radius:50%;background:var(--accent-bright)}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-
 /* ── Stats ── */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .stat-item{background:var(--bg);padding:3rem 2rem;text-align:center}
@@ -100,14 +140,14 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .stat-label{font-size:.85rem;color:var(--muted);letter-spacing:.04em}
 
 /* ── Section base ── */
-.section{padding:8rem 4rem;max-width:1200px;margin:0 auto}
+.section{padding:8rem 4rem;max-width:1200px;margin:0 auto;position:relative}
 .stag{display:inline-block;font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-bright);margin-bottom:.9rem;font-weight:600}
 .stitle{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:1.4rem}
 .stitle .hand{font-family:var(--fh);font-weight:700;font-size:1.1em;color:var(--accent-bright);display:inline;text-shadow:0 0 30px rgba(107,94,240,.4)}
 .ssub{font-size:1.05rem;color:var(--muted);max-width:490px;line-height:1.75}
 
 /* ── Proceso ── */
-.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
 .steps-list{display:flex;flex-direction:column;gap:1.8rem;margin-top:3rem}
 .step-item{display:flex;gap:1.4rem;align-items:flex-start;padding:1.4rem 1.5rem;border-radius:16px;border:1px solid transparent;transition:border-color .3s,background .3s;cursor:default}
 .step-item:hover{border-color:var(--border);background:var(--surface)}
@@ -125,8 +165,8 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .mini-badge{font-size:.68rem;padding:.2rem .6rem;border-radius:100px;font-weight:600;white-space:nowrap}
 
 /* ── Email section ── */
-.email-section{padding:6rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
-.email-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.email-section{padding:6rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);position:relative;overflow:hidden}
+.email-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
 .feat-list{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-top:2rem}
 .feat-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.9rem;color:var(--text)}
 .feat-list li span{color:var(--accent3);flex-shrink:0;margin-top:.1rem}
@@ -135,8 +175,8 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 @keyframes rotate{to{transform:rotate(360deg)}}
 
 /* ── Portfolio ── */
-.portfolio-section{padding:8rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
-.portfolio-inner{max-width:1200px;margin:0 auto}
+.portfolio-section{padding:8rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);position:relative;overflow:hidden}
+.portfolio-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
 .portfolio-header{text-align:center;margin-bottom:4rem}
 .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
 .pcard{background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;transition:transform .4s,border-color .4s,box-shadow .4s;cursor:default}
@@ -220,8 +260,11 @@ footer p{font-size:.78rem;color:var(--muted)}
 </head>
 <body>
 
+<!-- Scroll progress -->
+<div id="scrollProgress"></div>
+
 <!-- WhatsApp -->
-<div id="waBubble">Contáctanos ahora 👋</div>
+<div id="waBubble">Contáctanos ahora</div>
 <a href="https://wa.me/525554921640" target="_blank" rel="noopener" id="waBtn" title="Escríbenos por WhatsApp">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="#fff"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.628.678 5.1 1.865 7.254L1 31l7.98-1.833A14.94 14.94 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.2a12.14 12.14 0 01-6.19-1.694l-.443-.263-4.736 1.088 1.118-4.617-.29-.473A12.16 12.16 0 013.8 16C3.8 9.26 9.26 3.8 16 3.8S28.2 9.26 28.2 16 22.74 28.2 16 28.2zm6.67-9.115c-.366-.183-2.163-1.067-2.498-1.19-.335-.12-.578-.183-.822.184-.244.366-.944 1.19-1.157 1.434-.213.244-.427.274-.793.091-.366-.183-1.545-.57-2.943-1.816-1.088-.97-1.822-2.168-2.035-2.534-.213-.366-.023-.564.16-.746.164-.163.366-.427.549-.64.183-.213.244-.366.366-.61.122-.244.061-.457-.03-.64-.092-.183-.822-1.982-1.127-2.713-.297-.713-.598-.616-.822-.628l-.7-.012c-.244 0-.64.091-.975.457s-1.28 1.25-1.28 3.047 1.311 3.534 1.494 3.778c.183.244 2.58 3.94 6.253 5.524.874.377 1.556.602 2.087.77.877.279 1.676.24 2.308.145.704-.104 2.163-.884 2.468-1.737.305-.854.305-1.585.213-1.737-.09-.152-.334-.244-.7-.427z"/></svg>
 </a>
@@ -251,35 +294,14 @@ footer p{font-size:.78rem;color:var(--muted)}
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item"><span class="mdot"></span>Más Ventas</span>
-    <span class="marquee-item"><span class="mdot"></span>Más Clientes</span>
-    <span class="marquee-item"><span class="mdot"></span>Email Marketing</span>
-    <span class="marquee-item"><span class="mdot"></span>Publicidad Digital</span>
-    <span class="marquee-item"><span class="mdot"></span>Redes Sociales</span>
-    <span class="marquee-item"><span class="mdot"></span>Páginas Web</span>
-    <span class="marquee-item"><span class="mdot"></span>E-commerce</span>
-    <span class="marquee-item"><span class="mdot"></span>Resultados Reales</span>
-    <span class="marquee-item"><span class="mdot"></span>Más Ventas</span>
-    <span class="marquee-item"><span class="mdot"></span>Más Clientes</span>
-    <span class="marquee-item"><span class="mdot"></span>Email Marketing</span>
-    <span class="marquee-item"><span class="mdot"></span>Publicidad Digital</span>
-    <span class="marquee-item"><span class="mdot"></span>Redes Sociales</span>
-    <span class="marquee-item"><span class="mdot"></span>Páginas Web</span>
-    <span class="marquee-item"><span class="mdot"></span>E-commerce</span>
-    <span class="marquee-item"><span class="mdot"></span>Resultados Reales</span>
-  </div>
-</div>
-
 <!-- PROCESO -->
 <section class="section" id="proceso">
+  <div class="section-glow g-purple"></div>
   <div class="steps-grid">
     <div>
       <div class="reveal">
         <span class="stag">Nuestro proceso</span>
-        <h2 class="stitle">Estrategia sin rodeos</h2>
+        <h2 class="stitle js-split">Estrategia sin rodeos</h2>
         <p class="ssub">Analizamos tu negocio, construimos la estrategia y ejecutamos. Sin complicaciones, con resultados claros.</p>
       </div>
       <div class="steps-list">
@@ -291,9 +313,9 @@ footer p{font-size:.78rem;color:var(--muted)}
     </div>
     <div class="steps-visual reveal-right">
       <div class="visual-inner">
-        <div class="mini-card"><div class="mini-icon" style="background:rgba(74,63,212,.15)">📊</div><div class="mini-card-text"><div class="mini-card-title">Medimos el éxito</div><div class="mini-card-sub">2,450 aperturas · 18.3% CTR</div></div><div class="mini-badge" style="background:rgba(96,212,247,.1);color:var(--accent3)">+340%</div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:rgba(107,94,240,.12)">✉️</div><div class="mini-card-text"><div class="mini-card-title">Sistema automatizado</div><div class="mini-card-sub">Tasa apertura: 64.2%</div></div><div class="mini-badge" style="background:rgba(74,63,212,.1);color:var(--accent-bright)">Live</div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:rgba(96,212,247,.1)">🎯</div><div class="mini-card-text"><div class="mini-card-title">Publicidad que convierte</div><div class="mini-card-sub">1,200 contactos · Lista caliente</div></div><div class="mini-badge" style="background:rgba(155,127,248,.12);color:var(--accent2)">Nuevo</div></div>
+        <div class="mini-card"><div class="mini-icon" style="background:rgba(74,63,212,.15)"><svg class="mi-svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#6b5ef0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M4 20h16"/><path class="draw" pathLength="1" d="M7 20v-4"/><path class="draw" pathLength="1" d="M12 20v-8"/><path class="draw" pathLength="1" d="M17 20v-12"/></svg></div><div class="mini-card-text"><div class="mini-card-title">Medimos el éxito</div><div class="mini-card-sub">2,450 aperturas · 18.3% CTR</div></div><div class="mini-badge" style="background:rgba(96,212,247,.1);color:var(--accent3)">+340%</div></div>
+        <div class="mini-card"><div class="mini-icon" style="background:rgba(107,94,240,.12)"><svg class="mi-svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#9b7ff8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path class="draw" pathLength="1" d="M3.5 7.5 12 13l8.5-5.5"/></svg></div><div class="mini-card-text"><div class="mini-card-title">Sistema automatizado</div><div class="mini-card-sub">Tasa apertura: 64.2%</div></div><div class="mini-badge" style="background:rgba(74,63,212,.1);color:var(--accent-bright)">Live</div></div>
+        <div class="mini-card"><div class="mini-icon" style="background:rgba(96,212,247,.1)"><svg class="mi-svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#60d4f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle class="draw" pathLength="1" cx="12" cy="12" r="8.5"/><circle class="draw" pathLength="1" cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.6" fill="#60d4f7" stroke="none"/></svg></div><div class="mini-card-text"><div class="mini-card-title">Publicidad que convierte</div><div class="mini-card-sub">1,200 contactos · Lista caliente</div></div><div class="mini-badge" style="background:rgba(155,127,248,.12);color:var(--accent2)">Nuevo</div></div>
       </div>
     </div>
   </div>
@@ -301,31 +323,32 @@ footer p{font-size:.78rem;color:var(--muted)}
 
 <!-- EMAIL MARKETING -->
 <section class="email-section" id="email">
+  <div class="section-glow g-blue"></div>
   <div class="email-inner">
     <div class="reveal-left">
       <span class="stag">Email Marketing</span>
-      <h2 class="stitle">Emails que la gente <span class="hand">quiere</span> abrir</h2>
+      <h2 class="stitle js-split">Emails que la gente <span class="hand">quiere</span> abrir</h2>
       <p class="ssub">Flujos automatizados y campañas diseñadas para convertir. Tu lista de contactos es el activo más poderoso de tu negocio — nosotros lo activamos.</p>
       <ul class="feat-list">
-        <li><span>✓</span>Secuencias de bienvenida y nurturing</li>
-        <li><span>✓</span>Campañas estacionales y promocionales</li>
-        <li><span>✓</span>Segmentación inteligente de audiencias</li>
-        <li><span>✓</span>A/B testing de asuntos y contenido</li>
-        <li><span>✓</span>Copywriting persuasivo en cada envío</li>
-        <li><span>✓</span>Reportes de performance mensuales</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Secuencias de bienvenida y nurturing</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Campañas estacionales y promocionales</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Segmentación inteligente de audiencias</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>A/B testing de asuntos y contenido</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Copywriting persuasivo en cada envío</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Reportes de performance mensuales</li>
       </ul>
     </div>
     <div class="reveal-right">
       <div class="email-visual">
         <div style="display:flex;align-items:center;justify-content:center;height:100%;min-height:260px;flex-direction:column;gap:1.5rem;position:relative">
-          <div style="font-family:var(--fd);font-size:4.5rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--accent-bright),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center">4.1×</div>
+          <div class="countup" data-count="4.1" data-dec="1" data-suffix="×" style="font-family:var(--fd);font-size:4.5rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--accent-bright),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center">4.1×</div>
           <div style="font-size:.95rem;color:var(--muted);text-align:center;max-width:200px;line-height:1.6">Retorno de inversión promedio de nuestros clientes</div>
           <div style="display:flex;gap:1.5rem;margin-top:.5rem">
-            <div style="text-align:center"><div style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent-bright)">58%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Apertura</div></div>
+            <div style="text-align:center"><div class="countup" data-count="58" data-dec="0" data-suffix="%" style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent-bright)">58%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Apertura</div></div>
             <div style="width:1px;background:var(--border2)"></div>
-            <div style="text-align:center"><div style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent2)">22%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">CTR</div></div>
+            <div style="text-align:center"><div class="countup" data-count="22" data-dec="0" data-suffix="%" style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent2)">22%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">CTR</div></div>
             <div style="width:1px;background:var(--border2)"></div>
-            <div style="text-align:center"><div style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent3)">0.2%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Rebote</div></div>
+            <div style="text-align:center"><div class="countup" data-count="0.2" data-dec="1" data-suffix="%" style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent3)">0.2%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Rebote</div></div>
           </div>
         </div>
       </div>
@@ -335,10 +358,11 @@ footer p{font-size:.78rem;color:var(--muted)}
 
 <!-- PROYECTOS -->
 <section class="portfolio-section" id="portafolio">
+  <div class="section-glow g-violet"></div>
   <div class="portfolio-inner">
     <div class="portfolio-header reveal">
       <span class="stag">Proyectos</span>
-      <h2 class="stitle">Trabajos que hablan<br>por sí solos</h2>
+      <h2 class="stitle js-split">Trabajos que hablan<br>por sí solos</h2>
     </div>
     <div class="portfolio-grid">
 
@@ -773,18 +797,19 @@ footer p{font-size:.78rem;color:var(--muted)}
 </section>
 
 <!-- REVIEWS -->
-<section style="padding:8rem 0;overflow:hidden" id="reviews">
-  <div style="text-align:center;padding:0 2rem" class="reveal">
+<section style="padding:8rem 0;overflow:hidden;position:relative" id="reviews">
+  <div class="section-glow g-purple"></div>
+  <div style="text-align:center;padding:0 2rem;position:relative;z-index:1" class="reveal">
     <span class="stag">Reviews</span>
-    <h2 class="stitle">Lo que dicen<br>nuestros clientes</h2>
+    <h2 class="stitle js-split">Lo que dicen<br>nuestros clientes</h2>
   </div>
-  <div class="carousel-outer">
+  <div class="carousel-outer" style="position:relative;z-index:1">
     <div class="carousel-track" id="carouselTrack">
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Trabajar con Nomántica fue un acierto total. Entendieron mi negocio desde el minuto uno y los resultados se notaron rápido. Muy recomendables.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#9b7ff8)">CR</div><div><div class="rev-name">Carlos Reyes</div><div class="rev-verified">✓ Verificado</div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Estoy súper contenta con Nomántica. Captaron la esencia de mi marca y le dieron justo el impulso que quería.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#6b5ef0,#60d4f7)">SO</div><div><div class="rev-name">Sofía Ortega</div><div class="rev-verified">✓ Verificado</div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Conseguimos ordenar nuestra estrategia digital y mejorar resultados de forma consistente.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#60d4f7)">AM</div><div><div class="rev-name">Andrés Molina</div><div class="rev-verified">✓ Verificado</div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Le pusimos orden a todo el tema digital y empezamos a ver resultados de verdad. Son prácticos, van al grano y se implican mucho.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#60d4f7)">LV</div><div><div class="rev-name">Laura Villanueva</div><div class="rev-verified">✓ Verificado</div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span><span class="rev-star">★</span></div><p class="tcard-text">Muy buena experiencia con Nomántica. Nos ayudaron a enfocar mejor la estrategia y a optimizar lo que ya estábamos haciendo.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#4a3fd4)">DP</div><div><div class="rev-name">Diego Paredes</div><div class="rev-verified">✓ Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Trabajar con Nomántica fue un acierto total. Entendieron mi negocio desde el minuto uno y los resultados se notaron rápido. Muy recomendables.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#9b7ff8)">CR</div><div><div class="rev-name">Carlos Reyes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Estoy súper contenta con Nomántica. Captaron la esencia de mi marca y le dieron justo el impulso que quería.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#6b5ef0,#60d4f7)">SO</div><div><div class="rev-name">Sofía Ortega</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Conseguimos ordenar nuestra estrategia digital y mejorar resultados de forma consistente.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#60d4f7)">AM</div><div><div class="rev-name">Andrés Molina</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Le pusimos orden a todo el tema digital y empezamos a ver resultados de verdad. Son prácticos, van al grano y se implican mucho.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#60d4f7)">LV</div><div><div class="rev-name">Laura Villanueva</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Muy buena experiencia con Nomántica. Nos ayudaron a enfocar mejor la estrategia y a optimizar lo que ya estábamos haciendo.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#4a3fd4)">DP</div><div><div class="rev-name">Diego Paredes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
     </div>
     <div class="carousel-dots" id="carouselDots">
       <button class="cdot active" onclick="goTo(0)"></button>
@@ -798,10 +823,11 @@ footer p{font-size:.78rem;color:var(--muted)}
 
 <!-- CTA -->
 <section class="cta-section" id="contacto">
+  <div class="section-glow g-blue"></div>
   <div class="cta-inner">
     <div class="reveal">
       <span class="stag">Empieza hoy</span>
-      <h2 class="cta-title">Deja de perder<br>clientes <span class="hand">hoy.</span></h2>
+      <h2 class="cta-title js-split">Deja de perder<br>clientes <span class="hand">hoy.</span></h2>
       <p class="ssub" style="margin:1.2rem auto 0;text-align:center;max-width:460px">Déjanos tus datos y en menos de 24 horas te mostramos exactamente cómo podemos hacer crecer tu negocio. Sin compromiso.</p>
     </div>
     <div class="reveal" data-delay="2">
@@ -842,7 +868,7 @@ footer p{font-size:.78rem;color:var(--muted)}
             <option value="E-commerce" style="background:#0a0a1a">E-commerce</option>
             <option value="Contenido Orgánico" style="background:#0a0a1a">Creación de Contenido</option>
             <option value="Plataformas" style="background:#0a0a1a">Creación de Plataformas</option>
-            <option value="Todo" style="background:#0a0a1a">Necesito todo 🚀</option>
+            <option value="Todo" style="background:#0a0a1a">Necesito todo</option>
           </select>
         </div>
         <div class="email-form" style="margin:0;padding:.8rem 1.2rem;border-radius:16px;align-items:flex-start">
@@ -851,7 +877,7 @@ footer p{font-size:.78rem;color:var(--muted)}
         <button class="step-btn" id="ctaBtn" onclick="handleStep()">Enviar y hablar por WhatsApp →</button>
       </div>
 
-      <p class="form-note" id="ctaNote">Sin spam. Te contactamos en menos de 24 hrs. 🔒</p>
+      <p class="form-note" id="ctaNote"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:.35rem"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Sin spam. Te contactamos en menos de 24 hrs.</p>
     </div>
 
     <style>
@@ -874,23 +900,135 @@ footer p{font-size:.78rem;color:var(--muted)}
 </footer>
 
 <script>
-  // Nav scroll
+  // Nav scroll + progress bar
   const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 50));
+  const progressBar = document.getElementById('scrollProgress');
+  function onNavScroll(){
+    nav.classList.toggle('scrolled', scrollY > 50);
+    const max = document.documentElement.scrollHeight - innerHeight;
+    if(progressBar) progressBar.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', onNavScroll, { passive: true });
+  onNavScroll();
 
-  // Reveal on scroll
+  // Count-up animation
+  function countUp(el){
+    const target = parseFloat(el.dataset.count);
+    const dec = parseInt(el.dataset.dec || '0', 10);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1400, start = performance.now();
+    function tick(now){
+      const p = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(dec) + suffix;
+      if(p < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toFixed(dec) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Divide títulos en letras (para reveal escalonado)
+  const reduceMotionEarly = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function splitLetters(el){
+    const nodes = Array.from(el.childNodes);
+    el.textContent = '';
+    let idx = 0;
+    const addLetters = (text, container) => {
+      for(const ch of text){
+        if(ch === ' '){ container.appendChild(document.createTextNode(' ')); continue; }
+        const s = document.createElement('span');
+        s.className = 'ltr';
+        s.textContent = ch;
+        s.style.transitionDelay = (idx * 0.026) + 's';
+        idx++;
+        container.appendChild(s);
+      }
+    };
+    nodes.forEach(node => {
+      if(node.nodeType === 3){
+        node.textContent.split(/(\s+)/).forEach(chunk => {
+          if(chunk === '') return;
+          if(chunk.trim() === ''){ el.appendChild(document.createTextNode(chunk)); return; }
+          const word = document.createElement('span');
+          word.className = 'word';
+          addLetters(chunk, word);
+          el.appendChild(word);
+        });
+      } else if(node.nodeName === 'BR'){
+        el.appendChild(document.createElement('br'));
+      } else {
+        const word = document.createElement('span');
+        word.className = 'word ' + node.className;
+        if(node.getAttribute && node.getAttribute('style')) word.setAttribute('style', node.getAttribute('style'));
+        addLetters(node.textContent, word);
+        el.appendChild(word);
+      }
+    });
+    el.classList.add('split');
+  }
+  document.querySelectorAll('.js-split').forEach(splitLetters);
+
+  // Reveal on scroll (bidireccional: aparecen al entrar, se ocultan al salir)
   const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el => obs.observe(el));
+    entries.forEach(e => {
+      e.target.classList.toggle('visible', e.isIntersecting);
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.countup').forEach(c => {
+          if(!c.dataset.done){ c.dataset.done = '1'; if(!reduceMotionEarly) countUp(c); }
+        });
+      }
+    });
+  }, { threshold: 0, rootMargin: '-7% 0px -10% 0px' });
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale,.split').forEach(el => obs.observe(el));
 
-  // Hero parallax
-  document.addEventListener('mousemove', e => {
-    const x = (e.clientX/innerWidth-.5)*16;
-    const y = (e.clientY/innerHeight-.5)*8;
-    const bg = document.getElementById('heroBg');
-    if(bg) bg.style.transform = `translate(${x*.45}px,${y*.45}px)`;
-  });
+  // Hero parallax (mouse + scroll combined)
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const heroBg = document.getElementById('heroBg');
+  let mouseX = 0, mouseY = 0, scrollYCached = 0;
+
+  function applyHeroBg(){
+    if(heroBg) heroBg.style.transform = `translate(${mouseX*.45}px,${mouseY*.45 + scrollYCached*.15}px)`;
+  }
+
+  if(!reduceMotion){
+    document.addEventListener('mousemove', e => {
+      mouseX = (e.clientX/innerWidth-.5)*16;
+      mouseY = (e.clientY/innerHeight-.5)*8;
+      applyHeroBg();
+    });
+
+    // Scroll-driven parallax + section glow
+    const floaters = document.querySelectorAll('.floater');
+    const floatFactors = [0.06, -0.09, 0.12];
+    const glows = document.querySelectorAll('.section-glow');
+    let ticking = false;
+
+    function updateScrollFx(){
+      scrollYCached = window.scrollY;
+      const vh = innerHeight;
+
+      applyHeroBg();
+      floaters.forEach((f,i) => { f.style.transform = `translateY(${scrollYCached*floatFactors[i]}px)`; });
+
+      glows.forEach(g => {
+        const r = g.parentElement.getBoundingClientRect();
+        const center = r.top + r.height/2;
+        const dist = Math.abs(center - vh/2);
+        const proximity = Math.max(0, 1 - dist/(vh*.75));
+        g.style.opacity = proximity.toFixed(3);
+        g.style.transform = `translateY(${(1-proximity)*24}px)`;
+      });
+
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if(!ticking){ requestAnimationFrame(updateScrollFx); ticking = true; }
+    }, { passive: true });
+    updateScrollFx();
+  } else {
+    document.querySelectorAll('.section-glow').forEach(g => { g.style.opacity = '.35'; });
+  }
 
   // Carousel
   const track = document.getElementById('carouselTrack');
@@ -945,7 +1083,7 @@ footer p{font-size:.78rem;color:var(--muted)}
 
     // bloqueo por intentos fallidos
     if(attempts >= MAX_ATTEMPTS){
-      document.getElementById('ctaNote').textContent = 'Demasiados intentos. Contáctanos directo por WhatsApp 👇';
+      document.getElementById('ctaNote').textContent = 'Demasiados intentos. Contáctanos directo por WhatsApp.';
       return;
     }
     const note = document.getElementById('ctaNote');
@@ -988,7 +1126,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       formStep = 3;
       showStep(3);
       animIn(document.getElementById('ctaStep3'));
-      note.textContent = 'Último paso — cuéntanos qué necesitas 👇';
+      note.textContent = 'Último paso — cuéntanos qué necesitas.';
       document.getElementById('ctaService').focus();
       return;
     }
@@ -1024,7 +1162,16 @@ footer p{font-size:.78rem;color:var(--muted)}
         setTimeout(()=>{
           document.getElementById('ctaStep3').innerHTML = `
             <div style="text-align:center;padding:1rem 0">
-              <div style="font-size:2.5rem;margin-bottom:.8rem">🎉</div>
+              <div style="margin-bottom:.8rem;display:flex;justify-content:center">
+                <svg viewBox="0 0 68 68" width="66" height="66" fill="none" style="overflow:visible">
+                  <circle cx="34" cy="34" r="30" fill="none" stroke="var(--accent-bright)" stroke-width="2.5" stroke-linecap="round" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1;animation:okDraw .6s cubic-bezier(.65,0,.35,1) .05s forwards"/>
+                  <path d="M22 35l8 8 16-17" fill="none" stroke="var(--accent-bright)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" pathLength="1" style="stroke-dasharray:1;stroke-dashoffset:1;animation:okDraw .5s cubic-bezier(.65,0,.35,1) .5s forwards"/>
+                  <g stroke="var(--accent2)" stroke-width="2" stroke-linecap="round" style="opacity:0;transform-box:fill-box;transform-origin:center;animation:okRays .5s ease .85s forwards">
+                    <path d="M34 1V-6"/><path d="M34 68v7"/><path d="M1 34H-6"/><path d="M68 34h7"/>
+                    <path d="M10 10 5 5"/><path d="M58 58l5 5"/><path d="M58 10l5-5"/><path d="M10 58l-5 5"/>
+                  </g>
+                </svg>
+              </div>
               <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;margin-bottom:.5rem">¡Listo, ${nombre.split(' ')[0]}!</div>
               <div style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1.4rem">Recibimos tu información. Te contactamos en menos de 24 hrs.</div>
               <a href="https://wa.me/527121837694?text=${encodeURIComponent('Hola, acabo de registrarme en Nomántica y me interesa saber más sobre sus servicios')}" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;background:#25d366;color:#fff;padding:.8rem 1.8rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.92rem;box-shadow:0 4px 20px rgba(37,211,102,.35)">
