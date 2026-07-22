@@ -74,10 +74,11 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 @keyframes float{0%,100%{translate:0 0}50%{translate:0 -22px}}
 
 /* ── Scroll glow (fondo reactivo por sección) ── */
-.section-glow{position:absolute;inset:0;pointer-events:none;opacity:0;will-change:opacity,transform;z-index:0}
+.section-glow{position:absolute;inset:0;pointer-events:none;opacity:0;will-change:opacity,transform,translate;z-index:0;animation:glowDrift 13s ease-in-out infinite alternate}
 .section-glow.g-purple{background:radial-gradient(ellipse 60% 50% at 50% 42%,rgba(74,63,212,.18),transparent 70%)}
-.section-glow.g-blue{background:radial-gradient(ellipse 55% 48% at 50% 55%,rgba(96,212,247,.12),transparent 70%)}
-.section-glow.g-violet{background:radial-gradient(ellipse 65% 50% at 50% 45%,rgba(155,127,248,.15),transparent 70%)}
+.section-glow.g-blue{background:radial-gradient(ellipse 55% 48% at 50% 55%,rgba(96,212,247,.12),transparent 70%);animation-duration:17s;animation-delay:-5s}
+.section-glow.g-violet{background:radial-gradient(ellipse 65% 50% at 50% 45%,rgba(155,127,248,.15),transparent 70%);animation-duration:20s;animation-delay:-9s}
+@keyframes glowDrift{from{transform:translate(-6%,-4%) scale(1)}to{transform:translate(6%,4%) scale(1.1)}}
 
 /* ── Scroll progress bar ── */
 #scrollProgress{position:fixed;top:0;left:0;height:2px;width:0;z-index:200;background:linear-gradient(90deg,var(--accent),var(--accent-bright),var(--accent3));box-shadow:0 0 10px rgba(107,94,240,.5);transition:width .1s linear}
@@ -113,6 +114,9 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
   .mi-svg .draw,.feat-list li .chk .draw{transition:none!important;stroke-dashoffset:0!important}
   #scrollProgress{transition:none}
   .split .ltr{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+  .section-glow{animation:none!important}
+  .pm-step{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
+  .pm-panel{transition:opacity .2s ease!important}
 }
 .hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(74,63,212,.1);border:1px solid rgba(74,63,212,.28);color:var(--accent-bright);font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;margin-bottom:2rem;animation:fadeInDown 1s ease .2s both}
 .hero-tag::before{content:'';width:6px;height:6px;background:var(--accent-bright);border-radius:50%;animation:blink 1.5s ease infinite}
@@ -179,7 +183,8 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .portfolio-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
 .portfolio-header{text-align:center;margin-bottom:4rem}
 .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.pcard{background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;transition:transform .4s,border-color .4s,box-shadow .4s;cursor:default}
+.pcard{background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;transition:transform .4s,border-color .4s,box-shadow .4s;cursor:pointer}
+.pcard:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px}
 .pcard:hover{transform:translateY(-6px);border-color:var(--border);box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .pthumb{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .pbody{padding:1.5rem}
@@ -193,6 +198,35 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .port-cta{text-align:center;margin-top:3rem}
 .btn-outline{display:inline-flex;align-items:center;gap:.6rem;border:1px solid var(--border2);color:var(--muted);padding:.8rem 2rem;border-radius:100px;text-decoration:none;font-size:.9rem;font-weight:500;transition:border-color .3s,color .3s}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent-bright)}
+
+/* ── Project modal (proceso por servicio) ── */
+.proj-modal{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:2rem;opacity:0;visibility:hidden;transition:opacity .4s ease,visibility .4s ease}
+.proj-modal.open{opacity:1;visibility:visible}
+.pm-backdrop{position:absolute;inset:0;background:rgba(3,3,10,.72);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.pm-panel{position:relative;z-index:1;width:min(560px,100%);max-height:90vh;overflow-y:auto;background:linear-gradient(160deg,var(--surface2),var(--surface));border:1px solid var(--border);border-radius:26px;padding:2.1rem 2.4rem 1.9rem;box-shadow:0 40px 120px rgba(0,0,0,.6),0 0 80px rgba(74,63,212,.12);transform:translateY(28px) scale(.965);opacity:0;transition:transform .55s cubic-bezier(.2,.75,.25,1),opacity .5s ease;scrollbar-width:thin;scrollbar-color:var(--accent) transparent}
+.proj-modal.open .pm-panel{transform:none;opacity:1}
+.pm-panel::-webkit-scrollbar{width:6px}.pm-panel::-webkit-scrollbar-thumb{background:rgba(107,94,240,.4);border-radius:100px}
+.pm-glow{position:absolute;top:-30%;left:50%;transform:translateX(-50%);width:70%;height:55%;background:radial-gradient(ellipse at 50% 50%,rgba(107,94,240,.22),transparent 70%);pointer-events:none;z-index:0}
+.pm-close{position:absolute;top:1.1rem;right:1.1rem;z-index:2;width:38px;height:38px;border-radius:50%;border:1px solid var(--border2);background:rgba(255,255,255,.03);color:var(--muted);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:color .3s,border-color .3s,background .3s}
+.pm-close:hover{color:var(--text);border-color:var(--accent);background:rgba(74,63,212,.12)}
+.pm-inner{position:relative;z-index:1}
+.pm-thumb{height:100px;border-radius:16px;overflow:hidden;position:relative;background:#0a0a1a;border:1px solid var(--border2);margin-bottom:1.3rem}
+.pm-thumb svg{width:100%;height:100%;position:absolute;inset:0}
+.pm-cat{display:inline-block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-bright);font-weight:600;margin-bottom:.7rem}
+.pm-title{font-family:var(--fd);font-size:clamp(1.7rem,4vw,2.3rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:.8rem}
+.pm-sub{font-size:.95rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
+.pm-steps{display:flex;flex-direction:column;gap:.9rem;margin-bottom:1.7rem}
+.pm-step{display:flex;gap:1.1rem;align-items:flex-start;opacity:0;transform:translateY(16px);filter:blur(6px);transition:opacity .5s ease,transform .55s cubic-bezier(.2,.75,.25,1),filter .5s ease}
+.proj-modal.open .pm-step{opacity:1;transform:none;filter:none}
+.pm-step-num{font-family:var(--fd);font-size:1.15rem;font-weight:800;color:var(--accent-bright);line-height:1.3;min-width:2.2ch;flex-shrink:0}
+.pm-step-line{position:relative;padding-left:1.1rem;border-left:1px solid var(--border)}
+.pm-step-t{font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:.25rem}
+.pm-step-d{font-size:.86rem;color:var(--muted);line-height:1.6}
+.pm-cta{display:flex;flex-direction:column;gap:.8rem;align-items:center;text-align:center;border-top:1px solid var(--border2);padding-top:1.5rem}
+.pm-cta-btn{background:var(--accent);color:#fff;padding:.95rem 2.4rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.98rem;box-shadow:0 0 40px rgba(74,63,212,.4);transition:transform .3s,box-shadow .3s,background .3s;border:none;cursor:pointer}
+.pm-cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 65px rgba(107,94,240,.6);background:var(--accent-bright)}
+.pm-wa{font-size:.85rem;color:var(--muted);text-decoration:none;transition:color .3s}
+.pm-wa:hover{color:var(--wa,#25d366)}
 
 /* ── Reviews carousel ── */
 .carousel-outer{position:relative;margin-top:4rem;padding-bottom:3rem}
@@ -899,6 +933,28 @@ footer p{font-size:.78rem;color:var(--muted)}
   </ul>
 </footer>
 
+<!-- PROJECT MODAL -->
+<div id="projModal" class="proj-modal" aria-hidden="true">
+  <div class="pm-backdrop" data-pmclose></div>
+  <div class="pm-panel" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <div class="pm-glow"></div>
+    <button class="pm-close" data-pmclose aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="pm-inner">
+      <div class="pm-thumb" id="pmThumb"></div>
+      <span class="pm-cat" id="pmCat"></span>
+      <h2 class="pm-title" id="pmTitle"></h2>
+      <p class="pm-sub" id="pmSub"></p>
+      <div class="pm-steps" id="pmSteps"></div>
+      <div class="pm-cta">
+        <button class="pm-cta-btn" id="pmCta">Quiero empezar mi proyecto →</button>
+        <a class="pm-wa" id="pmWa" href="https://wa.me/525554921640" target="_blank" rel="noopener">o escríbenos directo por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   // Nav scroll + progress bar
   const nav = document.getElementById('nav');
@@ -1016,7 +1072,7 @@ footer p{font-size:.78rem;color:var(--muted)}
         const dist = Math.abs(center - vh/2);
         const proximity = Math.max(0, 1 - dist/(vh*.75));
         g.style.opacity = proximity.toFixed(3);
-        g.style.transform = `translateY(${(1-proximity)*24}px)`;
+        g.style.translate = `0 ${(1-proximity)*24}px`;
       });
 
       ticking = false;
@@ -1193,6 +1249,141 @@ footer p{font-size:.78rem;color:var(--muted)}
       }
     }
   }
+
+  /* ===== Modal de proyectos (proceso por servicio) ===== */
+  const PROJECTS = {
+    'Campaña de lanzamiento': { svc:'Email Marketing', sub:'Así llevamos un lanzamiento por email de la idea a las ventas.', steps:[
+      ['Diagnóstico','Revisamos tu lista, tu producto y el objetivo del lanzamiento.'],
+      ['Estrategia','Diseñamos la secuencia de correos y el calendario de envíos.'],
+      ['Producción','Redactamos y diseñamos cada email listo para convertir.'],
+      ['Lanzamiento','Automatizamos, enviamos y medimos resultados en tiempo real.']]},
+    'Automatización de nurturing': { svc:'Email Marketing', sub:'Convertimos leads fríos en clientes con flujos automáticos.', steps:[
+      ['Mapeo','Identificamos las etapas de tu embudo y los puntos de fuga.'],
+      ['Secuencias','Creamos flujos automáticos de 6 a 8 pasos por segmento.'],
+      ['Integración','Conectamos tu CRM y los disparadores por comportamiento.'],
+      ['Optimización','Medimos aperturas y clics, y afinamos cada envío.']]},
+    'Newsletter de marca personal': { svc:'Email Marketing', sub:'Construimos una newsletter que fideliza y hace crecer tu audiencia.', steps:[
+      ['Voz','Definimos tu tono y los temas que conectan con tu audiencia.'],
+      ['Calendario','Planeamos la newsletter semanal y sus formatos.'],
+      ['Copywriting','Escribimos cada edición con enfoque editorial.'],
+      ['Crecimiento','Sumamos captación de suscriptores y medición constante.']]},
+    'Creación de contenido orgánico': { svc:'Contenido Orgánico', sub:'Atraemos a tu audiencia ideal sin depender de la pauta.', steps:[
+      ['Investigación','Estudiamos tu nicho, audiencia y palabras clave.'],
+      ['Línea editorial','Definimos pilares de contenido y formatos.'],
+      ['Producción','Creamos piezas pensadas para atraer de forma natural.'],
+      ['Análisis','Medimos alcance y potenciamos lo que funciona.']]},
+    'Campañas publicitarias': { svc:'Campañas Publicitarias', sub:'Cada peso invertido, rastreado y optimizado para vender.', steps:[
+      ['Objetivos','Definimos meta, presupuesto y público ideal.'],
+      ['Creativos','Producimos anuncios y variantes para testear.'],
+      ['Lanzamiento','Configuramos campañas con segmentación precisa.'],
+      ['Optimización','Rastreamos resultados y escalamos lo rentable.']]},
+    'Creación de plataformas': { svc:'Plataformas', sub:'Diseñamos y construimos la plataforma que tu operación necesita.', steps:[
+      ['Descubrimiento','Entendemos tu operación y lo que necesitas resolver.'],
+      ['Arquitectura','Diseñamos la estructura técnica y el flujo de datos.'],
+      ['Desarrollo','Construimos una plataforma escalable y segura.'],
+      ['Entrega','Probamos, lanzamos y te acompañamos en el crecimiento.']]},
+    'Desarrollo web': { svc:'Desarrollo Web', sub:'Un sitio rápido y pensado para convertir visitas en clientes.', steps:[
+      ['Brief','Definimos objetivos, secciones y referencias.'],
+      ['Diseño','Creamos una interfaz alineada a tu marca.'],
+      ['Desarrollo','Construimos un sitio veloz y optimizado.'],
+      ['Publicación','Lanzamos, medimos y ajustamos para vender más.']]},
+    'E-commerce': { svc:'E-commerce', sub:'Una tienda en línea diseñada para vender desde el día uno.', steps:[
+      ['Estrategia','Analizamos tu catálogo y tu propuesta de venta.'],
+      ['Tienda','Diseñamos una experiencia de compra fluida y confiable.'],
+      ['Integración','Conectamos pagos, envíos e inventario.'],
+      ['Conversión','Optimizamos el checkout y las campañas de recompra.']]},
+    'Gestión de redes sociales': { svc:'Redes Sociales', sub:'Hacemos crecer tu comunidad con contenido que engancha.', steps:[
+      ['Diagnóstico','Auditamos tus redes y a tu competencia.'],
+      ['Plan','Definimos línea gráfica, formatos y calendario.'],
+      ['Producción','Creamos posts, reels y carruseles que enganchan.'],
+      ['Comunidad','Publicamos, respondemos y hacemos crecer tu audiencia.']]}
+  };
+
+  (function(){
+    const modal = document.getElementById('projModal');
+    if(!modal) return;
+    const pmThumb = document.getElementById('pmThumb');
+    const pmCat = document.getElementById('pmCat');
+    const pmTitle = document.getElementById('pmTitle');
+    const pmSub = document.getElementById('pmSub');
+    const pmSteps = document.getElementById('pmSteps');
+    const pmCta = document.getElementById('pmCta');
+    const panel = modal.querySelector('.pm-panel');
+    let lastFocused = null, currentSvc = '';
+
+    function buildSteps(steps){
+      pmSteps.innerHTML = '';
+      steps.forEach((s, i) => {
+        const row = document.createElement('div');
+        row.className = 'pm-step';
+        row.style.transitionDelay = (0.15 + i*0.09) + 's';
+        row.innerHTML = '<div class="pm-step-num">0'+(i+1)+'</div><div class="pm-step-line"><div class="pm-step-t"></div><div class="pm-step-d"></div></div>';
+        row.querySelector('.pm-step-t').textContent = s[0];
+        row.querySelector('.pm-step-d').textContent = s[1];
+        pmSteps.appendChild(row);
+      });
+    }
+
+    function openProject(card){
+      const titleEl = card.querySelector('.ptitle');
+      const title = titleEl ? titleEl.textContent.trim() : '';
+      const data = PROJECTS[title];
+      if(!data) return;
+      const cat = card.querySelector('.pcat');
+      const thumbSvg = card.querySelector('.pthumb svg');
+
+      pmThumb.innerHTML = thumbSvg ? thumbSvg.outerHTML : '';
+      pmThumb.style.display = thumbSvg ? '' : 'none';
+      pmCat.textContent = (cat ? cat.textContent.trim() : '') + ' · Cómo lo hacemos';
+      pmTitle.textContent = title;
+      pmSub.textContent = data.sub;
+      currentSvc = data.svc;
+      buildSteps(data.steps);
+      splitLetters(pmTitle);
+
+      lastFocused = document.activeElement;
+      document.body.style.overflow = 'hidden';
+      modal.setAttribute('aria-hidden', 'false');
+      if(panel) panel.scrollTop = 0;
+      void modal.offsetWidth;
+      modal.classList.add('open');
+      requestAnimationFrame(() => {
+        pmTitle.classList.add('visible');
+        const closeBtn = modal.querySelector('.pm-close');
+        if(closeBtn) closeBtn.focus();
+      });
+    }
+
+    function closeProject(returnFocus){
+      modal.classList.remove('open');
+      pmTitle.classList.remove('visible');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if(returnFocus !== false && lastFocused && lastFocused.focus){
+        try { lastFocused.focus({ preventScroll: true }); } catch(e){ lastFocused.focus(); }
+      }
+    }
+
+    document.querySelectorAll('.pcard').forEach(card => {
+      card.setAttribute('tabindex', '0');
+      card.setAttribute('role', 'button');
+      card.addEventListener('click', () => openProject(card));
+      card.addEventListener('keydown', e => {
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openProject(card); }
+      });
+    });
+
+    modal.querySelectorAll('[data-pmclose]').forEach(el => el.addEventListener('click', closeProject));
+    document.addEventListener('keydown', e => { if(e.key === 'Escape' && modal.classList.contains('open')) closeProject(); });
+
+    pmCta.addEventListener('click', () => {
+      const sel = document.getElementById('ctaService');
+      if(sel && currentSvc){ sel.value = currentSvc; sel.style.color = 'var(--text)'; }
+      closeProject(false);
+      const dest = document.getElementById('contacto');
+      if(dest) requestAnimationFrame(() => dest.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    });
+  })();
 </script>
 </body>
 </html>
