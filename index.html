@@ -1250,7 +1250,10 @@ footer p{font-size:.78rem;color:var(--muted)}
       const fs = lastFs;
       const sizeScale = Math.min(1, .6 + .4*(fs/175));
       sScale = sizeScale;
-      const MAX = Math.min(1150, Math.max(150, Math.round(.0343*fs*fs)));
+      // la cantidad escala ~lineal con el tamaño (no con el área): las letras son las mismas
+      // en móvil y desktop y necesitan suficientes puntos para definirse (evita que en móvil
+      // quede ralo). fs≈66 móvil → ~450 · fs≈186 desktop → ~1100
+      const MAX = Math.min(1150, Math.round(5.4*fs + 95));
       if(pts.length > MAX){
         const keep = MAX/pts.length; // cuerpo de la "á" esparcido; tilde apenas diluida en pantallas chicas
         pts = pts.filter(p => p.accent ? Math.random() < (.55+.45*sizeScale) : Math.random() < (p.silver ? keep*.7 : keep));
