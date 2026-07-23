@@ -63,10 +63,13 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .split.visible .ltr{opacity:1;transform:none;filter:none}
 
 /* ── Hero ── */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9rem 2rem 6rem;position:relative;overflow:hidden}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7.5rem 2rem 5.5rem;position:relative;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 65% at 50% -5%,rgba(74,63,212,.22),transparent 68%),radial-gradient(ellipse 55% 40% at 85% 75%,rgba(107,94,240,.1),transparent 60%),radial-gradient(ellipse 45% 45% at 10% 70%,rgba(96,212,247,.06),transparent 60%);animation:bgPulse 9s ease-in-out infinite alternate}
 @keyframes bgPulse{0%{opacity:.75}100%{opacity:1}}
 .hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px;opacity:.6;pointer-events:none}
+#heroCanvas{display:block;width:min(1040px,94vw);height:min(52vh,470px);pointer-events:none}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%)}
 .floater{position:absolute;border-radius:50%;pointer-events:none;animation:float 7s ease-in-out infinite}
 .f1{width:350px;height:350px;background:radial-gradient(circle,rgba(74,63,212,.07),transparent 70%);top:10%;left:-8%}
 .f2{width:220px;height:220px;background:radial-gradient(circle,rgba(107,94,240,.07),transparent 70%);top:45%;right:-4%;animation-delay:2.5s}
@@ -118,21 +121,6 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
   .pm-step{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
   .pm-panel{transition:opacity .2s ease!important}
 }
-.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(74,63,212,.1);border:1px solid rgba(74,63,212,.28);color:var(--accent-bright);font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;padding:.4rem 1rem;border-radius:100px;margin-bottom:2rem;animation:fadeInDown 1s ease .2s both}
-.hero-tag::before{content:'';width:6px;height:6px;background:var(--accent-bright);border-radius:50%;animation:blink 1.5s ease infinite}
-@keyframes blink{50%{opacity:0}}
-@keyframes fadeInDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
-@keyframes fadeInUp{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}
-.hero h1{font-family:var(--fd);font-size:clamp(3.5rem,8.5vw,8.5rem);font-weight:800;line-height:1.15;letter-spacing:-.04em;max-width:920px;margin-bottom:1.6rem;animation:fadeInUp 1s ease .4s both}
-.hero h1 .hand{font-family:var(--fh);font-weight:700;font-size:1.08em;color:var(--accent-bright);display:inline;text-shadow:0 0 40px rgba(107,94,240,.5)}
-.hero p{font-size:clamp(1rem,2vw,1.2rem);color:var(--muted);max-width:500px;line-height:1.75;margin-bottom:3rem;animation:fadeInUp 1s ease .6s both}
-.hero-actions{display:flex;gap:1rem;align-items:center;animation:fadeInUp 1s ease .8s both}
-.btn-primary{background:var(--accent);color:#fff;padding:.9rem 2.2rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:1rem;transition:transform .3s,box-shadow .3s,background .3s;box-shadow:0 0 40px rgba(74,63,212,.4)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 65px rgba(107,94,240,.6);background:var(--accent-bright)}
-.btn-ghost{color:var(--muted);text-decoration:none;font-size:.95rem;display:flex;align-items:center;gap:.5rem;transition:color .3s}
-.btn-ghost:hover{color:var(--text)}
-.btn-ghost svg{transition:transform .3s}
-.btn-ghost:hover svg{transform:translateX(4px)}
 .scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--accent),transparent);animation:scrollLine 2s ease infinite;transform-origin:top}
 @keyframes scrollLine{0%,100%{transform:scaleY(0);opacity:1}50%{transform:scaleY(1);opacity:1}99%{opacity:0}}
 
@@ -320,12 +308,9 @@ footer p{font-size:.78rem;color:var(--muted)}
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-noise"></div>
   <div class="floater f1"></div><div class="floater f2"></div><div class="floater f3"></div>
-  <h1>¿Tu negocio necesita<br>más <span class="hand">clientes?</span></h1>
-  <p>Ayudamos a negocios a vender más con marketing digital que realmente funciona. Tú enfócate en tu negocio — nosotros traemos los clientes.</p>
-  <div class="hero-actions">
-    <a href="#contacto" class="btn-primary">Contáctanos →</a>
-    <a href="#proceso" class="btn-ghost">Cómo funciona <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  </div>
+  <h1 class="sr-only">Nomántica — Soluciones digitales integrales</h1>
+  <canvas id="heroCanvas" role="img" aria-label="Nomántica"></canvas>
+  <div class="hero-scroll"><div class="scroll-line"></div></div>
 </section>
 
 <!-- PROCESO -->
@@ -1085,6 +1070,336 @@ footer p{font-size:.78rem;color:var(--muted)}
   } else {
     document.querySelectorAll('.section-glow').forEach(g => { g.style.opacity = '.35'; });
   }
+
+  /* ===== Hero: enjambre de luciérnagas, flores y mariposas que forman "Nomántica" ===== */
+  (function(){
+    const canvas = document.getElementById('heroCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d', { desynchronized: true });
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const WORD = 'Nomántica';
+    // paleta ponderada: morados profundos → brillantes, lavanda, y cian ocasional
+    const PURPLES = ['#241e5c','#2c2470','#3b2f9e','#4a3fd4','#4a3fd4','#5b4fe0','#6b5ef0','#6b5ef0','#7d6cf3','#9b7ff8','#9b7ff8','#b9a8ff','#60d4f7'];
+    const SILVERS = ['#eeedf8','#cfcfe4','#ffffff','#b9a8ff'];
+    let W = 0, H = 0, DPR = 1, parts = [], raf = 0, running = false, booted = false;
+    const mouse = { x:-9999, y:-9999 };
+    const sprites = {};
+
+    function hexRgb(h){ const n = parseInt(h.slice(1),16); return [(n>>16)&255,(n>>8)&255,n&255]; }
+
+    // sprite de luciérnaga: núcleo definido con halo corto (legibilidad primero)
+    function glowSprite(color, r){
+      const key = 'g'+color+r; if(sprites[key]) return sprites[key];
+      const d = Math.ceil(r*4.4), s = document.createElement('canvas'); s.width = s.height = d;
+      const g = s.getContext('2d'), [R,Gc,B] = hexRgb(color);
+      const grad = g.createRadialGradient(d/2,d/2,0,d/2,d/2,d/2);
+      grad.addColorStop(0,'rgba(255,255,255,.92)');
+      grad.addColorStop(.34,`rgba(${R},${Gc},${B},.88)`);
+      grad.addColorStop(.66,`rgba(${R},${Gc},${B},.16)`);
+      grad.addColorStop(1,`rgba(${R},${Gc},${B},0)`);
+      g.fillStyle = grad; g.fillRect(0,0,d,d);
+      sprites[key] = s; return s;
+    }
+
+    // sprite compacto: dot casi sólido con halo muy corto (tilde y trazos finos → nítidos)
+    function dotSprite(color, r){
+      const key = 'd'+color+r; if(sprites[key]) return sprites[key];
+      const d = Math.ceil(r*3.2), s = document.createElement('canvas'); s.width = s.height = d;
+      const g = s.getContext('2d'), [R,Gc,B] = hexRgb(color);
+      const grad = g.createRadialGradient(d/2,d/2,0,d/2,d/2,d/2);
+      grad.addColorStop(0,'rgba(255,255,255,.98)');
+      grad.addColorStop(.5,`rgba(${R},${Gc},${B},.92)`);
+      grad.addColorStop(.85,`rgba(${R},${Gc},${B},.32)`);
+      grad.addColorStop(1,`rgba(${R},${Gc},${B},0)`);
+      g.fillStyle = grad; g.fillRect(0,0,d,d);
+      sprites[key] = s; return s;
+    }
+
+    // sprites de flor: 4 especies (pétalo redondo, puntiagudo, trébol ancho, margarita fina)
+    // × 4 rotaciones base — cada flor luce distinta
+    function flowerSprite(color, r, v, rb){
+      const key = 'f'+color+r+v+rb; if(sprites[key]) return sprites[key];
+      const d = Math.ceil(r*6.6), s = document.createElement('canvas'); s.width = s.height = d;
+      const g = s.getContext('2d'), [R,Gc,B] = hexRgb(color);
+      const petals = [5,6,4,8][v];
+      g.translate(d/2, d/2); g.rotate(rb*Math.PI/2 + v*.6);
+      for(let i=0;i<petals;i++){
+        g.save(); g.rotate(i/petals*Math.PI*2);
+        g.fillStyle = `rgba(${R},${Gc},${B},${i%2 ? .66 : .85})`;
+        g.beginPath();
+        if(v === 0) g.arc(r*1.02, 0, r*.68, 0, 7);
+        else if(v === 1) g.ellipse(r*1.12, 0, r*1.02, r*.4, 0, 0, 7);
+        else if(v === 2) g.arc(r*.9, 0, r*.82, 0, 7);
+        else g.ellipse(r*1.18, 0, r*1.1, r*.28, 0, 0, 7);
+        g.fill();
+        g.restore();
+      }
+      g.fillStyle = v%2 ? 'rgba(255,255,255,.85)' : `rgba(${Math.min(R+70,255)},${Math.min(Gc+70,255)},${Math.min(B+70,255)},.95)`;
+      g.beginPath(); g.arc(0, 0, r*.4, 0, 7); g.fill();
+      sprites[key] = s; return s;
+    }
+
+    // mariposa: dos alas que aletean (procedural)
+    function drawButterfly(g, p, t){
+      const flap = .35 + .65*Math.abs(Math.sin(t*.008*p.sp + p.ph));
+      g.save(); g.translate(p.x, p.y); g.rotate(p.ang);
+      g.globalAlpha = p.tw; g.fillStyle = p.col;
+      g.beginPath(); g.ellipse(-p.r*.62*flap, 0, p.r*flap, p.r*.55, 0, 0, 7); g.fill();
+      g.beginPath(); g.ellipse( p.r*.62*flap, 0, p.r*flap, p.r*.55, 0, 0, 7); g.fill();
+      g.globalAlpha = Math.min(1, p.tw+.25); g.fillStyle = '#eeedf8';
+      g.fillRect(-.6, -p.r*.5, 1.2, p.r);
+      g.restore();
+    }
+
+    // catarina: caparazón con cabeza, línea central y motas oscuras (sin halo, nítida)
+    function ladybugSprite(color, r, rb){
+      const key = 'l'+color+r+rb; if(sprites[key]) return sprites[key];
+      const d = Math.ceil(r*5.2), s = document.createElement('canvas'); s.width = s.height = d;
+      const g = s.getContext('2d'), [R,Gc,B] = hexRgb(color);
+      g.translate(d/2, d/2); g.rotate(rb*Math.PI/2 + .35);
+      g.fillStyle = `rgba(${R},${Gc},${B},.94)`;
+      g.beginPath(); g.ellipse(0, r*.12, r*.92, r*1.12, 0, 0, 7); g.fill();
+      g.fillStyle = 'rgba(16,13,44,.95)';
+      g.beginPath(); g.arc(0, -r*.92, r*.4, 0, 7); g.fill();
+      g.strokeStyle = 'rgba(16,13,44,.8)'; g.lineWidth = Math.max(1, r*.14);
+      g.beginPath(); g.moveTo(0, -r*.55); g.lineTo(0, r*1.12); g.stroke();
+      g.fillStyle = 'rgba(16,13,44,.85)';
+      [[-.45,-.12],[.46,-.06],[-.34,.58],[.4,.62]].forEach(pt => {
+        g.beginPath(); g.arc(pt[0]*r, pt[1]*r, r*.16, 0, 7); g.fill();
+      });
+      sprites[key] = s; return s;
+    }
+
+    // libélula: cuerpo alargado + 4 alas translúcidas con aleteo rápido (procedural,
+    // alas por rotación de elipse — sin save/restore por ala)
+    function drawDragonfly(g, p, t){
+      const fl = Math.sin(t*.02*p.sp + p.ph);
+      g.save(); g.translate(p.x, p.y); g.rotate(p.ang);
+      g.globalAlpha = p.tw*.5; g.fillStyle = p.wing;
+      for(const sd of [-1,1]){
+        const a1 = sd*(1.05 - .28*fl), a2 = sd*(1.4 - .28*fl);
+        g.beginPath(); g.ellipse(p.r*.35 + Math.cos(a1)*p.r*.95, Math.sin(a1)*p.r*.95, p.r*1.05, p.r*.22, a1, 0, 7); g.fill();
+        g.beginPath(); g.ellipse(-p.r*.15 + Math.cos(a2)*p.r*.85, Math.sin(a2)*p.r*.85, p.r*.9, p.r*.2, a2, 0, 7); g.fill();
+      }
+      g.globalAlpha = p.tw; g.fillStyle = p.col;
+      g.beginPath(); g.ellipse(0, 0, p.r*1.4, p.r*.26, 0, 0, 7); g.fill();
+      g.beginPath(); g.ellipse(-p.r*1.5, 0, p.r*.95, p.r*.13, 0, 0, 7); g.fill();
+      g.beginPath(); g.arc(p.r*1.5, 0, p.r*.3, 0, 7); g.fill();
+      g.restore();
+    }
+
+    function size(){
+      DPR = Math.min(devicePixelRatio || 1, 1.5);
+      const rect = canvas.getBoundingClientRect();
+      W = Math.round(rect.width); H = Math.round(rect.height);
+      canvas.width = W*DPR; canvas.height = H*DPR;
+      ctx.setTransform(DPR,0,0,DPR,0,0);
+    }
+
+    // muestrea la palabra en un canvas oculto → puntos objetivo
+    function samplePoints(){
+      const off = document.createElement('canvas');
+      off.width = W; off.height = H;
+      const g = off.getContext('2d');
+      g.font = '800 100px "Bricolage Grotesque", sans-serif';
+      const w100 = g.measureText(WORD).width || 1;
+      const fs = Math.min(W*.88/w100*100, H*.6);
+      g.font = `800 ${fs}px "Bricolage Grotesque", sans-serif`;
+      g.textAlign = 'left'; g.textBaseline = 'middle';
+      const wordW = g.measureText(WORD).width;
+      const left = (W-wordW)/2, cy = H*.48;
+      g.fillStyle = '#fff'; g.fillText(WORD, left, cy);
+      // rango x de la "á" → paleta plateada (guiño al logo)
+      const aX0 = left + g.measureText('Nom').width;
+      const aX1 = left + g.measureText('Nomá').width;
+      const step = Math.max(3, Math.round(fs/30));
+      const img = g.getImageData(0,0,W,H).data;
+      const A = (x,y) => img[(y*W+x)*4+3] > 128;
+
+      // localizar el bloque de la tilde: primeras filas con tinta dentro del rango x
+      // de la "á", hasta el primer hueco vertical (el que separa la tilde de la 'a')
+      const x0 = Math.max(0, Math.floor(aX0)), x1 = Math.min(W, Math.ceil(aX1));
+      const rowHas = y => { for(let x=x0; x<x1; x++) if(A(x,y)) return true; return false; };
+      let ay0 = -1, aBottom = -1;
+      for(let y=0; y<H; y++){ if(rowHas(y)){ ay0 = y; break; } }
+      if(ay0 >= 0){ for(let y=ay0+1; y<H; y++){ if(!rowHas(y)){ aBottom = y; break; } } }
+      const lift = Math.round(fs*.07); // separación extra tilde ↔ cuerpo de la "a"
+
+      const out = [];
+      for(let y=0; y<H; y+=step) for(let x=0; x<W; x+=step)
+        if(A(x,y)){
+          const inA = x>=aX0 && x<aX1;
+          if(inA && aBottom>0 && y < aBottom) continue; // la tilde se muestrea aparte
+          out.push({ x, y, silver: inA });
+        }
+      // tilde: muestreo fino + subida → se lee como acento nítido y separado
+      if(aBottom > 0){
+        const fstep = Math.max(3, Math.round(step*1.15));
+        for(let y=ay0; y<aBottom; y+=fstep) for(let x=x0; x<x1; x+=fstep)
+          if(A(x,y)) out.push({ x, y: y-lift, silver: true, accent: true });
+      }
+      return out;
+    }
+
+    function build(){
+      let pts = samplePoints();
+      const MAX = W < 700 ? 560 : 1050;
+      if(pts.length > MAX){
+        const keep = MAX/pts.length; // la tilde nunca se diluye; el cuerpo de la "á" va más esparcido
+        pts = pts.filter(p => p.accent ? true : Math.random() < (p.silver ? keep*.7 : keep));
+      }
+      const BRIGHTS = ['#5b4fe0','#6b5ef0','#7d6cf3','#9b7ff8','#b9a8ff','#60d4f7'];
+      const WINGS = ['#b9a8ff','#cfcfe4','#8fd9f7','#eeedf8'];
+      parts = pts.map(pt => {
+        const roll = Math.random();
+        // mayormente luciérnagas (baratas) → densidad legible sin costo:
+        // luciérnaga 84% | flor 10% | mariposa 2.5% | catarina 2.5% | libélula 1%
+        let type = roll < .84 ? 0 : roll < .94 ? 1 : roll < .965 ? 2 : roll < .99 ? 3 : 4;
+        if(pt.silver) type = roll < .72 ? 0 : roll < .93 ? 1 : 2; // á/tilde: puntos, flores y alguna mariposa
+        const pool = pt.silver ? SILVERS : PURPLES;
+        let col = pool[(Math.random()*pool.length)|0];
+        if(type === 3) col = pt.silver ? '#eeedf8' : BRIGHTS[(Math.random()*BRIGHTS.length)|0]; // caparazón claro p/ motas
+        let r = type === 4 ? 2.6+Math.random()*1.4
+              : type === 3 ? 2+Math.random()*1
+              : type === 2 ? 2.4+Math.random()*1.5
+              : type === 1 ? 2+Math.random()*1.1
+              : 1.1+Math.random()*1.4;   // luciérnagas finas → trazos nítidos
+        if(pt.accent && type === 0) r = .9+Math.random()*.6; // fireflies de la tilde compactas
+        // wobble: la "á" se mueve suave (poco), el resto libre
+        const amp = pt.silver ? .3+Math.random()*.55 : 1+Math.random()*2.4;
+        const a0 = Math.random()*Math.PI*2, d0 = 70+Math.random()*220;
+        // luciérnagas de la "á" con sprite compacto (bajo glow) para no fundirse
+        const useDot = pt.silver && type === 0;
+        return {
+          tx: pt.x, ty: pt.y,
+          x: pt.x + Math.cos(a0)*d0, y: pt.y + Math.sin(a0)*d0,
+          vx: 0, vy: 0, type, col, r, silver: pt.silver,
+          wing: pt.silver ? '#ffffff' : WINGS[(Math.random()*WINGS.length)|0],
+          k: .016 + Math.random()*.024,                    // resorte propio → llegadas desparejas
+          delay: (pt.x/W)*1300 + Math.random()*800,        // barrido izq→der con azar
+          fadeDur: 380 + Math.random()*520,
+          exS: (pt.x/W)*.3 + Math.random()*.22,            // salida: mismo barrido izq→der
+          exW: .28 + Math.random()*.22,
+          rise: 60 + Math.random()*110,
+          exDrift: (Math.random()-.5)*46,
+          ph: Math.random()*Math.PI*2, sp: .6+Math.random()*.9,
+          amp, tw: 1, ang: 0,
+          sprite: type === 0 ? (useDot ? dotSprite(col, r*1.7) : glowSprite(col, r*2))
+                : type === 1 ? flowerSprite(col, r, (Math.random()*4)|0, (Math.random()*4)|0)
+                : type === 3 ? ladybugSprite(col, r, (Math.random()*4)|0)
+                : null
+        };
+      });
+      // barajar → el recorte adaptativo diluye uniforme en toda la palabra
+      for(let i = parts.length-1; i > 0; i--){
+        const j = (Math.random()*(i+1))|0, tmp = parts[i]; parts[i] = parts[j]; parts[j] = tmp;
+      }
+      activeN = parts.length;
+    }
+
+    let bootT = 0, activeN = 0;
+    function stepFrame(t){
+      if(!bootT) bootT = t || 1;
+      const el = t - bootT;
+      // progreso de salida ligado al scroll: desde el primer px ya desvanece
+      const exitP = reduce ? 0 : Math.min(1, Math.max(0, window.scrollY/(innerHeight*.55)));
+      ctx.clearRect(0,0,W,H);
+      for(let i = 0; i < activeN; i++){
+        const p = parts[i];
+        if(el < p.delay) continue;                          // aún no "nace"
+        const ex = exitP <= p.exS ? 0 : Math.min(1, (exitP - p.exS)/p.exW);
+        if(ex >= 1) continue;                               // ya se fue
+        const ease = ex*ex*(3-2*ex);                        // smoothstep
+        const ramp = Math.min(1, (el - p.delay)/p.fadeDur); // fundido de entrada
+        const alive = ramp*(1-ease);
+        const hx = p.tx + ease*p.exDrift + Math.cos(t*.0006*p.sp + p.ph)*p.amp;
+        const hy = p.ty - ease*p.rise + Math.sin(t*.0007*p.sp + p.ph)*p.amp;
+        // homing exponencial: cierra un % de la distancia por frame → llega y frena
+        // suave, sin poder sobrepasar el destino (cero rebote). Mouse = inercia que decae.
+        const hs = .052 + p.k;
+        let mvx = (hx - p.x) * hs, mvy = (hy - p.y) * hs;
+        const dx = p.x-mouse.x, dy = p.y-mouse.y, d2 = dx*dx+dy*dy;
+        if(d2 < 5600){ const d = Math.sqrt(d2)||1, f = (75-d)/75*1.7; p.vx += dx/d*f; p.vy += dy/d*f; }
+        p.vx *= .82; p.vy *= .82;
+        mvx += p.vx; mvy += p.vy;
+        p.x += mvx; p.y += mvy;
+        // la "á" titila apenas: brillo casi constante para que el acento siempre se lea
+        const tw = p.silver ? .9 + .1*Math.sin(t*.0026*p.sp + p.ph*3)
+                            : .72 + .28*Math.sin(t*.0026*p.sp + p.ph*3);
+        if(p.type === 2){
+          p.ang = Math.atan2(mvy,mvx)*.4 + Math.sin(t*.001+p.ph)*.35;
+          p.tw = alive*(.5 + .45*tw);
+          drawButterfly(ctx, p, t);
+        } else if(p.type === 4){
+          p.ang = Math.atan2(mvy,mvx)*.5 + Math.sin(t*.0012+p.ph)*.25;
+          p.tw = alive*(.55 + .4*tw);
+          drawDragonfly(ctx, p, t);
+        } else {
+          ctx.globalAlpha = alive*(p.type === 0 ? tw : .55 + .45*tw);
+          const s = p.sprite, d = s.width;
+          ctx.drawImage(s, p.x-d/2, p.y-d/2);
+        }
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function loop(t){ if(!running) return; stepFrame(t); raf = requestAnimationFrame(loop); }
+    function start(){ if(!running && !reduce){ running = true; raf = requestAnimationFrame(loop); } }
+    function stop(){ running = false; cancelAnimationFrame(raf); }
+    function scatter(){
+      bootT = 0; // la próxima entrada re-forma con el mismo barrido orgánico
+      for(const p of parts){
+        const a = Math.random()*Math.PI*2, d = 70+Math.random()*220;
+        p.x = p.tx + Math.cos(a)*d; p.y = p.ty + Math.sin(a)*d;
+        p.vx = p.vy = 0;
+      }
+    }
+
+    function staticDraw(){
+      for(const p of parts){ p.x = p.tx; p.y = p.ty; p.amp = 0; p.delay = -1; p.fadeDur = 1; }
+      bootT = 0; stepFrame(1);
+    }
+
+    function init(){
+      if(booted) return; booted = true;
+      size(); build();
+      if(reduce){ staticDraw(); return; }
+      start();
+    }
+
+    // arranca cuando la tipografía del wordmark está lista (con red de seguridad)
+    if(document.fonts && document.fonts.load){
+      document.fonts.load('800 100px "Bricolage Grotesque"').then(init, init);
+      setTimeout(init, 1600);
+    } else init();
+
+    // solo anima con el hero en pantalla; al salir se dispersa y se re-forma al volver
+    const heroSec = document.querySelector('.hero');
+    new IntersectionObserver(es => {
+      es.forEach(e => {
+        if(!booted) return;
+        if(e.isIntersecting) start();
+        else { stop(); scatter(); }
+      });
+    }, { threshold: .05 }).observe(heroSec);
+
+    heroSec.addEventListener('mousemove', e => {
+      const r = canvas.getBoundingClientRect();
+      mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top;
+    });
+    heroSec.addEventListener('mouseleave', () => { mouse.x = mouse.y = -9999; });
+
+    let rz;
+    window.addEventListener('resize', () => {
+      clearTimeout(rz);
+      rz = setTimeout(() => {
+        if(!booted) return;
+        stop(); size(); build(); bootT = 0;
+        if(reduce) staticDraw();
+        else start();
+      }, 200);
+    });
+  })();
 
   // Carousel
   const track = document.getElementById('carouselTrack');
