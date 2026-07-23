@@ -1196,6 +1196,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       ctx.setTransform(DPR,0,0,DPR,0,0);
     }
 
+    let lastFs = 175, sScale = 1;
     // muestrea la palabra en un canvas oculto → puntos objetivo
     function samplePoints(){
       const off = document.createElement('canvas');
@@ -1204,6 +1205,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       g.font = '800 100px "Bricolage Grotesque", sans-serif';
       const w100 = g.measureText(WORD).width || 1;
       const fs = Math.min(W*.88/w100*100, H*.6);
+      lastFs = fs;
       g.font = `800 ${fs}px "Bricolage Grotesque", sans-serif`;
       g.textAlign = 'left'; g.textBaseline = 'middle';
       const wordW = g.measureText(WORD).width;
@@ -1243,10 +1245,15 @@ footer p{font-size:.78rem;color:var(--muted)}
 
     function build(){
       let pts = samplePoints();
-      const MAX = W < 700 ? 560 : 1050;
+      // densidad de partículas Y tamaño de punto escalan con el tamaño de la palabra
+      // → mismo look aireado y legible en móvil, tablet y desktop (evita el amontonamiento en móvil)
+      const fs = lastFs;
+      const sizeScale = Math.min(1, .6 + .4*(fs/175));
+      sScale = sizeScale;
+      const MAX = Math.min(1150, Math.max(150, Math.round(.0343*fs*fs)));
       if(pts.length > MAX){
-        const keep = MAX/pts.length; // la tilde nunca se diluye; el cuerpo de la "á" va más esparcido
-        pts = pts.filter(p => p.accent ? true : Math.random() < (p.silver ? keep*.7 : keep));
+        const keep = MAX/pts.length; // cuerpo de la "á" esparcido; tilde apenas diluida en pantallas chicas
+        pts = pts.filter(p => p.accent ? Math.random() < (.55+.45*sizeScale) : Math.random() < (p.silver ? keep*.7 : keep));
       }
       const BRIGHTS = ['#5b4fe0','#6b5ef0','#7d6cf3','#9b7ff8','#b9a8ff','#60d4f7'];
       const WINGS = ['#b9a8ff','#cfcfe4','#8fd9f7','#eeedf8'];
@@ -1265,9 +1272,10 @@ footer p{font-size:.78rem;color:var(--muted)}
               : type === 1 ? 2+Math.random()*1.1
               : 1.1+Math.random()*1.4;   // luciérnagas finas → trazos nítidos
         if(pt.accent && type === 0) r = .9+Math.random()*.6; // fireflies de la tilde compactas
+        r *= sizeScale;                                       // puntos proporcionales al tamaño de la palabra
         // wobble: la "á" se mueve suave (poco), el resto libre
-        const amp = pt.silver ? .3+Math.random()*.55 : 1+Math.random()*2.4;
-        const a0 = Math.random()*Math.PI*2, d0 = 70+Math.random()*220;
+        const amp = (pt.silver ? .3+Math.random()*.55 : 1+Math.random()*2.4) * sizeScale;
+        const a0 = Math.random()*Math.PI*2, d0 = (70+Math.random()*220)*sizeScale;
         // luciérnagas de la "á" con sprite compacto (bajo glow) para no fundirse
         const useDot = pt.silver && type === 0;
         return {
@@ -1280,8 +1288,8 @@ footer p{font-size:.78rem;color:var(--muted)}
           fadeDur: 380 + Math.random()*520,
           exS: (pt.x/W)*.3 + Math.random()*.22,            // salida: mismo barrido izq→der
           exW: .28 + Math.random()*.22,
-          rise: 60 + Math.random()*110,
-          exDrift: (Math.random()-.5)*46,
+          rise: (60 + Math.random()*110)*sizeScale,
+          exDrift: (Math.random()-.5)*46*sizeScale,
           ph: Math.random()*Math.PI*2, sp: .6+Math.random()*.9,
           amp, tw: 1, ang: 0,
           sprite: type === 0 ? (useDot ? dotSprite(col, r*1.7) : glowSprite(col, r*2))
@@ -1349,7 +1357,7 @@ footer p{font-size:.78rem;color:var(--muted)}
     function scatter(){
       bootT = 0; // la próxima entrada re-forma con el mismo barrido orgánico
       for(const p of parts){
-        const a = Math.random()*Math.PI*2, d = 70+Math.random()*220;
+        const a = Math.random()*Math.PI*2, d = (70+Math.random()*220)*sScale;
         p.x = p.tx + Math.cos(a)*d; p.y = p.ty + Math.sin(a)*d;
         p.vx = p.vy = 0;
       }
