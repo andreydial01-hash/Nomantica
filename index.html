@@ -1276,8 +1276,9 @@ footer p{font-size:.78rem;color:var(--muted)}
         // wobble: la "á" se mueve suave (poco), el resto libre
         const amp = (pt.silver ? .3+Math.random()*.55 : 1+Math.random()*2.4) * sizeScale;
         const a0 = Math.random()*Math.PI*2, d0 = (70+Math.random()*220)*sizeScale;
-        // luciérnagas de la "á" con sprite compacto (bajo glow) para no fundirse
-        const useDot = pt.silver && type === 0;
+        // sprite compacto (bajo glow): siempre en la "á", y en TODA la palabra en pantallas
+        // chicas — en móvil el halo funde letras contiguas y se ve amontonado
+        const useDot = type === 0 && (pt.silver || sizeScale < .86);
         return {
           tx: pt.x, ty: pt.y,
           x: pt.x + Math.cos(a0)*d0, y: pt.y + Math.sin(a0)*d0,
