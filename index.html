@@ -1192,7 +1192,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       ctx.setTransform(DPR,0,0,DPR,0,0);
     }
 
-    let lastFs = 175, sScale = 1, smallF = 0;
+    let lastFs = 175, sScale = 1, smallF = 0, lastW = -1;
     // muestrea la palabra en un canvas oculto → puntos objetivo
     function samplePoints(){
       const off = document.createElement('canvas');
@@ -1377,7 +1377,7 @@ footer p{font-size:.78rem;color:var(--muted)}
 
     function init(){
       if(booted) return; booted = true;
-      size(); build();
+      size(); build(); lastW = W;
       if(reduce){ staticDraw(); return; }
       start();
     }
@@ -1394,7 +1394,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       es.forEach(e => {
         if(!booted) return;
         if(e.isIntersecting) start();
-        else { stop(); scatter(); }
+        else { stop(); if(smallF <= .5) scatter(); } // móvil: la entrada se juega una sola vez (no re-dispersa)
       });
     }, { threshold: .05 }).observe(heroSec);
 
@@ -1404,11 +1404,18 @@ footer p{font-size:.78rem;color:var(--muted)}
     });
     heroSec.addEventListener('mouseleave', () => { mouse.x = mouse.y = -9999; });
 
+    // el ANCHO es la señal real de un cambio de layout. En móvil, al hacer scroll la barra de
+    // URL del navegador colapsa/expande y cambia SOLO el alto, disparando 'resize' → antes eso
+    // reconstruía el enjambre y repetía la animación de entrada. Ahora un cambio de solo alto
+    // se ignora, así el wordmark no se vuelve a formar al hacer scroll.
     let rz;
     window.addEventListener('resize', () => {
       clearTimeout(rz);
       rz = setTimeout(() => {
         if(!booted) return;
+        const nw = Math.round(canvas.getBoundingClientRect().width);
+        if(nw === lastW) return;             // solo cambió el alto (barra de URL móvil) → no reanimar
+        lastW = nw;
         stop(); size(); build(); bootT = 0;
         if(reduce) staticDraw();
         else start();
