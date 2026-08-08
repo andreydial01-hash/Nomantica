@@ -1256,7 +1256,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       // la cantidad escala ~lineal con el tamaño (no con el área): las letras son las mismas
       // en móvil y desktop y necesitan suficientes puntos para definirse (evita que en móvil
       // quede ralo). fs≈66 móvil → ~450 · fs≈186 desktop → ~1100
-      const MAX = Math.min(1150, Math.round((5.4*fs + 95) * (1 + .12*smallF))); // móvil: un poco más denso → letras completas
+      const MAX = Math.min(1150, Math.round((5.4*fs + 95) * (1 + .9*smallF))); // móvil: muchos más puntos (finos) → trazos bien formados
       if(pts.length > MAX){
         const keep = MAX/pts.length; // cuerpo de la "á" esparcido; tilde apenas diluida en pantallas chicas
         pts = pts.filter(p => p.accent ? Math.random() < (.55+.45*sizeScale) : Math.random() < (p.silver ? keep*.7 : keep));
@@ -1267,7 +1267,8 @@ footer p{font-size:.78rem;color:var(--muted)}
         const roll = Math.random();
         // mayormente luciérnagas (baratas) → densidad legible sin costo:
         // luciérnaga 84% | flor 10% | mariposa 2.5% | catarina 2.5% | libélula 1%
-        let type = roll < .84 ? 0 : roll < .94 ? 1 : roll < .965 ? 2 : roll < .99 ? 3 : 4;
+        const fT = .84 + .09*smallF; // móvil: más luciérnagas (punto fino) → letras mejor formadas
+        let type = roll < fT ? 0 : roll < .94 ? 1 : roll < .965 ? 2 : roll < .99 ? 3 : 4;
         if(pt.silver) type = roll < .72 ? 0 : roll < .93 ? 1 : 2; // á/tilde: puntos, flores y alguna mariposa
         const pool = pt.silver ? SILVERS : PURPLES;
         let col = pool[(Math.random()*pool.length)|0];
@@ -1280,7 +1281,7 @@ footer p{font-size:.78rem;color:var(--muted)}
         if(pt.accent && type === 0) r = .9+Math.random()*.6; // fireflies de la tilde compactas
         r *= sizeScale;                                       // puntos proporcionales al tamaño de la palabra
         // wobble: la "á" se mueve suave (poco), el resto libre; en móvil menos → no desdibuja el trazo
-        const amp = (pt.silver ? .3+Math.random()*.55 : 1+Math.random()*2.4) * sizeScale * (1 - .45*smallF);
+        const amp = (pt.silver ? .3+Math.random()*.55 : 1+Math.random()*2.4) * sizeScale * (1 - .6*smallF);
         const a0 = Math.random()*Math.PI*2, d0 = (70+Math.random()*220)*sizeScale;
         // sprite compacto (bajo glow): siempre en la "á", y en TODA la palabra en pantallas
         // chicas — en móvil el halo funde letras contiguas y se ve amontonado
@@ -1299,7 +1300,7 @@ footer p{font-size:.78rem;color:var(--muted)}
           exDrift: (Math.random()-.5)*46*sizeScale,
           ph: Math.random()*Math.PI*2, sp: .6+Math.random()*.9,
           amp, tw: 1, ang: 0,
-          sprite: type === 0 ? (useDot ? dotSprite(col, r*(1.7 - .53*smallF)) : glowSprite(col, r*2))
+          sprite: type === 0 ? (useDot ? dotSprite(col, r*(1.7 - .78*smallF)) : glowSprite(col, r*2))
                 : type === 1 ? flowerSprite(col, r, (Math.random()*4)|0, (Math.random()*4)|0)
                 : type === 3 ? ladybugSprite(col, r, (Math.random()*4)|0)
                 : null
