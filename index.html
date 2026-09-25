@@ -33,8 +33,9 @@
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--fb);font-weight:300;overflow-x:hidden}
-/* perf: no renderizar secciones de abajo del pliegue hasta que se necesiten */
+/* perf: no renderizar (ni animar) secciones de abajo del pliegue hasta que se necesiten */
 #reviews,#contacto,footer{content-visibility:auto;contain-intrinsic-size:auto 700px}
+#portafolio{content-visibility:auto;contain-intrinsic-size:auto 1400px}
 
 /* ── Nav ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 4rem;backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .4s,background .4s}
@@ -175,6 +176,8 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .pcard:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px}
 .pcard:hover{transform:translateY(-6px);border-color:var(--border);box-shadow:0 20px 60px rgba(0,0,0,.4)}
 .pthumb{height:118px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pthumb svg{transition:transform .5s cubic-bezier(.2,.75,.25,1)}
+.pcard:hover .pthumb svg{transform:scale(1.06)}
 .pbody{padding:1.05rem 1.15rem .5rem}
 .pcat{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-bright);font-weight:700;margin-bottom:.4rem}
 .ptitle{font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:.25rem}
@@ -770,7 +773,7 @@ footer p{font-size:.78rem;color:var(--muted)}
     <div class="portfolio-grid">
 
       <!-- 1. Campaña de lanzamiento -->
-      <div class="pcard reveal-scale" data-delay="1">
+      <div class="pcard">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
@@ -808,7 +811,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       </div>
 
       <!-- 2. Automatización de nurturing -->
-      <div class="pcard reveal-scale" data-delay="2">
+      <div class="pcard">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
@@ -858,7 +861,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       </div>
 
       <!-- 3. Newsletter de marca personal -->
-      <div class="pcard reveal-scale" data-delay="3">
+      <div class="pcard">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
@@ -897,7 +900,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       </div>
 
       <!-- 4. Contenido orgánico -->
-      <div class="pcard reveal-scale" data-delay="1">
+      <div class="pcard">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
@@ -932,7 +935,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       </div>
 
       <!-- 5. Campañas publicitarias -->
-      <div class="pcard reveal-scale" data-delay="2">
+      <div class="pcard">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
@@ -971,7 +974,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       </div>
 
       <!-- 6. Creación de plataformas -->
-      <div class="pcard reveal-scale" data-delay="3">
+      <div class="pcard">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
@@ -1017,7 +1020,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       </div>
 
       <!-- 7. Desarrollo web -->
-      <div class="pcard reveal-scale" data-delay="1">
+      <div class="pcard">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
@@ -1064,7 +1067,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       </div>
 
       <!-- 8. E-commerce -->
-      <div class="pcard reveal-scale" data-delay="2">
+      <div class="pcard">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
@@ -1118,7 +1121,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       </div>
 
       <!-- 9. Redes sociales -->
-      <div class="pcard reveal-scale" data-delay="3">
+      <div class="pcard">
         <div class="pthumb">
           <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
             <defs>
@@ -1405,6 +1408,27 @@ footer p{font-size:.78rem;color:var(--muted)}
     });
   }, { threshold: 0, rootMargin: '-7% 0px -10% 0px' });
   document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale,.split').forEach(el => obs.observe(el));
+
+  // Pausar las animaciones SVG (SMIL) de la sección Servicios mientras está fuera de pantalla:
+  // por defecto quedan pausadas (sin gasto de CPU al cargar, ya que va debajo del pliegue)
+  // y solo corren cuando la sección entra a la vista. Da dinamismo sin costar tiempo de carga.
+  (function(){
+    var svcSec = document.getElementById('portafolio');
+    if(!svcSec) return;
+    var svgs = svcSec.querySelectorAll('svg');
+    if(!svgs.length) return;
+    function setSvc(run){
+      svgs.forEach(function(s){ try{ run ? s.unpauseAnimations() : s.pauseAnimations(); }catch(e){} });
+    }
+    setSvc(false); // pausadas al cargar
+    if('IntersectionObserver' in window && !reduceMotionEarly){
+      new IntersectionObserver(function(es){
+        es.forEach(function(e){ setSvc(e.isIntersecting); });
+      }, { threshold: .04 }).observe(svcSec);
+    } else {
+      setSvc(true);
+    }
+  })();
 
   // Hero parallax (mouse + scroll combined)
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
