@@ -21,17 +21,20 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://acjxlouiphdxitdmoasy.supabase.co https://wa.me; frame-src 'none'; object-src 'none';"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Lato:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Lato:wght@300;400&display=swap"></noscript>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#05050e;--surface:#0a0a1a;--surface2:#0f0f22;
+  --bg:#030308;--surface:#0a0a1a;--surface2:#0f0f22;
   --accent:#4a3fd4;--accent-bright:#6b5ef0;--accent2:#9b7ff8;--accent3:#60d4f7;
   --text:#eeedf8;--muted:#6b6a8f;--border:rgba(74,63,212,.15);--border2:rgba(255,255,255,.06);
   --fd:'Bricolage Grotesque',sans-serif;--fh:'Caveat',cursive;--fb:'Lato',sans-serif;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--fb);font-weight:300;overflow-x:hidden}
+/* perf: no renderizar secciones de abajo del pliegue hasta que se necesiten */
+#reviews,#contacto,footer{content-visibility:auto;contain-intrinsic-size:auto 700px}
 
 /* ── Nav ── */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 4rem;backdrop-filter:blur(20px);border-bottom:1px solid transparent;transition:border-color .4s,background .4s}
@@ -164,19 +167,19 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 @keyframes rotate{to{transform:rotate(360deg)}}
 
 /* ── Portfolio ── */
-.portfolio-section{padding:8rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);position:relative;overflow:hidden}
+.portfolio-section{padding:5rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);position:relative;overflow:hidden}
 .portfolio-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1}
-.portfolio-header{text-align:center;margin-bottom:4rem}
-.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.pcard{background:var(--surface2);border:1px solid var(--border2);border-radius:20px;overflow:hidden;transition:transform .4s,border-color .4s,box-shadow .4s;cursor:pointer}
+.portfolio-header{text-align:center;margin-bottom:2.4rem}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.pcard{background:var(--surface2);border:1px solid var(--border2);border-radius:16px;overflow:hidden;transition:transform .4s,border-color .4s,box-shadow .4s;cursor:pointer}
 .pcard:focus-visible{outline:2px solid var(--accent-bright);outline-offset:3px}
 .pcard:hover{transform:translateY(-6px);border-color:var(--border);box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.pthumb{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.pbody{padding:1.5rem}
+.pthumb{height:118px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pbody{padding:1.05rem 1.15rem .5rem}
 .pcat{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-bright);font-weight:700;margin-bottom:.4rem}
-.ptitle{font-family:var(--fd);font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
-.pdescr{font-size:.82rem;color:var(--muted);line-height:1.6}
-.pfooter{display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem 1.5rem}
+.ptitle{font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:.25rem}
+.pdescr{font-size:.8rem;color:var(--muted);line-height:1.5}
+.pfooter{display:flex;align-items:center;justify-content:space-between;padding:0 1.15rem 1.05rem}
 .ptag{font-size:.7rem;background:rgba(74,63,212,.1);color:var(--muted);border:1px solid var(--border2);padding:.25rem .7rem;border-radius:100px}
 .parrow{width:32px;height:32px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem;transition:background .3s,color .3s,border-color .3s}
 .pcard:hover .parrow{background:var(--accent);color:#fff;border-color:var(--accent)}
@@ -272,7 +275,13 @@ footer p{font-size:.78rem;color:var(--muted)}
   .stats{grid-template-columns:1fr 1fr}
   .section,.email-section,.portfolio-section,.cta-section{padding:5rem 1.5rem}
   .steps-grid,.email-inner{grid-template-columns:1fr}
-  .portfolio-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}
+  .pthumb{height:94px}
+  .pbody{padding:.75rem .8rem .35rem}
+  .ptitle{font-size:.9rem}
+  .pdescr{font-size:.74rem;line-height:1.45}
+  .pfooter{padding:0 .8rem .75rem}
+  .pcat{font-size:.62rem}
   footer{flex-direction:column;gap:1.5rem;text-align:center}
 }
 </style>
@@ -292,8 +301,7 @@ footer p{font-size:.78rem;color:var(--muted)}
 <nav id="nav">
   <a href="#" class="nav-logo">Nom<span class="la">á</span>ntica</a>
   <ul class="nav-links">
-    <li><a href="#proceso">Proceso</a></li>
-    <li><a href="#email">Email</a></li>
+    <li><a href="#diagnostico">Diagnóstico</a></li>
     <li><a href="#portafolio">Proyectos</a></li>
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#contacto" class="nav-cta">Empezar →</a></li>
@@ -310,74 +318,454 @@ footer p{font-size:.78rem;color:var(--muted)}
 </section>
 
 <!-- PROCESO -->
-<section class="section" id="proceso">
+<!-- DIAGNÓSTICO -->
+<section class="section" id="diagnostico">
   <div class="section-glow g-purple"></div>
-  <div class="steps-grid">
-    <div>
-      <div class="reveal">
-        <span class="stag">Nuestro proceso</span>
-        <h2 class="stitle js-split">Estrategia sin rodeos</h2>
-        <p class="ssub">Analizamos tu negocio, construimos la estrategia y ejecutamos. Sin complicaciones, con resultados claros.</p>
-      </div>
-      <div class="steps-list">
-        <div class="step-item reveal" data-delay="1"><div class="step-num">01</div><div class="step-content"><h3>Diagnóstico inicial</h3><p>Auditamos tu situación: base de datos, canales activos, métricas y oportunidades.</p></div></div>
-        <div class="step-item reveal" data-delay="2"><div class="step-num">02</div><div class="step-content"><h3>Diseño de estrategia</h3><p>Plan personalizado con flujos de email, segmentación y calendario de envíos.</p></div></div>
-        <div class="step-item reveal" data-delay="3"><div class="step-num">03</div><div class="step-content"><h3>Ejecución y automatización</h3><p>Implementamos todo para que funcione mientras tú te enfocas en crecer.</p></div></div>
-        <div class="step-item reveal" data-delay="4"><div class="step-num">04</div><div class="step-content"><h3>Análisis y optimización</h3><p>Medimos, aprendemos y mejoramos. Reportes claros con lo que importa.</p></div></div>
-      </div>
-    </div>
-    <div class="steps-visual reveal-right">
-      <div class="visual-inner">
-        <div class="mini-card"><div class="mini-icon" style="background:rgba(74,63,212,.15)"><svg class="mi-svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#6b5ef0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M4 20h16"/><path class="draw" pathLength="1" d="M7 20v-4"/><path class="draw" pathLength="1" d="M12 20v-8"/><path class="draw" pathLength="1" d="M17 20v-12"/></svg></div><div class="mini-card-text"><div class="mini-card-title">Medimos el éxito</div><div class="mini-card-sub">2,450 aperturas · 18.3% CTR</div></div><div class="mini-badge" style="background:rgba(96,212,247,.1);color:var(--accent3)">+340%</div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:rgba(107,94,240,.12)"><svg class="mi-svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#9b7ff8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path class="draw" pathLength="1" d="M3.5 7.5 12 13l8.5-5.5"/></svg></div><div class="mini-card-text"><div class="mini-card-title">Sistema automatizado</div><div class="mini-card-sub">Tasa apertura: 64.2%</div></div><div class="mini-badge" style="background:rgba(74,63,212,.1);color:var(--accent-bright)">Live</div></div>
-        <div class="mini-card"><div class="mini-icon" style="background:rgba(96,212,247,.1)"><svg class="mi-svg" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#60d4f7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle class="draw" pathLength="1" cx="12" cy="12" r="8.5"/><circle class="draw" pathLength="1" cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.6" fill="#60d4f7" stroke="none"/></svg></div><div class="mini-card-text"><div class="mini-card-title">Publicidad que convierte</div><div class="mini-card-sub">1,200 contactos · Lista caliente</div></div><div class="mini-badge" style="background:rgba(155,127,248,.12);color:var(--accent2)">Nuevo</div></div>
-      </div>
-    </div>
+  <style>
+  .dx-head{text-align:center;max-width:560px;margin:0 auto 2.2rem}
+  .dx-card{max-width:560px;margin:0 auto;position:relative;z-index:1;background:linear-gradient(160deg,var(--surface2),var(--surface));border:1px solid var(--border);border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 60px rgba(74,63,212,.1);overflow:hidden;transition:height .42s cubic-bezier(.22,.7,.26,1)}
+  .dx-progbar{display:flex;align-items:center;gap:.85rem;padding:1.55rem 1.6rem 0}
+  .dx-progbar[hidden]{display:none}
+  .dx-screen{padding:1.8rem 1.6rem;transition:opacity .26s ease,transform .34s cubic-bezier(.2,.8,.3,1)}
+  .dx-card.has-prog .dx-screen{padding-top:1.1rem}
+  .dx-screen.leaving{opacity:0;transform:translateY(-10px)}
+  .dx-screen.entering{opacity:0;transform:translateY(12px);transition:none}
+  .dx-intro{text-align:center}
+  .dx-intro-sub{color:var(--muted);font-size:1rem;line-height:1.6;margin-bottom:1.5rem}
+  .dx-prog{display:flex;align-items:center;gap:.85rem;margin-bottom:1.4rem}
+  .dx-prog-track{flex:1;height:4px;border-radius:100px;background:var(--border2);overflow:hidden}
+  .dx-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-bright));border-radius:100px;transition:width .55s cubic-bezier(.34,.06,.2,1)}
+  .dx-prog-num{font-size:.72rem;color:var(--muted);white-space:nowrap}
+  .dx-q{font-family:var(--fd);font-size:1.25rem;font-weight:700;line-height:1.25;letter-spacing:-.02em;margin-bottom:.3rem}
+  .dx-q-sub{font-size:.82rem;color:var(--muted);margin-bottom:1.05rem}
+  .dx-opts{display:flex;flex-direction:column;gap:.55rem}
+  .dx-opt{display:flex;align-items:center;gap:.75rem;width:100%;text-align:left;background:var(--surface);border:1px solid var(--border2);border-radius:14px;padding:.82rem .95rem;color:var(--text);font-family:var(--fb);font-size:.92rem;line-height:1.35;cursor:pointer;transition:border-color .25s,background .25s,transform .12s}
+  .dx-opt:hover{border-color:rgba(107,94,240,.5);background:rgba(74,63,212,.06)}
+  .dx-opt:active{transform:scale(.99)}
+  .dx-opt:focus-visible{outline:2px solid var(--accent-bright);outline-offset:2px}
+  .dx-opt.sel{border-color:var(--accent-bright);background:rgba(74,63,212,.12)}
+  .dx-tick{width:20px;height:20px;border-radius:6px;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s,border-color .2s}
+  .dx-opts.single .dx-tick{border-radius:50%}
+  .dx-opt.sel .dx-tick{background:var(--accent);border-color:var(--accent)}
+  .dx-tick svg{width:12px;height:12px;opacity:0;transition:opacity .2s}
+  .dx-opt.sel .dx-tick svg{opacity:1}
+  .dx-nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.3rem}
+  .dx-back{background:none;border:none;color:var(--muted);font-family:var(--fb);font-size:.85rem;cursor:pointer;display:inline-flex;align-items:center;gap:.35rem;padding:.4rem .1rem;transition:color .25s}
+  .dx-back:hover{color:var(--text)}
+  .dx-back svg{width:15px;height:15px}
+  .dx-next{background:var(--accent);color:#fff;border:none;padding:.6rem 1.3rem;border-radius:100px;font-family:var(--fb);font-size:.88rem;font-weight:600;cursor:pointer;transition:background .3s}
+  .dx-next:hover{background:var(--accent-bright)}
+  .dx-res-head{margin-bottom:1.15rem}
+  .dx-res-title{font-family:var(--fd);font-size:1.3rem;font-weight:800;line-height:1.2;letter-spacing:-.02em;margin-top:.4rem}
+  .dx-svc{position:relative;background:var(--surface);border:1px solid var(--border2);border-radius:16px;padding:1.05rem 1.1rem;margin-bottom:.8rem}
+  .dx-svc.principal{border-color:rgba(107,94,240,.5);box-shadow:0 0 40px rgba(74,63,212,.12)}
+  .dx-svc-badge{display:inline-block;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent-bright);background:rgba(74,63,212,.14);border:1px solid var(--border);padding:.24rem .6rem;border-radius:100px;margin-bottom:.55rem}
+  .dx-svc-name{font-family:var(--fd);font-size:1.08rem;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:.5rem}
+  .dx-why{width:20px;height:20px;flex-shrink:0;border-radius:50%;border:1px solid var(--border);background:rgba(74,63,212,.12);color:var(--accent-bright);font-family:var(--fb);font-size:.72rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;line-height:1;transition:background .2s,color .2s}
+  .dx-why:hover,.dx-why[aria-expanded="true"]{background:var(--accent);color:#fff}
+  .dx-why:focus-visible{outline:2px solid var(--accent-bright);outline-offset:2px}
+  .dx-svc-said{font-size:.82rem;color:var(--muted);margin:.5rem 0 .35rem}
+  .dx-svc-said em{color:var(--text);font-style:normal}
+  .dx-svc-sol{font-size:.9rem;color:var(--text);line-height:1.55}
+  .dx-why-pop{margin-top:.7rem;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:.7rem .8rem;font-size:.82rem;color:var(--muted);line-height:1.55}
+  .dx-why-pop b{color:var(--text);font-weight:700}
+  .dx-actions{display:flex;flex-direction:column;gap:.65rem;margin-top:1.25rem}
+  .dx-actions .step-btn,.dx-actions .btn-outline{width:100%;justify-content:center;text-align:center}
+  .dx-actions .btn-outline{padding:.82rem 1.5rem}
+  .dx-restart{background:none;border:none;color:var(--muted);font-family:var(--fb);font-size:.82rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:color .25s;margin-top:.15rem}
+  .dx-restart:hover{color:var(--accent-bright)}
+  </style>
+  <style>
+  /* Fucsia SUTIL + morado (acento) dominante + liquid glass + forma irregular (SOLO el diagnóstico) */
+  #diagnostico{--fx:#ff5fb0}
+  .dx-stage{position:relative;max-width:560px;margin:0 auto}
+  .dx-blob{position:absolute;border-radius:50%;z-index:0;pointer-events:none;filter:blur(50px)}
+  .dx-blob.b1{width:230px;height:230px;background:radial-gradient(circle,rgba(255,95,176,.32),transparent 70%);top:-46px;left:-54px;animation:dxBlob 11s ease-in-out infinite}
+  .dx-blob.b2{width:240px;height:240px;background:radial-gradient(circle,rgba(107,94,240,.5),transparent 70%);bottom:-48px;right:-46px;animation:dxBlob 13s ease-in-out infinite reverse}
+  @keyframes dxBlob{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-18px)}}
+  .dx-card{background:linear-gradient(155deg,rgba(255,95,176,.07),rgba(107,94,240,.13) 45%,rgba(12,12,28,.5));backdrop-filter:blur(22px) saturate(1.2);-webkit-backdrop-filter:blur(22px) saturate(1.2);border:1px solid rgba(190,175,255,.16);border-radius:56px 22px 46px 30px;box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 80px rgba(107,94,240,.16),0 0 46px rgba(255,95,176,.08),inset 0 1px 0 rgba(255,255,255,.14)}
+  .dx-prog-fill{background:linear-gradient(90deg,var(--accent),var(--accent-bright) 55%,var(--fx))}
+  .dx-opt{background:rgba(255,255,255,.03)}
+  .dx-opt:hover{border-color:rgba(107,94,240,.55);background:rgba(107,94,240,.08)}
+  .dx-opt.sel{border-color:var(--accent-bright);background:rgba(107,94,240,.15)}
+  .dx-opt.sel .dx-tick{background:var(--accent);border-color:var(--accent-bright)}
+  .dx-next{background:linear-gradient(135deg,var(--accent),var(--accent-bright));box-shadow:0 8px 24px rgba(74,63,212,.4)}
+  .dx-next:hover{background:linear-gradient(135deg,var(--accent-bright),var(--fx))}
+  .dx-why{background:rgba(107,94,240,.16);color:#cdbfff;border-color:rgba(155,127,248,.4)}
+  .dx-why:hover,.dx-why[aria-expanded="true"]{background:var(--accent);color:#fff}
+  .dx-svc{background:rgba(255,255,255,.03)}
+  .dx-svc.principal{border-color:rgba(155,127,248,.5);box-shadow:0 0 40px rgba(107,94,240,.16),0 0 40px rgba(255,95,176,.07)}
+  .dx-svc-badge{color:var(--accent2);background:rgba(155,127,248,.12);border-color:rgba(155,127,248,.26);font-weight:700}
+  .dx-why-pop{border-color:rgba(155,127,248,.3)}
+  /* Botones finales: legibles a simple vista (morado sólido + texto claro) */
+  #dxCard .step-btn{background:linear-gradient(135deg,var(--accent),var(--accent-bright));color:#fff;box-shadow:0 10px 30px rgba(74,63,212,.45),0 0 22px rgba(255,95,176,.18)}
+  #dxCard .step-btn:hover{background:linear-gradient(135deg,var(--accent-bright),#8a6ef5)}
+  #dxCard .btn-outline{background:rgba(255,255,255,.06);border:1px solid rgba(155,127,248,.5);color:var(--text);font-weight:600}
+  #dxCard .btn-outline:hover{background:rgba(107,94,240,.16);border-color:var(--accent-bright);color:#fff}
+  /* Gráfico radar (fortalezas/debilidades) */
+  .dx-radar{margin:.2rem 0 1.4rem}
+  .dx-radar-svg{width:100%;max-width:330px;height:auto;display:block;margin:0 auto;animation:dxRadarIn .7s cubic-bezier(.2,.85,.3,1.05) both}
+  .dx-radar-svg text{font-family:var(--fb);font-size:10px;fill:#a9a7c8}
+  .dx-radar-poly{filter:drop-shadow(0 0 9px rgba(155,127,248,.35))}
+  @keyframes dxRadarIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+  .dx-radar-note{font-size:.76rem;color:var(--muted);line-height:1.5;text-align:center;max-width:44ch;margin:.55rem auto 0}
+  .dx-rec-h{font-family:var(--fd);font-size:1.05rem;font-weight:800;letter-spacing:-.01em;color:var(--text);margin:.2rem 0 .9rem}
+  /* CTA de ventas (visible junto al radar) */
+  .dx-cta{background:linear-gradient(150deg,rgba(255,95,176,.08),rgba(107,94,240,.11));border:1px solid rgba(155,127,248,.32);border-radius:18px;padding:1.35rem 1.2rem 1.25rem;text-align:center;margin:.1rem 0 1.7rem;box-shadow:0 0 44px rgba(107,94,240,.1)}
+  .dx-cta-h{font-family:var(--fd);font-size:1.18rem;font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-bottom:.4rem;color:var(--text)}
+  .dx-cta-p{font-size:.86rem;color:var(--muted);line-height:1.5;max-width:38ch;margin:0 auto 1rem}
+  .dx-cta-actions{display:flex;flex-direction:column;gap:.6rem}
+  .dx-cta-actions .step-btn,.dx-cta-actions .btn-outline{width:100%;justify-content:center;text-align:center}
+  .dx-cta-actions .btn-outline{padding:.82rem 1.5rem}
+  .dx-restart-wrap{text-align:center;margin-top:1.3rem}
+  @media (prefers-reduced-motion:reduce){.dx-blob,.dx-radar-svg{animation:none}}
+  </style>
+  <div class="dx-head reveal">
+    <span class="stag">Diagnóstico</span>
+    <h2 class="stitle js-split">Descubre qué necesita<br>tu negocio</h2>
   </div>
-</section>
-
-<!-- EMAIL MARKETING -->
-<section class="email-section" id="email">
-  <div class="section-glow g-blue"></div>
-  <div class="email-inner">
-    <div class="reveal-left">
-      <span class="stag">Email Marketing</span>
-      <h2 class="stitle js-split">Emails que la gente <span class="hand">quiere</span> abrir</h2>
-      <p class="ssub">Flujos automatizados y campañas diseñadas para convertir. Tu lista de contactos es el activo más poderoso de tu negocio — nosotros lo activamos.</p>
-      <ul class="feat-list">
-        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Secuencias de bienvenida y nurturing</li>
-        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Campañas estacionales y promocionales</li>
-        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Segmentación inteligente de audiencias</li>
-        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>A/B testing de asuntos y contenido</li>
-        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Copywriting persuasivo en cada envío</li>
-        <li><span class="chk"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path class="draw" pathLength="1" d="M20 6 9 17l-5-5"/></svg></span>Reportes de performance mensuales</li>
-      </ul>
-    </div>
-    <div class="reveal-right">
-      <div class="email-visual">
-        <div style="display:flex;align-items:center;justify-content:center;height:100%;min-height:260px;flex-direction:column;gap:1.5rem;position:relative">
-          <div class="countup" data-count="4.1" data-dec="1" data-suffix="×" style="font-family:var(--fd);font-size:4.5rem;font-weight:800;line-height:1;background:linear-gradient(135deg,var(--accent-bright),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center">4.1×</div>
-          <div style="font-size:.95rem;color:var(--muted);text-align:center;max-width:200px;line-height:1.6">Retorno de inversión promedio de nuestros clientes</div>
-          <div style="display:flex;gap:1.5rem;margin-top:.5rem">
-            <div style="text-align:center"><div class="countup" data-count="58" data-dec="0" data-suffix="%" style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent-bright)">58%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Apertura</div></div>
-            <div style="width:1px;background:var(--border2)"></div>
-            <div style="text-align:center"><div class="countup" data-count="22" data-dec="0" data-suffix="%" style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent2)">22%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">CTR</div></div>
-            <div style="width:1px;background:var(--border2)"></div>
-            <div style="text-align:center"><div class="countup" data-count="0.2" data-dec="1" data-suffix="%" style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:var(--accent3)">0.2%</div><div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">Rebote</div></div>
-          </div>
+  <div class="dx-stage">
+    <span class="dx-blob b1"></span>
+    <span class="dx-blob b2"></span>
+    <div class="dx-card" id="dxCard" aria-live="polite">
+      <div class="dx-progbar" id="dxProg" hidden>
+        <div class="dx-prog-track"><div class="dx-prog-fill" id="dxProgFill"></div></div>
+        <span class="dx-prog-num" id="dxProgNum">1 de 5</span>
+      </div>
+      <div class="dx-screen" id="dxScreen">
+        <div class="dx-intro">
+          <div class="dx-intro-sub">5 preguntas, menos de 2 minutos.</div>
+          <button type="button" class="step-btn" id="dxStart">Empezar</button>
         </div>
       </div>
     </div>
   </div>
 </section>
+<script>
+(function(){
+  var card=document.getElementById('dxCard'), screen=document.getElementById('dxScreen');
+  if(!card||!screen) return;
+  var progEl=document.getElementById('dxProg'), progFill=document.getElementById('dxProgFill'), progNum=document.getElementById('dxProgNum'), curPct=0;
+  function setProgress(step){
+    if(step<=0){ if(progEl) progEl.hidden=true; curPct=0; return; }
+    var pct=(step/5)*100;
+    if(!progEl) return;
+    var wasHidden=progEl.hidden; progEl.hidden=false;
+    progNum.textContent=step+' de 5';
+    if(wasHidden){ progFill.style.transition='none'; progFill.style.width=curPct+'%'; void progFill.offsetWidth; progFill.style.transition=''; }
+    requestAnimationFrame(function(){ progFill.style.width=pct+'%'; });
+    curPct=pct;
+  }
+
+  var SVC={
+    ECOM:{name:'Tienda en línea',contact:'E-commerce',
+      pitch:'Por lo que nos contaste, tu prioridad es vender por internet sin depender de contestar mensaje por mensaje. Te armamos una tienda clara y confiable, lista para cobrar y despachar sola, para que las ventas entren aunque tú no estés conectado.',
+      why:'Una tienda en línea vende aunque estés dormido y no depende de que contestes mensajes uno por uno.'},
+    WEB:{name:'Página web que vende',contact:'Desarrollo Web',
+      pitch:'Según lo que respondiste, la gente te encuentra pero no termina de decidirse. Hacemos una página rápida y ordenada que genera confianza desde el primer vistazo y empuja a que te escriban o te compren.',
+      why:'Antes de comprarte, la gente te busca en internet. Si no te encuentra o tu página se ve descuidada, se va con otro.'},
+    PLAT:{name:'Sistema a tu medida',contact:'Plataformas',
+      pitch:'Nos dijiste que se te va el tiempo en tareas repetidas y a mano. Creamos un sistema a tu medida que las hace por ti y ordena tu operación, para que ese tiempo lo uses en vender y no en apagar fuegos.',
+      why:'Cada hora que pasas en tareas repetidas es una hora que no usas para vender ni para descansar.'},
+    ADS:{name:'Anuncios que traen clientes',contact:'Campañas Publicitarias',
+      pitch:'Como buscas más clientes pronto, ponemos anuncios frente a quienes ya están buscando lo que ofreces. Medimos cada peso invertido para saber qué funciona y que el gasto se convierta en clientes reales, no en likes sueltos.',
+      why:'Es de las formas más rápidas de conseguir clientes, y sabes exactamente cuánto te costó cada uno.'},
+    CONT:{name:'Contenido que atrae clientes',contact:'Contenido Orgánico',
+      pitch:'Por lo que respondiste, lo que más te ayuda es que más gente te conozca y confíe en ti. Creamos publicaciones y videos que atraen a las personas correctas y te posicionan como referente, sin pagar por cada visita.',
+      why:'La gente le compra a quien conoce y le da confianza. El contenido te da a conocer sin pagar cada visita.'},
+    RRSS:{name:'Redes sociales siempre activas',contact:'Redes Sociales',
+      pitch:'Nos comentaste que tus redes no están al día. Nos encargamos de publicar cada semana con fotos y videos que enganchan, para que tu negocio se vea activo y esté presente en la mente de tus clientes.',
+      why:'Unas redes abandonadas hacen pensar que tu negocio cerró. Publicar seguido te mantiene en la mente de tus clientes.'}
+  };
+  var CODES=['ECOM','WEB','PLAT','ADS','CONT','RRSS'];
+  var Q=[
+    {id:'q1',type:'single',q:'¿A qué se dedica tu negocio?',opts:[
+      {t:'Vendo productos',d:{ECOM:3,ADS:1}},
+      {t:'Doy un servicio (consultorio, restaurante, taller, despacho)',d:{WEB:2,RRSS:2,ADS:1}},
+      {t:'Vendo lo que sé (asesorías, cursos, clases)',d:{CONT:3,RRSS:2}},
+      {t:'Tengo una app o un sistema',d:{PLAT:3,WEB:1,ADS:1}},
+      {t:'Apenas voy a empezar',d:{WEB:2,RRSS:1,CONT:1}}
+    ]},
+    {id:'q2',type:'single',q:'¿Qué es lo que más te quita el sueño?',opts:[
+      {t:'Casi nadie conoce mi negocio',d:{CONT:3,RRSS:2,ADS:2}},
+      {t:'Me ven, pero no me compran',d:{WEB:3,ECOM:2}},
+      {t:'Necesito vender ya',d:{ADS:4,ECOM:1}},
+      {t:'Hago todo a mano y no me alcanza el tiempo',d:{PLAT:4,ECOM:1}},
+      {t:'Mis redes están abandonadas',d:{RRSS:3,CONT:2}}
+    ]},
+    {id:'q3',type:'multi',q:'¿Qué tienes hoy?',sub:'Puedes marcar varias',opts:[
+      {t:'Página web',k:'web'},
+      {t:'Tienda en línea',k:'tienda'},
+      {t:'Redes donde publico cada semana',k:'redes'},
+      {t:'Anuncios pagados',k:'ads'},
+      {t:'Nada todavía',k:'nada'}
+    ]},
+    {id:'q4',type:'single',q:'¿Puedes invertir en anuncios?',sub:'Aparte de nuestro servicio',opts:[
+      {t:'No, quiero crecer sin pagar anuncios',d:{CONT:2,RRSS:1,ADS:-3}},
+      {t:'Sí, un poco para probar',d:{ADS:2}},
+      {t:'Sí, quiero crecer rápido',d:{ADS:3}},
+      {t:'Todavía no sé',d:{}}
+    ]},
+    {id:'q5',type:'single',q:'En 3 meses, ¿qué te gustaría ver?',opts:[
+      {t:'Más ventas por internet',d:{ECOM:2,ADS:2}},
+      {t:'Más gente pidiendo informes',d:{ADS:2,WEB:2}},
+      {t:'Gente que me sigue y confía en mí',d:{RRSS:3,CONT:2}},
+      {t:'Menos trabajo a mano',d:{PLAT:3}},
+      {t:'Verme más profesional',d:{WEB:3,RRSS:1}}
+    ]}
+  ];
+  var CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+
+  var answers, busy=false, settleT;
+  function reset(){ answers={q1:null,q2:null,q3:new Set(),q4:null,q5:null}; }
+  reset();
+
+  function paint(builder){
+    busy=true;
+    var curH=card.offsetHeight;
+    card.style.height=curH+'px';
+    screen.classList.add('leaving');
+    setTimeout(function(){
+      screen.innerHTML='';
+      screen.classList.remove('leaving');
+      screen.classList.add('entering');
+      builder(screen);
+      var target=card.scrollHeight;
+      void card.offsetWidth;
+      requestAnimationFrame(function(){
+        card.style.height=target+'px';
+        screen.classList.remove('entering');
+      });
+      clearTimeout(settleT);
+      settleT=setTimeout(function(){ card.style.height='auto'; busy=false; },470);
+    },175);
+  }
+  function d(cls,html){ var e=document.createElement('div'); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
+
+  function answerText(qid){
+    if(qid==='q3'){
+      var labels=Q[2].opts.filter(function(o){return answers.q3.has(o.k);}).map(function(o){return o.t;});
+      return labels.length?labels.join(' · '):'Nada todavía';
+    }
+    var map={q1:0,q2:1,q4:3,q5:4}, idx=answers[qid];
+    return (idx==null)?'':Q[map[qid]].opts[idx].t;
+  }
+
+  function compute(){
+    var contrib={}; CODES.forEach(function(c){contrib[c]={q1:0,q2:0,q3:0,q4:0,q5:0};});
+    function add(qid,dd){ for(var c in dd) contrib[c][qid]+=dd[c]; }
+    add('q1',Q[0].opts[answers.q1].d);
+    add('q2',Q[1].opts[answers.q2].d);
+    add('q4',Q[3].opts[answers.q4].d);
+    add('q5',Q[4].opts[answers.q5].d);
+    var has=function(k){return answers.q3.has(k);}, prod=(answers.q1===0), d3={};
+    function a(c,v){ d3[c]=(d3[c]||0)+v; }
+    if(!has('web')&&!has('tienda')){ if(prod) a('ECOM',3); else a('WEB',3); }
+    else if(has('web')&&!has('tienda')&&prod){ a('ECOM',2); }
+    if(!has('redes')){ a('RRSS',2); a('CONT',1); }
+    if(has('ads')){ a('ADS',1); }
+    add('q3',d3);
+    var total={}; CODES.forEach(function(c){ total[c]=contrib[c].q1+contrib[c].q2+contrib[c].q3+contrib[c].q4+contrib[c].q5; });
+    return {contrib:contrib,total:total};
+  }
+
+  function pick(){
+    var r=compute(), contrib=r.contrib, total=r.total;
+    var noAds=(answers.q4===0), prod=(answers.q1===0), has=function(k){return answers.q3.has(k);};
+    var mand=[];
+    if(prod&&!has('tienda')) mand.push('ECOM');
+    if(!has('web')&&!has('tienda')&&!prod) mand.push('WEB');
+    function cmp(x,y){
+      if(total[y]!==total[x])return total[y]-total[x];
+      if(contrib[y].q2!==contrib[x].q2)return contrib[y].q2-contrib[x].q2;
+      if(contrib[y].q5!==contrib[x].q5)return contrib[y].q5-contrib[x].q5;
+      return CODES.indexOf(x)-CODES.indexOf(y);
+    }
+    var principal=CODES.filter(function(c){return !(noAds&&c==='ADS');}).sort(cmp)[0];
+    var comp=[];
+    mand.forEach(function(c){ if(c!==principal&&comp.indexOf(c)<0) comp.push(c); });
+    CODES.filter(function(c){return c!==principal&&comp.indexOf(c)<0&&total[c]>=3;}).sort(cmp).forEach(function(c){comp.push(c);});
+    return {principal:principal,comp:comp.slice(0,3),contrib:contrib,total:total};
+  }
+
+  function saidTop2(code,contrib){
+    var qs=['q1','q2','q3','q4','q5'].filter(function(qid){ return contrib[code][qid]>0; });
+    qs.sort(function(x,y){ return contrib[code][y]-contrib[code][x]; });
+    var out=[]; qs.slice(0,2).forEach(function(qid){ var t=answerText(qid); if(t&&out.indexOf(t)<0) out.push(t); });
+    if(!out.length) out.push(answerText('q1'));
+    return out;
+  }
+
+  // Algoritmo: convierte las 5 respuestas en 6 dimensiones (0-100). Alto = fuerte; bajo = a reforzar.
+  function dims(){
+    var has=function(k){return answers.q3.has(k);}, p1=answers.q1, p2=answers.q2, p4=answers.q4, p5=answers.q5;
+    function cl(v){ return Math.max(8, Math.min(100, Math.round(v))); }
+    return [
+      {label:'Web',        v:cl(28 + (has('web')?45:0) + (has('tienda')?18:0) + ((!has('web')&&!has('tienda'))?-12:0) + (p5===4?6:0))},
+      {label:'Venta',      v:cl(18 + (has('tienda')?58:0) + (p5===0?10:0) + ((p1===0&&!has('tienda'))?-6:0))},
+      {label:'Anuncios',   v:cl(30 + (has('ads')?33:0) + (p4===2?22:(p4===1?11:(p4===0?-16:0))) + (p2===0?-12:0))},
+      {label:'Redes',      v:cl(24 + (has('redes')?52:0) + (p2===4?-20:0) + (p5===2?4:0))},
+      {label:'Contenido',  v:cl(36 + (has('redes')?14:0) + (p1===2?10:0) + (p2===1?-14:0) + (p2===0?-10:0) + (p5===4?6:0))},
+      {label:'Sistemas',   v:cl(46 + (p1===3?34:0) + (p2===3?-34:0) + (p5===3?-8:0))}
+    ];
+  }
+
+  function buildRadar(data){
+    var cx=170, cy=138, R=94, LR=108, n=data.length, anchors=['middle','start','start','middle','end','end'], dy=[0,4,4,13,4,4];
+    function pt(i,rad){ var a=(-90+i*(360/n))*Math.PI/180; return [cx+Math.cos(a)*rad, cy+Math.sin(a)*rad]; }
+    var svg='', rings=[.25,.5,.75,1];
+    rings.forEach(function(rr){ var p=[]; for(var i=0;i<n;i++){var q=pt(i,R*rr);p.push(q[0].toFixed(1)+','+q[1].toFixed(1));} svg+='<polygon points="'+p.join(' ')+'" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1"/>'; });
+    for(var i=0;i<n;i++){ var q=pt(i,R); svg+='<line x1="'+cx+'" y1="'+cy+'" x2="'+q[0].toFixed(1)+'" y2="'+q[1].toFixed(1)+'" stroke="rgba(255,255,255,.07)" stroke-width="1"/>'; }
+    var dp=[], dots='';
+    for(var j=0;j<n;j++){ var q2=pt(j,R*(data[j].v/100)); dp.push(q2[0].toFixed(1)+','+q2[1].toFixed(1)); dots+='<circle cx="'+q2[0].toFixed(1)+'" cy="'+q2[1].toFixed(1)+'" r="3" fill="#b9a8ff"/>'; }
+    var labels='';
+    for(var k=0;k<n;k++){ var lp=pt(k,LR); labels+='<text x="'+lp[0].toFixed(1)+'" y="'+(lp[1]+dy[k]).toFixed(1)+'" text-anchor="'+anchors[k]+'">'+data[k].label+'</text>'; }
+    return '<svg class="dx-radar-svg" viewBox="0 0 340 290" role="img" aria-label="Fortalezas y debilidades de tu negocio">'
+      +'<defs><radialGradient id="dxrg" cx="50%" cy="45%" r="62%"><stop offset="0%" stop-color="rgba(255,95,176,.5)"/><stop offset="100%" stop-color="rgba(107,94,240,.3)"/></radialGradient></defs>'
+      +svg
+      +'<polygon class="dx-radar-poly" points="'+dp.join(' ')+'" fill="url(#dxrg)" stroke="#9b7ff8" stroke-width="2" stroke-linejoin="round"/>'
+      +dots+labels+'</svg>';
+  }
+
+  function renderIntro(){
+    reset();
+    paint(function(root){
+      setProgress(0); card.classList.remove('has-prog');
+      var box=d('dx-intro','<div class="dx-intro-sub">5 preguntas, menos de 2 minutos.</div>');
+      var b=document.createElement('button'); b.type='button'; b.className='step-btn'; b.textContent='Empezar';
+      b.addEventListener('click',function(){renderQuestion(0);});
+      box.appendChild(b); root.appendChild(box);
+    });
+  }
+
+  function renderQuestion(qi){
+    paint(function(root){
+      setProgress(qi+1); card.classList.add('has-prog');
+      var q=Q[qi];
+      var qEl=d('dx-q'); qEl.textContent=q.q; root.appendChild(qEl);
+      if(q.sub){ var sEl=d('dx-q-sub'); sEl.textContent=q.sub; root.appendChild(sEl); }
+      var opts=d('dx-opts'+(q.type==='single'?' single':''));
+      q.opts.forEach(function(o,i){
+        var b=document.createElement('button'); b.type='button'; b.className='dx-opt';
+        var tick=d('dx-tick',CHK), tx=document.createElement('span'); tx.textContent=o.t;
+        b.appendChild(tick); b.appendChild(tx);
+        if(q.type==='single'){ if(answers[q.id]===i) b.classList.add('sel'); }
+        else if(answers[q.id].has(o.k)) b.classList.add('sel');
+        b.addEventListener('click',function(){ onOpt(qi,i); });
+        opts.appendChild(b);
+      });
+      root.appendChild(opts);
+      var nav=d('dx-nav');
+      var back=document.createElement('button'); back.type='button'; back.className='dx-back';
+      back.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Atrás';
+      back.addEventListener('click',function(){ if(qi===0){renderIntro();}else{renderQuestion(qi-1);} });
+      nav.appendChild(back);
+      if(q.type==='multi'){
+        var cont=document.createElement('button'); cont.type='button'; cont.className='dx-next'; cont.textContent='Continuar →';
+        cont.addEventListener('click',function(){ advance(qi); });
+        nav.appendChild(cont);
+      }
+      root.appendChild(nav);
+    });
+  }
+
+  function onOpt(qi,i){
+    var q=Q[qi];
+    if(q.type==='single'){
+      if(busy) return;
+      answers[q.id]=i;
+      var btns=screen.querySelectorAll('.dx-opt');
+      btns.forEach(function(b,bi){ b.classList.toggle('sel',bi===i); });
+      setTimeout(function(){ advance(qi); },150);
+    } else {
+      var o=q.opts[i], set=answers[q.id];
+      if(o.k==='nada'){ set.clear(); set.add('nada'); }
+      else { set.delete('nada'); if(set.has(o.k)) set.delete(o.k); else set.add(o.k); }
+      var b2=screen.querySelectorAll('.dx-opt');
+      q.opts.forEach(function(oo,bi){ b2[bi].classList.toggle('sel',set.has(oo.k)); });
+    }
+  }
+
+  function advance(qi){
+    var q=Q[qi];
+    if(q.type==='multi' && answers[q.id].size===0) return;
+    if(qi<Q.length-1) renderQuestion(qi+1); else renderResult();
+  }
+
+  function renderResult(){
+    var r=pick(), list=[r.principal].concat(r.comp), contrib=r.contrib;
+    paint(function(root){
+      setProgress(0); card.classList.remove('has-prog');
+      root.appendChild(d('dx-res-head','<span class="stag">Tu diagnóstico</span><div class="dx-res-title">Radiografía de tu negocio</div>'));
+      var radar=d('dx-radar'); radar.innerHTML=buildRadar(dims())+'<p class="dx-radar-note">Entre más lleno el hexágono, más fuerte estás en esa área. Las puntas más cortas son donde más te conviene enfocarte.</p>'; root.appendChild(radar);
+      var cta=d('dx-cta','<div class="dx-cta-h">Ya sabemos por dónde crecer</div><div class="dx-cta-p">Con tu diagnóstico armamos un plan concreto para vender más. Da el siguiente paso hoy.</div>');
+      var acts=d('dx-cta-actions');
+      var wa=document.createElement('button'); wa.type='button'; wa.className='step-btn'; wa.textContent='Quiero mi diagnóstico completo →';
+      wa.addEventListener('click',function(){ openWA(list); });
+      var ct=document.createElement('button'); ct.type='button'; ct.className='btn-outline'; ct.textContent='Prefiero que me contacten';
+      ct.addEventListener('click',function(){ goContact(r.principal); });
+      acts.appendChild(wa); acts.appendChild(ct); cta.appendChild(acts); root.appendChild(cta);
+      root.appendChild(d('dx-rec-h')).textContent='Lo que te recomendamos';
+      list.forEach(function(code,idx){
+        var s=SVC[code], said=saidTop2(code,contrib), html='';
+        if(idx===0) html+='<span class="dx-svc-badge">Lo que más necesitas</span>';
+        html+='<div class="dx-svc-name">'+s.name+'<button type="button" class="dx-why" aria-label="Por qué importa" aria-expanded="false">?</button></div>';
+        html+='<div class="dx-svc-said">Nos dijiste: '+said.map(function(t){return '<em>“'+t+'”</em>';}).join(' y ')+'</div>';
+        html+='<div class="dx-svc-sol">'+s.pitch+'</div>';
+        html+='<div class="dx-why-pop" role="tooltip" hidden><b>Por qué importa.</b> '+s.why+'</div>';
+        var c=d('dx-svc'+(idx===0?' principal':'')); c.innerHTML=html; root.appendChild(c);
+      });
+      var rsw=d('dx-restart-wrap');
+      var rs=document.createElement('button'); rs.type='button'; rs.className='dx-restart'; rs.textContent='Volver a empezar';
+      rs.addEventListener('click',function(){ renderIntro(); });
+      rsw.appendChild(rs); root.appendChild(rsw);
+    });
+  }
+
+  function openWA(list){
+    var principalName=SVC[list[0]].name;
+    var rest=list.slice(1).map(function(c){return SVC[c].name;});
+    var ans=['q1','q2','q3','q4','q5'].map(function(qid,i){return (i+1)+') '+answerText(qid);}).join(' · ');
+    var m='Hola Nomántica, hice el diagnóstico en su página. Lo que más necesito: '+principalName+'.';
+    if(rest.length){ var lst=rest.length>1?(rest.slice(0,-1).join(', ')+' y '+rest[rest.length-1]):rest[0]; m+=' También me sirve: '+lst+'.'; }
+    m+=' Mis respuestas — '+ans+'.';
+    window.open('https://wa.me/525554921640?text='+encodeURIComponent(m),'_blank','noopener');
+  }
+  function goContact(principal){
+    var sel=document.getElementById('ctaService');
+    if(sel){ sel.value=SVC[principal].contact; sel.style.color='var(--text)'; }
+    var dest=document.getElementById('contacto');
+    if(dest) dest.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  function closePops(){
+    screen.querySelectorAll('.dx-why-pop').forEach(function(p){ p.hidden=true; });
+    screen.querySelectorAll('.dx-why').forEach(function(b){ b.setAttribute('aria-expanded','false'); });
+  }
+  document.addEventListener('click',function(e){
+    var why=e.target.closest?e.target.closest('.dx-why'):null;
+    if(why){
+      var pop=why.closest('.dx-svc').querySelector('.dx-why-pop'), open=pop.hidden;
+      closePops();
+      if(open){ pop.hidden=false; why.setAttribute('aria-expanded','true'); }
+      return;
+    }
+    if(!(e.target.closest&&e.target.closest('.dx-why-pop'))) closePops();
+  });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') closePops(); });
+
+  var start=document.getElementById('dxStart');
+  if(start) start.addEventListener('click',function(){ renderQuestion(0); });
+})();
+</script>
 
 <!-- PROYECTOS -->
 <section class="portfolio-section" id="portafolio">
   <div class="section-glow g-violet"></div>
   <div class="portfolio-inner">
     <div class="portfolio-header reveal">
-      <span class="stag">Proyectos</span>
-      <h2 class="stitle js-split">Trabajos que hablan<br>por sí solos</h2>
+      <span class="stag">Servicios</span>
+      <h2 class="stitle js-split">Lo que hacemos por ti</h2>
     </div>
     <div class="portfolio-grid">
 
@@ -1201,7 +1589,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       // en pantallas chicas las partículas no alcanzan a formar las letras: 0 en desktop,
       // 1 en móvil → más espaciado + algo más chico + más elementos = trazos completos y legibles
       smallF = Math.max(0, Math.min(1, (640 - W)/300));
-      const SPACE_EM = .07 + .045*smallF;   // móvil MÁS separado → letras que no se tocan
+      const SPACE_EM = .1 + .045*smallF;   // más aire entre letras para mejor lectura (móvil aún más separado)
       const widthFrac = .88 - .033*smallF;  // móvil un poco más chico → cabe el espaciado extra
       g.font = '800 100px "Bricolage Grotesque", sans-serif';
       g.letterSpacing = (100*SPACE_EM)+'px';
