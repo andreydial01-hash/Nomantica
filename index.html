@@ -396,6 +396,37 @@ footer p{font-size:.78rem;color:var(--muted)}
 #faq{padding-bottom:3rem}
 #contacto{padding-top:3.5rem}
 @media(max-width:900px){#faq{padding-bottom:2rem}#contacto{padding-top:2.5rem}}
+/* ── Flecha de la marca: un solo ícono para todos los botones y enlaces que avanzan ── */
+.nav-cta::after,.hero-wa::after,.dx-next::after,.dx-lead .step-btn::after,.port-cta .btn-outline::after,.faq-foot a::after,#ctaStep1 button::after,#ctaStep2 .step-btn::after,#ctaBtn::after,.pm-cta-btn::after{content:'';display:inline-block;width:1.05em;height:1.05em;margin-left:.45em;vertical-align:-.17em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15'/%3E%3Cpath d='M13 5.5 19.5 12 13 18.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15'/%3E%3Cpath d='M13 5.5 19.5 12 13 18.5'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .35s cubic-bezier(.2,.75,.25,1)}
+.nav-cta:hover::after,.hero-wa:hover::after,.dx-next:hover::after,.dx-lead .step-btn:hover::after,.port-cta .btn-outline:hover::after,.faq-foot a:hover::after,#ctaStep1 button:hover::after,#ctaStep2 .step-btn:hover::after,#ctaBtn:hover::after,.pm-cta-btn:hover::after{transform:translateX(4px)}
+#ctaBtn:disabled::after{display:none}
+.dx-back svg{width:16px;height:16px;transition:transform .3s cubic-bezier(.2,.75,.25,1)}
+.dx-back:hover svg{transform:translateX(-3px)}
+/* flecha de tarjeta: círculo de vidrio con aro degradado; al pasar el cursor gira de ↗ a → y se rellena */
+.parrow{position:relative;width:36px;height:36px;border:none;border-radius:50%;background:rgba(255,255,255,.04);color:#d9d0ff;display:flex;align-items:center;justify-content:center;transition:background .4s,color .4s,box-shadow .4s}
+.parrow::before{content:'';position:absolute;inset:0;border-radius:50%;padding:1px;background:linear-gradient(135deg,#9b7ff8,#ff5fb0);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);opacity:.75;transition:opacity .4s}
+.parrow svg{width:16px;height:16px;transition:transform .5s cubic-bezier(.2,.75,.25,1)}
+.pcard:hover .parrow,.pcard:focus-visible .parrow{background:linear-gradient(135deg,var(--accent-bright),#ff5fb0);color:#fff;box-shadow:0 0 24px rgba(255,95,176,.35),0 0 18px rgba(107,94,240,.4)}
+.pcard:hover .parrow::before,.pcard:focus-visible .parrow::before{opacity:0}
+.pcard:hover .parrow svg,.pcard:focus-visible .parrow svg{transform:rotate(45deg)}
+/* tarjetas de servicio un poco más compactas */
+.portfolio-grid{max-width:1000px;margin:0 auto;gap:1.3rem 1.1rem}
+.pcard:nth-child(n) .pthumb{height:108px}
+.pcard:nth-child(1) .pthumb,.pcard:nth-child(6) .pthumb{height:128px}
+.pbody{padding:.9rem 1rem .4rem}
+.ptitle{font-size:.95rem}
+.pdescr{font-size:.77rem}
+.pfooter{padding:0 1rem .9rem}
+@media(max-width:1100px){.portfolio-grid{max-width:720px}.pcard:nth-child(n) .pthumb{height:108px}}
+@media(max-width:900px){
+  .pcard:nth-child(n) .pthumb{height:80px}
+  .pbody{padding:.7rem .75rem .3rem}
+  .ptitle{font-size:.86rem}
+  .pdescr{font-size:.71rem}
+  .pfooter{padding:0 .75rem .7rem}
+  .parrow{width:30px;height:30px}
+  .parrow svg{width:14px;height:14px}
+}
 </style>
 </head>
 <body>
@@ -418,9 +449,9 @@ footer p{font-size:.78rem;color:var(--muted)}
       <li><a href="#portafolio" data-i18n="nav.svc">Servicios</a></li>
       <li><a href="#reviews" data-i18n="nav.rev">Reviews</a></li>
       <li><a href="#faq" data-i18n="nav.faq">Preguntas</a></li>
-      <li><a href="#contacto" class="nav-cta" data-i18n="nav.cta">Empezar →</a></li>
+      <li><a href="#contacto" class="nav-cta" data-i18n="nav.cta">Empezar</a></li>
     </ul>
-    <a href="#contacto" class="nav-cta nav-cta-m" data-i18n="nav.cta">Empezar →</a>
+    <a href="#contacto" class="nav-cta nav-cta-m" data-i18n="nav.cta">Empezar</a>
     <button type="button" class="lang-btn" id="langBtn" aria-label="View in English">EN</button>
   </div>
 </nav>
@@ -545,7 +576,7 @@ footer p{font-size:.78rem;color:var(--muted)}
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p2">Radiografía de tu negocio en 6 áreas clave</span></li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p3">Consultoría y plan de trabajo incluidos</span></li>
       </ul>
-      <a class="hero-wa" href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="hero.wa">¿Prefieres hablar con alguien? Escríbenos por WhatsApp →</a>
+      <a class="hero-wa" href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="hero.wa">¿Prefieres hablar con alguien? Escríbenos por WhatsApp</a>
     </div>
     <div class="dx-stage" id="diagnostico">
       <span class="dx-blob b1"></span>
@@ -782,11 +813,11 @@ footer p{font-size:.78rem;color:var(--muted)}
       root.appendChild(opts);
       var nav=d('dx-nav');
       var back=document.createElement('button'); back.type='button'; back.className='dx-back';
-      back.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>'+T('Atrás','Back');
+      back.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M19.5 12H5"/><path d="M11 5.5 4.5 12 11 18.5"/></svg>'+T('Atrás','Back');
       back.addEventListener('click',function(){ renderQuestion(qi-1); });
       nav.appendChild(back);
       if(q.type==='multi'){
-        var cont=document.createElement('button'); cont.type='button'; cont.className='dx-next'; cont.textContent=T('Continuar →','Continue →');
+        var cont=document.createElement('button'); cont.type='button'; cont.className='dx-next'; cont.textContent=T('Continuar','Continue');
         cont.addEventListener('click',function(){ advance(qi); });
         nav.appendChild(cont);
       }
@@ -831,7 +862,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       // captura del lead: el WhatsApp se queda aquí mismo y el formulario de abajo continúa en el paso 2
       var form=document.createElement('form'); form.className='dx-lead'; form.noValidate=true;
       var inp=document.createElement('input'); inp.type='tel'; inp.inputMode='tel'; inp.autocomplete='tel'; inp.placeholder=T('Tu WhatsApp (10 dígitos)','Your WhatsApp (10 digits)'); inp.setAttribute('aria-label',T('Tu número de WhatsApp','Your WhatsApp number'));
-      var go=document.createElement('button'); go.type='submit'; go.className='step-btn'; go.textContent=T('Quiero mi plan →','I want my plan →');
+      var go=document.createElement('button'); go.type='submit'; go.className='step-btn'; go.textContent=T('Quiero mi plan','I want my plan');
       var wa=document.createElement('button'); wa.type='button'; wa.className='dx-wa-link'; wa.textContent=T('o escríbenos directo por WhatsApp','or message us directly on WhatsApp');
       wa.addEventListener('click',function(){ openWA(list); });
       form.addEventListener('submit',function(e){
@@ -952,7 +983,7 @@ footer p{font-size:.78rem;color:var(--muted)}
           </svg>
         </div>
         <div class="pbody"><div class="pcat">Contenido</div><div class="ptitle">Creación de contenido orgánico</div><div class="pdescr">Estrategia de contenido que crece de forma natural, conectando con la audiencia correcta en el momento correcto.</div></div>
-        <div class="pfooter"><span class="ptag">Orgánico</span><span class="parrow">→</span></div>
+        <div class="pfooter"><span class="ptag">Orgánico</span><span class="parrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></div>
       </div>
 
       <!-- 5. Campañas publicitarias -->
@@ -990,7 +1021,7 @@ footer p{font-size:.78rem;color:var(--muted)}
           </svg>
         </div>
         <div class="pbody"><div class="pcat">Publicidad</div><div class="ptitle">Campañas publicitarias</div><div class="pdescr">Campañas de pago orientadas a resultados medibles. Cada peso invertido, rastreado y optimizado.</div></div>
-        <div class="pfooter"><span class="ptag">Ads</span><span class="parrow">→</span></div>
+        <div class="pfooter"><span class="ptag">Ads</span><span class="parrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></div>
       </div>
 
       <!-- 6. Creación de plataformas -->
@@ -1035,7 +1066,7 @@ footer p{font-size:.78rem;color:var(--muted)}
           </svg>
         </div>
         <div class="pbody"><div class="pcat">Plataformas</div><div class="ptitle">Creación de plataformas</div><div class="pdescr">Arquitecturas digitales sólidas y escalables, construidas para crecer contigo desde el primer día.</div></div>
-        <div class="pfooter"><span class="ptag">Tech</span><span class="parrow">→</span></div>
+        <div class="pfooter"><span class="ptag">Tech</span><span class="parrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></div>
       </div>
 
       <!-- 7. Desarrollo web -->
@@ -1081,7 +1112,7 @@ footer p{font-size:.78rem;color:var(--muted)}
           </svg>
         </div>
         <div class="pbody"><div class="pcat">Web</div><div class="ptitle">Desarrollo web</div><div class="pdescr">Sitios web rápidos, modernos y optimizados para convertir visitas en clientes desde el primer scroll.</div></div>
-        <div class="pfooter"><span class="ptag">Frontend</span><span class="parrow">→</span></div>
+        <div class="pfooter"><span class="ptag">Frontend</span><span class="parrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></div>
       </div>
 
       <!-- 8. E-commerce -->
@@ -1134,7 +1165,7 @@ footer p{font-size:.78rem;color:var(--muted)}
           </svg>
         </div>
         <div class="pbody"><div class="pcat">E-commerce</div><div class="ptitle">E-commerce</div><div class="pdescr">Tiendas en línea diseñadas para vender. Experiencia de compra fluida, rápida y que genera confianza.</div></div>
-        <div class="pfooter"><span class="ptag">Tienda Online</span><span class="parrow">→</span></div>
+        <div class="pfooter"><span class="ptag">Tienda Online</span><span class="parrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></div>
       </div>
 
       <!-- 9. Redes sociales -->
@@ -1210,11 +1241,11 @@ footer p{font-size:.78rem;color:var(--muted)}
           </svg>
         </div>
         <div class="pbody"><div class="pcat">Social Media</div><div class="ptitle">Gestión de redes sociales</div><div class="pdescr">Publicaciones, reels y carruseles programados para crecer tu comunidad con contenido que engancha.</div></div>
-        <div class="pfooter"><span class="ptag">Redes Sociales</span><span class="parrow">→</span></div>
+        <div class="pfooter"><span class="ptag">Redes Sociales</span><span class="parrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M8.5 7H17v8.5"/></svg></span></div>
       </div>
 
     </div><!-- /portfolio-grid -->
-    <div class="port-cta reveal"><a href="#diagnostico" class="btn-outline" data-i18n="svc.cta">¿No sabes cuál necesitas? Haz el diagnóstico →</a></div>
+    <div class="port-cta reveal"><a href="#diagnostico" class="btn-outline" data-i18n="svc.cta">¿No sabes cuál necesitas? Haz el diagnóstico</a></div>
   </div>
 </section>
 
@@ -1277,7 +1308,7 @@ footer p{font-size:.78rem;color:var(--muted)}
         <div class="faq-a" data-i18n="faq.a6">Sí. Lo que se invierte en anuncios se paga directo a la plataforma (como Meta o Google) y es independiente de nuestro servicio. Tú decides cuánto invertir y te mostramos en qué se usa cada peso.</div>
       </details>
     </div>
-    <p class="faq-foot"><span data-i18n="faq.foot">¿Tienes otra pregunta?</span> <a href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="faq.footlink">Escríbenos por WhatsApp →</a></p>
+    <p class="faq-foot"><span data-i18n="faq.foot">¿Tienes otra pregunta?</span> <a href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="faq.footlink">Escríbenos por WhatsApp</a></p>
   </div>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto cuesta trabajar con ustedes?","acceptedAnswer":{"@type":"Answer","text":"Depende de lo que tu negocio necesite, por eso no damos precios a ciegas. Con tu diagnóstico te preparamos una propuesta con alcance y precio claros, con consultoría y plan de trabajo incluidos, y tú decides sin presión."}},{"@type":"Question","name":"¿En cuánto tiempo voy a ver resultados?","acceptedAnswer":{"@type":"Answer","text":"Depende del servicio: los anuncios pueden traer contactos desde los primeros días, una página o tienda en línea toma algunas semanas en quedar lista, y el contenido y las redes dan resultados constantes mes con mes. En tu propuesta te damos tiempos realistas para tu caso."}},{"@type":"Question","name":"¿Funciona para mi tipo de negocio?","acceptedAnswer":{"@type":"Answer","text":"Trabajamos con negocios que venden productos, servicios, cursos o software, y también con quienes apenas empiezan. Para eso existe el diagnóstico: para recomendarte solo lo que sí le sirve a tu giro."}},{"@type":"Question","name":"No sé nada de marketing ni de tecnología, ¿es problema?","acceptedAnswer":{"@type":"Answer","text":"Para nada. Nosotros nos encargamos de toda la parte técnica y te explicamos cada paso en palabras simples. Tú sigues enfocado en tu negocio."}},{"@type":"Question","name":"¿Qué pasa después de hacer el diagnóstico?","acceptedAnswer":{"@type":"Answer","text":"Te escribimos por WhatsApp en menos de 24 horas para platicar tus resultados y proponerte un plan. Es sin compromiso: si no te convence, no pasa nada."}},{"@type":"Question","name":"¿El presupuesto de anuncios va aparte?","acceptedAnswer":{"@type":"Answer","text":"Sí. Lo que se invierte en anuncios se paga directo a la plataforma (como Meta o Google) y es independiente de nuestro servicio. Tú decides cuánto invertir y te mostramos en qué se usa cada peso."}}]}</script>
 </section>
@@ -1309,7 +1340,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       <div class="email-form" id="ctaStep1">
         <input type="tel" id="ctaPhone" inputmode="tel" autocomplete="tel" placeholder="Tu WhatsApp (10 dígitos)" data-i18n-ph="f.phone" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
         <input type="text" id="ctaHoney" style="display:none;position:absolute;left:-9999px" tabindex="-1" autocomplete="off"/>
-        <button onclick="handleStep()" data-i18n="f.next">Siguiente →</button>
+        <button onclick="handleStep()" data-i18n="f.next">Siguiente</button>
       </div>
 
       <!-- step 2: nombre + email -->
@@ -1320,7 +1351,7 @@ footer p{font-size:.78rem;color:var(--muted)}
         <div class="email-form" style="margin:0">
           <input type="email" id="ctaEmail" autocomplete="email" placeholder="tu@email.com (opcional)" data-i18n-ph="f.email" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
         </div>
-        <button class="step-btn" onclick="handleStep()" data-i18n="f.next">Siguiente →</button>
+        <button class="step-btn" onclick="handleStep()" data-i18n="f.next">Siguiente</button>
       </div>
 
       <!-- step 3: servicio + comentarios -->
@@ -1340,7 +1371,7 @@ footer p{font-size:.78rem;color:var(--muted)}
         <div class="email-form" style="margin:0;padding:.8rem 1.2rem;border-radius:16px;align-items:flex-start">
           <textarea id="ctaComment" data-i18n-ph="f.comment" placeholder="Cuéntanos brevemente sobre tu negocio y lo que necesitas..." style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.88rem;resize:none;min-height:80px;line-height:1.6" maxlength="400"></textarea>
         </div>
-        <button class="step-btn" id="ctaBtn" onclick="handleStep()" data-i18n="f.send">Enviar y hablar por WhatsApp →</button>
+        <button class="step-btn" id="ctaBtn" onclick="handleStep()" data-i18n="f.send">Enviar y hablar por WhatsApp</button>
       </div>
 
       <p class="form-note" id="ctaNote"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:.35rem"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span id="ctaNoteTx" data-i18n="f.note">Sin spam. Te contactamos en menos de 24 hrs.</span></p>
@@ -1380,7 +1411,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       <p class="pm-sub" id="pmSub"></p>
       <div class="pm-steps" id="pmSteps"></div>
       <div class="pm-cta">
-        <button class="pm-cta-btn" id="pmCta" data-i18n="pm.cta">Quiero empezar mi proyecto →</button>
+        <button class="pm-cta-btn" id="pmCta" data-i18n="pm.cta">Quiero empezar mi proyecto</button>
         <a class="pm-wa" id="pmWa" href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="pm.wa">o escríbenos directo por WhatsApp</a>
       </div>
     </div>
@@ -1400,26 +1431,26 @@ footer p{font-size:.78rem;color:var(--muted)}
     'faq.q4':'I know nothing about marketing or tech. Is that a problem?','faq.a4':'Not at all. We handle all the technical work and explain every step in plain words. You stay focused on your business.',
     'faq.q5':'What happens after the diagnosis?','faq.a5':'We message you on WhatsApp within 24 hours to go over your results and propose a plan. No strings attached: if it does not convince you, no problem.',
     'faq.q6':'Is the ad budget separate?','faq.a6':'Yes. Ad spend is paid directly to the platform (such as Meta or Google) and is separate from our service. You decide how much to invest and we show you where every peso goes.',
-    'faq.foot':'Got another question?','faq.footlink':'Message us on WhatsApp →',
+    'faq.foot':'Got another question?','faq.footlink':'Message us on WhatsApp',
     'wa.title':'Message us on WhatsApp',
-    'nav.dx':'Diagnosis','nav.svc':'Services','nav.rev':'Reviews','nav.cta':'Get started →',
+    'nav.dx':'Diagnosis','nav.svc':'Services','nav.rev':'Reviews','nav.cta':'Get started',
     'hero.title':'Why isn’t your business selling <span class="hand">more</span> online?',
     'hero.sub':'Answer 5 questions and instantly find out what your business is missing to win more customers, with a plan tailored to you.',
     'hero.p1':'Instant results, no sign-up',
     'hero.p2':'An X-ray of your business across 6 key areas',
     'hero.p3':'Consulting and a work plan included',
-    'hero.wa':'Rather talk to a person? Message us on WhatsApp →',
+    'hero.wa':'Rather talk to a person? Message us on WhatsApp',
     'svc.tag':'Services','svc.title':'What we do for you',
-    'svc.cta':'Not sure which one you need? Take the diagnosis →',
+    'svc.cta':'Not sure which one you need? Take the diagnosis',
     'rev.tag':'Reviews','rev.title':'What our<br>clients say','rev.ver':'Verified',
     'cta.tag':'Start today',
     'cta.title':'Stop losing<br>customers <span class="hand">today.</span>',
     'cta.sub':'Leave your WhatsApp and within 24 hours we will show you exactly how we can grow your business. Consulting and a work plan included.',
-    'f.next':'Next →','f.send':'Send and chat on WhatsApp →',
+    'f.next':'Next','f.send':'Send and chat on WhatsApp',
     'f.o0':'Which service are you interested in?','f.o2':'Social Media Management','f.o3':'Ad Campaigns','f.o4':'Web Development','f.o5':'E-commerce','f.o6':'Content Creation','f.o7':'Custom Platforms','f.o8':'I need everything',
     'f.note':'No spam. We will reach out within 24 hours.',
     'ft.copy':'© 2026 Nomántica. All rights reserved.','ft.priv':'Privacy','ft.terms':'Terms','ft.contact':'Contact',
-    'pm.cta':'I want to start my project →','pm.wa':'or message us directly on WhatsApp'
+    'pm.cta':'I want to start my project','pm.wa':'or message us directly on WhatsApp'
   };
   var EN_PH={'f.email':'you@email.com (optional)','f.name':'Your name','f.phone':'Your WhatsApp (10 digits)','f.comment':'Tell us briefly about your business and what you need...'};
   // Tarjetas de servicios, en el orden en que aparecen: [categoría, título, descripción, etiqueta]
@@ -2171,7 +2202,7 @@ footer p{font-size:.78rem;color:var(--muted)}
         submitted = false;
         attempts++;
         btn.textContent=T('Algo falló, intenta de nuevo','Something went wrong, please try again'); btn.style.background='#e53e3e'; btn.disabled=false;
-        setTimeout(()=>{ btn.textContent=T('Enviar y hablar por WhatsApp →','Send and chat on WhatsApp →'); btn.style.background=''; },3000);
+        setTimeout(()=>{ btn.textContent=T('Enviar y hablar por WhatsApp','Send and chat on WhatsApp'); btn.style.background=''; },3000);
       }
     }
   }
