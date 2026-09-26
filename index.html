@@ -393,9 +393,21 @@ footer p{font-size:.78rem;color:var(--muted)}
 @keyframes svcFloatS{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @media(prefers-reduced-motion:reduce){.pcard{animation:none}}
 /* menos aire alrededor de la banda de partículas */
-#faq{padding-bottom:3rem}
 #contacto{padding-top:3.5rem}
-@media(max-width:900px){#faq{padding-bottom:2rem}#contacto{padding-top:2.5rem}}
+#reviews{padding-bottom:3rem!important}
+/* FAQs compactas */
+.faq-section{padding:4.5rem 2rem 3rem}
+.faq-inner{max-width:640px}
+.faq-head{margin-bottom:1.6rem}
+.faq-head .stitle{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:0}
+.faq-list{gap:.55rem}
+.faq-item{border-radius:14px}
+.faq-item summary{padding:.8rem 1.05rem;font-size:.9rem}
+.faq-item summary:focus-visible{border-radius:14px}
+.faq-ico{width:24px;height:24px}
+.faq-a{padding:0 1.05rem .95rem;font-size:.84rem;line-height:1.65}
+.faq-foot{margin-top:1.4rem;font-size:.84rem}
+@media(max-width:900px){.faq-section{padding:3.5rem 1.25rem 2rem}#contacto{padding-top:2.5rem}#reviews{padding-top:4rem!important;padding-bottom:2rem!important}}
 /* ── Flecha de la marca: un solo ícono para todos los botones y enlaces que avanzan ── */
 .nav-cta::after,.hero-wa::after,.dx-next::after,.dx-lead .step-btn::after,.port-cta .btn-outline::after,.faq-foot a::after,#ctaStep1 button::after,#ctaStep2 .step-btn::after,#ctaBtn::after,.pm-cta-btn::after{content:'';display:inline-block;width:1.05em;height:1.05em;margin-left:.45em;vertical-align:-.17em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15'/%3E%3Cpath d='M13 5.5 19.5 12 13 18.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15'/%3E%3Cpath d='M13 5.5 19.5 12 13 18.5'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .35s cubic-bezier(.2,.75,.25,1)}
 .nav-cta:hover::after,.hero-wa:hover::after,.dx-next:hover::after,.dx-lead .step-btn:hover::after,.port-cta .btn-outline:hover::after,.faq-foot a:hover::after,#ctaStep1 button:hover::after,#ctaStep2 .step-btn:hover::after,#ctaBtn:hover::after,.pm-cta-btn:hover::after{transform:translateX(4px)}
@@ -447,8 +459,8 @@ footer p{font-size:.78rem;color:var(--muted)}
     <ul class="nav-links">
       <li><a href="#diagnostico" data-i18n="nav.dx">Diagnóstico</a></li>
       <li><a href="#portafolio" data-i18n="nav.svc">Servicios</a></li>
-      <li><a href="#reviews" data-i18n="nav.rev">Reviews</a></li>
       <li><a href="#faq" data-i18n="nav.faq">Preguntas</a></li>
+      <li><a href="#reviews" data-i18n="nav.rev">Reviews</a></li>
       <li><a href="#contacto" class="nav-cta" data-i18n="nav.cta">Empezar</a></li>
     </ul>
     <a href="#contacto" class="nav-cta nav-cta-m" data-i18n="nav.cta">Empezar</a>
@@ -1249,31 +1261,6 @@ footer p{font-size:.78rem;color:var(--muted)}
   </div>
 </section>
 
-<!-- REVIEWS -->
-<section style="padding:8rem 0;overflow:hidden;position:relative" id="reviews">
-  <div class="section-glow g-purple"></div>
-  <div style="text-align:center;padding:0 2rem;position:relative;z-index:1" class="reveal">
-    <span class="stag" data-i18n="rev.tag">Reviews</span>
-    <h2 class="stitle js-split" data-i18n="rev.title">Lo que dicen<br>nuestros clientes</h2>
-  </div>
-  <div class="carousel-outer" style="position:relative;z-index:1">
-    <div class="carousel-track" id="carouselTrack">
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Trabajar con Nomántica fue un acierto total. Entendieron mi negocio desde el minuto uno y los resultados se notaron rápido. Muy recomendables.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#9b7ff8)">CR</div><div><div class="rev-name">Carlos Reyes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Estoy súper contenta con Nomántica. Captaron la esencia de mi marca y le dieron justo el impulso que quería.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#6b5ef0,#60d4f7)">SO</div><div><div class="rev-name">Sofía Ortega</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Conseguimos ordenar nuestra estrategia digital y mejorar resultados de forma consistente.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#60d4f7)">AM</div><div><div class="rev-name">Andrés Molina</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Le pusimos orden a todo el tema digital y empezamos a ver resultados de verdad. Son prácticos, van al grano y se implican mucho.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#60d4f7)">LV</div><div><div class="rev-name">Laura Villanueva</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Muy buena experiencia con Nomántica. Nos ayudaron a enfocar mejor la estrategia y a optimizar lo que ya estábamos haciendo.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#4a3fd4)">DP</div><div><div class="rev-name">Diego Paredes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
-    </div>
-    <div class="carousel-dots" id="carouselDots">
-      <button class="cdot active" onclick="goTo(0)"></button>
-      <button class="cdot" onclick="goTo(1)"></button>
-      <button class="cdot" onclick="goTo(2)"></button>
-      <button class="cdot" onclick="goTo(3)"></button>
-      <button class="cdot" onclick="goTo(4)"></button>
-    </div>
-  </div>
-</section>
-
 <!-- PREGUNTAS FRECUENTES -->
 <section class="faq-section" id="faq">
   <div class="section-glow g-violet"></div>
@@ -1311,6 +1298,30 @@ footer p{font-size:.78rem;color:var(--muted)}
     <p class="faq-foot"><span data-i18n="faq.foot">¿Tienes otra pregunta?</span> <a href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="faq.footlink">Escríbenos por WhatsApp</a></p>
   </div>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto cuesta trabajar con ustedes?","acceptedAnswer":{"@type":"Answer","text":"Depende de lo que tu negocio necesite, por eso no damos precios a ciegas. Con tu diagnóstico te preparamos una propuesta con alcance y precio claros, con consultoría y plan de trabajo incluidos, y tú decides sin presión."}},{"@type":"Question","name":"¿En cuánto tiempo voy a ver resultados?","acceptedAnswer":{"@type":"Answer","text":"Depende del servicio: los anuncios pueden traer contactos desde los primeros días, una página o tienda en línea toma algunas semanas en quedar lista, y el contenido y las redes dan resultados constantes mes con mes. En tu propuesta te damos tiempos realistas para tu caso."}},{"@type":"Question","name":"¿Funciona para mi tipo de negocio?","acceptedAnswer":{"@type":"Answer","text":"Trabajamos con negocios que venden productos, servicios, cursos o software, y también con quienes apenas empiezan. Para eso existe el diagnóstico: para recomendarte solo lo que sí le sirve a tu giro."}},{"@type":"Question","name":"No sé nada de marketing ni de tecnología, ¿es problema?","acceptedAnswer":{"@type":"Answer","text":"Para nada. Nosotros nos encargamos de toda la parte técnica y te explicamos cada paso en palabras simples. Tú sigues enfocado en tu negocio."}},{"@type":"Question","name":"¿Qué pasa después de hacer el diagnóstico?","acceptedAnswer":{"@type":"Answer","text":"Te escribimos por WhatsApp en menos de 24 horas para platicar tus resultados y proponerte un plan. Es sin compromiso: si no te convence, no pasa nada."}},{"@type":"Question","name":"¿El presupuesto de anuncios va aparte?","acceptedAnswer":{"@type":"Answer","text":"Sí. Lo que se invierte en anuncios se paga directo a la plataforma (como Meta o Google) y es independiente de nuestro servicio. Tú decides cuánto invertir y te mostramos en qué se usa cada peso."}}]}</script>
+</section>
+
+<!-- REVIEWS -->
+<section style="padding:8rem 0;overflow:hidden;position:relative" id="reviews">
+  <div class="section-glow g-purple"></div>
+  <div style="text-align:center;padding:0 2rem;position:relative;z-index:1" class="reveal">
+    <h2 class="stitle js-split" data-i18n="rev.title">Reviews</h2>
+  </div>
+  <div class="carousel-outer" style="position:relative;z-index:1">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Trabajar con Nomántica fue un acierto total. Entendieron mi negocio desde el minuto uno y los resultados se notaron rápido. Muy recomendables.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#9b7ff8)">CR</div><div><div class="rev-name">Carlos Reyes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Estoy súper contenta con Nomántica. Captaron la esencia de mi marca y le dieron justo el impulso que quería.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#6b5ef0,#60d4f7)">SO</div><div><div class="rev-name">Sofía Ortega</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Conseguimos ordenar nuestra estrategia digital y mejorar resultados de forma consistente.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#60d4f7)">AM</div><div><div class="rev-name">Andrés Molina</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Le pusimos orden a todo el tema digital y empezamos a ver resultados de verdad. Son prácticos, van al grano y se implican mucho.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#60d4f7)">LV</div><div><div class="rev-name">Laura Villanueva</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Muy buena experiencia con Nomántica. Nos ayudaron a enfocar mejor la estrategia y a optimizar lo que ya estábamos haciendo.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#4a3fd4)">DP</div><div><div class="rev-name">Diego Paredes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
+    </div>
+    <div class="carousel-dots" id="carouselDots">
+      <button class="cdot active" onclick="goTo(0)"></button>
+      <button class="cdot" onclick="goTo(1)"></button>
+      <button class="cdot" onclick="goTo(2)"></button>
+      <button class="cdot" onclick="goTo(3)"></button>
+      <button class="cdot" onclick="goTo(4)"></button>
+    </div>
+  </div>
 </section>
 
 <!-- MARCA: enjambre de partículas que forma "Nomántica" -->
@@ -1442,7 +1453,7 @@ footer p{font-size:.78rem;color:var(--muted)}
     'hero.wa':'Rather talk to a person? Message us on WhatsApp',
     'svc.tag':'Services','svc.title':'What we do for you',
     'svc.cta':'Not sure which one you need? Take the diagnosis',
-    'rev.tag':'Reviews','rev.title':'What our<br>clients say','rev.ver':'Verified',
+    'rev.title':'Reviews','rev.ver':'Verified',
     'cta.tag':'Start today',
     'cta.title':'Stop losing<br>customers <span class="hand">today.</span>',
     'cta.sub':'Leave your WhatsApp and within 24 hours we will show you exactly how we can grow your business. Consulting and a work plan included.',
@@ -1905,6 +1916,10 @@ footer p{font-size:.78rem;color:var(--muted)}
           k: .016 + Math.random()*.024,                    // resorte propio → llegadas desparejas
           delay: (pt.x/W)*1300 + Math.random()*800,        // barrido izq→der con azar
           fadeDur: 380 + Math.random()*520,
+          exS: (pt.x/W)*.3 + Math.random()*.22,            // disolución por scroll: barrido izq→der con azar
+          exW: .28 + Math.random()*.22,
+          rise: (60 + Math.random()*110)*sizeScale,
+          exDrift: (Math.random()-.5)*46*sizeScale,
           ph: Math.random()*Math.PI*2, sp: .6+Math.random()*.9,
           amp, tw: 1, ang: 0,
           sprite: type === 0 ? (useDot ? dotSprite(col, r*(1.7 - .78*smallF)) : glowSprite(col, r*2))
@@ -1924,13 +1939,26 @@ footer p{font-size:.78rem;color:var(--muted)}
     function stepFrame(t){
       if(!bootT) bootT = t || 1;
       const el = t - bootT;
+      // desvanecido ligado al scroll: con la banda al centro de la pantalla la palabra está completa;
+      // al salir por arriba las partículas suben y se disuelven, al quedar abajo bajan y se disuelven.
+      // Depende solo de la posición, así que al regresar se vuelve a formar.
+      let exitP = 0, dir = -1;
+      if(!reduce){
+        const r = canvas.getBoundingClientRect(), half = innerHeight/2;
+        const d = (r.top + r.height/2 - half)/half;         // -1 arriba … 0 centro … +1 abajo
+        dir = d < 0 ? -1 : 1;
+        exitP = Math.min(1, Math.max(0, (Math.abs(d) - .2)/.75));
+      }
       ctx.clearRect(0,0,W,H);
       for(let i = 0; i < activeN; i++){
         const p = parts[i];
         if(el < p.delay) continue;                          // aún no "nace"
-        const alive = Math.min(1, (el - p.delay)/p.fadeDur); // fundido de entrada
-        const hx = p.tx + Math.cos(t*.0006*p.sp + p.ph)*p.amp;
-        const hy = p.ty + Math.sin(t*.0007*p.sp + p.ph)*p.amp;
+        const ex = exitP <= p.exS ? 0 : Math.min(1, (exitP - p.exS)/p.exW);
+        if(ex >= 1) continue;                               // ya se disolvió
+        const ease = ex*ex*(3-2*ex);                        // smoothstep
+        const alive = Math.min(1, (el - p.delay)/p.fadeDur)*(1-ease); // fundido de entrada × disolución
+        const hx = p.tx + ease*p.exDrift + Math.cos(t*.0006*p.sp + p.ph)*p.amp;
+        const hy = p.ty + dir*ease*p.rise + Math.sin(t*.0007*p.sp + p.ph)*p.amp;
         // homing exponencial: cierra un % de la distancia por frame → llega y frena
         // suave, sin poder sobrepasar el destino (cero rebote). Mouse = inercia que decae.
         const hs = .052 + p.k;
@@ -1963,15 +1991,6 @@ footer p{font-size:.78rem;color:var(--muted)}
     function loop(t){ if(!running) return; stepFrame(t); raf = requestAnimationFrame(loop); }
     function start(){ if(!running && !reduce){ running = true; raf = requestAnimationFrame(loop); } }
     function stop(){ running = false; cancelAnimationFrame(raf); }
-    function scatter(){
-      bootT = 0; // la próxima entrada re-forma con el mismo barrido orgánico
-      for(const p of parts){
-        const a = Math.random()*Math.PI*2, d = (70+Math.random()*220)*sScale;
-        p.x = p.tx + Math.cos(a)*d; p.y = p.ty + Math.sin(a)*d;
-        p.vx = p.vy = 0;
-      }
-    }
-
     function staticDraw(){
       for(const p of parts){ p.x = p.tx; p.y = p.ty; p.amp = 0; p.delay = -1; p.fadeDur = 1; }
       bootT = 0; stepFrame(1);
@@ -1996,13 +2015,13 @@ footer p{font-size:.78rem;color:var(--muted)}
       } else go();
     }
 
-    // solo anima con la banda en pantalla; al salir se dispersa y se re-forma al volver
+    // solo anima con la banda en pantalla (el scroll se encarga de disolverla y re-formarla)
     new IntersectionObserver(es => {
       es.forEach(e => {
         inView = e.isIntersecting;
         if(!booted){ if(inView) boot(); return; }
         if(inView) start();
-        else { stop(); if(smallF <= .5) scatter(); } // móvil: la entrada se juega una sola vez (no re-dispersa)
+        else stop();
       });
     }, { threshold: .15 }).observe(bandSec);
 
