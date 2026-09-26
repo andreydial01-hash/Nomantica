@@ -98,9 +98,6 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7.5rem 2rem 5rem;position:relative;overflow:hidden}
 .hero-grid{position:relative;z-index:1;width:100%;max-width:1180px;display:grid;grid-template-columns:1.05fr .95fr;gap:4rem;align-items:start}
 .hero-copy{position:sticky;top:7rem;padding-top:1.2rem}
-.hero-kicker{display:inline-flex;align-items:center;gap:.55rem;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--accent2);background:rgba(107,94,240,.1);border:1px solid var(--border);padding:.45rem .95rem;border-radius:100px;margin-bottom:1.5rem}
-.hk-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 10px var(--accent2);animation:hkPulse 2s ease-in-out infinite}
-@keyframes hkPulse{0%,100%{opacity:1}50%{opacity:.35}}
 .hero-title{font-family:var(--fd);font-size:clamp(2.2rem,4.4vw,3.9rem);font-weight:800;line-height:1.06;letter-spacing:-.035em;margin-bottom:1.3rem}
 .hero-title .hand{margin-right:.12em;font-family:var(--fh);font-weight:700;font-size:1.15em;color:var(--accent-bright);text-shadow:0 0 34px rgba(107,94,240,.45)}
 .hero-sub{font-size:1.08rem;color:#a9a7c8;line-height:1.7;max-width:500px;margin-bottom:1.6rem}
@@ -350,7 +347,6 @@ footer p{font-size:.78rem;color:var(--muted)}
   .hero{min-height:0;padding:6.2rem 1.25rem 3.5rem}
   .hero-grid{grid-template-columns:1fr;gap:1.8rem}
   .hero-copy{position:static;padding-top:0;text-align:center}
-  .hero-kicker{font-size:.66rem;margin-bottom:1rem}
   .hero-title{font-size:clamp(1.85rem,7.4vw,2.6rem);margin-bottom:.9rem}
   .hero-sub{font-size:.95rem;margin:0 auto;line-height:1.6}
   .hero-points,.hero-wa{display:none}
@@ -501,7 +497,6 @@ footer p{font-size:.78rem;color:var(--muted)}
   </style>
   <div class="hero-grid">
     <div class="hero-copy">
-      <span class="hero-kicker"><span class="hk-dot"></span><span data-i18n="hero.kicker">Diagnóstico digital · 2 min</span></span>
       <h1 class="hero-title" data-i18n="hero.title">¿Por qué tu negocio no está vendiendo <span class="hand">más</span> en internet?</h1>
       <p class="hero-sub" data-i18n="hero.sub">Responde 5 preguntas y descubre al instante qué le falta a tu negocio para conseguir más clientes, con un plan hecho a tu medida.</p>
       <ul class="hero-points">
@@ -1374,7 +1369,6 @@ footer p{font-size:.78rem;color:var(--muted)}
     'faq.foot':'Got another question?','faq.footlink':'Message us on WhatsApp →',
     'wa.title':'Message us on WhatsApp',
     'nav.dx':'Diagnosis','nav.svc':'Services','nav.rev':'Reviews','nav.cta':'Get started →',
-    'hero.kicker':'Digital diagnosis · 2 min',
     'hero.title':'Why isn’t your business selling <span class="hand">more</span> online?',
     'hero.sub':'Answer 5 questions and instantly find out what your business is missing to win more customers, with a plan tailored to you.',
     'hero.p1':'Instant results, no sign-up',
