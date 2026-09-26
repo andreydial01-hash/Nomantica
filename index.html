@@ -4,21 +4,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nomántica — Más clientes para tu negocio</title>
+<script>
+  // Idioma: ?lang=en (útil para campañas en inglés) > elección guardada > español por defecto
+  (function(){
+    var l=null;
+    try{ l=new URLSearchParams(location.search).get('lang'); }catch(e){}
+    if(l!=='en'&&l!=='es'){ try{ l=localStorage.getItem('nom-lang'); }catch(e){} }
+    if(l!=='en'&&l!=='es') l='es';
+    window.NOM_LANG=l; document.documentElement.lang=l;
+  })();
+  // Pixel de Meta: pega el ID (solo números) entre las comillas y se activa solo.
+  var META_PIXEL_ID='';
+  if(META_PIXEL_ID){
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init',META_PIXEL_ID); fbq('track','PageView');
+  }
+  // Envía un evento a Meta (y a GA4 si algún día se instala). custom=true → evento personalizado.
+  function nomTrack(ev,params,custom){ try{ if(window.fbq) fbq(custom?'trackCustom':'track',ev,params||{}); if(window.gtag) gtag('event',ev,params||{}); }catch(e){} }
+  // Cualquier clic a WhatsApp cuenta como "Contact"
+  document.addEventListener('click',function(e){ var a=e.target.closest&&e.target.closest('a[href*="wa.me"]'); if(a) nomTrack('Contact',{origen:a.id||a.className||'link'}); },true);
+  function T(es,en){ return window.NOM_LANG==='en'?en:es; }
+  function L(pair){ return Array.isArray(pair)?pair[window.NOM_LANG==='en'?1:0]:pair; }
+</script>
 <!-- Open Graph / Meta Ads -->
 <meta property="og:type" content="website"/>
-<meta property="og:url" content="https://nomantica.com"/>
+<meta property="og:url" content="https://nomantica.com.mx/"/>
 <meta property="og:title" content="¿Tu negocio necesita más clientes? — Nomántica"/>
-<meta property="og:description" content="Ayudamos a negocios a vender más con marketing digital que realmente funciona. Email, redes, publicidad y páginas web. Resultados reales."/>
-<meta property="og:image" content="https://nomantica.com/og-image.jpg"/>
+<meta property="og:description" content="Haz gratis el diagnóstico digital de tu negocio en 2 minutos y descubre qué te falta para vender más: página web, tienda en línea, anuncios, redes y contenido."/>
+<meta property="og:image" content="https://nomantica.com.mx/og-image.jpg"/>
 <meta property="og:locale" content="es_MX"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="¿Tu negocio necesita más clientes? — Nomántica"/>
-<meta name="twitter:description" content="Marketing digital para pymes mexicanas. Email, redes, publicidad y más. Resultados reales."/>
-<meta name="twitter:image" content="https://nomantica.com/og-image.jpg"/>
-<meta name="description" content="Ayudamos a negocios a vender más con marketing digital que realmente funciona. Email, redes, publicidad y páginas web."/>
+<meta name="twitter:description" content="Diagnóstico digital gratis en 2 minutos. Páginas web, tiendas en línea, anuncios y redes para negocios en México."/>
+<meta name="twitter:image" content="https://nomantica.com.mx/og-image.jpg"/>
+<meta name="description" content="Diagnóstico digital gratis en 2 minutos: descubre qué le falta a tu negocio para vender más. Páginas web, tiendas en línea, anuncios, redes y contenido para negocios en México."/>
+<link rel="canonical" href="https://nomantica.com.mx/"/>
 <meta name="robots" content="index, follow"/>
 <!-- Content Security Policy -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://acjxlouiphdxitdmoasy.supabase.co https://wa.me; frame-src 'none'; object-src 'none';"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://acjxlouiphdxitdmoasy.supabase.co https://wa.me https://www.facebook.com; frame-src 'none'; object-src 'none';"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Lato:wght@300;400&display=swap" onload="this.onload=null;this.rel='stylesheet'">
@@ -48,6 +71,11 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .nav-links a:hover{color:var(--text)}
 .nav-cta{background:var(--accent)!important;color:#fff!important;padding:.55rem 1.3rem;border-radius:100px;font-weight:600!important;text-transform:none!important;letter-spacing:.01em!important;box-shadow:0 0 22px rgba(74,63,212,.4);transition:background .3s,box-shadow .3s!important}
 .nav-cta:hover{background:var(--accent-bright)!important;box-shadow:0 0 38px rgba(107,94,240,.55)!important}
+.nav-right{display:flex;align-items:center;gap:1.4rem}
+.nav-cta-m{display:none;text-decoration:none;font-size:.8rem}
+.lang-btn{background:rgba(255,255,255,.04);border:1px solid var(--border2);color:var(--text);font-family:var(--fb);font-size:.72rem;font-weight:700;letter-spacing:.1em;padding:.45rem .75rem;border-radius:100px;cursor:pointer;transition:border-color .3s,background .3s}
+.lang-btn:hover{border-color:var(--accent-bright);background:rgba(74,63,212,.14)}
+.lang-btn:focus-visible{outline:2px solid var(--accent-bright);outline-offset:2px}
 
 /* ── Scroll reveal ── */
 .reveal{opacity:0;transform:translateY(48px);transition:opacity .8s cubic-bezier(.25,.46,.45,.94),transform .8s cubic-bezier(.25,.46,.45,.94)}
@@ -67,11 +95,29 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .split.visible .ltr{opacity:1;transform:none;filter:none}
 
 /* ── Hero ── */
-.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:7.5rem 2rem 5.5rem;position:relative;overflow:hidden}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7.5rem 2rem 5rem;position:relative;overflow:hidden}
+.hero-grid{position:relative;z-index:1;width:100%;max-width:1180px;display:grid;grid-template-columns:1.05fr .95fr;gap:4rem;align-items:start}
+.hero-copy{position:sticky;top:7rem;padding-top:1.2rem}
+.hero-kicker{display:inline-flex;align-items:center;gap:.55rem;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--accent2);background:rgba(107,94,240,.1);border:1px solid var(--border);padding:.45rem .95rem;border-radius:100px;margin-bottom:1.5rem}
+.hk-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);box-shadow:0 0 10px var(--accent2);animation:hkPulse 2s ease-in-out infinite}
+@keyframes hkPulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero-title{font-family:var(--fd);font-size:clamp(2.2rem,4.4vw,3.9rem);font-weight:800;line-height:1.06;letter-spacing:-.035em;margin-bottom:1.3rem}
+.hero-title .hand{margin-right:.12em;font-family:var(--fh);font-weight:700;font-size:1.15em;color:var(--accent-bright);text-shadow:0 0 34px rgba(107,94,240,.45)}
+.hero-sub{font-size:1.08rem;color:#a9a7c8;line-height:1.7;max-width:500px;margin-bottom:1.6rem}
+.hero-points{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.hero-points li{display:flex;align-items:center;gap:.65rem;font-size:.93rem;color:var(--text)}
+.hero-points svg{width:18px;height:18px;flex-shrink:0;color:var(--accent3)}
+.hero-wa{display:inline-flex;align-items:center;gap:.5rem;font-size:.88rem;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border2);padding-bottom:.2rem;transition:color .3s,border-color .3s}
+.hero-wa:hover{color:var(--wa,#25d366);border-color:currentColor}
+.hero .dx-stage{margin:0;width:100%;max-width:520px;justify-self:end}
+/* ── Banda de marca (enjambre de partículas "Nomántica") ── */
+.brand-band{position:relative;overflow:hidden;padding:5rem 1rem 0;text-align:center}
+.brand-band-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 50% 50%,rgba(74,63,212,.16),transparent 70%)}
+#brandCanvas{position:relative;display:block;margin:0 auto;width:min(1040px,94vw);height:min(42vh,400px);pointer-events:none}
+.brand-tag{position:relative;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:-.5rem}
 .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 65% at 50% -5%,rgba(74,63,212,.22),transparent 68%),radial-gradient(ellipse 55% 40% at 85% 75%,rgba(107,94,240,.1),transparent 60%),radial-gradient(ellipse 45% 45% at 10% 70%,rgba(96,212,247,.06),transparent 60%);animation:bgPulse 9s ease-in-out infinite alternate}
 @keyframes bgPulse{0%{opacity:.75}100%{opacity:1}}
 .hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px;opacity:.6;pointer-events:none}
-#heroCanvas{display:block;width:min(1040px,94vw);height:min(52vh,470px);pointer-events:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .floater{position:absolute;border-radius:50%;pointer-events:none;animation:float 7s ease-in-out infinite}
 .f1{width:350px;height:350px;background:radial-gradient(circle,rgba(74,63,212,.07),transparent 70%);top:10%;left:-8%}
@@ -157,14 +203,10 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .mini-card-text{flex:1}.mini-card-title{font-size:.83rem;font-weight:600;margin-bottom:.18rem}.mini-card-sub{font-size:.73rem;color:var(--muted)}
 .mini-badge{font-size:.68rem;padding:.2rem .6rem;border-radius:100px;font-weight:600;white-space:nowrap}
 
-/* ── Email section ── */
-.email-section{padding:6rem 4rem;background:var(--surface);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);position:relative;overflow:hidden}
-.email-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+/* ── Listas con check ── */
 .feat-list{list-style:none;display:flex;flex-direction:column;gap:.85rem;margin-top:2rem}
 .feat-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.9rem;color:var(--text)}
 .feat-list li span{color:var(--accent3);flex-shrink:0;margin-top:.1rem}
-.email-visual{background:var(--surface2);border:1px solid var(--border);border-radius:24px;padding:2rem;position:relative;overflow:hidden}
-.email-visual::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 50% 50%,rgba(74,63,212,.06),transparent 60%);animation:rotate 22s linear infinite}
 @keyframes rotate{to{transform:rotate(360deg)}}
 
 /* ── Portfolio ── */
@@ -240,6 +282,23 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 @keyframes cardPulse{0%,100%{box-shadow:0 0 0 rgba(74,63,212,0)}50%{box-shadow:0 0 50px rgba(74,63,212,.2),0 0 0 1px rgba(74,63,212,.3)}}
 .tcard.active-card{animation:cardPulse 2s ease}
 
+/* ── FAQs ── */
+.faq-section{padding:7rem 2rem;position:relative;overflow:hidden}
+.faq-inner{max-width:760px;margin:0 auto;position:relative;z-index:1}
+.faq-head{text-align:center;margin-bottom:2.4rem}
+.faq-list{display:flex;flex-direction:column;gap:.75rem}
+.faq-item{background:var(--surface);border:1px solid var(--border2);border-radius:18px;transition:border-color .3s,background .3s}
+.faq-item[open]{border-color:var(--border);background:linear-gradient(160deg,var(--surface2),var(--surface))}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 1.3rem;font-family:var(--fd);font-weight:700;font-size:1.02rem;letter-spacing:-.01em;line-height:1.35}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:focus-visible{outline:2px solid var(--accent-bright);outline-offset:2px;border-radius:18px}
+.faq-ico{width:28px;height:28px;border-radius:50%;border:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--accent-bright);transition:transform .3s,background .3s}
+.faq-item[open] .faq-ico{transform:rotate(45deg);background:rgba(74,63,212,.18)}
+.faq-a{padding:0 1.3rem 1.2rem;color:#a9a7c8;font-size:.93rem;line-height:1.7}
+.faq-foot{text-align:center;margin-top:2rem;color:var(--muted);font-size:.9rem}
+.faq-foot a{color:var(--accent2);text-decoration:none;font-weight:600}
+.faq-foot a:hover{color:var(--wa,#25d366)}
+
 /* ── CTA ── */
 .cta-section{padding:8rem 4rem;text-align:center;position:relative;overflow:hidden}
 .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(74,63,212,.15),transparent 70%)}
@@ -276,8 +335,8 @@ footer p{font-size:.78rem;color:var(--muted)}
 @media(max-width:900px){
   nav{padding:1rem 1.5rem}.nav-links{display:none}
   .stats{grid-template-columns:1fr 1fr}
-  .section,.email-section,.portfolio-section,.cta-section{padding:5rem 1.5rem}
-  .steps-grid,.email-inner{grid-template-columns:1fr}
+  .section,.portfolio-section,.cta-section,.faq-section{padding:5rem 1.5rem}
+  .steps-grid{grid-template-columns:1fr}
   .portfolio-grid{grid-template-columns:repeat(2,1fr);gap:.7rem}
   .pthumb{height:94px}
   .pbody{padding:.75rem .8rem .35rem}
@@ -286,6 +345,19 @@ footer p{font-size:.78rem;color:var(--muted)}
   .pfooter{padding:0 .8rem .75rem}
   .pcat{font-size:.62rem}
   footer{flex-direction:column;gap:1.5rem;text-align:center}
+  .nav-right{gap:.6rem}
+  .nav-cta-m{display:inline-block;padding:.5rem 1rem!important;font-size:.78rem}
+  .hero{min-height:0;padding:6.2rem 1.25rem 3.5rem}
+  .hero-grid{grid-template-columns:1fr;gap:1.8rem}
+  .hero-copy{position:static;padding-top:0;text-align:center}
+  .hero-kicker{font-size:.66rem;margin-bottom:1rem}
+  .hero-title{font-size:clamp(1.85rem,7.4vw,2.6rem);margin-bottom:.9rem}
+  .hero-sub{font-size:.95rem;margin:0 auto;line-height:1.6}
+  .hero-points,.hero-wa{display:none}
+  .hero .dx-stage{justify-self:center}
+  .brand-band{padding-top:3rem}
+  #brandCanvas{height:min(30vh,240px)}
+  .brand-tag{font-size:.64rem;letter-spacing:.12em;padding:0 1rem}
 }
 </style>
 </head>
@@ -295,35 +367,32 @@ footer p{font-size:.78rem;color:var(--muted)}
 <div id="scrollProgress"></div>
 
 <!-- WhatsApp -->
-<div id="waBubble">Contáctanos ahora</div>
-<a href="https://wa.me/525554921640" target="_blank" rel="noopener" id="waBtn" title="Escríbenos por WhatsApp">
+<div id="waBubble" data-i18n="wa.bubble">Contáctanos ahora</div>
+<a href="https://wa.me/525554921640" target="_blank" rel="noopener" id="waBtn" title="Escríbenos por WhatsApp" data-i18n-title="wa.title">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" fill="#fff"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.628.678 5.1 1.865 7.254L1 31l7.98-1.833A14.94 14.94 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.2a12.14 12.14 0 01-6.19-1.694l-.443-.263-4.736 1.088 1.118-4.617-.29-.473A12.16 12.16 0 013.8 16C3.8 9.26 9.26 3.8 16 3.8S28.2 9.26 28.2 16 22.74 28.2 16 28.2zm6.67-9.115c-.366-.183-2.163-1.067-2.498-1.19-.335-.12-.578-.183-.822.184-.244.366-.944 1.19-1.157 1.434-.213.244-.427.274-.793.091-.366-.183-1.545-.57-2.943-1.816-1.088-.97-1.822-2.168-2.035-2.534-.213-.366-.023-.564.16-.746.164-.163.366-.427.549-.64.183-.213.244-.366.366-.61.122-.244.061-.457-.03-.64-.092-.183-.822-1.982-1.127-2.713-.297-.713-.598-.616-.822-.628l-.7-.012c-.244 0-.64.091-.975.457s-1.28 1.25-1.28 3.047 1.311 3.534 1.494 3.778c.183.244 2.58 3.94 6.253 5.524.874.377 1.556.602 2.087.77.877.279 1.676.24 2.308.145.704-.104 2.163-.884 2.468-1.737.305-.854.305-1.585.213-1.737-.09-.152-.334-.244-.7-.427z"/></svg>
 </a>
 
 <!-- NAV -->
 <nav id="nav">
   <a href="#" class="nav-logo">Nom<span class="la">á</span>ntica</a>
-  <ul class="nav-links">
-    <li><a href="#diagnostico">Diagnóstico</a></li>
-    <li><a href="#portafolio">Proyectos</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#contacto" class="nav-cta">Empezar →</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#diagnostico" data-i18n="nav.dx">Diagnóstico</a></li>
+      <li><a href="#portafolio" data-i18n="nav.svc">Servicios</a></li>
+      <li><a href="#reviews" data-i18n="nav.rev">Reviews</a></li>
+      <li><a href="#faq" data-i18n="nav.faq">Preguntas</a></li>
+      <li><a href="#contacto" class="nav-cta" data-i18n="nav.cta">Empezar →</a></li>
+    </ul>
+    <a href="#contacto" class="nav-cta nav-cta-m" data-i18n="nav.cta">Empezar →</a>
+    <button type="button" class="lang-btn" id="langBtn" aria-label="View in English">EN</button>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
+<!-- HERO + DIAGNÓSTICO -->
+<section class="hero" id="inicio">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-noise"></div>
   <div class="floater f1"></div><div class="floater f2"></div><div class="floater f3"></div>
-  <h1 class="sr-only">Nomántica — Soluciones digitales integrales</h1>
-  <canvas id="heroCanvas" role="img" aria-label="Nomántica"></canvas>
-</section>
-
-<!-- PROCESO -->
-<!-- DIAGNÓSTICO -->
-<section class="section" id="diagnostico">
-  <div class="section-glow g-purple"></div>
   <style>
   .dx-head{text-align:center;max-width:560px;margin:0 auto 2.2rem}
   .dx-card{max-width:560px;margin:0 auto;position:relative;z-index:1;background:linear-gradient(160deg,var(--surface2),var(--surface));border:1px solid var(--border);border-radius:24px;box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 60px rgba(74,63,212,.1);overflow:hidden;transition:height .42s cubic-bezier(.22,.7,.26,1)}
@@ -421,25 +490,36 @@ footer p{font-size:.78rem;color:var(--muted)}
   .dx-cta-actions .step-btn,.dx-cta-actions .btn-outline{width:100%;justify-content:center;text-align:center}
   .dx-cta-actions .btn-outline{padding:.82rem 1.5rem}
   .dx-restart-wrap{text-align:center;margin-top:1.3rem}
+  .dx-lead{display:flex;flex-direction:column;gap:.6rem}
+  .dx-lead input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(155,127,248,.35);border-radius:100px;padding:.85rem 1.2rem;color:var(--text);font-family:var(--fb);font-size:.95rem;text-align:center;outline:none;transition:border-color .25s,box-shadow .25s}
+  .dx-lead input::placeholder{color:var(--muted)}
+  .dx-lead input:focus{border-color:var(--accent-bright);box-shadow:0 0 0 3px rgba(107,94,240,.2)}
+  .dx-lead input.err{border-color:#e53e3e;box-shadow:0 0 0 3px rgba(229,62,62,.18)}
+  .dx-wa-link{background:none;border:none;color:var(--muted);font-family:var(--fb);font-size:.84rem;cursor:pointer;text-decoration:underline;text-underline-offset:3px;margin-top:.2rem;transition:color .25s}
+  .dx-wa-link:hover{color:var(--wa,#25d366)}
   @media (prefers-reduced-motion:reduce){.dx-blob,.dx-radar-svg{animation:none}}
   </style>
-  <div class="dx-head reveal">
-    <span class="stag">Diagnóstico</span>
-    <h2 class="stitle js-split">Descubre qué necesita<br>tu negocio</h2>
-  </div>
-  <div class="dx-stage">
-    <span class="dx-blob b1"></span>
-    <span class="dx-blob b2"></span>
-    <div class="dx-card" id="dxCard" aria-live="polite">
-      <div class="dx-progbar" id="dxProg" hidden>
-        <div class="dx-prog-track"><div class="dx-prog-fill" id="dxProgFill"></div></div>
-        <span class="dx-prog-num" id="dxProgNum">1 de 5</span>
-      </div>
-      <div class="dx-screen" id="dxScreen">
-        <div class="dx-intro">
-          <div class="dx-intro-sub">5 preguntas, menos de 2 minutos.</div>
-          <button type="button" class="step-btn" id="dxStart">Empezar</button>
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <span class="hero-kicker"><span class="hk-dot"></span><span data-i18n="hero.kicker">Diagnóstico digital gratis · 2 min</span></span>
+      <h1 class="hero-title" data-i18n="hero.title">¿Por qué tu negocio no está vendiendo <span class="hand">más</span> en internet?</h1>
+      <p class="hero-sub" data-i18n="hero.sub">Responde 5 preguntas y descubre al instante qué le falta a tu negocio para conseguir más clientes, con un plan hecho a tu medida.</p>
+      <ul class="hero-points">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p1">Resultado inmediato, sin registrarte</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p2">Radiografía de tu negocio en 6 áreas clave</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p3">Recomendación personalizada y sin compromiso</span></li>
+      </ul>
+      <a class="hero-wa" href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="hero.wa">¿Prefieres hablar con alguien? Escríbenos por WhatsApp →</a>
+    </div>
+    <div class="dx-stage" id="diagnostico">
+      <span class="dx-blob b1"></span>
+      <span class="dx-blob b2"></span>
+      <div class="dx-card" id="dxCard" aria-live="polite">
+        <div class="dx-progbar" id="dxProg" hidden>
+          <div class="dx-prog-track"><div class="dx-prog-fill" id="dxProgFill"></div></div>
+          <span class="dx-prog-num" id="dxProgNum">1 de 5</span>
         </div>
+        <div class="dx-screen" id="dxScreen"></div>
       </div>
     </div>
   </div>
@@ -454,76 +534,90 @@ footer p{font-size:.78rem;color:var(--muted)}
     var pct=(step/5)*100;
     if(!progEl) return;
     var wasHidden=progEl.hidden; progEl.hidden=false;
-    progNum.textContent=step+' de 5';
+    progNum.textContent=step+T(' de 5',' of 5');
     if(wasHidden){ progFill.style.transition='none'; progFill.style.width=curPct+'%'; void progFill.offsetWidth; progFill.style.transition=''; }
     requestAnimationFrame(function(){ progFill.style.width=pct+'%'; });
     curPct=pct;
   }
 
+  // Textos en pares [español, inglés]; L() elige según el idioma activo
   var SVC={
-    ECOM:{name:'Tienda en línea',contact:'E-commerce',
-      pitch:'Por lo que nos contaste, tu prioridad es vender por internet sin depender de contestar mensaje por mensaje. Te armamos una tienda clara y confiable, lista para cobrar y despachar sola, para que las ventas entren aunque tú no estés conectado.',
-      why:'Una tienda en línea vende aunque estés dormido y no depende de que contestes mensajes uno por uno.'},
-    WEB:{name:'Página web que vende',contact:'Desarrollo Web',
-      pitch:'Según lo que respondiste, la gente te encuentra pero no termina de decidirse. Hacemos una página rápida y ordenada que genera confianza desde el primer vistazo y empuja a que te escriban o te compren.',
-      why:'Antes de comprarte, la gente te busca en internet. Si no te encuentra o tu página se ve descuidada, se va con otro.'},
-    PLAT:{name:'Sistema a tu medida',contact:'Plataformas',
-      pitch:'Nos dijiste que se te va el tiempo en tareas repetidas y a mano. Creamos un sistema a tu medida que las hace por ti y ordena tu operación, para que ese tiempo lo uses en vender y no en apagar fuegos.',
-      why:'Cada hora que pasas en tareas repetidas es una hora que no usas para vender ni para descansar.'},
-    ADS:{name:'Anuncios que traen clientes',contact:'Campañas Publicitarias',
-      pitch:'Como buscas más clientes pronto, ponemos anuncios frente a quienes ya están buscando lo que ofreces. Medimos cada peso invertido para saber qué funciona y que el gasto se convierta en clientes reales, no en likes sueltos.',
-      why:'Es de las formas más rápidas de conseguir clientes, y sabes exactamente cuánto te costó cada uno.'},
-    CONT:{name:'Contenido que atrae clientes',contact:'Contenido Orgánico',
-      pitch:'Por lo que respondiste, lo que más te ayuda es que más gente te conozca y confíe en ti. Creamos publicaciones y videos que atraen a las personas correctas y te posicionan como referente, sin pagar por cada visita.',
-      why:'La gente le compra a quien conoce y le da confianza. El contenido te da a conocer sin pagar cada visita.'},
-    RRSS:{name:'Redes sociales siempre activas',contact:'Redes Sociales',
-      pitch:'Nos comentaste que tus redes no están al día. Nos encargamos de publicar cada semana con fotos y videos que enganchan, para que tu negocio se vea activo y esté presente en la mente de tus clientes.',
-      why:'Unas redes abandonadas hacen pensar que tu negocio cerró. Publicar seguido te mantiene en la mente de tus clientes.'}
+    ECOM:{name:['Tienda en línea','Online store'],contact:'E-commerce',
+      pitch:['Por lo que nos contaste, tu prioridad es vender por internet sin depender de contestar mensaje por mensaje. Te armamos una tienda clara y confiable, lista para cobrar y despachar sola, para que las ventas entren aunque tú no estés conectado.',
+             'From what you told us, your priority is selling online without answering message after message. We build you a clear, trustworthy store that takes payments and handles orders on its own, so sales come in even when you are offline.'],
+      why:['Una tienda en línea vende aunque estés dormido y no depende de que contestes mensajes uno por uno.',
+           'An online store sells while you sleep and does not depend on you answering messages one by one.']},
+    WEB:{name:['Página web que vende','A website that sells'],contact:'Desarrollo Web',
+      pitch:['Según lo que respondiste, la gente te encuentra pero no termina de decidirse. Hacemos una página rápida y ordenada que genera confianza desde el primer vistazo y empuja a que te escriban o te compren.',
+             'Based on your answers, people find you but do not quite decide. We build a fast, well-organized site that earns trust at first glance and nudges people to contact you or buy.'],
+      why:['Antes de comprarte, la gente te busca en internet. Si no te encuentra o tu página se ve descuidada, se va con otro.',
+           'Before buying, people look you up online. If they cannot find you or your site looks neglected, they go elsewhere.']},
+    PLAT:{name:['Sistema a tu medida','A custom system'],contact:'Plataformas',
+      pitch:['Nos dijiste que se te va el tiempo en tareas repetidas y a mano. Creamos un sistema a tu medida que las hace por ti y ordena tu operación, para que ese tiempo lo uses en vender y no en apagar fuegos.',
+             'You told us your time goes into repetitive manual tasks. We build a custom system that does them for you and organizes your operation, so you spend that time selling instead of putting out fires.'],
+      why:['Cada hora que pasas en tareas repetidas es una hora que no usas para vender ni para descansar.',
+           'Every hour spent on repetitive tasks is an hour you are not using to sell or to rest.']},
+    ADS:{name:['Anuncios que traen clientes','Ads that bring customers'],contact:'Campañas Publicitarias',
+      pitch:['Como buscas más clientes pronto, ponemos anuncios frente a quienes ya están buscando lo que ofreces. Medimos cada peso invertido para saber qué funciona y que el gasto se convierta en clientes reales, no en likes sueltos.',
+             'Since you want more customers soon, we put ads in front of people already looking for what you offer. We measure every peso spent so we know what works and your budget turns into real customers, not just likes.'],
+      why:['Es de las formas más rápidas de conseguir clientes, y sabes exactamente cuánto te costó cada uno.',
+           'It is one of the fastest ways to get customers, and you know exactly what each one cost you.']},
+    CONT:{name:['Contenido que atrae clientes','Content that attracts customers'],contact:'Contenido Orgánico',
+      pitch:['Por lo que respondiste, lo que más te ayuda es que más gente te conozca y confíe en ti. Creamos publicaciones y videos que atraen a las personas correctas y te posicionan como referente, sin pagar por cada visita.',
+             'From your answers, what helps you most is getting more people to know and trust you. We create posts and videos that attract the right people and position you as the go-to reference, without paying for every visit.'],
+      why:['La gente le compra a quien conoce y le da confianza. El contenido te da a conocer sin pagar cada visita.',
+           'People buy from those they know and trust. Content gets you known without paying for every visit.']},
+    RRSS:{name:['Redes sociales siempre activas','Always-active social media'],contact:'Redes Sociales',
+      pitch:['Nos comentaste que tus redes no están al día. Nos encargamos de publicar cada semana con fotos y videos que enganchan, para que tu negocio se vea activo y esté presente en la mente de tus clientes.',
+             'You mentioned your social media is not up to date. We post every week with engaging photos and videos, so your business looks active and stays top of mind for your customers.'],
+      why:['Unas redes abandonadas hacen pensar que tu negocio cerró. Publicar seguido te mantiene en la mente de tus clientes.',
+           'Abandoned social profiles make people think you closed. Posting often keeps you top of mind.']}
   };
   var CODES=['ECOM','WEB','PLAT','ADS','CONT','RRSS'];
   var Q=[
-    {id:'q1',type:'single',q:'¿A qué se dedica tu negocio?',opts:[
-      {t:'Vendo productos',d:{ECOM:3,ADS:1}},
-      {t:'Doy un servicio (consultorio, restaurante, taller, despacho)',d:{WEB:2,RRSS:2,ADS:1}},
-      {t:'Vendo lo que sé (asesorías, cursos, clases)',d:{CONT:3,RRSS:2}},
-      {t:'Tengo una app o un sistema',d:{PLAT:3,WEB:1,ADS:1}},
-      {t:'Apenas voy a empezar',d:{WEB:2,RRSS:1,CONT:1}}
+    {id:'q1',type:'single',q:['¿A qué se dedica tu negocio?','What does your business do?'],opts:[
+      {t:['Vendo productos','I sell products'],d:{ECOM:3,ADS:1}},
+      {t:['Doy un servicio (consultorio, restaurante, taller, despacho)','I offer a service (clinic, restaurant, workshop, office)'],d:{WEB:2,RRSS:2,ADS:1}},
+      {t:['Vendo lo que sé (asesorías, cursos, clases)','I sell my expertise (consulting, courses, classes)'],d:{CONT:3,RRSS:2}},
+      {t:['Tengo una app o un sistema','I have an app or a software product'],d:{PLAT:3,WEB:1,ADS:1}},
+      {t:['Apenas voy a empezar','I am just getting started'],d:{WEB:2,RRSS:1,CONT:1}}
     ]},
-    {id:'q2',type:'single',q:'¿Qué es lo que más te quita el sueño?',opts:[
-      {t:'Casi nadie conoce mi negocio',d:{CONT:3,RRSS:2,ADS:2}},
-      {t:'Me ven, pero no me compran',d:{WEB:3,ECOM:2}},
-      {t:'Necesito vender ya',d:{ADS:4,ECOM:1}},
-      {t:'Hago todo a mano y no me alcanza el tiempo',d:{PLAT:4,ECOM:1}},
-      {t:'Mis redes están abandonadas',d:{RRSS:3,CONT:2}}
+    {id:'q2',type:'single',q:['¿Qué es lo que más te quita el sueño?','What keeps you up at night the most?'],opts:[
+      {t:['Casi nadie conoce mi negocio','Hardly anyone knows my business'],d:{CONT:3,RRSS:2,ADS:2}},
+      {t:['Me ven, pero no me compran','People see me, but they do not buy'],d:{WEB:3,ECOM:2}},
+      {t:['Necesito vender ya','I need sales now'],d:{ADS:4,ECOM:1}},
+      {t:['Hago todo a mano y no me alcanza el tiempo','I do everything by hand and run out of time'],d:{PLAT:4,ECOM:1}},
+      {t:['Mis redes están abandonadas','My social media is abandoned'],d:{RRSS:3,CONT:2}}
     ]},
-    {id:'q3',type:'multi',q:'¿Qué tienes hoy?',sub:'Puedes marcar varias',opts:[
-      {t:'Página web',k:'web'},
-      {t:'Tienda en línea',k:'tienda'},
-      {t:'Redes donde publico cada semana',k:'redes'},
-      {t:'Anuncios pagados',k:'ads'},
-      {t:'Nada todavía',k:'nada'}
+    {id:'q3',type:'multi',q:['¿Qué tienes hoy?','What do you have today?'],sub:['Puedes marcar varias','You can pick several'],opts:[
+      {t:['Página web','Website'],k:'web'},
+      {t:['Tienda en línea','Online store'],k:'tienda'},
+      {t:['Redes donde publico cada semana','Social media I post on every week'],k:'redes'},
+      {t:['Anuncios pagados','Paid ads'],k:'ads'},
+      {t:['Nada todavía','Nothing yet'],k:'nada'}
     ]},
-    {id:'q4',type:'single',q:'¿Puedes invertir en anuncios?',sub:'Aparte de nuestro servicio',opts:[
-      {t:'No, quiero crecer sin pagar anuncios',d:{CONT:2,RRSS:1,ADS:-3}},
-      {t:'Sí, un poco para probar',d:{ADS:2}},
-      {t:'Sí, quiero crecer rápido',d:{ADS:3}},
-      {t:'Todavía no sé',d:{}}
+    {id:'q4',type:'single',q:['¿Puedes invertir en anuncios?','Can you invest in ads?'],sub:['Aparte de nuestro servicio','On top of our service'],opts:[
+      {t:['No, quiero crecer sin pagar anuncios','No, I want to grow without paid ads'],d:{CONT:2,RRSS:1,ADS:-3}},
+      {t:['Sí, un poco para probar','Yes, a little to test'],d:{ADS:2}},
+      {t:['Sí, quiero crecer rápido','Yes, I want to grow fast'],d:{ADS:3}},
+      {t:['Todavía no sé','Not sure yet'],d:{}}
     ]},
-    {id:'q5',type:'single',q:'En 3 meses, ¿qué te gustaría ver?',opts:[
-      {t:'Más ventas por internet',d:{ECOM:2,ADS:2}},
-      {t:'Más gente pidiendo informes',d:{ADS:2,WEB:2}},
-      {t:'Gente que me sigue y confía en mí',d:{RRSS:3,CONT:2}},
-      {t:'Menos trabajo a mano',d:{PLAT:3}},
-      {t:'Verme más profesional',d:{WEB:3,RRSS:1}}
+    {id:'q5',type:'single',q:['En 3 meses, ¿qué te gustaría ver?','In 3 months, what would you like to see?'],opts:[
+      {t:['Más ventas por internet','More online sales'],d:{ECOM:2,ADS:2}},
+      {t:['Más gente pidiendo informes','More people asking for quotes'],d:{ADS:2,WEB:2}},
+      {t:['Gente que me sigue y confía en mí','People who follow and trust me'],d:{RRSS:3,CONT:2}},
+      {t:['Menos trabajo a mano','Less manual work'],d:{PLAT:3}},
+      {t:['Verme más profesional','Look more professional'],d:{WEB:3,RRSS:1}}
     ]}
   ];
   var CHK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
 
-  var answers, busy=false, settleT;
+  var answers, busy=false, settleT, view={type:'q',qi:0}, started=false;
   function reset(){ answers={q1:null,q2:null,q3:new Set(),q4:null,q5:null}; }
   reset();
 
-  function paint(builder){
+  function paint(builder,instant){
+    if(instant){ screen.innerHTML=''; builder(screen); return; }
     busy=true;
     var curH=card.offsetHeight;
     card.style.height=curH+'px';
@@ -547,11 +641,11 @@ footer p{font-size:.78rem;color:var(--muted)}
 
   function answerText(qid){
     if(qid==='q3'){
-      var labels=Q[2].opts.filter(function(o){return answers.q3.has(o.k);}).map(function(o){return o.t;});
-      return labels.length?labels.join(' · '):'Nada todavía';
+      var labels=Q[2].opts.filter(function(o){return answers.q3.has(o.k);}).map(function(o){return L(o.t);});
+      return labels.length?labels.join(' · '):L(Q[2].opts[4].t);
     }
     var map={q1:0,q2:1,q4:3,q5:4}, idx=answers[qid];
-    return (idx==null)?'':Q[map[qid]].opts[idx].t;
+    return (idx==null)?'':L(Q[map[qid]].opts[idx].t);
   }
 
   function compute(){
@@ -604,12 +698,12 @@ footer p{font-size:.78rem;color:var(--muted)}
     var has=function(k){return answers.q3.has(k);}, p1=answers.q1, p2=answers.q2, p4=answers.q4, p5=answers.q5;
     function cl(v){ return Math.max(8, Math.min(100, Math.round(v))); }
     return [
-      {label:'Web',        v:cl(28 + (has('web')?45:0) + (has('tienda')?18:0) + ((!has('web')&&!has('tienda'))?-12:0) + (p5===4?6:0))},
-      {label:'Venta',      v:cl(18 + (has('tienda')?58:0) + (p5===0?10:0) + ((p1===0&&!has('tienda'))?-6:0))},
-      {label:'Anuncios',   v:cl(30 + (has('ads')?33:0) + (p4===2?22:(p4===1?11:(p4===0?-16:0))) + (p2===0?-12:0))},
-      {label:'Redes',      v:cl(24 + (has('redes')?52:0) + (p2===4?-20:0) + (p5===2?4:0))},
-      {label:'Contenido',  v:cl(36 + (has('redes')?14:0) + (p1===2?10:0) + (p2===1?-14:0) + (p2===0?-10:0) + (p5===4?6:0))},
-      {label:'Sistemas',   v:cl(46 + (p1===3?34:0) + (p2===3?-34:0) + (p5===3?-8:0))}
+      {label:T('Web','Web'),             v:cl(28 + (has('web')?45:0) + (has('tienda')?18:0) + ((!has('web')&&!has('tienda'))?-12:0) + (p5===4?6:0))},
+      {label:T('Venta','Sales'),         v:cl(18 + (has('tienda')?58:0) + (p5===0?10:0) + ((p1===0&&!has('tienda'))?-6:0))},
+      {label:T('Anuncios','Ads'),        v:cl(30 + (has('ads')?33:0) + (p4===2?22:(p4===1?11:(p4===0?-16:0))) + (p2===0?-12:0))},
+      {label:T('Redes','Social'),        v:cl(24 + (has('redes')?52:0) + (p2===4?-20:0) + (p5===2?4:0))},
+      {label:T('Contenido','Content'),   v:cl(36 + (has('redes')?14:0) + (p1===2?10:0) + (p2===1?-14:0) + (p2===0?-10:0) + (p5===4?6:0))},
+      {label:T('Sistemas','Systems'),    v:cl(46 + (p1===3?34:0) + (p2===3?-34:0) + (p5===3?-8:0))}
     ];
   }
 
@@ -623,34 +717,26 @@ footer p{font-size:.78rem;color:var(--muted)}
     for(var j=0;j<n;j++){ var q2=pt(j,R*(data[j].v/100)); dp.push(q2[0].toFixed(1)+','+q2[1].toFixed(1)); dots+='<circle cx="'+q2[0].toFixed(1)+'" cy="'+q2[1].toFixed(1)+'" r="3" fill="#b9a8ff"/>'; }
     var labels='';
     for(var k=0;k<n;k++){ var lp=pt(k,LR); labels+='<text x="'+lp[0].toFixed(1)+'" y="'+(lp[1]+dy[k]).toFixed(1)+'" text-anchor="'+anchors[k]+'">'+data[k].label+'</text>'; }
-    return '<svg class="dx-radar-svg" viewBox="0 0 340 290" role="img" aria-label="Fortalezas y debilidades de tu negocio">'
+    return '<svg class="dx-radar-svg" viewBox="0 0 340 290" role="img" aria-label="'+T('Fortalezas y debilidades de tu negocio','Your business strengths and weaknesses')+'">'
       +'<defs><radialGradient id="dxrg" cx="50%" cy="45%" r="62%"><stop offset="0%" stop-color="rgba(255,95,176,.5)"/><stop offset="100%" stop-color="rgba(107,94,240,.3)"/></radialGradient></defs>'
       +svg
       +'<polygon class="dx-radar-poly" points="'+dp.join(' ')+'" fill="url(#dxrg)" stroke="#9b7ff8" stroke-width="2" stroke-linejoin="round"/>'
       +dots+labels+'</svg>';
   }
 
-  function renderIntro(){
-    reset();
-    paint(function(root){
-      setProgress(0); card.classList.remove('has-prog');
-      var box=d('dx-intro','<div class="dx-intro-sub">5 preguntas, menos de 2 minutos.</div>');
-      var b=document.createElement('button'); b.type='button'; b.className='step-btn'; b.textContent='Empezar';
-      b.addEventListener('click',function(){renderQuestion(0);});
-      box.appendChild(b); root.appendChild(box);
-    });
-  }
+  function restart(){ reset(); renderQuestion(0); }
 
-  function renderQuestion(qi){
+  function renderQuestion(qi,instant){
+    view={type:'q',qi:qi};
     paint(function(root){
       setProgress(qi+1); card.classList.add('has-prog');
       var q=Q[qi];
-      var qEl=d('dx-q'); qEl.textContent=q.q; root.appendChild(qEl);
-      if(q.sub){ var sEl=d('dx-q-sub'); sEl.textContent=q.sub; root.appendChild(sEl); }
+      var qEl=d('dx-q'); qEl.textContent=L(q.q); root.appendChild(qEl);
+      if(q.sub){ var sEl=d('dx-q-sub'); sEl.textContent=L(q.sub); root.appendChild(sEl); }
       var opts=d('dx-opts'+(q.type==='single'?' single':''));
       q.opts.forEach(function(o,i){
         var b=document.createElement('button'); b.type='button'; b.className='dx-opt';
-        var tick=d('dx-tick',CHK), tx=document.createElement('span'); tx.textContent=o.t;
+        var tick=d('dx-tick',CHK), tx=document.createElement('span'); tx.textContent=L(o.t);
         b.appendChild(tick); b.appendChild(tx);
         if(q.type==='single'){ if(answers[q.id]===i) b.classList.add('sel'); }
         else if(answers[q.id].has(o.k)) b.classList.add('sel');
@@ -660,20 +746,21 @@ footer p{font-size:.78rem;color:var(--muted)}
       root.appendChild(opts);
       var nav=d('dx-nav');
       var back=document.createElement('button'); back.type='button'; back.className='dx-back';
-      back.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>Atrás';
-      back.addEventListener('click',function(){ if(qi===0){renderIntro();}else{renderQuestion(qi-1);} });
+      back.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>'+T('Atrás','Back');
+      back.addEventListener('click',function(){ renderQuestion(qi-1); });
       nav.appendChild(back);
       if(q.type==='multi'){
-        var cont=document.createElement('button'); cont.type='button'; cont.className='dx-next'; cont.textContent='Continuar →';
+        var cont=document.createElement('button'); cont.type='button'; cont.className='dx-next'; cont.textContent=T('Continuar →','Continue →');
         cont.addEventListener('click',function(){ advance(qi); });
         nav.appendChild(cont);
       }
-      root.appendChild(nav);
-    });
+      if(qi>0) root.appendChild(nav); // la 1a pregunta es la puerta de entrada: no hay a dónde regresar
+    },instant);
   }
 
   function onOpt(qi,i){
     var q=Q[qi];
+    if(!started){ started=true; nomTrack('DiagnosticoInicio',{},true); }
     if(q.type==='single'){
       if(busy) return;
       answers[q.id]=i;
@@ -696,49 +783,71 @@ footer p{font-size:.78rem;color:var(--muted)}
   }
 
   function renderResult(){
+    var fresh=(view.type!=='result');
+    view={type:'result'};
     var r=pick(), list=[r.principal].concat(r.comp), contrib=r.contrib;
+    if(fresh) nomTrack('DiagnosticoCompleto',{servicio:SVC[r.principal].contact},true);
     paint(function(root){
       setProgress(0); card.classList.remove('has-prog');
-      root.appendChild(d('dx-res-head','<span class="stag">Tu diagnóstico</span><div class="dx-res-title">Radiografía de tu negocio</div>'));
-      var radar=d('dx-radar'); radar.innerHTML=buildRadar(dims())+'<p class="dx-radar-note">Entre más lleno el hexágono, más fuerte estás en esa área. Las puntas más cortas son donde más te conviene enfocarte.</p>'; root.appendChild(radar);
-      var cta=d('dx-cta','<div class="dx-cta-h">Ya sabemos por dónde crecer</div><div class="dx-cta-p">Con tu diagnóstico armamos un plan concreto para vender más. Da el siguiente paso hoy.</div>');
-      var acts=d('dx-cta-actions');
-      var wa=document.createElement('button'); wa.type='button'; wa.className='step-btn'; wa.textContent='Quiero mi diagnóstico completo →';
+      root.appendChild(d('dx-res-head','<span class="stag">'+T('Tu diagnóstico','Your diagnosis')+'</span><div class="dx-res-title">'+T('Radiografía de tu negocio','Your business X-ray')+'</div>'));
+      var radar=d('dx-radar'); radar.innerHTML=buildRadar(dims())+'<p class="dx-radar-note">'+T('Entre más lleno el hexágono, más fuerte estás en esa área. Las puntas más cortas son donde más te conviene enfocarte.','The fuller the hexagon, the stronger you are in that area. The shortest points are where focusing will pay off most.')+'</p>'; root.appendChild(radar);
+      var cta=d('dx-cta','<div class="dx-cta-h">'+T('Ya sabemos por dónde crecer','We know where you can grow')+'</div><div class="dx-cta-p">'+T('Déjanos tu WhatsApp y te mandamos tu plan con los pasos concretos para vender más. Gratis y sin compromiso.','Leave your WhatsApp and we will send you your plan with concrete steps to sell more. Free, no strings attached.')+'</div>');
+      // captura del lead: el WhatsApp se queda aquí mismo y el formulario de abajo continúa en el paso 2
+      var form=document.createElement('form'); form.className='dx-lead'; form.noValidate=true;
+      var inp=document.createElement('input'); inp.type='tel'; inp.inputMode='tel'; inp.autocomplete='tel'; inp.placeholder=T('Tu WhatsApp (10 dígitos)','Your WhatsApp (10 digits)'); inp.setAttribute('aria-label',T('Tu número de WhatsApp','Your WhatsApp number'));
+      var go=document.createElement('button'); go.type='submit'; go.className='step-btn'; go.textContent=T('Quiero mi plan gratis →','Send me my free plan →');
+      var wa=document.createElement('button'); wa.type='button'; wa.className='dx-wa-link'; wa.textContent=T('o escríbenos directo por WhatsApp','or message us directly on WhatsApp');
       wa.addEventListener('click',function(){ openWA(list); });
-      var ct=document.createElement('button'); ct.type='button'; ct.className='btn-outline'; ct.textContent='Prefiero que me contacten';
-      ct.addEventListener('click',function(){ goContact(r.principal); });
-      acts.appendChild(wa); acts.appendChild(ct); cta.appendChild(acts); root.appendChild(cta);
-      root.appendChild(d('dx-rec-h')).textContent='Lo que te recomendamos';
+      form.addEventListener('submit',function(e){
+        e.preventDefault();
+        var v=inp.value.trim(), digits=v.replace(/\D/g,'');
+        if(!/^[\d\s\+\-\(\)]{10,22}$/.test(v)||digits.length<10||digits.length>15){ inp.classList.add('err'); inp.focus(); setTimeout(function(){ inp.classList.remove('err'); },1600); return; }
+        nomTrack('DiagnosticoWhatsApp',{servicio:SVC[list[0]].contact},true);
+        if(window.ctaPrefillPhone) window.ctaPrefillPhone(v);
+        goContact(list);
+      });
+      form.appendChild(inp); form.appendChild(go); form.appendChild(wa); cta.appendChild(form); root.appendChild(cta);
+      root.appendChild(d('dx-rec-h')).textContent=T('Lo que te recomendamos','What we recommend');
       list.forEach(function(code,idx){
         var s=SVC[code], said=saidTop2(code,contrib), html='';
-        if(idx===0) html+='<span class="dx-svc-badge">Lo que más necesitas</span>';
-        html+='<div class="dx-svc-name">'+s.name+'<button type="button" class="dx-why" aria-label="Por qué importa" aria-expanded="false">?</button></div>';
-        html+='<div class="dx-svc-said">Nos dijiste: '+said.map(function(t){return '<em>“'+t+'”</em>';}).join(' y ')+'</div>';
-        html+='<div class="dx-svc-sol">'+s.pitch+'</div>';
-        html+='<div class="dx-why-pop" role="tooltip" hidden><b>Por qué importa.</b> '+s.why+'</div>';
+        if(idx===0) html+='<span class="dx-svc-badge">'+T('Lo que más necesitas','What you need most')+'</span>';
+        html+='<div class="dx-svc-name">'+L(s.name)+'<button type="button" class="dx-why" aria-label="'+T('Por qué importa','Why it matters')+'" aria-expanded="false">?</button></div>';
+        html+='<div class="dx-svc-said">'+T('Nos dijiste: ','You told us: ')+said.map(function(t){return '<em>“'+t+'”</em>';}).join(T(' y ',' and '))+'</div>';
+        html+='<div class="dx-svc-sol">'+L(s.pitch)+'</div>';
+        html+='<div class="dx-why-pop" role="tooltip" hidden><b>'+T('Por qué importa.','Why it matters.')+'</b> '+L(s.why)+'</div>';
         var c=d('dx-svc'+(idx===0?' principal':'')); c.innerHTML=html; root.appendChild(c);
       });
       var rsw=d('dx-restart-wrap');
-      var rs=document.createElement('button'); rs.type='button'; rs.className='dx-restart'; rs.textContent='Volver a empezar';
-      rs.addEventListener('click',function(){ renderIntro(); });
+      var rs=document.createElement('button'); rs.type='button'; rs.className='dx-restart'; rs.textContent=T('Volver a empezar','Start over');
+      rs.addEventListener('click',restart);
       rsw.appendChild(rs); root.appendChild(rsw);
     });
   }
 
-  function openWA(list){
-    var principalName=SVC[list[0]].name;
-    var rest=list.slice(1).map(function(c){return SVC[c].name;});
+  function summary(list){
+    var principalName=L(SVC[list[0]].name);
+    var rest=list.slice(1).map(function(c){return L(SVC[c].name);});
     var ans=['q1','q2','q3','q4','q5'].map(function(qid,i){return (i+1)+') '+answerText(qid);}).join(' · ');
-    var m='Hola Nomántica, hice el diagnóstico en su página. Lo que más necesito: '+principalName+'.';
-    if(rest.length){ var lst=rest.length>1?(rest.slice(0,-1).join(', ')+' y '+rest[rest.length-1]):rest[0]; m+=' También me sirve: '+lst+'.'; }
-    m+=' Mis respuestas — '+ans+'.';
+    var m=T('Lo que más necesito: ','What I need most: ')+principalName+'.';
+    if(rest.length){ var and=T(' y ',' and '), lst=rest.length>1?(rest.slice(0,-1).join(', ')+and+rest[rest.length-1]):rest[0]; m+=T(' También me sirve: ',' Also useful: ')+lst+'.'; }
+    return m+T(' Mis respuestas — ',' My answers — ')+ans+'.';
+  }
+  function openWA(list){
+    nomTrack('Contact',{origen:'diagnostico'});
+    var m=T('Hola Nomántica, hice el diagnóstico en su página. ','Hi Nomántica, I took the diagnosis on your website. ')+summary(list);
     window.open('https://wa.me/525554921640?text='+encodeURIComponent(m),'_blank','noopener');
   }
-  function goContact(principal){
+  // Lleva al formulario con el servicio preseleccionado y el diagnóstico en el comentario:
+  // así el lead llega a Supabase con su contexto completo.
+  function goContact(list){
     var sel=document.getElementById('ctaService');
-    if(sel){ sel.value=SVC[principal].contact; sel.style.color='var(--text)'; }
+    if(sel){ sel.value=SVC[list[0]].contact; sel.style.color='var(--text)'; }
+    var com=document.getElementById('ctaComment');
+    if(com && !com.value.trim()) com.value=(T('[Diagnóstico] ','[Diagnosis] ')+summary(list)).slice(0,400);
     var dest=document.getElementById('contacto');
     if(dest) dest.scrollIntoView({behavior:'smooth',block:'start'});
+    var nm=document.getElementById('ctaName');
+    if(nm && nm.offsetParent) setTimeout(function(){ nm.focus({preventScroll:true}); },700);
   }
 
   function closePops(){
@@ -757,8 +866,12 @@ footer p{font-size:.78rem;color:var(--muted)}
   });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') closePops(); });
 
-  var start=document.getElementById('dxStart');
-  if(start) start.addEventListener('click',function(){ renderQuestion(0); });
+  // al cambiar de idioma, se redibuja la pantalla actual sin perder las respuestas
+  document.addEventListener('nom:lang',function(){
+    if(view.type==='result') renderResult(); else renderQuestion(view.qi);
+  });
+
+  renderQuestion(0,true); // el hero abre directo en la 1a pregunta
 })();
 </script>
 
@@ -767,137 +880,10 @@ footer p{font-size:.78rem;color:var(--muted)}
   <div class="section-glow g-violet"></div>
   <div class="portfolio-inner">
     <div class="portfolio-header reveal">
-      <span class="stag">Servicios</span>
-      <h2 class="stitle js-split">Lo que hacemos por ti</h2>
+      <span class="stag" data-i18n="svc.tag">Servicios</span>
+      <h2 class="stitle js-split" data-i18n="svc.title">Lo que hacemos por ti</h2>
     </div>
     <div class="portfolio-grid">
-
-      <!-- 1. Campaña de lanzamiento -->
-      <div class="pcard">
-        <div class="pthumb">
-          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
-            <defs>
-              <radialGradient id="g1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4a3fd4" stop-opacity=".18"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
-              <filter id="glow1"><feGaussianBlur stdDeviation="2.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            </defs>
-            <rect width="380" height="180" fill="#0a0a1a"/>
-            <ellipse cx="190" cy="90" rx="120" ry="70" fill="url(#g1)"/>
-            <ellipse cx="190" cy="90" rx="100" ry="38" fill="none" stroke="#4a3fd4" stroke-width=".7" stroke-opacity=".3" stroke-dasharray="4 6"/>
-            <ellipse cx="190" cy="90" rx="65" ry="24" fill="none" stroke="#6b5ef0" stroke-width=".7" stroke-opacity=".25" stroke-dasharray="3 5"/>
-            <g filter="url(#glow1)" stroke="#6b5ef0" stroke-width=".9" stroke-opacity=".55" stroke-linecap="round">
-              <line x1="190" y1="90" x2="190" y2="38"><animate attributeName="y2" values="38;34;38" dur="3s" repeatCount="indefinite"/></line>
-              <line x1="190" y1="90" x2="236" y2="62"><animate attributeName="x2" values="236;240;236" dur="3.2s" repeatCount="indefinite"/></line>
-              <line x1="190" y1="90" x2="144" y2="62"><animate attributeName="x2" values="144;140;144" dur="2.8s" repeatCount="indefinite"/></line>
-              <line x1="190" y1="90" x2="248" y2="90"><animate attributeName="x2" values="248;253;248" dur="3.5s" repeatCount="indefinite"/></line>
-              <line x1="190" y1="90" x2="132" y2="90"><animate attributeName="x2" values="132;127;132" dur="3s" repeatCount="indefinite"/></line>
-            </g>
-            <g transform="translate(190,90)" filter="url(#glow1)">
-              <polygon points="0,-22 8,-2 -8,-2" fill="#4a3fd4" opacity=".9"/>
-              <rect x="-8" y="-2" width="16" height="14" rx="2" fill="#6b5ef0" opacity=".85"/>
-              <polygon points="-8,12 -14,20 -8,18" fill="#4a3fd4" opacity=".7"/>
-              <polygon points="8,12 14,20 8,18" fill="#4a3fd4" opacity=".7"/>
-              <circle cx="0" cy="4" r="4" fill="none" stroke="#60d4f7" stroke-width="1.2" opacity=".8"/>
-              <ellipse cx="0" cy="22" rx="5" ry="8" fill="#60d4f7" opacity=".4"><animate attributeName="ry" values="8;12;7;10;8" dur="1.4s" repeatCount="indefinite"/><animate attributeName="opacity" values=".4;.7;.35;.6;.4" dur="1.4s" repeatCount="indefinite"/></ellipse>
-              <ellipse cx="0" cy="22" rx="2.5" ry="5" fill="#9b7ff8" opacity=".7"><animate attributeName="ry" values="5;8;4;7;5" dur="1.1s" repeatCount="indefinite"/></ellipse>
-              <animateTransform attributeName="transform" type="translate" values="0,0;0,-4;0,0" dur="4s" repeatCount="indefinite" additive="sum"/>
-            </g>
-            <circle r="3" fill="#9b7ff8" opacity=".7"><animateMotion dur="7s" repeatCount="indefinite" path="M190,90 A100,38 0 1,1 189,90 Z"/></circle>
-            <circle r="2" fill="#60d4f7" opacity=".6"><animateMotion dur="4.5s" repeatCount="indefinite" path="M190,90 A65,24 0 1,0 191,90 Z"/></circle>
-            <circle cx="60" cy="30" r="1" fill="#fff" opacity=".2"/><circle cx="320" cy="50" r="1.2" fill="#fff" opacity=".15"/><circle cx="340" cy="140" r=".8" fill="#fff" opacity=".2"/>
-          </svg>
-        </div>
-        <div class="pbody"><div class="pcat">Email Marketing</div><div class="ptitle">Campaña de lanzamiento</div><div class="pdescr">Estrategia de emails para el lanzamiento de un producto digital. Resultados por publicar.</div></div>
-        <div class="pfooter"><span class="ptag">E-commerce</span><span class="parrow">→</span></div>
-      </div>
-
-      <!-- 2. Automatización de nurturing -->
-      <div class="pcard">
-        <div class="pthumb">
-          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
-            <defs>
-              <radialGradient id="g2" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="#60d4f7" stop-opacity=".1"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
-              <filter id="glow2"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <marker id="arr2" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><polygon points="0,0 5,2.5 0,5" fill="#6b5ef0" opacity=".6"/></marker>
-            </defs>
-            <rect width="380" height="180" fill="#0a0a1a"/>
-            <ellipse cx="190" cy="80" rx="130" ry="75" fill="url(#g2)"/>
-            <g filter="url(#glow2)">
-              <rect x="168" y="14" width="44" height="24" rx="6" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1.2"/>
-              <rect x="172" y="18" width="16" height="4" rx="2" fill="#4a3fd4" opacity=".6"/>
-              <rect x="172" y="26" width="10" height="3" rx="1.5" fill="#4a3fd4" opacity=".3"/>
-            </g>
-            <line x1="190" y1="38" x2="120" y2="66" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".4" marker-end="url(#arr2)"/>
-            <line x1="190" y1="38" x2="260" y2="66" stroke="#4a3fd4" stroke-width=".8" stroke-opacity=".4" marker-end="url(#arr2)"/>
-            <g filter="url(#glow2)">
-              <rect x="96" y="68" width="44" height="24" rx="6" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.2"/>
-              <rect x="100" y="72" width="14" height="4" rx="2" fill="#6b5ef0" opacity=".55"/>
-              <rect x="100" y="80" width="9" height="3" rx="1.5" fill="#6b5ef0" opacity=".3"/>
-              <rect x="238" y="68" width="44" height="24" rx="6" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.2"/>
-              <rect x="242" y="72" width="14" height="4" rx="2" fill="#6b5ef0" opacity=".55"/>
-              <rect x="242" y="80" width="9" height="3" rx="1.5" fill="#6b5ef0" opacity=".3"/>
-            </g>
-            <line x1="118" y1="92" x2="90" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr2)"/>
-            <line x1="118" y1="92" x2="162" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr2)"/>
-            <line x1="260" y1="92" x2="218" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr2)"/>
-            <line x1="260" y1="92" x2="290" y2="118" stroke="#6b5ef0" stroke-width=".8" stroke-opacity=".35" marker-end="url(#arr2)"/>
-            <g filter="url(#glow2)">
-              <rect x="64" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
-              <rect x="68" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
-              <rect x="138" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
-              <rect x="142" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
-              <rect x="194" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
-              <rect x="198" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
-              <rect x="268" y="120" width="38" height="20" rx="5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
-              <rect x="272" y="124" width="10" height="3" rx="1.5" fill="#9b7ff8" opacity=".5"/>
-            </g>
-            <circle r="2.5" fill="#60d4f7" opacity=".8"><animateMotion dur="2.2s" repeatCount="indefinite" begin="0s" path="M190,26 L120,68"/></circle>
-            <circle r="2.5" fill="#60d4f7" opacity=".8"><animateMotion dur="2.2s" repeatCount="indefinite" begin="1.1s" path="M190,26 L260,68"/></circle>
-            <circle r="2" fill="#9b7ff8" opacity=".75"><animateMotion dur="2s" repeatCount="indefinite" begin=".5s" path="M118,90 L90,120"/></circle>
-            <circle r="2" fill="#9b7ff8" opacity=".75"><animateMotion dur="2s" repeatCount="indefinite" begin="1.5s" path="M260,90 L290,120"/></circle>
-          </svg>
-        </div>
-        <div class="pbody"><div class="pcat">Growth Strategy</div><div class="ptitle">Automatización de nurturing</div><div class="pdescr">Secuencias automatizadas de 8 pasos para convertir leads fríos en clientes activos.</div></div>
-        <div class="pfooter"><span class="ptag">SaaS</span><span class="parrow">→</span></div>
-      </div>
-
-      <!-- 3. Newsletter de marca personal -->
-      <div class="pcard">
-        <div class="pthumb">
-          <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;position:absolute;inset:0">
-            <defs>
-              <radialGradient id="g3" cx="50%" cy="55%" r="55%"><stop offset="0%" stop-color="#9b7ff8" stop-opacity=".14"/><stop offset="100%" stop-color="#05050e" stop-opacity="0"/></radialGradient>
-              <filter id="glow3"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            </defs>
-            <rect width="380" height="180" fill="#0a0a1a"/>
-            <ellipse cx="190" cy="100" rx="130" ry="75" fill="url(#g3)"/>
-            <g filter="url(#glow3)" fill="none" stroke-linecap="round">
-              <path d="M138,88 Q124,75 138,62" stroke="#4a3fd4" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.55;0" dur="3s" begin="0s" repeatCount="indefinite"/></path>
-              <path d="M242,88 Q256,75 242,62" stroke="#4a3fd4" stroke-width="1.5" opacity=".0"><animate attributeName="opacity" values="0;.55;0" dur="3s" begin="0s" repeatCount="indefinite"/></path>
-              <path d="M122,100 Q104,75 122,50" stroke="#6b5ef0" stroke-width="1.3" opacity=".0"><animate attributeName="opacity" values="0;.45;0" dur="3s" begin=".7s" repeatCount="indefinite"/></path>
-              <path d="M258,100 Q276,75 258,50" stroke="#6b5ef0" stroke-width="1.3" opacity=".0"><animate attributeName="opacity" values="0;.45;0" dur="3s" begin=".7s" repeatCount="indefinite"/></path>
-              <path d="M106,112 Q82,75 106,38" stroke="#9b7ff8" stroke-width="1.1" opacity=".0"><animate attributeName="opacity" values="0;.35;0" dur="3s" begin="1.4s" repeatCount="indefinite"/></path>
-              <path d="M274,112 Q298,75 274,38" stroke="#9b7ff8" stroke-width="1.1" opacity=".0"><animate attributeName="opacity" values="0;.35;0" dur="3s" begin="1.4s" repeatCount="indefinite"/></path>
-            </g>
-            <circle cx="190" cy="70" r="14" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.4" filter="url(#glow3)" opacity=".95"/>
-            <circle cx="190" cy="70" r="8" fill="none" stroke="#9b7ff8" stroke-width=".7" opacity=".4"/>
-            <circle cx="190" cy="70" r="3.5" fill="#6b5ef0" opacity=".5"/>
-            <ellipse cx="190" cy="106" rx="14" ry="20" fill="#0f0f22" stroke="#6b5ef0" stroke-width="1.2" filter="url(#glow3)" opacity=".9"/>
-            <rect x="187" y="83" width="6" height="7" rx="2" fill="#0f0f22" stroke="#6b5ef0" stroke-width=".8" opacity=".7"/>
-            <g filter="url(#glow3)" opacity=".0">
-              <rect x="308" y="58" width="28" height="20" rx="4" fill="#0f0f22" stroke="#4a3fd4" stroke-width="1"/>
-              <polyline points="308,58 322,70 336,58" fill="none" stroke="#4a3fd4" stroke-width=".9"/>
-              <animate attributeName="opacity" values="0;.65;0" dur="4s" begin=".5s" repeatCount="indefinite"/>
-            </g>
-            <g filter="url(#glow3)" opacity=".0">
-              <rect x="44" y="68" width="24" height="17" rx="3.5" fill="#0f0f22" stroke="#9b7ff8" stroke-width="1"/>
-              <polyline points="44,68 56,77 68,68" fill="none" stroke="#9b7ff8" stroke-width=".8"/>
-              <animate attributeName="opacity" values="0;.55;0" dur="4s" begin="2s" repeatCount="indefinite"/>
-            </g>
-          </svg>
-        </div>
-        <div class="pbody"><div class="pcat">Email + Contenido</div><div class="ptitle">Newsletter de marca personal</div><div class="pdescr">Estrategia de contenido semanal con copywriting editorial que fidelizó más de 5k suscriptores.</div></div>
-        <div class="pfooter"><span class="ptag">Marca Personal</span><span class="parrow">→</span></div>
-      </div>
 
       <!-- 4. Contenido orgánico -->
       <div class="pcard">
@@ -1198,7 +1184,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       </div>
 
     </div><!-- /portfolio-grid -->
-    <div class="port-cta reveal"><a href="#contacto" class="btn-outline">¿Quieres ser parte de nuestro portafolio? →</a></div>
+    <div class="port-cta reveal"><a href="#diagnostico" class="btn-outline" data-i18n="svc.cta">¿No sabes cuál necesitas? Haz el diagnóstico gratis →</a></div>
   </div>
 </section>
 
@@ -1206,16 +1192,16 @@ footer p{font-size:.78rem;color:var(--muted)}
 <section style="padding:8rem 0;overflow:hidden;position:relative" id="reviews">
   <div class="section-glow g-purple"></div>
   <div style="text-align:center;padding:0 2rem;position:relative;z-index:1" class="reveal">
-    <span class="stag">Reviews</span>
-    <h2 class="stitle js-split">Lo que dicen<br>nuestros clientes</h2>
+    <span class="stag" data-i18n="rev.tag">Reviews</span>
+    <h2 class="stitle js-split" data-i18n="rev.title">Lo que dicen<br>nuestros clientes</h2>
   </div>
   <div class="carousel-outer" style="position:relative;z-index:1">
     <div class="carousel-track" id="carouselTrack">
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Trabajar con Nomántica fue un acierto total. Entendieron mi negocio desde el minuto uno y los resultados se notaron rápido. Muy recomendables.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#9b7ff8)">CR</div><div><div class="rev-name">Carlos Reyes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Estoy súper contenta con Nomántica. Captaron la esencia de mi marca y le dieron justo el impulso que quería.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#6b5ef0,#60d4f7)">SO</div><div><div class="rev-name">Sofía Ortega</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Conseguimos ordenar nuestra estrategia digital y mejorar resultados de forma consistente.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#60d4f7)">AM</div><div><div class="rev-name">Andrés Molina</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Le pusimos orden a todo el tema digital y empezamos a ver resultados de verdad. Son prácticos, van al grano y se implican mucho.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#60d4f7)">LV</div><div><div class="rev-name">Laura Villanueva</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
-      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Muy buena experiencia con Nomántica. Nos ayudaron a enfocar mejor la estrategia y a optimizar lo que ya estábamos haciendo.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#4a3fd4)">DP</div><div><div class="rev-name">Diego Paredes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verificado</div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Trabajar con Nomántica fue un acierto total. Entendieron mi negocio desde el minuto uno y los resultados se notaron rápido. Muy recomendables.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#9b7ff8)">CR</div><div><div class="rev-name">Carlos Reyes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Estoy súper contenta con Nomántica. Captaron la esencia de mi marca y le dieron justo el impulso que quería.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#6b5ef0,#60d4f7)">SO</div><div><div class="rev-name">Sofía Ortega</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Conseguimos ordenar nuestra estrategia digital y mejorar resultados de forma consistente.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#60d4f7)">AM</div><div><div class="rev-name">Andrés Molina</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Le pusimos orden a todo el tema digital y empezamos a ver resultados de verdad. Son prácticos, van al grano y se implican mucho.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#4a3fd4,#60d4f7)">LV</div><div><div class="rev-name">Laura Villanueva</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
+      <div class="tcard"><div class="tcard-glow"></div><div class="rev-stars"><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span><span class="rev-star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545L12 17.545l-5.878 3.09 1.123-6.545L2.489 8.91l6.572-.955z"/></svg></span></div><p class="tcard-text">Muy buena experiencia con Nomántica. Nos ayudaron a enfocar mejor la estrategia y a optimizar lo que ya estábamos haciendo.</p><div class="tcard-author"><div class="rev-avatar" style="background:linear-gradient(135deg,#9b7ff8,#4a3fd4)">DP</div><div><div class="rev-name">Diego Paredes</div><div class="rev-verified"><span class="vchk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span data-i18n="rev.ver">Verificado</span></div></div></div></div>
     </div>
     <div class="carousel-dots" id="carouselDots">
       <button class="cdot active" onclick="goTo(0)"></button>
@@ -1227,14 +1213,60 @@ footer p{font-size:.78rem;color:var(--muted)}
   </div>
 </section>
 
+<!-- PREGUNTAS FRECUENTES -->
+<section class="faq-section" id="faq">
+  <div class="section-glow g-violet"></div>
+  <div class="faq-inner">
+    <div class="faq-head reveal">
+      <span class="stag" data-i18n="faq.tag">Preguntas frecuentes</span>
+      <h2 class="stitle js-split" data-i18n="faq.title">Resolvemos tus dudas</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary><span data-i18n="faq.q1">¿Cuánto cuesta trabajar con ustedes?</span><span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a" data-i18n="faq.a1">Depende de lo que tu negocio necesite, por eso no damos precios a ciegas. Con tu diagnóstico te preparamos una propuesta con alcance y precio claros, y tú decides sin presión.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span data-i18n="faq.q2">¿En cuánto tiempo voy a ver resultados?</span><span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a" data-i18n="faq.a2">Depende del servicio: los anuncios pueden traer contactos desde los primeros días, una página o tienda en línea toma algunas semanas en quedar lista, y el contenido y las redes dan resultados constantes mes con mes. En tu propuesta te damos tiempos realistas para tu caso.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span data-i18n="faq.q3">¿Funciona para mi tipo de negocio?</span><span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a" data-i18n="faq.a3">Trabajamos con negocios que venden productos, servicios, cursos o software, y también con quienes apenas empiezan. Para eso existe el diagnóstico: para recomendarte solo lo que sí le sirve a tu giro.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span data-i18n="faq.q4">No sé nada de marketing ni de tecnología, ¿es problema?</span><span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a" data-i18n="faq.a4">Para nada. Nosotros nos encargamos de toda la parte técnica y te explicamos cada paso en palabras simples. Tú sigues enfocado en tu negocio.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span data-i18n="faq.q5">¿Qué pasa después de hacer el diagnóstico?</span><span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a" data-i18n="faq.a5">Te escribimos por WhatsApp en menos de 24 horas para platicar tus resultados y proponerte un plan. Es sin compromiso: si no te convence, no pasa nada.</div>
+      </details>
+      <details class="faq-item">
+        <summary><span data-i18n="faq.q6">¿El presupuesto de anuncios va aparte?</span><span class="faq-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <div class="faq-a" data-i18n="faq.a6">Sí. Lo que se invierte en anuncios se paga directo a la plataforma (como Meta o Google) y es independiente de nuestro servicio. Tú decides cuánto invertir y te mostramos en qué se usa cada peso.</div>
+      </details>
+    </div>
+    <p class="faq-foot"><span data-i18n="faq.foot">¿Tienes otra pregunta?</span> <a href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="faq.footlink">Escríbenos por WhatsApp →</a></p>
+  </div>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Cuánto cuesta trabajar con ustedes?","acceptedAnswer":{"@type":"Answer","text":"Depende de lo que tu negocio necesite, por eso no damos precios a ciegas. Con tu diagnóstico te preparamos una propuesta con alcance y precio claros, y tú decides sin presión."}},{"@type":"Question","name":"¿En cuánto tiempo voy a ver resultados?","acceptedAnswer":{"@type":"Answer","text":"Depende del servicio: los anuncios pueden traer contactos desde los primeros días, una página o tienda en línea toma algunas semanas en quedar lista, y el contenido y las redes dan resultados constantes mes con mes. En tu propuesta te damos tiempos realistas para tu caso."}},{"@type":"Question","name":"¿Funciona para mi tipo de negocio?","acceptedAnswer":{"@type":"Answer","text":"Trabajamos con negocios que venden productos, servicios, cursos o software, y también con quienes apenas empiezan. Para eso existe el diagnóstico: para recomendarte solo lo que sí le sirve a tu giro."}},{"@type":"Question","name":"No sé nada de marketing ni de tecnología, ¿es problema?","acceptedAnswer":{"@type":"Answer","text":"Para nada. Nosotros nos encargamos de toda la parte técnica y te explicamos cada paso en palabras simples. Tú sigues enfocado en tu negocio."}},{"@type":"Question","name":"¿Qué pasa después de hacer el diagnóstico?","acceptedAnswer":{"@type":"Answer","text":"Te escribimos por WhatsApp en menos de 24 horas para platicar tus resultados y proponerte un plan. Es sin compromiso: si no te convence, no pasa nada."}},{"@type":"Question","name":"¿El presupuesto de anuncios va aparte?","acceptedAnswer":{"@type":"Answer","text":"Sí. Lo que se invierte en anuncios se paga directo a la plataforma (como Meta o Google) y es independiente de nuestro servicio. Tú decides cuánto invertir y te mostramos en qué se usa cada peso."}}]}</script>
+</section>
+
+<!-- MARCA: enjambre de partículas que forma "Nomántica" -->
+<section class="brand-band" id="marca">
+  <div class="brand-band-bg"></div>
+  <canvas id="brandCanvas" role="img" aria-label="Nomántica"></canvas>
+  <p class="brand-tag" data-i18n="brand.tag">Soluciones digitales integrales · Hecho en México</p>
+</section>
+
 <!-- CTA -->
 <section class="cta-section" id="contacto">
   <div class="section-glow g-blue"></div>
   <div class="cta-inner">
     <div class="reveal">
-      <span class="stag">Empieza hoy</span>
-      <h2 class="cta-title js-split">Deja de perder<br>clientes <span class="hand">hoy.</span></h2>
-      <p class="ssub" style="margin:1.2rem auto 0;text-align:center;max-width:460px">Déjanos tus datos y en menos de 24 horas te mostramos exactamente cómo podemos hacer crecer tu negocio. Sin compromiso.</p>
+      <span class="stag" data-i18n="cta.tag">Empieza hoy</span>
+      <h2 class="cta-title js-split" data-i18n="cta.title">Deja de perder<br>clientes <span class="hand">hoy.</span></h2>
+      <p class="ssub" style="margin:1.2rem auto 0;text-align:center;max-width:460px" data-i18n="cta.sub">Déjanos tu WhatsApp y en menos de 24 horas te mostramos exactamente cómo podemos hacer crecer tu negocio. Sin compromiso.</p>
     </div>
     <div class="reveal" data-delay="2">
       <!-- progress dots -->
@@ -1244,46 +1276,45 @@ footer p{font-size:.78rem;color:var(--muted)}
         <div class="cpd" id="cpd3"></div>
       </div>
 
-      <!-- step 1: email -->
+      <!-- step 1: WhatsApp (el dato más valioso va primero) -->
       <div class="email-form" id="ctaStep1">
-        <input type="email" id="ctaEmail" placeholder="tu@email.com" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
+        <input type="tel" id="ctaPhone" inputmode="tel" autocomplete="tel" placeholder="Tu WhatsApp (10 dígitos)" data-i18n-ph="f.phone" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
         <input type="text" id="ctaHoney" style="display:none;position:absolute;left:-9999px" tabindex="-1" autocomplete="off"/>
-        <button onclick="handleStep()">Siguiente →</button>
+        <button onclick="handleStep()" data-i18n="f.next">Siguiente →</button>
       </div>
 
-      <!-- step 2: nombre + teléfono -->
+      <!-- step 2: nombre + email -->
       <div id="ctaStep2" style="display:none;flex-direction:column;gap:.75rem;max-width:460px;margin:0 auto">
         <div class="email-form" style="margin:0">
-          <input type="text" id="ctaName" placeholder="Tu nombre completo" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
+          <input type="text" id="ctaName" autocomplete="name" placeholder="Tu nombre" data-i18n-ph="f.name" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
         </div>
         <div class="email-form" style="margin:0">
-          <input type="tel" id="ctaPhone" placeholder="Tu número de WhatsApp" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
+          <input type="email" id="ctaEmail" autocomplete="email" placeholder="tu@email.com" data-i18n-ph="f.email" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
         </div>
-        <button class="step-btn" onclick="handleStep()">Siguiente →</button>
+        <button class="step-btn" onclick="handleStep()" data-i18n="f.next">Siguiente →</button>
       </div>
 
       <!-- step 3: servicio + comentarios -->
       <div id="ctaStep3" style="display:none;flex-direction:column;gap:.75rem;max-width:460px;margin:0 auto">
         <div class="email-form" style="margin:0;padding:.35rem .35rem .35rem 1.2rem;border-radius:16px">
           <select id="ctaService" style="flex:1;background:transparent;border:none;outline:none;color:var(--muted);font-family:var(--fb);font-size:.88rem;cursor:pointer">
-            <option value="" disabled selected style="background:#0a0a1a">¿Qué servicio te interesa?</option>
-            <option value="Email Marketing" style="background:#0a0a1a">Email Marketing</option>
-            <option value="Redes Sociales" style="background:#0a0a1a">Gestión de Redes Sociales</option>
-            <option value="Campañas Publicitarias" style="background:#0a0a1a">Campañas Publicitarias</option>
-            <option value="Desarrollo Web" style="background:#0a0a1a">Desarrollo Web</option>
-            <option value="E-commerce" style="background:#0a0a1a">E-commerce</option>
-            <option value="Contenido Orgánico" style="background:#0a0a1a">Creación de Contenido</option>
-            <option value="Plataformas" style="background:#0a0a1a">Creación de Plataformas</option>
-            <option value="Todo" style="background:#0a0a1a">Necesito todo</option>
+            <option value="" disabled selected style="background:#0a0a1a" data-i18n="f.o0">¿Qué servicio te interesa?</option>
+            <option value="Redes Sociales" style="background:#0a0a1a" data-i18n="f.o2">Gestión de Redes Sociales</option>
+            <option value="Campañas Publicitarias" style="background:#0a0a1a" data-i18n="f.o3">Campañas Publicitarias</option>
+            <option value="Desarrollo Web" style="background:#0a0a1a" data-i18n="f.o4">Desarrollo Web</option>
+            <option value="E-commerce" style="background:#0a0a1a" data-i18n="f.o5">E-commerce</option>
+            <option value="Contenido Orgánico" style="background:#0a0a1a" data-i18n="f.o6">Creación de Contenido</option>
+            <option value="Plataformas" style="background:#0a0a1a" data-i18n="f.o7">Creación de Plataformas</option>
+            <option value="Todo" style="background:#0a0a1a" data-i18n="f.o8">Necesito todo</option>
           </select>
         </div>
         <div class="email-form" style="margin:0;padding:.8rem 1.2rem;border-radius:16px;align-items:flex-start">
-          <textarea id="ctaComment" placeholder="Cuéntanos brevemente sobre tu negocio y lo que necesitas..." style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.88rem;resize:none;min-height:80px;line-height:1.6" maxlength="400"></textarea>
+          <textarea id="ctaComment" data-i18n-ph="f.comment" placeholder="Cuéntanos brevemente sobre tu negocio y lo que necesitas..." style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.88rem;resize:none;min-height:80px;line-height:1.6" maxlength="400"></textarea>
         </div>
-        <button class="step-btn" id="ctaBtn" onclick="handleStep()">Enviar y hablar por WhatsApp →</button>
+        <button class="step-btn" id="ctaBtn" onclick="handleStep()" data-i18n="f.send">Enviar y hablar por WhatsApp →</button>
       </div>
 
-      <p class="form-note" id="ctaNote"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:.35rem"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Sin spam. Te contactamos en menos de 24 hrs.</p>
+      <p class="form-note" id="ctaNote"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:.35rem"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span id="ctaNoteTx" data-i18n="f.note">Sin spam. Te contactamos en menos de 24 hrs.</span></p>
     </div>
 
     <style>
@@ -1297,11 +1328,11 @@ footer p{font-size:.78rem;color:var(--muted)}
 
 <footer>
   <div class="flogo">Nom<span class="la">á</span>ntica</div>
-  <p>© 2025 Nomántica. Todos los derechos reservados.</p>
+  <p data-i18n="ft.copy">© 2026 Nomántica. Todos los derechos reservados.</p>
   <ul class="flinks">
-    <li><a href="privacidad.html">Privacidad</a></li>
-    <li><a href="terminos.html">Términos</a></li>
-    <li><a href="#">Contacto</a></li>
+    <li><a href="privacidad.html" data-i18n="ft.priv">Privacidad</a></li>
+    <li><a href="terminos.html" data-i18n="ft.terms">Términos</a></li>
+    <li><a href="#contacto" data-i18n="ft.contact">Contacto</a></li>
   </ul>
 </footer>
 
@@ -1320,12 +1351,122 @@ footer p{font-size:.78rem;color:var(--muted)}
       <p class="pm-sub" id="pmSub"></p>
       <div class="pm-steps" id="pmSteps"></div>
       <div class="pm-cta">
-        <button class="pm-cta-btn" id="pmCta">Quiero empezar mi proyecto →</button>
-        <a class="pm-wa" id="pmWa" href="https://wa.me/525554921640" target="_blank" rel="noopener">o escríbenos directo por WhatsApp</a>
+        <button class="pm-cta-btn" id="pmCta" data-i18n="pm.cta">Quiero empezar mi proyecto →</button>
+        <a class="pm-wa" id="pmWa" href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="pm.wa">o escríbenos directo por WhatsApp</a>
       </div>
     </div>
   </div>
 </div>
+
+<!-- TRADUCCIÓN ES / EN -->
+<script>
+(function(){
+  var EN={
+    'wa.bubble':'Contact us now',
+    'nav.faq':'FAQ',
+    'faq.tag':'FAQ','faq.title':'Your questions, answered',
+    'faq.q1':'How much does it cost to work with you?','faq.a1':'It depends on what your business needs, so we never quote blindly. With your diagnosis we prepare a proposal with a clear scope and price, and you decide with no pressure.',
+    'faq.q2':'How soon will I see results?','faq.a2':'It depends on the service: ads can bring contacts within the first days, a website or online store takes a few weeks to be ready, and content and social media deliver steady results month after month. Your proposal includes realistic timelines for your case.',
+    'faq.q3':'Does it work for my type of business?','faq.a3':'We work with businesses that sell products, services, courses or software, and with those just getting started. That is what the diagnosis is for: recommending only what actually works for your industry.',
+    'faq.q4':'I know nothing about marketing or tech. Is that a problem?','faq.a4':'Not at all. We handle all the technical work and explain every step in plain words. You stay focused on your business.',
+    'faq.q5':'What happens after the diagnosis?','faq.a5':'We message you on WhatsApp within 24 hours to go over your results and propose a plan. No strings attached: if it does not convince you, no problem.',
+    'faq.q6':'Is the ad budget separate?','faq.a6':'Yes. Ad spend is paid directly to the platform (such as Meta or Google) and is separate from our service. You decide how much to invest and we show you where every peso goes.',
+    'faq.foot':'Got another question?','faq.footlink':'Message us on WhatsApp →',
+    'wa.title':'Message us on WhatsApp',
+    'nav.dx':'Diagnosis','nav.svc':'Services','nav.rev':'Reviews','nav.cta':'Get started →',
+    'hero.kicker':'Free digital diagnosis · 2 min',
+    'hero.title':'Why isn’t your business selling <span class="hand">more</span> online?',
+    'hero.sub':'Answer 5 questions and instantly find out what your business is missing to win more customers, with a plan tailored to you.',
+    'hero.p1':'Instant results, no sign-up',
+    'hero.p2':'An X-ray of your business across 6 key areas',
+    'hero.p3':'Personalized, no-strings recommendation',
+    'hero.wa':'Rather talk to a person? Message us on WhatsApp →',
+    'svc.tag':'Services','svc.title':'What we do for you',
+    'svc.cta':'Not sure which one you need? Take the free diagnosis →',
+    'rev.tag':'Reviews','rev.title':'What our<br>clients say','rev.ver':'Verified',
+    'brand.tag':'End-to-end digital solutions · Made in Mexico',
+    'cta.tag':'Start today',
+    'cta.title':'Stop losing<br>customers <span class="hand">today.</span>',
+    'cta.sub':'Leave your WhatsApp and within 24 hours we will show you exactly how we can grow your business. No strings attached.',
+    'f.next':'Next →','f.send':'Send and chat on WhatsApp →',
+    'f.o0':'Which service are you interested in?','f.o2':'Social Media Management','f.o3':'Ad Campaigns','f.o4':'Web Development','f.o5':'E-commerce','f.o6':'Content Creation','f.o7':'Custom Platforms','f.o8':'I need everything',
+    'f.note':'No spam. We will reach out within 24 hours.',
+    'ft.copy':'© 2026 Nomántica. All rights reserved.','ft.priv':'Privacy','ft.terms':'Terms','ft.contact':'Contact',
+    'pm.cta':'I want to start my project →','pm.wa':'or message us directly on WhatsApp'
+  };
+  var EN_PH={'f.email':'you@email.com','f.name':'Your name','f.phone':'Your WhatsApp (10 digits)','f.comment':'Tell us briefly about your business and what you need...'};
+  // Tarjetas de servicios, en el orden en que aparecen: [categoría, título, descripción, etiqueta]
+  var EN_CARDS=[
+    ['Content','Organic content creation','Content strategy that grows naturally, reaching the right audience at the right time.','Organic'],
+    ['Advertising','Ad campaigns','Paid campaigns built for measurable results. Every peso spent, tracked and optimized.','Ads'],
+    ['Platforms','Custom platforms','Solid, scalable digital architecture built to grow with you from day one.','Tech'],
+    ['Web','Web development','Fast, modern websites optimized to turn visits into customers from the first scroll.','Frontend'],
+    ['E-commerce','E-commerce','Online stores designed to sell. A smooth, fast shopping experience that builds trust.','Online Store'],
+    ['Social Media','Social media management','Posts, reels and carousels on a schedule to grow your community with content that hooks.','Social Media']
+  ];
+  var EN_REVIEWS=[
+    'Working with Nomántica was a total win. They understood my business from minute one and the results showed up fast. Highly recommended.',
+    'I am so happy with Nomántica. They captured the essence of my brand and gave it exactly the boost I wanted.',
+    'We managed to organize our digital strategy and improve results consistently.',
+    'We finally put our whole digital side in order and started seeing real results. They are practical, straight to the point and truly involved.',
+    'Great experience with Nomántica. They helped us sharpen our strategy and optimize what we were already doing.'
+  ];
+  // Pasos del modal "Cómo lo hacemos", por título original en español
+  var EN_PROJECTS={
+    'Creación de contenido orgánico':{sub:'We attract your ideal audience without relying on ad spend.',steps:[['Research','We study your niche, audience and keywords.'],['Editorial line','We define content pillars and formats.'],['Production','We create pieces designed to attract people naturally.'],['Analysis','We measure reach and double down on what works.']]},
+    'Campañas publicitarias':{sub:'Every peso spent, tracked and optimized to sell.',steps:[['Goals','We define the target, budget and ideal audience.'],['Creatives','We produce ads and variations to test.'],['Launch','We set up campaigns with precise targeting.'],['Optimization','We track results and scale what is profitable.']]},
+    'Creación de plataformas':{sub:'We design and build the platform your operation needs.',steps:[['Discovery','We learn how you operate and what you need to solve.'],['Architecture','We design the technical structure and data flow.'],['Development','We build a scalable, secure platform.'],['Delivery','We test, launch and support you as you grow.']]},
+    'Desarrollo web':{sub:'A fast website built to turn visits into customers.',steps:[['Brief','We define goals, sections and references.'],['Design','We create an interface aligned with your brand.'],['Development','We build a fast, optimized site.'],['Launch','We go live, measure and adjust to sell more.']]},
+    'E-commerce':{sub:'An online store designed to sell from day one.',steps:[['Strategy','We analyze your catalog and your value proposition.'],['Store','We design a smooth, trustworthy shopping experience.'],['Integration','We connect payments, shipping and inventory.'],['Conversion','We optimize checkout and repeat-purchase campaigns.']]},
+    'Gestión de redes sociales':{sub:'We grow your community with content that hooks.',steps:[['Diagnosis','We audit your social media and your competitors.'],['Plan','We define visual style, formats and calendar.'],['Production','We create posts, reels and carousels that hook.'],['Community','We publish, reply and grow your audience.']]}
+  };
+  window.NOM_I18N={projects:EN_PROJECTS};
+
+  // Capturar el español original ANTES de que los títulos se dividan en letras
+  var ES={}, ES_PH={}, ES_TITLE={};
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ ES[el.dataset.i18n]=el.innerHTML; });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){ ES_PH[el.getAttribute('data-i18n-ph')]=el.placeholder; });
+  document.querySelectorAll('[data-i18n-title]').forEach(function(el){ ES_TITLE[el.getAttribute('data-i18n-title')]=el.title; });
+  var cards=[].slice.call(document.querySelectorAll('.pcard')), F=['.pcat','.ptitle','.pdescr','.ptag'];
+  var ES_CARDS=cards.map(function(c){
+    c.dataset.pkey=c.querySelector('.ptitle').textContent.trim(); // clave estable para el modal
+    return F.map(function(s){ var e=c.querySelector(s); return e?e.textContent:''; });
+  });
+  var revs=[].slice.call(document.querySelectorAll('.tcard-text')), ES_REVIEWS=revs.map(function(e){ return e.textContent; });
+  var ES_META={title:document.title};
+
+  function apply(lang){
+    var en=(lang==='en');
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k=el.dataset.i18n, html=en?EN[k]:ES[k];
+      if(html==null||el.innerHTML===html) return;
+      el.innerHTML=html;
+      if(el.classList.contains('split')&&typeof splitLetters==='function') splitLetters(el); // títulos animados
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){ var k=el.getAttribute('data-i18n-ph'); el.placeholder=en?EN_PH[k]:ES_PH[k]; });
+    document.querySelectorAll('[data-i18n-title]').forEach(function(el){ var k=el.getAttribute('data-i18n-title'); el.title=en?EN[k]:ES_TITLE[k]; });
+    cards.forEach(function(c,i){ var src=en?EN_CARDS[i]:ES_CARDS[i]; if(!src) return; F.forEach(function(s,j){ var e=c.querySelector(s); if(e) e.textContent=src[j]; }); });
+    revs.forEach(function(e,i){ e.textContent=en?EN_REVIEWS[i]:ES_REVIEWS[i]; });
+    document.title=en?'Nomántica — More customers for your business':ES_META.title;
+    var b=document.getElementById('langBtn');
+    if(b){ b.textContent=en?'ES':'EN'; b.setAttribute('aria-label',en?'Ver en español':'View in English'); }
+  }
+
+  function setLang(lang){
+    window.NOM_LANG=lang;
+    try{ localStorage.setItem('nom-lang',lang); }catch(e){}
+    try{ var u=new URL(location.href); if(u.searchParams.has('lang')){ u.searchParams.set('lang',lang); history.replaceState(null,'',u); } }catch(e){}
+    apply(lang);
+    document.dispatchEvent(new Event('nom:lang'));
+  }
+
+  var btn=document.getElementById('langBtn');
+  if(btn) btn.addEventListener('click',function(){ setLang(window.NOM_LANG==='en'?'es':'en'); });
+  // se aplica al final, cuando los títulos ya se dividieron en letras
+  document.addEventListener('DOMContentLoaded',function(){ if(window.NOM_LANG==='en') apply('en'); });
+})();
+</script>
 
 <script>
   // Nav scroll + progress bar
@@ -1479,9 +1620,9 @@ footer p{font-size:.78rem;color:var(--muted)}
     document.querySelectorAll('.section-glow').forEach(g => { g.style.opacity = '.35'; });
   }
 
-  /* ===== Hero: enjambre de luciérnagas, flores y mariposas que forman "Nomántica" ===== */
+  /* ===== Banda de marca: enjambre de luciérnagas, flores y mariposas que forman "Nomántica" ===== */
   (function(){
-    const canvas = document.getElementById('heroCanvas');
+    const canvas = document.getElementById('brandCanvas');
     if(!canvas) return;
     const ctx = canvas.getContext('2d', { desynchronized: true });
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1706,10 +1847,6 @@ footer p{font-size:.78rem;color:var(--muted)}
           k: .016 + Math.random()*.024,                    // resorte propio → llegadas desparejas
           delay: (pt.x/W)*1300 + Math.random()*800,        // barrido izq→der con azar
           fadeDur: 380 + Math.random()*520,
-          exS: (pt.x/W)*.3 + Math.random()*.22,            // salida: mismo barrido izq→der
-          exW: .28 + Math.random()*.22,
-          rise: (60 + Math.random()*110)*sizeScale,
-          exDrift: (Math.random()-.5)*46*sizeScale,
           ph: Math.random()*Math.PI*2, sp: .6+Math.random()*.9,
           amp, tw: 1, ang: 0,
           sprite: type === 0 ? (useDot ? dotSprite(col, r*(1.7 - .78*smallF)) : glowSprite(col, r*2))
@@ -1729,19 +1866,13 @@ footer p{font-size:.78rem;color:var(--muted)}
     function stepFrame(t){
       if(!bootT) bootT = t || 1;
       const el = t - bootT;
-      // progreso de salida ligado al scroll: desde el primer px ya desvanece
-      const exitP = reduce ? 0 : Math.min(1, Math.max(0, window.scrollY/(innerHeight*.55)));
       ctx.clearRect(0,0,W,H);
       for(let i = 0; i < activeN; i++){
         const p = parts[i];
         if(el < p.delay) continue;                          // aún no "nace"
-        const ex = exitP <= p.exS ? 0 : Math.min(1, (exitP - p.exS)/p.exW);
-        if(ex >= 1) continue;                               // ya se fue
-        const ease = ex*ex*(3-2*ex);                        // smoothstep
-        const ramp = Math.min(1, (el - p.delay)/p.fadeDur); // fundido de entrada
-        const alive = ramp*(1-ease);
-        const hx = p.tx + ease*p.exDrift + Math.cos(t*.0006*p.sp + p.ph)*p.amp;
-        const hy = p.ty - ease*p.rise + Math.sin(t*.0007*p.sp + p.ph)*p.amp;
+        const alive = Math.min(1, (el - p.delay)/p.fadeDur); // fundido de entrada
+        const hx = p.tx + Math.cos(t*.0006*p.sp + p.ph)*p.amp;
+        const hy = p.ty + Math.sin(t*.0007*p.sp + p.ph)*p.amp;
         // homing exponencial: cierra un % de la distancia por frame → llega y frena
         // suave, sin poder sobrepasar el destino (cero rebote). Mouse = inercia que decae.
         const hs = .052 + p.k;
@@ -1795,27 +1926,33 @@ footer p{font-size:.78rem;color:var(--muted)}
       start();
     }
 
-    // arranca cuando la tipografía del wordmark está lista (con red de seguridad)
-    if(document.fonts && document.fonts.load){
-      document.fonts.load('800 100px "Bricolage Grotesque"').then(init, init);
-      setTimeout(init, 1600);
-    } else init();
+    // carga diferida: no se construye nada hasta que la banda se acerca a la pantalla (el hero
+    // queda libre para el diagnóstico). Arranca cuando la tipografía está lista, con red de seguridad.
+    const bandSec = document.getElementById('marca');
+    let inView = false;
+    function boot(){
+      const go = () => { init(); if(!inView) stop(); };
+      if(document.fonts && document.fonts.load){
+        document.fonts.load('800 100px "Bricolage Grotesque"').then(go, go);
+        setTimeout(go, 1600);
+      } else go();
+    }
 
-    // solo anima con el hero en pantalla; al salir se dispersa y se re-forma al volver
-    const heroSec = document.querySelector('.hero');
+    // solo anima con la banda en pantalla; al salir se dispersa y se re-forma al volver
     new IntersectionObserver(es => {
       es.forEach(e => {
-        if(!booted) return;
-        if(e.isIntersecting) start();
+        inView = e.isIntersecting;
+        if(!booted){ if(inView) boot(); return; }
+        if(inView) start();
         else { stop(); if(smallF <= .5) scatter(); } // móvil: la entrada se juega una sola vez (no re-dispersa)
       });
-    }, { threshold: .05 }).observe(heroSec);
+    }, { threshold: .15 }).observe(bandSec);
 
-    heroSec.addEventListener('mousemove', e => {
+    bandSec.addEventListener('mousemove', e => {
       const r = canvas.getBoundingClientRect();
       mouse.x = e.clientX-r.left; mouse.y = e.clientY-r.top;
     });
-    heroSec.addEventListener('mouseleave', () => { mouse.x = mouse.y = -9999; });
+    bandSec.addEventListener('mouseleave', () => { mouse.x = mouse.y = -9999; });
 
     // el ANCHO es la señal real de un cambio de layout. En móvil, al hacer scroll la barra de
     // URL del navegador colapsa/expande y cambia SOLO el alto, disparando 'resize' → antes eso
@@ -1884,55 +2021,66 @@ footer p{font-size:.78rem;color:var(--muted)}
     setTimeout(()=>{ el.style.opacity='1'; el.style.transform='none'; },20);
   }
 
+  // acepta +52, espacios, guiones y paréntesis; exige de 10 a 15 dígitos reales
+  function validPhone(v){ const digits = v.replace(/\D/g,''); return /^[\d\s\+\-\(\)]{10,22}$/.test(v.trim()) && digits.length >= 10 && digits.length <= 15; }
+  function goStep2(){
+    formStep = 2;
+    showStep(2);
+    animIn(document.getElementById('ctaStep2'));
+    document.getElementById('ctaNote').textContent = T('Paso 2 de 3 — ¿Cómo te llamas y a qué correo te mandamos tu propuesta?','Step 2 of 3 — What is your name and where should we email your proposal?');
+    document.getElementById('ctaName').focus({ preventScroll: true });
+  }
+  // el diagnóstico del hero entrega aquí el WhatsApp que ya capturó → el formulario salta al paso 2
+  window.ctaPrefillPhone = function(phone){
+    if(submitted) return;
+    document.getElementById('ctaPhone').value = phone;
+    if(formStep === 1) goStep2();
+  };
+
   async function handleStep(){
     if(submitted) return;
 
     // bloqueo por intentos fallidos
     if(attempts >= MAX_ATTEMPTS){
-      document.getElementById('ctaNote').textContent = 'Demasiados intentos. Contáctanos directo por WhatsApp.';
+      document.getElementById('ctaNote').textContent = T('Demasiados intentos. Contáctanos directo por WhatsApp.','Too many attempts. Please reach us directly on WhatsApp.');
       return;
     }
     const note = document.getElementById('ctaNote');
 
-    // ── PASO 1: email ──
+    // ── PASO 1: WhatsApp ──
     if(formStep === 1){
       const honey = document.getElementById('ctaHoney');
-      const emailInput = document.getElementById('ctaEmail');
-      const raw = emailInput.value.trim();
+      const phoneInput = document.getElementById('ctaPhone');
       if(honey.value) return;
-      if(!raw || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw) || raw.length > 254){
-        emailInput.style.outline='1px solid #e53e3e';
-        setTimeout(()=> emailInput.style.outline='',1500); return;
+      if(!validPhone(phoneInput.value)){
+        phoneInput.style.outline='1px solid #e53e3e';
+        setTimeout(()=> phoneInput.style.outline='',1500); return;
       }
-      userEmail = sanitize(raw, 254);
-      formStep = 2;
-      showStep(2);
-      animIn(document.getElementById('ctaStep2'));
-      note.textContent = 'Paso 2 de 3 — ¿Cómo te llamas y a qué número te escribimos?';
-      document.getElementById('ctaName').focus();
+      goStep2();
       return;
     }
 
-    // ── PASO 2: nombre + teléfono ──
+    // ── PASO 2: nombre + email ──
     if(formStep === 2){
       const nameInput  = document.getElementById('ctaName');
-      const phoneInput = document.getElementById('ctaPhone');
-      const name  = nameInput.value.trim();
-      const phone = phoneInput.value.trim();
+      const emailInput = document.getElementById('ctaEmail');
+      const name = nameInput.value.trim();
+      const raw  = emailInput.value.trim();
       if(!name || name.length < 2){
         attempts++;
         nameInput.style.outline='1px solid #e53e3e';
         setTimeout(()=> nameInput.style.outline='',1500); return;
       }
-      if(!phone || !/^[\d\s\+\-\(\)]{7,15}$/.test(phone)){
+      if(!raw || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw) || raw.length > 254){
         attempts++;
-        phoneInput.style.outline='1px solid #e53e3e';
-        setTimeout(()=> phoneInput.style.outline='',1500); return;
+        emailInput.style.outline='1px solid #e53e3e';
+        setTimeout(()=> emailInput.style.outline='',1500); return;
       }
+      userEmail = sanitize(raw, 254);
       formStep = 3;
       showStep(3);
       animIn(document.getElementById('ctaStep3'));
-      note.textContent = 'Último paso — cuéntanos qué necesitas.';
+      note.textContent = T('Último paso — cuéntanos qué necesitas.','Last step — tell us what you need.');
       document.getElementById('ctaService').focus();
       return;
     }
@@ -1953,7 +2101,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       const servicio    = sanitize(service, 60);
       const comentarios = sanitize(comment, 400);
 
-      submitted = true; btn.textContent = 'Enviando...'; btn.disabled = true;
+      submitted = true; btn.textContent = T('Enviando...','Sending...'); btn.disabled = true;
 
       try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/suscriptores`, {
@@ -1962,6 +2110,7 @@ footer p{font-size:.78rem;color:var(--muted)}
           body: JSON.stringify({ email: userEmail, nombre, telefono, servicio, comentarios })
         });
         if(!res.ok) throw new Error();
+        nomTrack('Lead',{content_name:servicio});
 
         document.getElementById('ctaStep3').style.opacity='0';
         document.getElementById('ctaStep3').style.transition='opacity .3s';
@@ -1978,11 +2127,11 @@ footer p{font-size:.78rem;color:var(--muted)}
                   </g>
                 </svg>
               </div>
-              <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;margin-bottom:.5rem">¡Listo, ${nombre.split(' ')[0]}!</div>
-              <div style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1.4rem">Recibimos tu información. Te contactamos en menos de 24 hrs.</div>
-              <a href="https://wa.me/527121837694?text=${encodeURIComponent('Hola, acabo de registrarme en Nomántica y me interesa saber más sobre sus servicios')}" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;background:#25d366;color:#fff;padding:.8rem 1.8rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.92rem;box-shadow:0 4px 20px rgba(37,211,102,.35)">
+              <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;margin-bottom:.5rem">${T('¡Listo, ','All set, ')}${nombre.split(' ')[0]}!</div>
+              <div style="color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:1.4rem">${T('Recibimos tu información. Te contactamos en menos de 24 hrs.','We got your info. We will reach out within 24 hours.')}</div>
+              <a href="https://wa.me/527121837694?text=${encodeURIComponent(T('Hola, acabo de registrarme en Nomántica y me interesa saber más sobre sus servicios','Hi, I just signed up on Nomántica and would like to know more about your services'))}" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;background:#25d366;color:#fff;padding:.8rem 1.8rem;border-radius:100px;text-decoration:none;font-weight:600;font-size:.92rem;box-shadow:0 4px 20px rgba(37,211,102,.35)">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18" fill="#fff"><path d="M16 1C7.716 1 1 7.716 1 16c0 2.628.678 5.1 1.865 7.254L1 31l7.98-1.833A14.94 14.94 0 0016 31c8.284 0 15-6.716 15-15S24.284 1 16 1zm0 27.2a12.14 12.14 0 01-6.19-1.694l-.443-.263-4.736 1.088 1.118-4.617-.29-.473A12.16 12.16 0 013.8 16C3.8 9.26 9.26 3.8 16 3.8S28.2 9.26 28.2 16 22.74 28.2 16 28.2zm6.67-9.115c-.366-.183-2.163-1.067-2.498-1.19-.335-.12-.578-.183-.822.184-.244.366-.944 1.19-1.157 1.434-.213.244-.427.274-.793.091-.366-.183-1.545-.57-2.943-1.816-1.088-.97-1.822-2.168-2.035-2.534-.213-.366-.023-.564.16-.746.164-.163.366-.427.549-.64.183-.213.244-.366.366-.61.122-.244.061-.457-.03-.64-.092-.183-.822-1.982-1.127-2.713-.297-.713-.598-.616-.822-.628l-.7-.012c-.244 0-.64.091-.975.457s-1.28 1.25-1.28 3.047 1.311 3.534 1.494 3.778c.183.244 2.58 3.94 6.253 5.524.874.377 1.556.602 2.087.77.877.279 1.676.24 2.308.145.704-.104 2.163-.884 2.468-1.737.305-.854.305-1.585.213-1.737-.09-.152-.334-.244-.7-.427z"/></svg>
-                Escríbenos por WhatsApp
+                ${T('Escríbenos por WhatsApp','Message us on WhatsApp')}
               </a>
             </div>`;
           document.getElementById('ctaStep3').style.opacity='1';
@@ -1994,29 +2143,14 @@ footer p{font-size:.78rem;color:var(--muted)}
       } catch {
         submitted = false;
         attempts++;
-        btn.textContent='Algo falló, intenta de nuevo'; btn.style.background='#e53e3e'; btn.disabled=false;
-        setTimeout(()=>{ btn.textContent='Enviar y hablar por WhatsApp →'; btn.style.background=''; },3000);
+        btn.textContent=T('Algo falló, intenta de nuevo','Something went wrong, please try again'); btn.style.background='#e53e3e'; btn.disabled=false;
+        setTimeout(()=>{ btn.textContent=T('Enviar y hablar por WhatsApp →','Send and chat on WhatsApp →'); btn.style.background=''; },3000);
       }
     }
   }
 
   /* ===== Modal de proyectos (proceso por servicio) ===== */
   const PROJECTS = {
-    'Campaña de lanzamiento': { svc:'Email Marketing', sub:'Así llevamos un lanzamiento por email de la idea a las ventas.', steps:[
-      ['Diagnóstico','Revisamos tu lista, tu producto y el objetivo del lanzamiento.'],
-      ['Estrategia','Diseñamos la secuencia de correos y el calendario de envíos.'],
-      ['Producción','Redactamos y diseñamos cada email listo para convertir.'],
-      ['Lanzamiento','Automatizamos, enviamos y medimos resultados en tiempo real.']]},
-    'Automatización de nurturing': { svc:'Email Marketing', sub:'Convertimos leads fríos en clientes con flujos automáticos.', steps:[
-      ['Mapeo','Identificamos las etapas de tu embudo y los puntos de fuga.'],
-      ['Secuencias','Creamos flujos automáticos de 6 a 8 pasos por segmento.'],
-      ['Integración','Conectamos tu CRM y los disparadores por comportamiento.'],
-      ['Optimización','Medimos aperturas y clics, y afinamos cada envío.']]},
-    'Newsletter de marca personal': { svc:'Email Marketing', sub:'Construimos una newsletter que fideliza y hace crecer tu audiencia.', steps:[
-      ['Voz','Definimos tu tono y los temas que conectan con tu audiencia.'],
-      ['Calendario','Planeamos la newsletter semanal y sus formatos.'],
-      ['Copywriting','Escribimos cada edición con enfoque editorial.'],
-      ['Crecimiento','Sumamos captación de suscriptores y medición constante.']]},
     'Creación de contenido orgánico': { svc:'Contenido Orgánico', sub:'Atraemos a tu audiencia ideal sin depender de la pauta.', steps:[
       ['Investigación','Estudiamos tu nicho, audiencia y palabras clave.'],
       ['Línea editorial','Definimos pilares de contenido y formatos.'],
@@ -2077,18 +2211,19 @@ footer p{font-size:.78rem;color:var(--muted)}
     function openProject(card){
       const titleEl = card.querySelector('.ptitle');
       const title = titleEl ? titleEl.textContent.trim() : '';
-      const data = PROJECTS[title];
+      const data = PROJECTS[card.dataset.pkey || title];
       if(!data) return;
+      const en = NOM_LANG === 'en' && window.NOM_I18N ? NOM_I18N.projects[card.dataset.pkey] : null;
       const cat = card.querySelector('.pcat');
       const thumbSvg = card.querySelector('.pthumb svg');
 
       pmThumb.innerHTML = thumbSvg ? thumbSvg.outerHTML : '';
       pmThumb.style.display = thumbSvg ? '' : 'none';
-      pmCat.textContent = (cat ? cat.textContent.trim() : '') + ' · Cómo lo hacemos';
+      pmCat.textContent = (cat ? cat.textContent.trim() : '') + T(' · Cómo lo hacemos',' · How we do it');
       pmTitle.textContent = title;
-      pmSub.textContent = data.sub;
+      pmSub.textContent = en ? en.sub : data.sub;
       currentSvc = data.svc;
-      buildSteps(data.steps);
+      buildSteps(en ? en.steps : data.steps);
       splitLetters(pmTitle);
 
       lastFocused = document.activeElement;
