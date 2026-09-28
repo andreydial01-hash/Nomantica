@@ -3,11 +3,14 @@
   "private": true,
   "description": "Sitio de Nomántica + API de leads + /admin privado",
   "type": "commonjs",
-  "engines": { "node": ">=22.13" },
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
     "start": "node --env-file-if-exists=.env server.js",
     "test": "node --test test/*.test.js",
-    "password": "node scripts/password.js"
+    "password": "node scripts/password.js",
+    "test-email": "node --env-file-if-exists=.env scripts/test-email.js"
   },
   "dependencies": {
     "express": "^5.2.1"

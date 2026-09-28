@@ -29,6 +29,7 @@ cp .env.example .env && nano .env            # correo del admin, DB_FILE, etc.
 sudo mkdir -p /var/lib/nomantica && sudo chown $USER /var/lib/nomantica && chmod 700 /var/lib/nomantica
 npm run password -- "una-contraseña-larga-y-única"
 npm test                                      # 19 pruebas de seguridad
+npm run test-email                            # si hay RESEND_API_KEY: manda un aviso de prueba
 # 4. Arrancar
 pm2 start ecosystem.config.cjs && pm2 save && pm2 startup
 sudo cp Caddyfile.example /etc/caddy/Caddyfile && sudo systemctl reload caddy
