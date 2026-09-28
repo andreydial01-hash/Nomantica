@@ -57,9 +57,9 @@
 <style>
 /* ── Paleta por variables: oscura (original) y clara (morado → verde-azulado, rosa → azul, luz invertida) ── */
 :root{--k1:3,3,8;--k2:10,10,26;--k3:15,15,34;--k4:74,63,212;--k5:107,94,240;--k6:155,127,248;--k7:96,212,247;--k8:238,237,248;--k9:107,106,143;--k10:255,255,255;--k11:5,5,14;--k12:200,200,200;--k13:224,224,224;--k14:136,136,136;--k15:192,192,192;--k16:176,176,176;--k17:169,167,200;--k18:3,3,10;--k19:17,17,17;--k20:255,95,176;--k21:14,12,32;--k22:190,175,255;--k23:185,168,255;--k24:185,182,216;--k25:217,208,255;--k26:255,217,236;--k27:201,199,226;--k28:12,12,28;--k29:255,159,206;--k30:255,179,214;--k31:255,227,241;--k32:205,191,255;--k33:229,62,62;--sh:0,0,0;--sha:1;color-scheme:dark}
-html[data-theme="light"]{--k1:248,251,250;--k2:233,241,237;--k3:226,235,231;--k4:27,121,81;--k5:15,118,76;--k6:15,118,90;--k7:21,109,172;--k8:10,15,13;--k9:98,112,105;--k10:0,0,0;--k11:243,248,246;--k12:55,55,55;--k13:31,31,31;--k14:94,94,94;--k15:63,63,63;--k16:54,54,54;--k17:64,79,72;--k18:247,250,249;--k19:238,238,238;--k20:25,70,200;--k21:229,237,234;--k22:15,118,86;--k23:15,118,87;--k24:48,64,57;--k25:15,118,86;--k26:10,15,28;--k27:36,49,43;--k28:231,239,235;--k29:25,67,200;--k30:25,62,200;--k31:8,11,20;--k32:15,118,89;--k33:198,27,27;--sh:20,40,50;--sha:.3;color-scheme:light}
+html[data-theme="light"]{--k1:248,250,251;--k2:233,238,241;--k3:226,232,235;--k4:34,113,152;--k5:20,112,159;--k6:20,112,166;--k7:21,109,172;--k8:10,13,15;--k9:98,108,112;--k10:0,0,0;--k11:243,246,248;--k12:55,55,55;--k13:31,31,31;--k14:94,94,94;--k15:63,63,63;--k16:54,54,54;--k17:64,74,79;--k18:247,249,250;--k19:238,238,238;--k20:25,70,200;--k21:229,234,237;--k22:20,113,166;--k23:20,113,166;--k24:48,59,64;--k25:20,113,166;--k26:10,15,28;--k27:36,45,49;--k28:231,236,239;--k29:25,67,200;--k30:25,62,200;--k31:8,11,20;--k32:20,112,166;--k33:198,27,27;--sh:20,40,50;--sha:.3;color-scheme:light}
 /* ilustraciones SVG de servicios y partículas: se invierten y se re-tiñen para fondo claro */
-html[data-theme="light"] .pthumb svg,html[data-theme="light"] .pm-thumb svg,html[data-theme="light"] #brandCanvas{filter:invert(1) hue-rotate(90deg)}
+html[data-theme="light"] .pthumb svg,html[data-theme="light"] .pm-thumb svg,html[data-theme="light"] #brandCanvas{filter:invert(1) grayscale(1) sepia(1) hue-rotate(172deg) saturate(3.2)}
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -484,6 +484,7 @@ footer p{font-size:.78rem;color:var(--muted)}
 .lc-av{width:28px;height:28px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,var(--accent),rgb(var(--k20)));display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:.8rem;color:#fff}
 .lc-name{display:block;font-family:var(--fd);font-weight:700;font-size:.84rem;line-height:1.1}
 .lc-st{display:block;font-size:.64rem;color:rgb(var(--k23))}
+.lc-chip:empty{display:none}
 .lc-chip{margin-left:auto;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:rgb(var(--k30));border:1px solid rgba(var(--k20),.35);border-radius:100px;padding:.2rem .5rem;white-space:nowrap}
 .lc-msgs{height:208px;display:flex;flex-direction:column;gap:.4rem;overflow-y:auto;overscroll-behavior:contain;scroll-behavior:smooth;padding-right:.35rem;margin-right:-.35rem;}
 .lc-msgs>:first-child{margin-top:auto}
@@ -1124,7 +1125,7 @@ html[data-theme="light"] .theme-btn .ti-moon{opacity:1;transform:none}
 
   // chat
   var TICKS='<svg class="lc-ticks" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3 3 6-7"/><path d="M6.5 8.5 7 9l6-7"/></svg>';
-  function exampleScript(){ return {chip:T('Ejemplo','Example'), msgs:[
+  function exampleScript(){ return {chip:'', msgs:[
     {me:1,t:T('Hola, acabo de hacer el diagnóstico.','Hi, I just took the diagnosis.')},
     {t:T('¡Hola! Ya vimos tu radiografía: tu área más débil es Anuncios.','Hi! We saw your X-ray: your weakest area is Ads.')},
     {t:T('Te proponemos: 1) Anuncios que traen clientes · 2) Página web que vende.','We propose: 1) Ads that bring customers · 2) A website that sells.')},
