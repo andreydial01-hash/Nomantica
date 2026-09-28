@@ -91,15 +91,13 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 
 /* Letter-by-letter reveal (títulos) */
 .split .word{display:inline-block;white-space:nowrap}
-.split .ltr{display:inline-block;opacity:0;transform:translateY(.55em) rotate(4deg);filter:blur(6px);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.75,.25,1),filter .5s ease}
-.split.visible .ltr{opacity:1;transform:none;filter:none}
+.split .ltr{display:inline-block;opacity:0;transform:translateY(.55em) rotate(4deg);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.75,.25,1)}
+.split.visible .ltr{opacity:1;transform:none}
 
 /* ── Hero ── */
 .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:7.5rem 2rem 5rem;position:relative;overflow:hidden}
 .hero-grid{position:relative;z-index:1;width:100%;max-width:1180px;display:grid;grid-template-columns:1.05fr .95fr;gap:4rem;align-items:start}
 .hero-copy{position:sticky;top:7rem;padding-top:1.2rem}
-.hero-title{font-family:var(--fd);font-size:clamp(2.2rem,4.4vw,3.9rem);font-weight:800;line-height:1.06;letter-spacing:-.035em;margin-bottom:1.3rem}
-.hero-title .hand{margin-right:.12em;font-family:var(--fh);font-weight:700;font-size:1.15em;color:var(--accent-bright);text-shadow:0 0 34px rgba(107,94,240,.45)}
 .hero-sub{font-size:1.08rem;color:#a9a7c8;line-height:1.7;max-width:500px;margin-bottom:1.6rem}
 .hero-points{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
 .hero-points li{display:flex;align-items:center;gap:.65rem;font-size:.93rem;color:var(--text)}
@@ -111,22 +109,20 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
 .brand-band{position:relative;overflow:hidden;padding:2.5rem 1rem 0;text-align:center}
 .brand-band-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 55% at 50% 50%,rgba(74,63,212,.16),transparent 70%)}
 #brandCanvas{position:relative;display:block;margin:0 auto;width:min(780px,90vw);height:min(26vh,230px);pointer-events:none}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 65% at 50% -5%,rgba(74,63,212,.22),transparent 68%),radial-gradient(ellipse 55% 40% at 85% 75%,rgba(107,94,240,.1),transparent 60%),radial-gradient(ellipse 45% 45% at 10% 70%,rgba(96,212,247,.06),transparent 60%);animation:bgPulse 9s ease-in-out infinite alternate}
-@keyframes bgPulse{0%{opacity:.75}100%{opacity:1}}
-.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");background-size:200px;opacity:.6;pointer-events:none}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 90% 65% at 50% -5%,rgba(74,63,212,.22),transparent 68%),radial-gradient(ellipse 55% 40% at 85% 75%,rgba(107,94,240,.1),transparent 60%),radial-gradient(ellipse 45% 45% at 10% 70%,rgba(96,212,247,.06),transparent 60%);will-change:transform}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.floater{position:absolute;border-radius:50%;pointer-events:none;animation:float 7s ease-in-out infinite}
+.floater{position:absolute;border-radius:50%;pointer-events:none}
 .f1{width:350px;height:350px;background:radial-gradient(circle,rgba(74,63,212,.07),transparent 70%);top:10%;left:-8%}
 .f2{width:220px;height:220px;background:radial-gradient(circle,rgba(107,94,240,.07),transparent 70%);top:45%;right:-4%;animation-delay:2.5s}
 .f3{width:160px;height:160px;background:radial-gradient(circle,rgba(96,212,247,.06),transparent 70%);bottom:18%;left:12%;animation-delay:5s}
 @keyframes float{0%,100%{translate:0 0}50%{translate:0 -22px}}
 
 /* ── Scroll glow (fondo reactivo por sección) ── */
-.section-glow{position:absolute;inset:0;pointer-events:none;opacity:0;will-change:opacity,transform,translate;z-index:0;animation:glowDrift 13s ease-in-out infinite alternate}
+.section-glow{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:0;transition:opacity 1.2s ease}
+.section-glow.on{opacity:1}
 .section-glow.g-purple{background:radial-gradient(ellipse 60% 50% at 50% 42%,rgba(74,63,212,.18),transparent 70%)}
-.section-glow.g-blue{background:radial-gradient(ellipse 55% 48% at 50% 55%,rgba(96,212,247,.12),transparent 70%);animation-duration:17s;animation-delay:-5s}
-.section-glow.g-violet{background:radial-gradient(ellipse 65% 50% at 50% 45%,rgba(155,127,248,.15),transparent 70%);animation-duration:20s;animation-delay:-9s}
-@keyframes glowDrift{from{transform:translate(-6%,-4%) scale(1)}to{transform:translate(6%,4%) scale(1.1)}}
+.section-glow.g-blue{background:radial-gradient(ellipse 55% 48% at 50% 55%,rgba(96,212,247,.12),transparent 70%)}
+.section-glow.g-violet{background:radial-gradient(ellipse 65% 50% at 50% 45%,rgba(155,127,248,.15),transparent 70%)}
 
 /* ── Scroll progress bar ── */
 #scrollProgress{position:fixed;top:0;left:0;height:2px;width:0;z-index:200;background:linear-gradient(90deg,var(--accent),var(--accent-bright),var(--accent3));box-shadow:0 0 10px rgba(107,94,240,.5);transition:width .1s linear}
@@ -162,7 +158,6 @@ nav.scrolled{border-color:var(--border);background:rgba(5,5,14,.9)}
   .mi-svg .draw,.feat-list li .chk .draw{transition:none!important;stroke-dashoffset:0!important}
   #scrollProgress{transition:none}
   .split .ltr{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
-  .section-glow{animation:none!important}
   .pm-step{opacity:1!important;transform:none!important;filter:none!important;transition:none!important}
   .pm-panel{transition:opacity .2s ease!important}
 }
@@ -329,7 +324,7 @@ footer p{font-size:.78rem;color:var(--muted)}
 @keyframes waPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.5);opacity:0}}
 
 @media(max-width:900px){
-  nav{padding:1rem 1.5rem}.nav-links{display:none}
+  nav{padding:1rem 1.5rem;backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(5,5,14,.9)}.nav-links{display:none}
   .stats{grid-template-columns:1fr 1fr}
   .section,.portfolio-section,.cta-section,.faq-section{padding:5rem 1.5rem}
   .steps-grid{grid-template-columns:1fr}
@@ -346,7 +341,6 @@ footer p{font-size:.78rem;color:var(--muted)}
   .hero{min-height:0;padding:6.2rem 1.25rem 3.5rem}
   .hero-grid{grid-template-columns:1fr;gap:1.8rem}
   .hero-copy{position:static;padding-top:0;text-align:center}
-  .hero-title{font-size:clamp(1.85rem,7.4vw,2.6rem);margin-bottom:.9rem}
   .hero-sub{font-size:.95rem;margin:0 auto;line-height:1.6}
   .hero-points,.hero-wa{display:none}
   .hero .dx-stage{justify-self:center}
@@ -359,7 +353,8 @@ footer p{font-size:.78rem;color:var(--muted)}
 .portfolio-grid::before,.portfolio-grid::after{content:'';position:absolute;border-radius:50%;pointer-events:none;filter:blur(60px);z-index:0}
 .portfolio-grid::before{width:360px;height:360px;left:6%;top:14%;background:radial-gradient(circle,rgba(107,94,240,.38),transparent 70%)}
 .portfolio-grid::after{width:320px;height:320px;right:4%;bottom:4%;background:radial-gradient(circle,rgba(255,95,176,.22),transparent 70%)}
-.pcard{position:relative;z-index:1;background:linear-gradient(155deg,rgba(255,95,176,.07),rgba(107,94,240,.13) 45%,rgba(12,12,28,.55));backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(190,175,255,.16);box-shadow:0 24px 70px rgba(0,0,0,.45),0 0 50px rgba(107,94,240,.1),inset 0 1px 0 rgba(255,255,255,.12);transition:rotate .55s cubic-bezier(.2,.75,.25,1),scale .55s cubic-bezier(.2,.75,.25,1),border-color .4s,box-shadow .4s;animation:svcFloat 7s ease-in-out infinite}
+.pcard{position:relative;z-index:1;background:linear-gradient(155deg,rgba(255,95,176,.08),rgba(107,94,240,.16) 45%,rgba(14,12,32,.86));border:1px solid rgba(190,175,255,.16);box-shadow:0 24px 70px rgba(0,0,0,.45),0 0 50px rgba(107,94,240,.1),inset 0 1px 0 rgba(255,255,255,.12);transition:rotate .55s cubic-bezier(.2,.75,.25,1),scale .55s cubic-bezier(.2,.75,.25,1),border-color .4s,box-shadow .4s;}
+@media(min-width:901px) and (prefers-reduced-motion:no-preference){.pcard{animation:svcFloat 7s ease-in-out infinite}}
 .pcard:hover,.pcard:focus-visible{transform:none;rotate:0deg;scale:1.035;z-index:3;animation-play-state:paused;border-color:rgba(155,127,248,.55);box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 70px rgba(107,94,240,.3),0 0 44px rgba(255,95,176,.14),inset 0 1px 0 rgba(255,255,255,.16)}
 @keyframes svcFloat{0%,100%{translate:0 0}50%{translate:0 -12px}}
 .pthumb{height:130px;background:radial-gradient(ellipse 70% 80% at 50% 60%,rgba(107,94,240,.14),transparent 70%)}
@@ -383,14 +378,12 @@ footer p{font-size:.78rem;color:var(--muted)}
 }
 @media(max-width:900px){
   .portfolio-grid{gap:.9rem .75rem;padding:.6rem 0 2.2rem}
-  .pcard{animation-name:svcFloatS}
   .pcard:nth-child(odd){rotate:-1.2deg}
   .pcard:nth-child(even){rotate:1.2deg;margin-top:1.6rem}
   .pcard:nth-child(n) .pthumb{height:96px}
   .portfolio-grid::before{width:220px;height:220px}
   .portfolio-grid::after{width:200px;height:200px}
 }
-@keyframes svcFloatS{0%,100%{translate:0 0}50%{translate:0 -6px}}
 @media(prefers-reduced-motion:reduce){.pcard{animation:none}}
 /* menos aire alrededor de la banda de partículas */
 #contacto{padding-top:3.5rem}
@@ -439,6 +432,28 @@ footer p{font-size:.78rem;color:var(--muted)}
   .parrow{width:30px;height:30px}
   .parrow svg{width:14px;height:14px}
 }
+/* ── Hero sin título: el texto de apoyo toma el papel de entrada ── */
+.hero-copy{padding-top:3.2rem}
+.hero-sub{font-size:1.32rem;color:var(--text);line-height:1.55;max-width:470px;margin-bottom:1.8rem}
+@media(max-width:900px){.hero-copy{padding-top:0}.hero-sub{font-size:1rem;color:#c9c7e2}}
+/* ── Entrada animada del diagnóstico (solo transform/opacity: corre en la GPU) ── */
+@media(prefers-reduced-motion:no-preference){
+  .hero .dx-stage{animation:dxEnter 1s cubic-bezier(.16,.84,.24,1) .15s both}
+  .hero .dx-blob{animation:dxBlobIn 1.6s cubic-bezier(.2,.8,.2,1) .25s both}
+  .hero-copy>*{animation:heroIn .8s cubic-bezier(.2,.8,.2,1) both}
+  .hero-copy>*:nth-child(2){animation-delay:.08s}.hero-copy>*:nth-child(3){animation-delay:.16s}.hero-copy>*:nth-child(4){animation-delay:.24s}
+  .dx-card.intro .dx-progbar,.dx-card.intro .dx-q{animation:dxItemIn .55s cubic-bezier(.2,.8,.2,1) .5s both}
+  .dx-card.intro .dx-opt{animation:dxItemIn .55s cubic-bezier(.2,.8,.2,1) both}
+  .dx-card.intro .dx-opt:nth-child(1){animation-delay:.6s}
+  .dx-card.intro .dx-opt:nth-child(2){animation-delay:.67s}
+  .dx-card.intro .dx-opt:nth-child(3){animation-delay:.74s}
+  .dx-card.intro .dx-opt:nth-child(4){animation-delay:.81s}
+  .dx-card.intro .dx-opt:nth-child(5){animation-delay:.88s}
+}
+@keyframes dxEnter{from{opacity:0;transform:translateY(36px) scale(.965)}to{opacity:1;transform:none}}
+@keyframes dxBlobIn{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
+@keyframes heroIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes dxItemIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -471,7 +486,6 @@ footer p{font-size:.78rem;color:var(--muted)}
 <!-- HERO + DIAGNÓSTICO -->
 <section class="hero" id="inicio">
   <div class="hero-bg" id="heroBg"></div>
-  <div class="hero-noise"></div>
   <div class="floater f1"></div><div class="floater f2"></div><div class="floater f3"></div>
   <style>
   .dx-head{text-align:center;max-width:560px;margin:0 auto 2.2rem}
@@ -532,9 +546,8 @@ footer p{font-size:.78rem;color:var(--muted)}
   #diagnostico{--fx:#ff5fb0}
   .dx-stage{position:relative;max-width:560px;margin:0 auto}
   .dx-blob{position:absolute;border-radius:50%;z-index:0;pointer-events:none;filter:blur(50px)}
-  .dx-blob.b1{width:230px;height:230px;background:radial-gradient(circle,rgba(255,95,176,.32),transparent 70%);top:-46px;left:-54px;animation:dxBlob 11s ease-in-out infinite}
-  .dx-blob.b2{width:240px;height:240px;background:radial-gradient(circle,rgba(107,94,240,.5),transparent 70%);bottom:-48px;right:-46px;animation:dxBlob 13s ease-in-out infinite reverse}
-  @keyframes dxBlob{0%,100%{transform:translate(0,0)}50%{transform:translate(14px,-18px)}}
+  .dx-blob.b1{width:230px;height:230px;background:radial-gradient(circle,rgba(255,95,176,.32),transparent 70%);top:-46px;left:-54px}
+  .dx-blob.b2{width:240px;height:240px;background:radial-gradient(circle,rgba(107,94,240,.5),transparent 70%);bottom:-48px;right:-46px}
   .dx-card{background:linear-gradient(155deg,rgba(255,95,176,.07),rgba(107,94,240,.13) 45%,rgba(12,12,28,.5));backdrop-filter:blur(22px) saturate(1.2);-webkit-backdrop-filter:blur(22px) saturate(1.2);border:1px solid rgba(190,175,255,.16);border-radius:56px 22px 46px 30px;box-shadow:0 30px 90px rgba(0,0,0,.5),0 0 80px rgba(107,94,240,.16),0 0 46px rgba(255,95,176,.08),inset 0 1px 0 rgba(255,255,255,.14)}
   .dx-prog-fill{background:linear-gradient(90deg,var(--accent),var(--accent-bright) 55%,var(--fx))}
   /* opciones y botones: al pasar el cursor o elegir → vidrio fucsia translúcido, sin brillo (igual que las flechas de las tarjetas) */
@@ -582,7 +595,7 @@ footer p{font-size:.78rem;color:var(--muted)}
   </style>
   <div class="hero-grid">
     <div class="hero-copy">
-      <h1 class="hero-title" data-i18n="hero.title">¿Por qué tu negocio no está vendiendo <span class="hand">más</span> en internet?</h1>
+      <h1 class="sr-only">Nomántica — Diagnóstico digital para vender más en internet</h1>
       <p class="hero-sub" data-i18n="hero.sub">Responde 5 preguntas y descubre al instante qué le falta a tu negocio para conseguir más clientes, con un plan hecho a tu medida.</p>
       <ul class="hero-points">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p1">Resultado inmediato, sin registrarte</span></li>
@@ -594,7 +607,7 @@ footer p{font-size:.78rem;color:var(--muted)}
     <div class="dx-stage" id="diagnostico">
       <span class="dx-blob b1"></span>
       <span class="dx-blob b2"></span>
-      <div class="dx-card" id="dxCard" aria-live="polite">
+      <div class="dx-card intro" id="dxCard" aria-live="polite">
         <div class="dx-progbar" id="dxProg" hidden>
           <div class="dx-prog-track"><div class="dx-prog-fill" id="dxProgFill"></div></div>
           <span class="dx-prog-num" id="dxProgNum">1 de 5</span>
@@ -698,6 +711,7 @@ footer p{font-size:.78rem;color:var(--muted)}
 
   function paint(builder,instant){
     if(instant){ screen.innerHTML=''; builder(screen); return; }
+    card.classList.remove('intro');
     busy=true;
     var curH=card.offsetHeight;
     card.style.height=curH+'px';
@@ -1477,7 +1491,6 @@ footer p{font-size:.78rem;color:var(--muted)}
     'faq.foot':'Got another question?','faq.footlink':'Message us on WhatsApp',
     'wa.title':'Message us on WhatsApp',
     'nav.dx':'Diagnosis','nav.svc':'Services','nav.rev':'Reviews','nav.cta':'Get started',
-    'hero.title':'Why isn’t your business selling <span class="hand">more</span> online?',
     'hero.sub':'Answer 5 questions and instantly find out what your business is missing to win more customers, with a plan tailored to you.',
     'hero.p1':'Instant results, no sign-up',
     'hero.p2':'An X-ray of your business across 6 key areas',
@@ -1659,17 +1672,17 @@ footer p{font-size:.78rem;color:var(--muted)}
     if(!svcSec) return;
     var svgs = svcSec.querySelectorAll('svg');
     if(!svgs.length) return;
-    function setSvc(run){
+    function setSvc(run){ // run=false pausa todas
       svgs.forEach(function(s){ try{ run ? s.unpauseAnimations() : s.pauseAnimations(); }catch(e){} });
     }
-    setSvc(false); // pausadas al cargar
-    if('IntersectionObserver' in window && !reduceMotionEarly){
-      new IntersectionObserver(function(es){
-        es.forEach(function(e){ setSvc(e.isIntersecting); });
-      }, { threshold: .04 }).observe(svcSec);
-    } else {
-      setSvc(true);
-    }
+    setSvc(false); // pausadas: animar las 6 ilustraciones a la vez es lo más caro de la sección
+    // escritorio: cada ilustración cobra vida solo mientras el cursor está sobre su tarjeta
+    if(reduceMotionEarly || !matchMedia('(hover: hover) and (min-width: 901px)').matches) return;
+    svcSec.querySelectorAll('.pcard').forEach(function(card){
+      var s = card.querySelector('.pthumb svg'); if(!s) return;
+      card.addEventListener('mouseenter', function(){ try{ s.unpauseAnimations(); }catch(e){} });
+      card.addEventListener('mouseleave', function(){ try{ s.pauseAnimations(); }catch(e){} });
+    });
   })();
 
   // Hero parallax (mouse + scroll combined)
@@ -1688,38 +1701,24 @@ footer p{font-size:.78rem;color:var(--muted)}
       applyHeroBg();
     });
 
-    // Scroll-driven parallax + section glow
-    const floaters = document.querySelectorAll('.floater');
-    const floatFactors = [0.06, -0.09, 0.12];
-    const glows = document.querySelectorAll('.section-glow');
+    // parallax del fondo del hero con el scroll (solo mientras el hero está cerca; sin lecturas de layout)
     let ticking = false;
-
-    function updateScrollFx(){
-      scrollYCached = window.scrollY;
-      const vh = innerHeight;
-
-      applyHeroBg();
-      floaters.forEach((f,i) => { f.style.transform = `translateY(${scrollYCached*floatFactors[i]}px)`; });
-
-      glows.forEach(g => {
-        const r = g.parentElement.getBoundingClientRect();
-        const center = r.top + r.height/2;
-        const dist = Math.abs(center - vh/2);
-        const proximity = Math.max(0, 1 - dist/(vh*.75));
-        g.style.opacity = proximity.toFixed(3);
-        g.style.translate = `0 ${(1-proximity)*24}px`;
-      });
-
-      ticking = false;
-    }
-
     window.addEventListener('scroll', () => {
-      if(!ticking){ requestAnimationFrame(updateScrollFx); ticking = true; }
+      if(ticking || window.scrollY > innerHeight*1.2) return;
+      ticking = true;
+      requestAnimationFrame(() => { scrollYCached = window.scrollY; applyHeroBg(); ticking = false; });
     }, { passive: true });
-    updateScrollFx();
-  } else {
-    document.querySelectorAll('.section-glow').forEach(g => { g.style.opacity = '.35'; });
   }
+  // brillos de sección: se encienden al entrar a la vista (IntersectionObserver, cero trabajo por scroll)
+  (function(){
+    const glows = document.querySelectorAll('.section-glow');
+    if(!('IntersectionObserver' in window)){ glows.forEach(g => g.classList.add('on')); return; }
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      const g = e.target.querySelector(':scope > .section-glow');
+      if(g) g.classList.toggle('on', e.isIntersecting);
+    }), { rootMargin: '-15% 0px -15% 0px' });
+    glows.forEach(g => io.observe(g.parentElement));
+  })();
 
   /* ===== Banda de marca: enjambre de luciérnagas, flores y mariposas que forman "Nomántica" ===== */
   (function(){
@@ -1910,7 +1909,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       // la cantidad escala ~lineal con el tamaño (no con el área): las letras son las mismas
       // en móvil y desktop y necesitan suficientes puntos para definirse (evita que en móvil
       // quede ralo). fs≈66 móvil → ~450 · fs≈186 desktop → ~1100
-      const MAX = Math.min(1150, Math.round((5.4*fs + 95) * (1 + .9*smallF))); // móvil: muchos más puntos (finos) → trazos bien formados
+      const MAX = Math.min(760, Math.round((4.2*fs + 80) * (1 + .6*smallF))); // móvil: muchos más puntos (finos) → trazos bien formados
       if(pts.length > MAX){
         const keep = MAX/pts.length; // cuerpo de la "á" esparcido; tilde apenas diluida en pantallas chicas
         pts = pts.filter(p => p.accent ? Math.random() < (.55+.45*sizeScale) : Math.random() < (p.silver ? keep*.7 : keep));
@@ -1968,6 +1967,10 @@ footer p{font-size:.78rem;color:var(--muted)}
     }
 
     let bootT = 0, activeN = 0;
+    // posición de la banda en el documento: la actualiza un IntersectionObserver (sin lecturas de layout por cuadro)
+    let bandDocTop = 0;
+    new IntersectionObserver(es => es.forEach(e => { bandDocTop = e.boundingClientRect.top + window.scrollY; }),
+      { threshold: Array.from({length:21}, (_,i) => i/20) }).observe(canvas);
     function stepFrame(t){
       if(!bootT) bootT = t || 1;
       const el = t - bootT;
@@ -1976,8 +1979,8 @@ footer p{font-size:.78rem;color:var(--muted)}
       // Depende solo de la posición, así que al regresar se vuelve a formar.
       let exitP = 0, dir = -1;
       if(!reduce){
-        const r = canvas.getBoundingClientRect(), half = innerHeight/2;
-        const d = (r.top + r.height/2 - half)/half;         // -1 arriba … 0 centro … +1 abajo
+        const half = innerHeight/2;
+        const d = (bandDocTop - window.scrollY + H/2 - half)/half; // -1 arriba … 0 centro … +1 abajo
         dir = d < 0 ? -1 : 1;
         exitP = Math.min(1, Math.max(0, (Math.abs(d) - .2)/.75));
       }
@@ -2020,7 +2023,18 @@ footer p{font-size:.78rem;color:var(--muted)}
       ctx.globalAlpha = 1;
     }
 
-    function loop(t){ if(!running) return; stepFrame(t); raf = requestAnimationFrame(loop); }
+    // ~30 fps: el vaivén es lento, así que dibujar un cuadro sí y uno no se ve igual y cuesta la mitad
+    let lastDraw = 0, lastPos = null, lastMove = 0;
+    function loop(t){
+      if(!running) return;
+      raf = requestAnimationFrame(loop);
+      if(t - lastDraw < 30) return;
+      // móvil: ya formada la palabra y sin scroll por un momento, se queda quieta (cero trabajo) hasta el siguiente scroll
+      const pos = bandDocTop - window.scrollY;
+      if(pos !== lastPos){ lastPos = pos; lastMove = t; }
+      if(smallF > .5 && bootT && t - bootT > 3500 && t - lastMove > 1200) return;
+      lastDraw = t; stepFrame(t);
+    }
     function start(){ if(!running && !reduce){ running = true; raf = requestAnimationFrame(loop); } }
     function stop(){ running = false; cancelAnimationFrame(raf); }
     function staticDraw(){
