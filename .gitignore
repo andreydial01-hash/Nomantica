@@ -1,0 +1,7 @@
+# Servidor: nunca subir dependencias, secretos ni la base de leads
+_server/node_modules/
+_server/.env
+_server/data/
+*.db
+*.db-wal
+*.db-shm

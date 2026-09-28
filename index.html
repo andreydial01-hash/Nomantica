@@ -1574,7 +1574,7 @@ html[data-theme="light"] .theme-btn .ti-moon{opacity:1;transform:none}
       <!-- step 1: WhatsApp (el dato más valioso va primero) -->
       <div class="email-form" id="ctaStep1">
         <input type="tel" id="ctaPhone" inputmode="tel" autocomplete="tel" placeholder="Tu WhatsApp (10 dígitos)" data-i18n-ph="f.phone" style="flex:1;background:transparent;border:none;outline:none;color:var(--text);font-family:var(--fb);font-size:.93rem"/>
-        <input type="text" id="ctaHoney" style="display:none;position:absolute;left:-9999px" tabindex="-1" autocomplete="off"/>
+        <input type="text" id="ctaHoney" name="website" aria-hidden="true" style="display:none;position:absolute;left:-9999px" tabindex="-1" autocomplete="off"/>
         <button onclick="handleStep()" data-i18n="f.next">Siguiente</button>
       </div>
 
@@ -2422,11 +2422,22 @@ html[data-theme="light"] .theme-btn .ti-moon{opacity:1;transform:none}
       submitted = true; btn.textContent = T('Enviando...','Sending...'); btn.disabled = true;
 
       try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/suscriptores`, {
-          method:'POST',
-          headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=minimal'},
-          body: JSON.stringify(Object.assign({ nombre, telefono, servicio, comentarios }, userEmail ? { email: userEmail } : {}))
+        // Servidor propio: valida, limita envíos por IP y filtra bots (honeypot + tiempo de llenado)
+        let res = await fetch('/api/lead', {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ nombre, telefono, email: userEmail, servicio, comentarios,
+            website: document.getElementById('ctaHoney').value, t: Math.round(performance.now()) })
         });
+        // TEMPORAL: mientras el sitio siga en hosting estático (sin /api) se guarda como antes.
+        // Se elimina junto con SUPABASE_* al mudar el sitio al droplet.
+        if(res.status === 404 || res.status === 405){
+          res = await fetch(`${SUPABASE_URL}/rest/v1/suscriptores`, {
+            method:'POST',
+            headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':`Bearer ${SUPABASE_KEY}`,'Prefer':'return=minimal'},
+            body: JSON.stringify(Object.assign({ nombre, telefono, servicio, comentarios }, userEmail ? { email: userEmail } : {}))
+          });
+        }
+        if(res.status === 429){ const e = new Error(); e.rate = true; throw e; }
         if(!res.ok) throw new Error();
         nomTrack('Lead',{content_name:servicio});
 
@@ -2458,9 +2469,10 @@ html[data-theme="light"] .theme-btn .ti-moon{opacity:1;transform:none}
           setProgress(3);
         },300);
 
-      } catch {
+      } catch(err) {
         submitted = false;
         attempts++;
+        if(err && err.rate){ btn.textContent=T('Demasiados envíos · escríbenos por WhatsApp','Too many attempts · message us on WhatsApp'); btn.disabled=false; return; }
         btn.textContent=T('Algo falló, intenta de nuevo','Something went wrong, please try again'); btn.style.background='#e53e3e'; btn.disabled=false;
         setTimeout(()=>{ btn.textContent=T('Enviar y hablar por WhatsApp','Send and chat on WhatsApp'); btn.style.background=''; },3000);
       }

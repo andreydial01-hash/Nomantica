@@ -1,0 +1,13 @@
+# /etc/caddy/Caddyfile — Caddy saca el certificado HTTPS solo y pasa todo al servidor Node
+nomantica.com.mx, www.nomantica.com.mx {
+	encode zstd gzip
+	reverse_proxy 127.0.0.1:3050
+	# límite de tamaño de cualquier petición antes de llegar a Node
+	request_body {
+		max_size 16KB
+	}
+	log {
+		output file /var/log/caddy/nomantica.log
+		format console
+	}
+}
