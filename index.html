@@ -460,6 +460,43 @@ footer p{font-size:.78rem;color:var(--muted)}
 @keyframes dxBlobIn{from{opacity:0;transform:scale(.55)}to{opacity:1;transform:none}}
 @keyframes heroIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes dxItemIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+/* ── Hero en vivo: radar que se dibuja + chat con lo que sigue (sin backdrop-filter: ligero) ── */
+.hero-copy{padding-top:1.4rem}
+.hero-sub{margin-bottom:1.3rem}
+.hero-live{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.15fr);gap:.9rem;max-width:560px}
+.live-radar,.live-chat{background:linear-gradient(160deg,rgba(107,94,240,.12),rgba(12,12,28,.72));border:1px solid rgba(190,175,255,.14);border-radius:22px;padding:.95rem .95rem .9rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.lr-head{display:flex;align-items:center;justify-content:space-between;gap:.5rem;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--accent2)}
+.lr-live{display:inline-flex;align-items:center;gap:.35rem;color:#ff9fce}
+.lr-live i{width:6px;height:6px;border-radius:50%;background:#ff5fb0;animation:lrPulse 1.8s ease-in-out infinite}
+@keyframes lrPulse{0%,100%{opacity:1}50%{opacity:.3}}
+.live-radar-svg{display:block;width:100%;height:auto;margin:.35rem 0 .2rem}
+.live-radar-svg text{font-family:var(--fb);font-size:15px;fill:#a9a7c8}
+.live-radar-svg .dx-radar-poly{filter:none}
+.lr-cap{font-size:.72rem;color:var(--muted);text-align:center;line-height:1.4;min-height:2.1em}
+.live-chat{display:flex;flex-direction:column}
+.lc-head{display:flex;align-items:center;gap:.55rem;padding-bottom:.6rem;margin-bottom:.55rem;border-bottom:1px solid var(--border2)}
+.lc-av{width:28px;height:28px;flex-shrink:0;border-radius:50%;background:linear-gradient(135deg,var(--accent),#ff5fb0);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-weight:800;font-size:.8rem;color:#fff}
+.lc-name{display:block;font-family:var(--fd);font-weight:700;font-size:.84rem;line-height:1.1}
+.lc-st{display:block;font-size:.64rem;color:#b9a8ff}
+.lc-chip{margin-left:auto;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:#ffb3d6;border:1px solid rgba(255,95,176,.35);border-radius:100px;padding:.2rem .5rem;white-space:nowrap}
+.lc-msgs{height:208px;display:flex;flex-direction:column;justify-content:flex-end;gap:.4rem;overflow:hidden;-webkit-mask:linear-gradient(transparent,#000 18%);mask:linear-gradient(transparent,#000 18%)}
+.lc-msg{max-width:90%;font-size:.76rem;line-height:1.45;padding:.48rem .68rem;border-radius:14px;flex-shrink:0;animation:lcIn .35s cubic-bezier(.2,.8,.2,1) both}
+.lc-msg.them{align-self:flex-start;background:rgba(107,94,240,.18);border:1px solid rgba(155,127,248,.22);border-bottom-left-radius:4px;color:var(--text)}
+.lc-msg.me{align-self:flex-end;background:linear-gradient(150deg,rgba(255,95,176,.22),rgba(255,95,176,.1));border:1px solid rgba(255,95,176,.3);border-bottom-right-radius:4px;color:#ffe3f1}
+.lc-ticks{display:inline-block;width:13px;height:9px;margin-left:.35rem;color:#ff9fce;vertical-align:-1px}
+.lc-typing{align-self:flex-start;flex-shrink:0;display:flex;gap:4px;padding:.6rem .7rem;border-radius:14px;border-bottom-left-radius:4px;background:rgba(107,94,240,.18);border:1px solid rgba(155,127,248,.22)}
+.lc-typing i{width:5px;height:5px;border-radius:50%;background:#b9a8ff;animation:lcDot 1s ease-in-out infinite}
+.lc-typing i:nth-child(2){animation-delay:.15s}.lc-typing i:nth-child(3){animation-delay:.3s}
+@keyframes lcIn{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes lcDot{0%,80%,100%{opacity:.3;transform:none}40%{opacity:1;transform:translateY(-2px)}}
+.lc-cta{margin-top:.65rem;width:100%;border:none;cursor:pointer;border-radius:100px;padding:.62rem 1rem;font-family:var(--fb);font-size:.8rem;font-weight:600;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-bright));animation:lcIn .4s cubic-bezier(.2,.8,.2,1) both;transition:background .35s,color .35s,box-shadow .35s}
+.lc-cta:hover{background:linear-gradient(150deg,rgba(255,95,176,.24),rgba(255,95,176,.1));color:#ffd9ec;box-shadow:inset 0 1px 0 rgba(255,255,255,.2),inset 0 0 0 1px rgba(255,95,176,.38)}
+.lc-cta::after{content:'';display:inline-block;width:1.05em;height:1.05em;margin-left:.45em;vertical-align:-.17em;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15'/%3E%3Cpath d='M13 5.5 19.5 12 13 18.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15'/%3E%3Cpath d='M13 5.5 19.5 12 13 18.5'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .35s cubic-bezier(.2,.75,.25,1)}
+.lc-cta:hover::after{transform:translateX(4px)}
+.live-chat.in-result{margin:.2rem 0 1.4rem}
+.live-chat.in-result .lc-msgs{height:auto;-webkit-mask:none;mask:none}
+@media(max-width:900px){.hero-live{display:none}}
+@media(prefers-reduced-motion:reduce){.lc-msg,.lc-cta,.lr-live i,.lc-typing i{animation:none}}
 </style>
 </head>
 <body>
@@ -602,13 +639,19 @@ footer p{font-size:.78rem;color:var(--muted)}
   <div class="hero-grid">
     <div class="hero-copy">
       <h1 class="sr-only">Nomántica — Diagnóstico digital para vender más en internet</h1>
-      <p class="hero-sub" data-i18n="hero.sub">Responde 5 preguntas y descubre al instante qué le falta a tu negocio para conseguir más clientes, con un plan hecho a tu medida.</p>
-      <ul class="hero-points">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p1">Resultado inmediato, sin registrarte</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p2">Radiografía de tu negocio en 6 áreas clave</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span data-i18n="hero.p3">Consultoría y plan de trabajo incluidos</span></li>
-      </ul>
-      <a class="hero-wa" href="https://wa.me/525554921640" target="_blank" rel="noopener" data-i18n="hero.wa">¿Prefieres hablar con alguien? Escríbenos por WhatsApp</a>
+      <p class="hero-sub" data-i18n="hero.sub">Contesta las 5 preguntas y mira cómo se dibuja tu negocio, en vivo.</p>
+      <div class="hero-live" aria-hidden="true">
+        <div class="live-radar">
+          <div class="lr-head"><span data-i18n="live.title">Tu radiografía</span><span class="lr-live"><i></i><span data-i18n="live.on">en vivo</span></span></div>
+          <div id="liveRadar"></div>
+          <p class="lr-cap" id="liveCap"></p>
+        </div>
+        <div class="live-chat" id="liveChat">
+          <div class="lc-head"><span class="lc-av">N</span><span><span class="lc-name">Nomántica</span><span class="lc-st" data-i18n="live.online">en línea</span></span><span class="lc-chip" id="liveChip"></span></div>
+          <div class="lc-msgs"></div>
+          <button type="button" class="lc-cta" hidden></button>
+        </div>
+      </div>
     </div>
     <div class="dx-stage" id="diagnostico">
       <span class="dx-blob b1"></span>
@@ -808,6 +851,7 @@ footer p{font-size:.78rem;color:var(--muted)}
   }
 
   var RCX=170, RCY=138, RR=94;
+  function backEase(t){ var c1=1.5, c3=c1+1; return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2); } // easeOutBack
   function radarPt(i,rad,n){ var a=(-90+i*(360/n))*Math.PI/180; return [RCX+Math.cos(a)*rad, RCY+Math.sin(a)*rad]; }
   function buildRadar(data){
     var cx=RCX, cy=RCY, R=RR, LR=108, n=data.length, anchors=['middle','start','start','middle','end','end'], dy=[0,4,4,13,4,4];
@@ -832,7 +876,7 @@ footer p{font-size:.78rem;color:var(--muted)}
     var poly=svg.querySelector('.dx-radar-poly'), dots=svg.querySelectorAll('.dx-radar-dot'), labels=svg.querySelectorAll('text'), n=data.length;
     if(!poly||matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var DELAY=380, DUR=950, STAG=150, t0=null;
-    function back(t){ var c1=1.5, c3=c1+1; return 1+c3*Math.pow(t-1,3)+c1*Math.pow(t-1,2); } // easeOutBack
+    var back=backEase;
     labels.forEach(function(l){ l.style.opacity='0'; l.style.transition='opacity .45s ease'; });
     function draw(el){
       var pts=[], done=true;
@@ -855,7 +899,7 @@ footer p{font-size:.78rem;color:var(--muted)}
     requestAnimationFrame(frame);
   }
 
-  function restart(){ reset(); renderQuestion(0); }
+  function restart(){ reset(); renderQuestion(0); liveReset(); }
 
   function renderQuestion(qi,instant){
     view={type:'q',qi:qi};
@@ -895,6 +939,7 @@ footer p{font-size:.78rem;color:var(--muted)}
     if(q.type==='single'){
       if(busy) return;
       answers[q.id]=i;
+      liveUpdate();
       var btns=screen.querySelectorAll('.dx-opt');
       btns.forEach(function(b,bi){ b.classList.toggle('sel',bi===i); });
       setTimeout(function(){ advance(qi); },150);
@@ -902,6 +947,7 @@ footer p{font-size:.78rem;color:var(--muted)}
       var o=q.opts[i], set=answers[q.id];
       if(o.k==='nada'){ set.clear(); set.add('nada'); }
       else { set.delete('nada'); if(set.has(o.k)) set.delete(o.k); else set.add(o.k); }
+      liveUpdate();
       var b2=screen.querySelectorAll('.dx-opt');
       q.opts.forEach(function(oo,bi){ b2[bi].classList.toggle('sel',set.has(oo.k)); });
     }
@@ -918,10 +964,12 @@ footer p{font-size:.78rem;color:var(--muted)}
     view={type:'result'};
     var r=pick(), list=[r.principal].concat(r.comp), contrib=r.contrib;
     if(fresh) nomTrack('DiagnosticoCompleto',{servicio:SVC[r.principal].contact},true);
+    liveResult(list);
     paint(function(root){
       setProgress(0); card.classList.remove('has-prog');
       root.appendChild(d('dx-res-head','<span class="stag">'+T('Tu diagnóstico','Your diagnosis')+'</span><div class="dx-res-title">'+T('Radiografía de tu negocio','Your business X-ray')+'</div>'));
       var dd=dims(), radar=d('dx-radar'); radar.innerHTML=buildRadar(dd)+'<p class="dx-radar-note">'+T('Entre más lleno el hexágono, más fuerte estás en esa área. Las puntas más cortas son donde más te conviene enfocarte.','The fuller the hexagon, the stronger you are in that area. The shortest points are where focusing will pay off most.')+'</p>'; root.appendChild(radar); animateRadar(radar.querySelector('svg'),dd);
+      if(isMobile()){ var mc=d('live-chat in-result'); mc.innerHTML='<div class="lc-head"><span class="lc-av">N</span><span><span class="lc-name">Nomántica</span><span class="lc-st">'+T('en línea','online')+'</span></span><span class="lc-chip">'+T('Tu caso','Your case')+'</span></div><div class="lc-msgs"></div>'; root.appendChild(mc); setTimeout(function(){ playChat(mc,personalScript(list),false); },500); }
       var cta=d('dx-cta','<div class="dx-cta-h">'+T('Ya sabemos por dónde crecer','We know where you can grow')+'</div><div class="dx-cta-p">'+T('Déjanos tu WhatsApp y armamos contigo el plan para vender más. Consultoría y plan de trabajo incluidos.','Leave your WhatsApp and we will build your plan to sell more with you. Consulting and a work plan included.')+'</div>');
       // captura del lead: el WhatsApp se queda aquí mismo y el formulario de abajo continúa en el paso 2
       var form=document.createElement('form'); form.className='dx-lead'; form.noValidate=true;
@@ -1001,6 +1049,97 @@ footer p{font-size:.78rem;color:var(--muted)}
   document.addEventListener('nom:lang',function(){
     if(view.type==='result') renderResult(); else renderQuestion(view.qi);
   });
+
+
+  /* ───── Hero en vivo: el radar se dibuja con cada respuesta y el chat muestra lo que sigue ───── */
+  var liveBox=document.getElementById('liveRadar'), liveCap=document.getElementById('liveCap'), chatBox=document.getElementById('liveChat'), chip=document.getElementById('liveChip');
+  var reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches, live={cur:null,raf:0,state:'neutral'}, chatTimers=[];
+  var NEUTRAL=[14,14,14,14,14,14];
+  function isMobile(){ return matchMedia('(max-width: 900px)').matches; }
+  function answeredCount(){ return ['q1','q2','q4','q5'].filter(function(k){return answers[k]!=null;}).length+(answers.q3.size?1:0); }
+  function liveDraw(v){
+    var svg=liveBox&&liveBox.querySelector('svg'); if(!svg) return;
+    var poly=svg.querySelector('.dx-radar-poly'), dots=svg.querySelectorAll('.dx-radar-dot'), pts=[];
+    for(var j=0;j<6;j++){ var q=radarPt(j,RR*v[j]/100,6); pts.push(q[0].toFixed(1)+','+q[1].toFixed(1)); if(dots[j]){ dots[j].setAttribute('cx',q[0].toFixed(1)); dots[j].setAttribute('cy',q[1].toFixed(1)); } }
+    poly.setAttribute('points',pts.join(' '));
+  }
+  function liveSet(to){
+    if(!liveBox) return;
+    var from=(live.cur||NEUTRAL).slice(), t0=null, DUR=750, ST=70;
+    cancelAnimationFrame(live.raf);
+    if(reduceM){ live.cur=to.slice(); liveDraw(to); return; }
+    function frame(ts){
+      if(t0===null) t0=ts;
+      var v=[], done=true;
+      for(var j=0;j<6;j++){ var p=Math.min(1,Math.max(0,(ts-t0-j*ST)/DUR)); if(p<1) done=false; v[j]=from[j]+(to[j]-from[j])*backEase(p); }
+      liveDraw(v); live.cur=v;
+      if(!done) live.raf=requestAnimationFrame(frame); else live.cur=to.slice();
+    }
+    live.raf=requestAnimationFrame(frame);
+  }
+  function liveCaption(){
+    if(!liveCap) return;
+    liveCap.textContent = live.state==='result' ? T('Así está tu negocio hoy','This is your business today')
+      : live.state==='partial' ? T('Se ajusta con cada respuesta · ','Adjusting with every answer · ')+answeredCount()+T(' de 5',' of 5')
+      : T('Contesta y mira cómo se dibuja tu negocio','Answer and watch your business take shape');
+  }
+  function liveBuild(){ // (re)crea el SVG con las etiquetas en el idioma activo
+    if(!liveBox) return;
+    var lbl=dims(); liveBox.innerHTML=buildRadar(lbl).replace('dx-radar-svg','live-radar-svg').split('dxrg').join('lvrg');
+    liveDraw(live.cur||NEUTRAL); liveCaption();
+  }
+  function liveUpdate(){ live.state='partial'; liveSet(dims().map(function(x){return x.v;})); liveCaption(); }
+  function liveReset(){ live.state='neutral'; liveSet(NEUTRAL); liveCaption(); if(!isMobile()) playChat(chatBox,exampleScript(),false); }
+
+  // chat
+  var TICKS='<svg class="lc-ticks" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3 3 6-7"/><path d="M6.5 8.5 7 9l6-7"/></svg>';
+  function exampleScript(){ return {chip:T('Ejemplo','Example'), msgs:[
+    {me:1,t:T('Hola, acabo de hacer el diagnóstico.','Hi, I just took the diagnosis.')},
+    {t:T('¡Hola! Ya vimos tu radiografía: tu área más débil es Anuncios.','Hi! We saw your X-ray: your weakest area is Ads.')},
+    {t:T('Te proponemos: 1) Anuncios que traen clientes · 2) Página web que vende.','We propose: 1) Ads that bring customers · 2) A website that sells.')},
+    {t:T('Consultoría y plan de trabajo incluidos. ¿Te mandamos tu plan?','Consulting and a work plan included. Shall we send you your plan?')},
+    {me:1,t:T('¡Sí, mándenlo!','Yes, send it!')}
+  ]}; }
+  function personalScript(list){
+    var dd=dims(), weak=dd.reduce(function(m,x){ return x.v<m.v?x:m; },dd[0]).label;
+    return {chip:T('Tu caso','Your case'), msgs:[
+      {me:1,t:T('Hola, acabo de hacer el diagnóstico.','Hi, I just took the diagnosis.')},
+      {t:T('¡Hola! Ya vimos tu radiografía: tu área más débil hoy es ','Hi! We saw your X-ray: your weakest area today is ')+weak+'.'},
+      {t:T('Te recomendamos: ','We recommend: ')+list.map(function(c,i){ return (i+1)+') '+L(SVC[c].name); }).join(' · ')+'.'},
+      {t:T('Consultoría y plan de trabajo incluidos. ¿Te mandamos tu plan?','Consulting and a work plan included. Shall we send you your plan?')}
+    ]};
+  }
+  function playChat(box,script,instant,onDone){
+    if(!box) return;
+    if(box===chatBox){ chatTimers.forEach(clearTimeout); chatTimers=[]; if(chip) chip.textContent=script.chip; var c0=box.querySelector('.lc-cta'); if(c0) c0.hidden=true; }
+    var msgs=box.querySelector('.lc-msgs'); msgs.innerHTML='';
+    var now=instant||reduceM, t=now?0:350, timers=(box===chatBox)?chatTimers:[];
+    function later(fn,ms){ timers.push(setTimeout(fn,ms)); }
+    function add(m){ var e=document.createElement('div'); e.className='lc-msg '+(m.me?'me':'them'); e.textContent=m.t; if(m.me) e.insertAdjacentHTML('beforeend',TICKS); msgs.appendChild(e); }
+    function typing(on){ var ty=msgs.querySelector('.lc-typing'); if(on&&!ty){ ty=document.createElement('div'); ty.className='lc-typing'; ty.innerHTML='<i></i><i></i><i></i>'; msgs.appendChild(ty); } else if(!on&&ty) ty.remove(); }
+    if(now){ script.msgs.forEach(add); if(onDone) onDone(); return; }
+    script.msgs.forEach(function(m){
+      if(m.me){ later(function(){ add(m); },t); t+=900; }
+      else { later(function(){ typing(true); },t); t+=1050; later(function(){ typing(false); add(m); },t); t+=650; }
+    });
+    if(onDone) later(onDone,t);
+  }
+  function liveResult(list){
+    live.state='result'; liveSet(dims().map(function(x){return x.v;})); liveCaption();
+    if(isMobile()||!chatBox) return;
+    playChat(chatBox,personalScript(list),false,function(){
+      var c=chatBox.querySelector('.lc-cta'); if(!c) return;
+      c.textContent=T('Seguir en WhatsApp','Continue on WhatsApp'); c.hidden=false;
+      c.onclick=function(){ openWA(list); };
+    });
+  }
+  // idioma: rehace etiquetas del radar y la conversación actual (sin animar)
+  document.addEventListener('nom:lang',function(){
+    liveBuild();
+    if(!isMobile()){ if(live.state==='result'){ var r=pick(); liveResult([r.principal].concat(r.comp)); } else playChat(chatBox,exampleScript(),true); }
+  });
+  liveBuild();
+  if(!isMobile()) setTimeout(function(){ if(live.state!=='result') playChat(chatBox,exampleScript(),false); },1300);
 
   renderQuestion(0,true); // el hero abre directo en la 1a pregunta
 })();
@@ -1497,11 +1636,8 @@ footer p{font-size:.78rem;color:var(--muted)}
     'faq.foot':'Got another question?','faq.footlink':'Message us on WhatsApp',
     'wa.title':'Message us on WhatsApp',
     'nav.dx':'Diagnosis','nav.svc':'Services','nav.rev':'Reviews','nav.cta':'Get started',
-    'hero.sub':'Answer 5 questions and instantly find out what your business is missing to win more customers, with a plan tailored to you.',
-    'hero.p1':'Instant results, no sign-up',
-    'hero.p2':'An X-ray of your business across 6 key areas',
-    'hero.p3':'Consulting and a work plan included',
-    'hero.wa':'Rather talk to a person? Message us on WhatsApp',
+    'hero.sub':'Answer the 5 questions and watch your business take shape, live.',
+    'live.title':'Your X-ray','live.on':'live','live.online':'online',
     'svc.tag':'Services','svc.title':'What we do for you',
     'svc.cta':'Not sure which one you need? Take the diagnosis',
     'rev.title':'Reviews','rev.ver':'Verified',
